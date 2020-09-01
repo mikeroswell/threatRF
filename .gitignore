@@ -43,3 +43,6 @@ data/USGS_DRO_flat.csv
 data/MDObsWithTaxa.csv
 data/AllTaxaWithTaxonomy.csv
 data/ObsMDBeesConservStat.csv
+
+#rproject file
+*.Rproj
