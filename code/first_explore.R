@@ -3,7 +3,7 @@
 library(tidyverse)
 
 assmnt <- read.csv("data/IUCNassessments.csv")
-ids<- read.csv("data/IUCNtaxonomy.csv")
+ids <- read.csv("data/IUCNtaxonomy.csv")
 
 head(assmnt)
 head(ids)

@@ -43,6 +43,14 @@ data/USGS_DRO_flat.csv
 data/MDObsWithTaxa.csv
 data/AllTaxaWithTaxonomy.csv
 data/ObsMDBeesConservStat.csv
+data/fromR/Obs_stat_cleaned.csv
 
 #rproject file
 *.Rproj
+
+#secret files
+psw_wlab.R
+user_wlab.R
+
+psw_clab.R
+user_clab.R
