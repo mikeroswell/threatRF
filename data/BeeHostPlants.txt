@@ -1,0 +1,144 @@
+Family	Family	Tribe	Genus	Subgenus	 species	Science.name	Full.name	Authority	Recorded.states	Status	Season	Host.Plant	Lecty
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 accepta	Andrena accepta	Andrena (Callandrena s.l.) accepta	"Viereck, 1916"	MD-NJ-NY-VA	Rare	Fall	"Asteraceae, e.g. Helianthus L."	poly
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 aliciae	Andrena aliciae	Andrena (Callandrena s.l.) aliciae	"Robertson, 1891"	CT-DE-MA-MD-NJ-NY-PA-VA-WV	Rare	Summer	"Asteraceae, e.g. Helianthus L."	poly
+Andrenidae	Andreninae		Andrena	Parandrena	 andrenoides	Andrena andrenoides	Andrena (Parandrena) andrenoides	"(Cresson, 1878)"	MD-NJ-NY-VA	Rare	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Scaphandrena	 arabis	Andrena arabis	Andrena (Scaphandrena) arabis	"Robertson, 1897"	CT-DE-MA-MD-NJ-NY-PA-VA-WV	Uncommon	Spring	"Arabis L., Cardamine L."	poly
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 asteris	Andrena asteris	Andrena (Callandrena s.l.) asteris	"Robertson, 1891"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common	Fall	"Solidago L., Symphyotrichum Nees"	poly
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 asteroides	Andrena asteroides	Andrena (Callandrena s.l.) asteroides	"Mitchell, 1960"	MD-NJ-PA-VA	Rare	Fall	Symphyotrichum Nees	oligo
+Andrenidae	Andreninae		Andrena	Thysandrena	 bisalicis	Andrena bisalicis	Andrena (Thysandrena) bisalicis	"Viereck, 1908"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common-Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 braccata	Andrena braccata	Andrena (Callandrena s.l.) braccata	"Viereck, 1907"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA	Common-Rare	Fall	"Euthamia Nutt. ex Cass., Solidago L."	poly
+Andrenidae	Andreninae		Andrena	Conandrena	 bradleyi	Andrena bradleyi	Andrena (Conandrena) bradleyi	"Viereck, 1907"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA	Common-Uncommon	Spring	"Ericaceae, e.g. Gaylussacia Kunth, VacciniumL."	poly
+Andrenidae	Andreninae		Andrena	Cnemidandrena	 canadensis	Andrena canadensis	Andrena (Cnemidandrena) canadensis	"Dalla Torre, 1896"	CT-MA-ME-NH-NJ-NY-RI-VA-VT	Common-Uncommon	Fall	"Astereae, e.g. Solidago L."	poly
+Andrenidae	Andreninae		Andrena	Andrena	 carolina	Andrena carolina	Andrena (Andrena) carolina	"Viereck, 1909"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-WV	Common-Uncommon	Spring	"Ericaceae, e.g. Vaccinium L."	poly
+Andrenidae	Andreninae		Andrena	Cnemidandrena	 chromotricha	Andrena chromotricha	Andrena (Cnemidandrena) chromotricha	"Cockerell, 1899"	NY-PA-WV	Rare	Fall	Asteraceae	poly
+Andrenidae	Andreninae		Andrena	Andrena	 clarkella	Andrena clarkella	Andrena (Andrena) clarkella	"(Kirby, 1802)"	CT-MA-ME-NH-NY-RI-VT-WV	Common-Rare	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Andrena	 cornelli	Andrena cornelli	Andrena (Andrena) cornelli	"Viereck, 1907"	CT-MA-MD-NJ-NY-PA-VA	Uncommon	Spring	Rhododendron L.	oligo
+Andrenidae	Andreninae		Andrena	Ptilandrena	 distans	Andrena distans	Andrena (Ptilandrena) distans	"Provancher, 1888"	CT-MA-MD-NH-NJ-NY-PA-RI-VA	Common-Uncommon	Spring	Geranium L.	oligo
+Andrenidae	Andreninae		Andrena	Callandrena	 duplicata	Andrena duplicata	Andrena (Callandrena) duplicata	"Mitchell, 1960"	CT-NJ-NY	Rare	Fall	Asteraceae	poly
+Andrenidae	Andreninae		Andrena	Ptilandrena	 erigeniae	Andrena erigeniae	Andrena (Ptilandrena) erigeniae	"Robertson, 1891"	CT-DE-MA-MD-NH-NJ-NY-PA-VA-WV	Common	Spring	Claytonia L.	oligo
+Andrenidae	Andreninae		Andrena	Tylandrena	 erythrogaster	Andrena erythrogaster	Andrena (Tylandrena) erythrogaster	"(Ashmead, 1890)"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common-Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Leucandrena	 erythronii	Andrena erythronii	Andrena (Leucandrena) erythronii	"Robertson, 1891"	CT-MA-MD-ME-NH-NJ-NY-PA-VA-WV	Uncommon	Spring	Erythronium L.	oligo
+Andrenidae	Andreninae		Andrena	Gonandrena	 fragilis	Andrena fragilis	Andrena (Gonandrena) fragilis	"Smith, 1853"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-WV	Common	Summer	Cornus (Swida) L.	oligo
+Andrenidae	Andreninae		Andrena	Andrena	 frigida	Andrena frigida	Andrena (Andrena) frigida	"Smith, 1853"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA	Common-Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 fulvipennis	Andrena fulvipennis	Andrena (Callandrena s.l.) fulvipennis	"Smith, 1853"	DE-MD-NJ-NY	Rare	Fall	"Chrysopsis (Nutt.) Elliot, Heterotheca Cass., Pityopsis Nutt."	poly
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 gardineri	Andrena gardineri	Andrena (Callandrena s.l.) gardineri	"Cockerell, 1906"	MD-VA-WV	Uncommon	Spring	Packera Á. Löve & D. Löve	
+Andrenidae	Andreninae		Andrena	Euandrena	 geranii	Andrena geranii	Andrena (Euandrena) geranii	"Robertson, 1891"	MD-NH-NJ-NY-PA-VA-VT-WV	Uncommon	Spring	Hydrophyllum L.	oligo
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 helianthi	Andrena helianthi	Andrena (Callandrena s.l.) helianthi	"Robertson, 1891"	CT-MA-NH-NJ-NY-PA-VA	Uncommon-Rare	Summer	Helianthus L.	oligo
+Andrenidae	Andreninae		Andrena	Cnemidandrena	 hirticincta	Andrena hirticincta	Andrena (Cnemidandrena) hirticincta	"Provancher, 1888"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common	Fall	"Euthamia Nutt ex. Cass., Solidago L., Symphyotrichum Nees"	poly
+Andrenidae	Andreninae		Andrena	Micrandrena	 illinoiensis	Andrena illinoiensis	Andrena (Micrandrena) illinoiensis	"Robertson, 1891"	MD-NY-VA	Rare	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Gonandrena	 integra	Andrena integra	Andrena (Gonandrena) integra	"Smith, 1853"	CT-MA-ME-MD-NJ-NY-PA-VA-VT	Uncommon	Summer	Cornus (Swida) L.	oligo
+Andrenidae	Andreninae		Andrena	Scrapteropsis	 kalmiae	Andrena kalmiae	Andrena (Scrapteropsis) kalmiae	"Atwood, 1934"	CT-MA-ME-NH	Uncommon	Spring	"Ericaceae, e.g. Kalmia L., Lyonia Nutt., Vaccinium L."	poly
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 krigiana	Andrena krigiana	Andrena (Callandrena s.l.) krigiana	"Robertson, 1901"	CT-MA-MD-NH-NJ-NY-PA-VA-WV	Uncommon	Spring	"Cichorieae, e.g. Krigia Schreb."	poly
+Andrenidae	Andreninae		Andrena	Micrandrena	 lamelliterga	Andrena lamelliterga	Andrena (Micrandrena) lamelliterga	"Ribble, 1968"	MD-PA-VA	Rare	Spring	Phacelia Juss.	oligo
+Andrenidae	Andreninae		Andrena	Andrena	 macoupinensis	Andrena macoupinensis	Andrena (Andrena) macoupinensis	"Robertson, 1900"	MD-PA-VA	Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Trachandrena	 mariae	Andrena mariae	Andrena (Trachandrena) mariae	"Robertson, 1891"	MD-NH-NJ-RI-VA-WV	Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Micrandrena	 melanochroa	Andrena melanochroa	Andrena (Micrandrena) melanochroa	"Cockerell, 1898"	CT-MA-MD-ME-NH-NJ-NY-VA-WV	Uncommon	Spring	"Rosaceae, e.g. Fragaria L."	poly
+Andrenidae	Andreninae		Andrena	Parandrena	 nida	Andrena nida	Andrena (Parandrena) nida	"Mitchell, 1960"	MD-NH-NJ-NY-RI-VA-WV	Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Micrandrena	 nigrae	Andrena nigrae	Andrena (Micrandrena) nigrae	"Robertson, 1905"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Cnemidandrena	 nubecula	Andrena nubecula	Andrena (Cnemidandrena) nubecula	"Smith, 1853"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common-Uncommon	Fall	"Solidago L., Symphyotrichum Nees"	poly
+Andrenidae	Andreninae		Andrena	Gonandrena	 perisimulata	Andrena perisimulata	Andrena (Gonandrena) perisimulata	"Viereck, 1917"	CT-MA-ME-NH-NY	Uncommon	Summer	Cornus (Swida) L.	oligo
+Andrenidae	Andreninae		Andrena	Euandrena	 phaceliae	Andrena phaceliae	Andrena (Euandrena) phaceliae	"Mitchell, 1960"	MD-VA-WV	Rare	Spring	Phacelia Juss.	oligo
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 placata	Andrena placata	Andrena (Callandrena s.l.) placata	"Mitchell, 1960"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common	Fall	"Astereae, e.g. Solidago L., SymphyotrichumNees"	poly
+Andrenidae	Andreninae		Andrena	Gonandrena	 platyparia	Andrena platyparia	Andrena (Gonandrena) platyparia	"Robertson, 1895"	CT-MA-MD-NH-NJ-NY-PA-VA	Uncommon	Summer	Cornus (Swida) L.	oligo
+Andrenidae	Andreninae		Andrena	Euandrena	 polemonii	Andrena polemonii	Andrena (Euandrena) polemonii	"Robertson, 1891"	WV	Rare	Spring	Polemonium L.	oligo
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 rudbeckiae	Andrena rudbeckiae	Andrena (Callandrena s.l.) rudbeckiae	"Robertson, 1891"	DE-MD-NJ-NY-PA	Rare	Summer	"Ratibida Raf., Rudbeckia L."	poly
+Andrenidae	Andreninae		Andrena	Micrandrena	 salictaria	Andrena salictaria	Andrena (Micrandrena) salictaria	"Robertson, 1905"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common-Rare	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Trachandrena	 sigmundi	Andrena sigmundi	Andrena (Trachandrena) sigmundi	"Cockerell, 1902"	CT-MA-ME-NH-RI-VT	Common	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Callandrena s.l.	 simplex	Andrena simplex	Andrena (Callandrena s.l.) simplex	"Smith, 1853"	CT-DE-MA-MD-NH-NJ-NY-PA-RI-VA-WV	Common	Fall	"Solidago L., Symphyotrichum Nees"	poly
+Andrenidae	Andreninae		Andrena	Derandrena	 uvulariae*	Andrena uvulariae*	Andrena (Derandrena) uvulariae*	"Mitchell, 1960"	MA-MD-NH-NJ-NY-PA-VA-WV	Rare	Spring	Uvularia L.	oligo
+Andrenidae	Andreninae		Andrena	Iomelissa	 violae	Andrena violae	Andrena (Iomelissa) violae	"Robertson, 1891"	CT-DE-MA-MD-NH-NJ-NY-PA-VA-WV	Common-Uncommon	Spring	Viola L.	oligo
+Andrenidae	Andreninae		Andrena	Parandrena	 wellesleyana	Andrena wellesleyana	Andrena (Parandrena) wellesleyana	"Robertson, 1897"	CT-MA-RI	Uncommon	Spring	Salix L.	oligo
+Andrenidae	Andreninae		Andrena	Micrandrena	 ziziae	Andrena ziziae	Andrena (Micrandrena) ziziae	"Robertson, 1891"	CT-MA-MD-NH-NJ-NY-PA-VA-VT-WV	Common-Uncommon	Spring	Zizia W.D.J. Koch	oligo
+Andrenidae	Andreninae		Andrena	Derandrena	 ziziaeformis	Andrena ziziaeformis	Andrena (Derandrena) ziziaeformis	"Cockerell, 1908"	CT-DE-MD-NJ-NY-PA-VA-WV	Uncommon-Rare	Spring	"Potentilla L., Waldsteinia Willd."	poly
+Andrenidae	Andreninae		Calliopsis	Verbenapis	 nebraskensis**	Calliopsis nebraskensis**	Calliopsis (Verbenapis) nebraskensis**	"Crawford, 1902"	CT-NJ	Rare	Summer	Verbena L.	oligo
+Andrenidae	Andreninae		Panurginus		atramontensis	Panurginusatramontensis	Panurginus atramontensis	"Crawford, 1926"	MD-NJ-VA	Rare	Spring	Vaccinium (Polycodium) L.	oligo
+Andrenidae	Andreninae		Panurginus		potentillae	Panurginuspotentillae	Panurginus potentillae	"(Crawford, 1916)"	CT-MA-MD-NJ-NY-VA	Uncommon-Rare	Spring	Potentilla L.	oligo
+Andrenidae	Andreninae		Perdita	Cockerellia	 bequaerti	Perdita bequaerti	Perdita (Cockerellia) bequaerti	"Viereck, 1917"	MD-NJ-NY	Rare	Summer	Asteraceae e.g. Helianthus L.	poly
+Andrenidae	Andreninae		Perdita	Hexaperdita	 bishoppi	Perdita bishoppi	Perdita (Hexaperdita) bishoppi	"Cockerell, 1906"	DE-MD-NJ	Rare	Fall	"Chrysopsis (Nutt.) Elliot, Heterotheca Cass., Pityopsis Nutt."	poly
+Andrenidae	Andreninae		Perdita	Hexaperdita	 boltoniae	Perdita boltoniae	Perdita (Hexaperdita) boltoniae	"(Robertson, 1902)"	DE-MD-NJ-NY-VA	Rare	Fall	"Chrysopsis (Nutt.) Elliot, Heterotheca Cass., Pityopsis Nutt."	poly
+Andrenidae	Andreninae		Perdita	Perdita	 consobrina	Perdita consobrina	Perdita (Perdita) consobrina	"Timberlake, 1928"	VA	Rare	Fall	"Asteraceae, e.g. Astereae"	poly
+Andrenidae	Andreninae		Perdita	Perdita	 gerardiae	Perdita gerardiae	Perdita (Perdita) gerardiae	"Crawford, 1932"	MD-NJ	Rare	Fall	Agalinis Raf.	oligo
+Andrenidae	Andreninae		Perdita	Perdita	 gerhardi	Perdita gerhardi	Perdita (Perdita) gerhardi	"Viereck, 1904"	MD-NJ-VA-WV	Rare	Summer	Monarda L.	oligo
+Andrenidae	Andreninae		Perdita	Perdita	 halictoides	Perdita halictoides	Perdita (Perdita) halictoides	"Smith, 1853"	MA-MD-NH-NJ-NY-VT	Uncommon-Rare	Summer	Physalis L.	oligo
+Andrenidae	Andreninae		Perdita	Perdita	 maculigera	Perdita maculigera	Perdita (Perdita) maculigera	"Cockerell, 1896"	NY	Rare	Fall	Salix L.	oligo
+Andrenidae	Andreninae		Perdita	Alloperdita	 novaeangliae	Perdita novaeangliae	Perdita (Alloperdita) novaeangliae	"Viereck, 1907"	CT-MA-RI	Uncommon	Summer	Lyonia Nutt.	oligo
+Andrenidae	Andreninae		Perdita	Perdita	 octomaculata	Perdita octomaculata	Perdita (Perdita) octomaculata	"(Say, 1824)"	CT-DE-MA-MD-ME-NH-NJ-NY-RI-VA-VT-WV	Common-Uncommon	Fall	"Astereae, e.g. Solidago L."	poly
+Andrenidae	Andreninae		Perdita	Perdita	 swenki	Perdita swenki	Perdita (Perdita) swenki	"Crawford, 1915"	NJ-NY	Rare	Summer	"Asteraceae, e.g. Astereae"	poly
+Andrenidae	Andreninae		Protandrena		abdominalis	Protandrenaabdominalis	Protandrena abdominalis	"(Cresson, 1878)"	MD-NJ-PA-VA-WV	Rare	Summer	Monarda L.	oligo
+Andrenidae	Andreninae		Pseudopanurgus		aestivalis	Pseudopanurgusaestivalis	Pseudopanurgus aestivalis	"(Provancher, 1882)"	CT-MA-MD-ME-NH-NJ-VT	Rare	Fall	"Astereae, e.g. Solidago L., SymphyotrichumNees"	poly
+Andrenidae	Andreninae		Pseudopanurgus		albitarsis	Pseudopanurgusalbitarsis	Pseudopanurgus albitarsis	"(Cresson, 1872)"	VA	Rare	Summer	"Asteraceae, e.g. Heliantheae"	poly
+Andrenidae	Andreninae		Pseudopanurgus		andrenoides	Pseudopanurgusandrenoides	Pseudopanurgus andrenoides	"(Smith, 1853)"	CT-MA-ME-NH-NJ-NY-VA-WV	Uncommon	Fall	"Asteraceae, e.g. Astereae"	poly
+Andrenidae	Andreninae		Pseudopanurgus		compositarum	Pseudopanurguscompositarum	Pseudopanurgus compositarum	"(Robertson, 1893)"	CT-DE-MD-NJ-NY-PA-VA-WV	Uncommon	Fall	"Asteraceae, e.g. Astereae"	poly
+Andrenidae	Andreninae		Pseudopanurgus		illinoiensis	Pseudopanurgusillinoiensis	Pseudopanurgus illinoiensis	"(Cresson, 1878)"	MD-VA	Rare	Spring	Asteraceae	poly
+Andrenidae	Andreninae		Pseudopanurgus		labrosiformis	Pseudopanurguslabrosiformis	Pseudopanurgus labrosiformis	"(Robertson, 1898)"	MD-VA-WV	Rare	Summer	"Asteraceae, e.g. Heliantheae"	poly
+Andrenidae	Andreninae		Pseudopanurgus		labrosus	Pseudopanurguslabrosus	Pseudopanurgus labrosus	"(Robertson, 1895)"	CT-VA-WV	Uncommon	Summer	"Asteraceae, e.g. Heliantheae"	poly
+Andrenidae	Andreninae		Pseudopanurgus		pauper	Pseudopanurguspauper	Pseudopanurgus pauper	"(Cresson, 1878)"	CT-MA-MD-NJ-NY-PA-RI-VA-WV	Rare	Summer	Ceanothus L.	oligo
+Andrenidae	Andreninae		Pseudopanurgus		rugosus	Pseudopanurgusrugosus	Pseudopanurgus rugosus	"(Robertson, 1895)"	MD-VA	Rare	Summer	"Asteraceae, e.g. Heliantheae"	poly
+Andrenidae	Andreninae		Pseudopanurgus		solidaginis	Pseudopanurgussolidaginis	Pseudopanurgus solidaginis	"(Robertson, 1893)"	MD	Uncommon	Summer	Asteraceae	poly
+Andrenidae	Andreninae		Pseudopanurgus		virginicus	Pseudopanurgusvirginicus	Pseudopanurgus virginicus	"(Cockerell, 1907)"	MD-VA-WV	Rare	Spring	"Ceanothus L., Houstonia L."	poly
+Apidae	Apinae	Anthophorini	Habropoda		laboriosa	Habropodalaboriosa	Habropoda laboriosa	"(Fabricius, 1804)"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-VA	Common-Uncommon	Spring	"Cercis L., Vaccinium L."	poly
+Apidae	Apinae	Emphorini	Melitoma		taurea	Melitomataurea	Melitoma taurea	"(Say, 1837)"	DE-MD-NJ-PA-VA-WV	Common	Summer	"Calystegia R. Br., Ipomoea L."	poly
+Apidae	Apinae	Emphorini	Ptilothrix		bombiformis	Ptilothrixbombiformis	Ptilothrix bombiformis	"(Cresson, 1878)"	CT-DE-MD-NJ-NY-PA-VA-WV	Common-Uncommon	Summer	Hibiscus L.	oligo
+Apidae	Apinae	Eucerini	Cemolobus		ipomoeae	Cemolobusipomoeae	Cemolobus ipomoeae	"(Robertson, 1891)"	MD-PA-VA-WV	Rare	Summer	"Calystegia R. Br., Ipomoea L."	poly
+Apidae	Apinae	Eucerini	Florilegus	Florilegus	 condignus	Florilegus condignus	Florilegus (Florilegus) condignus	"(Cresson, 1878)"	MD-NJ-VA	Rare	Summer	Pontederia L.	oligo
+Apidae	Apinae	Eucerini	Melissodes	Eumelissodes	 agilis	Melissodes agilis	Melissodes (Eumelissodes) agilis	"Cresson, 1878"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common-Uncommon	Summer	"Asteraceae, e.g. Helianthus L."	poly
+Apidae	Apinae		Melissodes	Apomelissodes	 apicatus	Melissodes apicatus	Melissodes (Apomelissodes) apicatus	"Lovell and Cockerell, 1906"	CT-DE-MA-MD-ME-NH-NJ-NY	Uncommon-Rare	Summer	Pontederia L.	oligo
+Apidae	Apinae		Melissodes	Eumelissodes	 boltoniae	Melissodes boltoniae	Melissodes (Eumelissodes) boltoniae	"Robertson, 1905"	DE-MD-NY-PA-VA	Uncommon	Fall	Asteraceae	poly
+Apidae	Apinae		Melissodes	Eumelissodes	 denticulatus	Melissodes denticulatus	Melissodes (Eumelissodes) denticulatus	"Smith, 1854"	CT-DE-MA-MD-NJ-NY-PA-VA-VT-WV	Uncommon	Fall	"Asteraceae, e.g.Vernonia Schreb."	poly
+Apidae	Apinae		Melissodes	Eumelissodes	 dentiventris	Melissodes dentiventris	Melissodes (Eumelissodes) dentiventris	"Smith, 1854"	CT-DE-MA-MD-NJ-NY-PA-VA	Uncommon	Fall	Asteraceae	poly
+Apidae	Apinae		Melissodes	Heliomelissodes	 desponsus	Melissodes desponsus	Melissodes (Heliomelissodes) desponsus	"Smith, 1854"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common	Fall	"Asteraceae, e.g. Cirsium Mill"	poly
+Apidae	Apinae		Melissodes	Eumelissodes	 druriellus	Melissodes druriellus	Melissodes (Eumelissodes) druriellus	"(Kirby, 1802)"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Uncommon	Fall	Asteraceae	poly
+Apidae	Apinae		Melissodes	Apomelissodes	 fimbriatus	Melissodes fimbriatus	Melissodes (Apomelissodes) fimbriatus	"Cresson, 1878"	VA	Rare	Summer	Oenothera L.	oligo
+Apidae	Apinae		Melissodes	Eumelissodes	 fumosus	Melissodes fumosus	Melissodes (Eumelissodes) fumosus	"LaBerge, 1961"	MD-VA	Rare	Fall	"Asteraceae, e.g. Solidago L."	poly
+Apidae	Apinae		Melissodes	Eumelissodes	 illatus	Melissodes illatus	Melissodes (Eumelissodes) illatus	"Lovell and Cockerell, 1906"	ME-NY-WV	Uncommon	Fall	Asteraceae	poly
+Apidae	Apinae		Melissodes	Eumelissodes	 niveus	Melissodes niveus	Melissodes (Eumelissodes) niveus	"Robertson, 1895"	MD-NJ-NY-VA	Uncommon	Fall	Asteraceae	poly
+Apidae	Apinae		Melissodes	Eumelissodes	 subillatus	Melissodes subillatus	Melissodes (Eumelissodes) subillatus	"LaBerge, 1961"	CT-DE-MA-MD-ME-NJ-NY-PA-VA-WV	Uncommon	Fall	Asteraceae	poly
+Apidae	Apinae		Melissodes	Eumelissodes	 trinodis	Melissodes trinodis	Melissodes (Eumelissodes) trinodis	"Robertson, 1901"	CT-DE-MA-MD-ME-NJ-NY-RI-VA-VT	Uncommon	Fall	"Asteraceae, e.g. Helianthus L."	poly
+Apidae	Apinae	Eucerini	Peponapis	Peponapis	 pruinosa	Peponapis pruinosa	Peponapis (Peponapis) pruinosa	"(Say, 1837)"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common	Summer	Cucurbita L.	oligo
+Apidae	Apinae	Eucerini	Svastra	Anthedonia	 compta	Svastra compta	Svastra (Anthedonia) compta	"(Cresson, 1878)"	MD-NJ-PA	Uncommon	Summer	Oenothera L.	oligo
+Apidae	Apinae		Svastra	Epimelissodes	 obliqua	Svastra obliqua	Svastra (Epimelissodes) obliqua	"(Say, 1837)"	DE-MD-NJ-NY-VA	Uncommon	Summer	Asteraceae	poly
+Apidae	Apinae		Svastra	Epimelissodes	 petulca	Svastra petulca	Svastra (Epimelissodes) petulca	"(Cresson, 1878)"	NJ	Rare	Summer	"Asteraceae, e.g. Heliantheae"	poly
+Apidae	Apinae	Eucerini	Xenoglossa	Eoxenoglossa	 strenua	Xenoglossa strenua	Xenoglossa (Eoxenoglossa) strenua	"(Cresson, 1878)"	MD-VA	Uncommon	Summer	Cucurbita L.	oligo
+Apidae	Apinae	Exomalopsini	Anthophorula	Anthophorisca	 micheneri	Anthophorula micheneri	Anthophorula (Anthophorisca) micheneri	"Timberlake, 1948"	VA	Rare	Fall	Agalinis Raf.	oligo
+Colletidae			Colletes		aestivalis	Colletesaestivalis	Colletes aestivalis	"Patton, 1879"	DE-MA-MD-NY-VA	Rare	Summer	Heuchera L.	oligo
+Colletidae			Colletes		americanus	Colletesamericanus	Colletes americanus	"Cresson, 1868"	CT-MA-MD-ME-NH-NJ-NY-PA-VA-WV	Common-Uncommon	Fall	"Asteraceae, e.g. Astereae"	poly
+Colletidae			Colletes		banksi	Colletesbanksi	Colletes banksi	"Swenk, 1908"	CT-NJ-NY-VA	Rare	Summer	Ilex L.	oligo
+Colletidae			Colletes		brevicornis	Colletesbrevicornis	Colletes brevicornis	"Robertson, 1897"	MD-NJ-VA-WV	Uncommon	Spring	"Campanula L., Triodanis Raf. ex Greene"	poly
+Colletidae			Colletes		brimleyi	Colletesbrimleyi	Colletes brimleyi	"Mitchell, 1951"	NJ	Rare	Spring	Ilex L.	oligo
+Colletidae			Colletes		compactus	Colletescompactus	Colletes compactus	"Cresson, 1868"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common	Fall	Asteraceae	poly
+Colletidae			Colletes		latitarsis	Colleteslatitarsis	Colletes latitarsis	"Robertson, 1891"	CT-MA-MD-ME-NJ-NY-PA-VA-WV	Uncommon	Summer	Physalis L.	oligo
+Colletidae			Colletes		productus	Colletesproductus	Colletes productus	"Robertson, 1891"	CT-MA-MD-NH-NJ-VA-WV	Uncommon-Rare	Summer	"Lyonia Nutt., Vaccinium L."	poly
+Colletidae			Colletes		simulans	Colletessimulans	Colletes simulans	"Cresson, 1868"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT-WV	Common	Fall	"Euthamia Nutt. ex Cass. , Solidago L., Symphyotrichum Nees"	poly
+Colletidae			Colletes		solidaginis	Colletessolidaginis	Colletes solidaginis	"Swenk, 1906"	CT-MA-MD-NH-NJ-NY-VA-VT	Uncommon-Rare	Fall	Solidago L.	oligo
+Colletidae			Colletes		speculiferus	Colletesspeculiferus	Colletes speculiferus	"Cockerell, 1927"	CT-DE-MA-MD-NJ-NY-RI-VA	Uncommon	Fall	"Asteraceae, e.g. Astereae"	poly
+Colletidae			Colletes		thysanellae	Colletesthysanellae	Colletes thysanellae	"Mitchell, 1951"	VA	Rare	Fall	"Asteraceae, e.g. Astereae"	poly
+Colletidae			Colletes		validus	Colletesvalidus	Colletes validus	"Cresson, 1868"	CT-DE-MA-ME-MD-NH-NJ-NY-PA-RI-VA	Uncommon	Spring	"Ericaceae, e.g. Vaccinium L."	poly
+Colletidae			Colletes		willistoni	Colleteswillistoni	Colletes willistoni	"Robertson, 1891"	MD-NJ-NY-PA-VA	Rare	Summer	Physalis L.	oligo
+Halictidae	Halictinae	Halictini	Lasioglossum	Hemihalictus	 lustrans	Lasioglossum lustrans	Lasioglossum (Hemihalictus) lustrans	"(Cockerell, 1897)"	DE-MD-VA	Rare	Summer	Pyrrhopappus DC.	oligo
+Halictidae	Halictinae		Lasioglossum	Sphecodogastra	 oenotherae	Lasioglossum oenotherae	Lasioglossum (Sphecodogastra) oenotherae	"(Stevens, 1920)"	CT-MA-MD-NH-NJ-NY-PA-VA-WV	Uncommon	Summer	Oenothera L.	oligo
+Halictidae	Halictinae		Lasioglossum	Hemihalictus	 pectinatum	Lasioglossum pectinatum	Lasioglossum (Hemihalictus) pectinatum	"(Robertson, 1890)"	CT-DE-MA-MD-NJ-NY-PA-VA-WV	Rare	Summer	Physalis L.	oligo
+Halictidae	Nomiinae		Dieunomia	Dieunomia	 heteropoda	Dieunomia heteropoda	Dieunomia (Dieunomia) heteropoda	"(Say, 1824)"	MD-NJ-VA	Rare	Fall	"Bidens L., Helianthus L."	oligo
+Halictidae	Nomiinae		Dieunomia	Epinomia	 nevadensis	Dieunomia nevadensis	Dieunomia (Epinomia) nevadensis	"(Cresson, 1874)"	MD	Rare	Summer	"Asteraceae, e.g. Astereae"	poly
+Halictidae	Rophitinae		Dufourea		monardae	Dufoureamonardae	Dufourea monardae	"(Viereck, 1924)"	CT-MA-NJ-NY	Rare	Summer	Monarda L.	oligo
+Halictidae	Rophitinae		Dufourea		novaeangliae	Dufoureanovaeangliae	Dufourea novaeangliae	"(Robertson, 1897)"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA-VT	Common-Rare	Summer	Pontederia L.	oligo
+Megachiliidae	Anthidiini		Dianthidium	Dianthidium	 simile	Dianthidium simile	Dianthidium (Dianthidium) simile	"(Cresson, 1864)"	CT-MA-ME-NJ-NY	Rare	Fall	"Asteraceae, e.g. Astereae"	poly
+Megachiliidae	Anthidiini		Paranthidium	Paranthidium	 jugatorium	Paranthidium jugatorium	Paranthidium (Paranthidium) jugatorium	"(Say, 1824)"	MD-NJ-NY-VA-WV	Rare	Summer	Helianthus L.	oligo
+Megachiliidae	Anthidiini		Trachusa	Heteranthidium	 dorsalis	Trachusa dorsalis	Trachusa (Heteranthidium) dorsalis	"(Lepeletier, 1841)"	NJ	Rare	Summer	Strophostyles Elliot	oligo
+Megachiliidae	Megachilini		Megachile	Sayapis	 inimica	Megachile inimica	Megachile (Sayapis) inimica	"Cresson, 1872"	CT-DE-MA-MD-NJ-NY-PA-VA-WV	Uncommon	Summer	Asteraceae	poly
+Megachiliidae			Megachile	Megachiloides	 integra	Megachile integra	Megachile (Megachiloides) integra	"Cresson, 1878"	MD-NJ	Rare	Summer	"Galactia P. Br., Strophostyles Elliot"	oligo
+Megachiliidae			Megachile	Megachiloides	 oenotherae	Megachile oenotherae	Megachile (Megachiloides) oenotherae	"(Mitchell, 1924)"	NJ	Rare	Spring	Oenothera L.	oligo
+Megachiliidae			Megachile	Argyropile	 parallela	Megachile parallela	Megachile (Argyropile) parallela	"Smith, 1853"	VA	Rare	Summer	Asteraceae	poly
+Megachiliidae			Megachile	Sayapis	 pugnata	Megachile pugnata	Megachile (Sayapis) pugnata	"Say, 1837"	CT-DE-MA-MD-NH-NJ-NY-PA-VA-VT-WV	Uncommon	Summer	"Asteraceae, e.g. Helianthus L."	poly
+Megachiliidae			Megachile	Melanosarus	 xylocopoides	Megachile xylocopoides	Megachile (Melanosarus) xylocopoides	"Smith, 1853"	DE-MD-NJ-VA	Uncommon	Summer	Asteraceae	poly
+Megachiliidae	Osmiini		Hoplitis	Robertsonella	 simplex	Hoplitis simplex	Hoplitis (Robertsonella) simplex	"(Cresson, 1864)"	DE-MD-NJ-VA-WV	Rare	Spring	"Nemophila Nutt., Phacelia Juss."	oligo
+Megachiliidae	Osmiini		Osmia	Helicosmia	 chalybea	Osmia chalybea	Osmia (Helicosmia) chalybea	"Smith, 1853"	DE-MD-NJ-NY-VA-WV	Rare	Summer	Cirsium Mill	oligo
+Megachiliidae			Osmia	Melanosmia	 distincta	Osmia distincta	Osmia (Melanosmia) distincta	"Cresson, 1864"	CT-MA-MD-ME-NH-NJ-NY-PA-VA-VT-WV	Uncommon	Spring	Penstemon Schmidel	oligo
+Megachiliidae			Osmia	Helicosmia	 texana	Osmia texana	Osmia (Helicosmia) texana	"Cresson, 1872"	MD-VA-WV	Rare	Summer	Cirsium Mill	oligo
+Megachiliidae			Osmia	Melanosmia	 virga	Osmia virga	Osmia (Melanosmia) virga	"Sandhouse, 1939"	CT-DE-MA-MD-ME-NH-NJ-NY-PA-RI-VA-WV	Uncommon	Spring	Vaccinium L.	oligo
+Melittidae	Melittinae	Macropidini	Macropis	Macropis	 ciliata	Macropis ciliata	Macropis (Macropis) ciliata	"Patton, 1880"	CT-MA-MD-ME-NH-NJ-NY-PA-RI-VA	Uncommon-Rare	Summer	Lysimachia L.	oligo
+Melittidae	Melittinae	Macropidini	Macropis	Macropis	 nuda	Macropis nuda	Macropis (Macropis) nuda	"(Provancher, 1882)"	CT-MA-ME-NH-NJ-NY-PA-RI-VT-WV	Uncommon-Rare	Summer	Lysimachia L.	oligo
+Melittidae	Melittinae	Macropidini	Macropis	Macropis	 patellata	Macropis patellata	Macropis (Macropis) patellata	"Patton, 1880"	CT-MA-MD-NJ-NY-PA-RI-VA-VT	Rare	Summer	Lysimachia L.	oligo
+Melittidae	Melittinae	Macropidini	Macropis	Macropis	 steironematis	Macropis steironematis	Macropis (Macropis) steironematis	"Robertson, 1891"	VA	Rare	Summer	Lysimachia L.	oligo
+Melittidae	Melittinae	Melittini	Melitta	Cilissa	 americana	Melitta americana	Melitta (Cilissa) americana	"(Smith, 1853)"	CT-MA-NJ-NY	Uncommon-Rare	Summer	Vaccinium L.	oligo
+Melittidae	Melittinae	Melittini	Melitta	Cilissa	 eickworti	Melitta eickworti	Melitta (Cilissa) eickworti	"Snelling & Stage, 1995"	MD-NJ-NY-WV	Rare	Spring	Vaccinium (Polycodium) L.	oligo
+Melittidae	Melittinae	Melittini	Melitta	Cilissa	 melittoides	Melitta melittoides	Melitta (Cilissa) melittoides	"(Viereck, 1909)"	CT-MA-MD-NH-NJ-PA-VA	Rare	Summer	Lyonia Nutt.	oligo
