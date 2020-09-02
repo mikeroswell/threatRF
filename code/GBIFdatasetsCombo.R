@@ -2,23 +2,24 @@ library(maps)
 library(rgdal)
 library(rgeos)
 library(dismo)
-library(plyr)
+library(tidyverse)
+library(data.table)
 
 #####This prepares the gbif data####
 
 
-setwd("E:/UMD/Projects/BeesOfMD/GBIF/0034093-190918142434337")
+# setwd("E:/UMD/Projects/BeesOfMD/GBIF/0034093-190918142434337")
 
-GBIFData=read.delim(file="0034093-190918142434337.csv", header=T, sep="\t") #read data from GBIF
+GBIFData=read.delim(file="data/0034093-190918142434337.csv", header=T, sep="\t") #read data from GBIF
 GBIFDataCoord=GBIFData[!is.na(GBIFData$decimalLatitude),] # delete observations that have no geo coord
 GBIFDataCoord=GBIFData[!is.na(GBIFData$decimalLongitude),] # delete observations that have no geo coord
 coordinates(GBIFDataCoord) <- c("decimalLongitude", "decimalLatitude")
 
 
-marylandST <- readOGR(dsn = "E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/stateBoundaries/Maryland_Political_Boundaries__State_Boundary", 
+marylandST <- readOGR(dsn = "data/stateBoundaries/Maryland_Political_Boundaries__State_Boundary",
                       layer = "Maryland_Political_Boundaries__State_Boundary")
 
-marylandCt <- readOGR(dsn = "E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/stateBoundaries/Maryland_Physical_Boundaries__County_Boundaries_Generalized", 
+marylandCt <- readOGR(dsn = "data/stateBoundaries/Maryland_Physical_Boundaries__County_Boundaries_Generalized",
                       layer = "Maryland_Physical_Boundaries__County_Boundaries_Generalized")
 proj4string(GBIFDataCoord) <- marylandST@proj4string
 
@@ -38,21 +39,34 @@ GBIFfam=GBIFMD.df[GBIFMD.df$family==families[i],]
 GBIFBeesOnly=rbind(GBIFBeesOnly,GBIFfam)
 }
 GBIFBeesOnly=droplevels(GBIFBeesOnly)
+GBIFBeesOnly <- cleannames(GBIFBeesOnly %>% rename(gs=species) %>% dplyr::select(-genus))
 
+names(GBIFBeesOnly)
 
 
 plot(marylandST)
-points(GBIFMD, pch=20,col=GBIFMD$genus) #plots the points in MD and colors them by species
+points(GBIFMD, pch=20, col=GBIFMD$genus) #plots the points in MD and colors them by species
 
 
 ##########This combines GBIF and Sam ###########
 
+SamBees <- fread("data/fromR/Obs_stat_cleaned.csv")
+# SamBees=read.csv(file="E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/ObsMDBeesConservStat.csv", header=T)
 
-SamBees=read.csv(file="E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/ObsMDBeesConservStat.csv", header=T)
-SWAPCat=read.csv(file="E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/SWAP_hymMD.csv", sep=",", header=T) # read conservation category
-NatureServe=read.table(file="E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/NatureServeData.txt", sep="\t", header=T)
-AllBees = merge(GBIFBeesOnly,SamBees,by.x="species", by.y="name", all=T) #merges the two datasets # combines the two datasets
+SWAPCat <- read.csv("data/SWAP_hymMD.csv")
 
+# SWAPCat=read.csv(file="E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/SWAP_hymMD.csv", sep=",", header=T) # read conservation category
+
+
+# NatureServe=read.table(file="E:/UMD/Projects/BeesOfMD/USGS_DRO_flat/NatureServeData.txt", sep="\t", header=T)
+
+NatureServe=read.table(file="data/NatureServeData.txt", sep="\t", header=T)
+# tic()
+# AllBees = merge(GBIFBeesOnly,SamBees,by.x="gs", by.y="gs", all=T) #merges the two datasets # combines the two datasets #this is really really slow!!!
+# toc() #this took almost 2 min
+# tic()
+AllBees<-SamBees %>% left_join(GBIFBeesOnly, by = "gs")
+# toc() # under 20 seconds!
 ### create one file with all conservation categories (nature Serve and SWAP)
 ConsCategory = merge.default(SWAPCat,NatureServe, by.x='Scientific.name', by.y="ScientificName", all=T)
 ConsCategory$GlobalCatComb <- ConsCategory$GRANK #create a new column to combine both SWAP and NatServe for global category
@@ -68,13 +82,19 @@ ConsCategory$StateCatComb[ConsCategory$GlobalCatComb=="G5"] <- "S5"
 ConsCategory$StateCatComb[ConsCategory$GlobalCatComb=="G5?"] <- "S5"
 
 #combine list of occurrences with their categories
-ObsMDConsCat = merge.default(AllBees[,c(1,2,4,8:14,22:23,64:66,89:91)],ConsCategory, by.x='species', by.y="Scientific.name", all=T)
+# ObsMDConsCat = merge.default(AllBees[,c(1,2,4,8:14,22:23,64:66,89:91)],ConsCategory, by.x='species', by.y="Scientific.name", all=T)
+
+ObsMDConsCat = left_join(AllBees, ConsCategory, by = c("gs" = "Scientific.name"))
+
+ObsMDConsCat <- ObsMDConsCat %>% select(-(grep(pattern = "*.x", names(ObsMDConsCat))))
+names(ObsMDConsCat)<- gsub(pattern = "*.y", replacement = "", names(ObsMDConsCat))
+
 
 # have all coodinates appear under the same column
 ObsMDConsCat$latitude[is.na(ObsMDConsCat$latitude)] <- (ObsMDConsCat$decimalLatitude[is.na(ObsMDConsCat$latitude)]) #replace values from one on the other
 ObsMDConsCat$longitude[is.na(ObsMDConsCat$longitude)] <- (ObsMDConsCat$decimalLongitude[is.na(ObsMDConsCat$longitude)]) #replace values from one on the other
 
-write.csv(ObsMDConsCat, file="ObsMDBeesSamGBIFConservStat.csv") #write table with all this organized data
+fwrite(ObsMDConsCat, file="data/fromR/ObsMDBeesSamGBIFConservStatMR.csv") #write table with all this organized data
 
 
 
