@@ -19,10 +19,12 @@ library(RMariaDB) #This is most up to date package for linking to databases. RMy
 
 traits<-read.csv("data/fromR/traits.csv")
 
-beeDat<-fread("data/ObsMDBeesConservStat.csv") %>% rename(gs = name) %>%
-  mutate(gs = str_to_sentence(gs)) %>% # deal with capitalization errors
-  separate(col = "gs", into = c("genus", "species"), sep = " ")
-cleannames<-function(project){
+beeDat<-fread("data/fromR/ObsMDBeesSamGBIFConservStat.csv")
+project<-beeDat
+
+cleannames <- function(project, binomial_column = "gs"){
+  project = project  %>% rename_("gs" = binomial_column) %>% mutate(gs = str_to_sentence(gs)) %>% # deal with capitalization errors
+    separate(col = "gs", into = c("genus", "species"), sep = " ")
   project$species[project$genus=="Melissodes" & project$species== "bimaculata" ] <- "bimaculatus"
   project$species[project$genus=="Melissodes" & project$species== "denticulata" ] <- "denticulatus"
   project$species[project$genus=="Melissodes" & project$species== "druriella" ] <- "druriellus"
@@ -122,3 +124,4 @@ beeDat<-beeDat %>% filter(gs!="Andrena ")
 beeDat %>% anti_join(traits, by = "gs") %>% group_by(gs) %>% summarize(n())
 
 fwrite(beeDat, "data/FromR/Obs_stat_cleaned.csv")
+

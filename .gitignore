@@ -44,6 +44,13 @@ data/MDObsWithTaxa.csv
 data/AllTaxaWithTaxonomy.csv
 data/ObsMDBeesConservStat.csv
 data/fromR/Obs_stat_cleaned.csv
+data/0034093-190918142434337.csv
+data/fromR/ObsMDBeesSamGBIFConservStatMR.csv
+data/fromR/Obs_stat_cleaned.csv
+data/fromR/ObsMDBeesSamGBIFConservStat.csv
+data/fromR/ObsMDBeesSamGBIFConservStatMR.csv
+
+
 
 #rproject file
 *.Rproj
