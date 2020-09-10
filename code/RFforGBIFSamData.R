@@ -1,14 +1,17 @@
 ### This file runs the RF approach for the bees including those from GBIF
 library(randomForest)
 # library(plyr)
-library(dplyr)
+library(tidyverse)
+library(data.table)
+source("code/cleannames.R")
 # memory.limit(size=20000)
 
 # setwd("E:/UMD/Projects/BeesOfMD/GBIF/0034093-190918142434337/")
 
 ##load files with taxonomy and with spatial data
 # ObservCons = read.csv(file="ObsMDBeesSamGBIFConservStat.csv") #read observations with conservation categories
-ObservCons <- fread("data/fromR/ObsMDBeesSamGBIFConservStatMR.csv")
+traits<-fread("data/fromR/traits.csv")
+ObservCons <- fread("data/fromR/ObsMDBeesSamGBIFConservStatMR.csv") %>% select(-c(1,2))
 # ObservCons=ObservCons[,c(2,15:32)]
 # ObservCons=ObservCons[,c(1:6,18,19)]
 
@@ -19,14 +22,18 @@ ObservCons <- fread("data/fromR/ObsMDBeesSamGBIFConservStatMR.csv")
 SpatialVariables = read.delim(file="data/ClimateSummariesBees.txt", sep="\t", header=T) # read summaries of spatial variables per bee species
 
 #clean names here too!
-SpatialVariables = SpatialVariables %>%  mutate(gs = str_to_sentence(SpatialVariables$species.i)) %>% # deal with capitalization errors
-  separate(col = "gs", into = c("genus", "species"), sep = " ") %>% cleannames()
+SpatialVariables = SpatialVariables %>%  mutate(gs = str_to_sentence(SpatialVariables$species.i)) %>% cleannames() %>% filter(gs!="Andrena ")
 
-SpatialVariables %>% anti_join(traits, by ="gs")
+SpatialVariables %>% anti_join(traits, by ="gs") # at some point need to deal with the spatial info for complexes.
 ##connect the two files
-ObsConsSpat=merge.default(ObservCons,SpatialVariables,by.x="gs",by.y="gs",all=T) #this takes a few seconds.
-ObsConsSpatRed= ObsConsSpat %>% distinct(gs, .keep_all = TRUE) #this cleans up all the extra lines for the same species #ok but why did I want that??
+ObsConsSpat=full_join(ObservCons, SpatialVariables, by = c("gs", "genus", "species")) #this takes a few seconds.
+ObsConsSpatRed= ObsConsSpat %>% distinct(gs, .keep_all = TRUE) #this cleans up all the extra lines for the same species #ok but why did I want that?? #385 spp.
+
+ObsConsSpatRed<-ObsConsSpatRed %>% select(-(grep(pattern = "*.x", names(ObsConsSpatRed)))) #deal with join artifacts
+names(ObsConsSpatRed)<- gsub(pattern = "*.y", replacement = "", names(ObsConsSpatRed))
 # ObsConsSpat=ObsConsSpatRed
+
+names(ObsConsSpatRed)
 
 #get some summaries of the data
 summary(ObsConsSpatRed[ObsConsSpatRed$StateCatComb=="S1",])
@@ -45,7 +52,7 @@ boxplot(n.gps~StateCatComb,data=ObsConsSpatRed)
 
 
 #remove those with low sample size: changing threshhold to 2!
-ObsConsSpat_2<-subset(ObsConsSpatRed, n.gps > 1) #retains ~50 spp excluded from >3!
+ObsConsSpat_2<-subset(ObsConsSpatRed, n.gps > 1) #this is only 200 spp!!!
 
 #get numbers for table
 table(ObsConsSpat_2$StateCatComb)
@@ -67,7 +74,7 @@ ObsConsSpat_2$SumStateCat[ObsConsSpat_2$SumStateCat == "S1S3"] <-"S1S2S3"
 ObsConsSpat_2 = droplevels(ObsConsSpat_2)
 table(ObsConsSpat_2$SumStateCat)
 
-#### 26 spp not NA or unclassified. 2 are in threatened category? Uh OH!
+#### 26 spp not NA or unclassified. 2 are in pretty secure 4/5 categories? Uh OH!
 ObsConsSpat_2 %>% filter(SumStateCat =="S1S2S3") %>% select(gs)
 ####################################################################################
 ############################ RUN RF ###################################

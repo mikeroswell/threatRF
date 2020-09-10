@@ -2,12 +2,14 @@
 
 library(data.table)
 library(tidyverse)
-library(RMariaDB) #This is most up to date package for linking to databases. RMySQL also works well but
-# source("psw_clab.R") #simply save a .R file as psw="PASSWORD"
-# source("user_clab.R")
+library(traitdataform)
+library(stringr)
+# library(RMariaDB) #This is most up to date package for linking to databases. RMySQL also works well but
+# source("psw_wlab.R") #simply save a .R file as psw="PASSWORD"
+# source("user_wlab.R")
+
 #
-#
-# conn <- dbConnect(RMariaDB::MariaDB(), user=user_clab, password=psw_clab,
+# conn <- dbConnect(RMariaDB::MariaDB(), user=user_2lab, password=psw_2lab,
 #                   dbname="cariveau_lab", port = 8889 , host= "160.94.186.138")
 #
 # dbListTables(conn)
@@ -17,10 +19,55 @@ library(RMariaDB) #This is most up to date package for linking to databases. RMy
 # traits$gs <- paste(traits$genus, traits$species, sep=" ")
 # write.csv(traits, "data/fromR/traits.csv")
 
-traits<-read.csv("data/fromR/traits.csv")
+# conn <- dbConnect(RMariaDB::MariaDB(), user=user, password=psw
+#                   , dbname="wlab_data", port = 3306 , host= "benedick.rutgers.edu")
+# dbListTables(conn)
+# traits_unk = dbReadTable(conn, "specimen_level_traits")
+# ITs = dbReadTable(conn, "it_measurements")
+# dbDisconnect(conn)
+# ITs<- bind_rows(ITs, traits_unk)
+#
+# head(traits_unk)
 
-beeDat<-fread("data/fromR/ObsMDBeesSamGBIFConservStat.csv")
-project<-beeDat
+# write.csv(ITs, "data/IT_measurements_wlab.csv")
+# traits_unk %>% mutate(gs= paste(genus, species)) %>% filter(sex == "female") %>% filter(ITlength_mm>0) %>% summarize(n_distinct(gs))
+# head(ITs) %>% mutate(gs= paste(genus, species)) %>% summarize(n_distinct(gs))
+
+# ObsConsSpat %>% group_by(genus, species) %>% dplyr::summarize(n()) %>% anti_join(ITs, by =c("genus", "species"))
+# ObsConsSpat %>% n_distinct(c("genus", "species"))
+
+# traits<-read.csv("data/fromR/traits.csv"
+
+# beeDat<-fread("data/fromR/ObsMDBeesSamGBIFConservStat.csv")
+# project<-beeDat
+
+ugly_names<-beeDat %>%
+  mutate(gs = stringr::str_to_sentence(species)) %>%
+  anti_join(traits %>%
+              mutate(gs = paste(genus, species))
+            , by = c("gs" = "gs"))
+
+ugly_names %>% summarize(n_distinct(species)) #str_to_sentence brings from 48 to 32
+
+#try the traitdataform taxize stuff
+names_to_fix<-ugly_names %>% group_by(species) %>% summarize(n()) %>% pull(species)
+
+names_to_fix
+
+try_traitdataform1<-get_gbif_taxonomy(names_to_fix[-1], subspecies = F, verbose = T, conf_threshold = 80) #in subsequent run dropped from default 90 to 80
+
+still_sketch<-data.frame(try_traitdataform1) %>% dplyr::filter(warnings!="")
+
+still_sketch #there are some obvious ones here, so let's take another look
+
+#just some tests to see how it works. #these are all misspellings of species names that are kind of ambiguous which spp. they should match.
+
+get_gbif_taxonomy(c("Lasioglossum alinum", "Lasioglossum adaliadae", "Lasioglossum adliade"))
+
+# warnings it gives give me some confidence that lowering the confidence threshold will not lead to silent mistakes. Good.
+
+# see if it throws warnings with clab traits table
+check_ours<-get_gbif_taxonomy(traits %>% mutate(gs=paste(genus, species)) %>% pull("gs"))
 
 cleannames <- function(project, binomial_column = "gs"){
   project = project  %>% rename_("gs" = binomial_column) %>% mutate(gs = str_to_sentence(gs)) %>% # deal with capitalization errors
@@ -118,10 +165,10 @@ cleannames <- function(project, binomial_column = "gs"){
   return(project)
 }
 
-beeDat<-cleannames(beeDat)
-beeDat<-beeDat %>% filter(gs!="Andrena ")
+# beeDat<-cleannames(beeDat)
+# beeDat<-beeDat %>% filter(gs!="Andrena ")
 
-beeDat %>% anti_join(traits, by = "gs") %>% group_by(gs) %>% summarize(n())
+# beeDat %>% anti_join(traits, by = "gs") %>% group_by(gs) %>% summarize(n())
 
-fwrite(beeDat, "data/FromR/Obs_stat_cleaned.csv")
+# fwrite(beeDat, "data/fromR/Obs_stat_cleaned.csv")
 
