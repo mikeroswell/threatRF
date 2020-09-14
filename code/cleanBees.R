@@ -4,6 +4,9 @@ library(data.table)
 library(tidyverse)
 library(traitdataform)
 library(stringr)
+library(tictoc)# to time things
+library(furrr)
+plan(strategy = "mulitprocess", workers = 7)
 # library(RMariaDB) #This is most up to date package for linking to databases. RMySQL also works well but
 # source("psw_wlab.R") #simply save a .R file as psw="PASSWORD"
 # source("user_wlab.R")
@@ -36,7 +39,7 @@ library(stringr)
 # ObsConsSpat %>% group_by(genus, species) %>% dplyr::summarize(n()) %>% anti_join(ITs, by =c("genus", "species"))
 # ObsConsSpat %>% n_distinct(c("genus", "species"))
 
-# traits<-read.csv("data/fromR/traits.csv"
+traits<-read.csv("data/fromR/traits.csv")
 
 # beeDat<-fread("data/fromR/ObsMDBeesSamGBIFConservStat.csv")
 # project<-beeDat
@@ -64,10 +67,39 @@ still_sketch #there are some obvious ones here, so let's take another look
 
 get_gbif_taxonomy(c("Lasioglossum alinum", "Lasioglossum adaliadae", "Lasioglossum adliade"))
 
+
 # warnings it gives give me some confidence that lowering the confidence threshold will not lead to silent mistakes. Good.
 
 # see if it throws warnings with clab traits table
+tic()
 check_ours<-get_gbif_taxonomy(traits %>% mutate(gs=paste(genus, species)) %>% pull("gs"))
+toc()
+# it failed aftern an hour and returned absolutely nothing!
+
+
+
+# run in parallel and troubleshoot
+e_line<-get_gbif_taxonomy("Lasioglossum alinum")
+e_line<-sapply(e_line, function(x){x<-"nogo"})
+e_line
+
+tic()
+check_ours<-future_map_dfr(traits %>% mutate(gs=paste(genus, species)) %>% pull("gs"), function(sp){
+sapply(tryCatch(get_gbif_taxonomy(sp)
+           , error = function(e){e_line$scientificName<-sp
+              return(e_line)}
+           ), as.character)
+  })
+toc()
+
+updated<-check_ours %>% map_dfr(function(x)sapply(x, as.character))
+str(updated)
+checkfull<-updated %>% mutate(resi = ifelse(warnings =="", "worked", ifelse(warnings == "nogo", "failed", "checkthis")))
+
+checkfull %>% group_by(resi) %>% summarize(n())
+checkfull %>% filter(resi =="failed") %>% pull(scientificName) #apparently a binomial that's actually just "Hoplitis" the genus
+
+#try running again and see if I get the same errors.
 
 cleannames <- function(project, binomial_column = "gs"){
   project = project  %>% rename_("gs" = binomial_column) %>% mutate(gs = str_to_sentence(gs)) %>% # deal with capitalization errors
