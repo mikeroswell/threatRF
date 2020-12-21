@@ -2,11 +2,12 @@
 
 library(data.table)
 library(tidyverse)
+# devtools::install_github('EcologicalTraitData/traitdataform')
 library(traitdataform)
 library(stringr)
 library(tictoc)# to time things
 library(furrr)
-plan(strategy = "mulitprocess", workers = 7)
+plan(strategy = "multiprocess", workers = 7)
 # library(RMariaDB) #This is most up to date package for linking to databases. RMySQL also works well but
 # source("psw_wlab.R") #simply save a .R file as psw="PASSWORD"
 # source("user_wlab.R")
@@ -94,13 +95,39 @@ toc()
 
 updated<-check_ours %>% map_dfr(function(x)sapply(x, as.character))
 str(updated)
-checkfull<-updated %>% mutate(resi = ifelse(warnings =="", "worked", ifelse(warnings == "nogo", "failed", "checkthis")))
+checkfull<-check_ours %>% mutate(resi = ifelse(warnings =="", "worked", ifelse(warnings == "nogo", "failed", "checkthis")))
 
 checkfull %>% group_by(resi) %>% summarize(n())
 checkfull %>% filter(resi =="failed") %>% pull(scientificName) #apparently a binomial that's actually just "Hoplitis" the genus
 
 #try running again and see if I get the same errors.
+#yep
 
+
+View(checkfull %>% filter(resi=="checkthis"))
+
+checkfull %>% group_by(warnings) %>% summarize(n())
+
+View(checkfull %>% filter(warnings ==" Mapped concept is labelled 'DOUBTFUL'!" )) #Triepeolus elisiae should be good.
+
+View(checkfull %>% filter(warnings == " Selected first of multiple equally ranked concepts!" ))
+(checkfull %>% filter(warnings == " No match! Check spelling or lower confidence threshold!" ))$scientificName
+Xsenior<-get_gbif_taxonomy("Xylocopa senior")
+
+(checkfull %>% filter(warnings == "No matching species concept! " ))$scientificName
+
+
+
+# real quick how many issues from sam's data
+dro<-data.table::fread("data/USGS_DRO_flat.csv")
+
+names(dro)
+head(dro)
+`%ni%` <- Negate(`%in%`)
+wlab_names<-traits %>% mutate(gs=paste(genus, species)) %>% pull("gs")
+dro_good<-dro %>% filter(name %in% wlab_names)
+dro_bad<-dro %>% filter(name %ni% wlab_names)
+View(dro_bad %>% group_by(name) %>% summarize(n()))
 cleannames <- function(project, binomial_column = "gs"){
   project = project  %>% rename_("gs" = binomial_column) %>% mutate(gs = str_to_sentence(gs)) %>% # deal with capitalization errors
     separate(col = "gs", into = c("genus", "species"), sep = " ")

@@ -43,6 +43,28 @@ boxplot(area~StateCatComb,data=ObsConsSpatRed)
 boxplot(n.gps~StateCatComb,data=ObsConsSpatRed)
 
 
+## #
+# make a little map of the occurrence data set.
+
+
+MD <- map_data("county", "Maryland")
+bbox = ggmap::make_bbox(lon = longitude, lat = latitude, data = ObservCons)
+mymap = ggmap::ggmap(ggmap::get_map(location = bbox, source="google", maptype = "terrain", color = "bw"))
+ggplot(data = counties)
+
+?ggmap::get_map
+
+pdf("figures/makeamap_toner.pdf")
+ggplot(MD)+
+  geom_polygon(aes(x = long, y = lat, group = group), color = "white", fill="grey") +
+  geom_point(data=ObservCons %>% group_by(latitude, longitude, gs) %>% summarize(freq=n()), aes(longitude, latitude), alpha=0.5, size = 0.1, color = "darkred")+
+  theme_void()+
+  coord_quickmap(ylim = c(38,40), xlim = c(-80, -75))
+dev.off()
+
+ObservCons %>% summarize(n_distinct(latitude))
+
+names(ObservCons)
 
 
 ####################################################################################
