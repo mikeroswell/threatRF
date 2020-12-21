@@ -5,17 +5,20 @@ library(rgeos)
 library(dismo)
 library(taxize)
 library(natserv)
-library(plyr)
+library(tidyverse)
 options(NatureServeKey = "2fec2d9b-0af1-42b8-afd0-b0e5cbf5c23b")
 
-setwd("E:/UMD/Projects/BeesOfMD/USGS_DRO_flat")
+# setwd("E:/UMD/Projects/BeesOfMD/USGS_DRO_flat")
 
 ########FOR THE FIRST TIME
 ###first, read the files
-obs = read.delim2("USGS_DRO_flat.txt", sep='\t', header=T) #read observations
-obs[,13:14] <- as.numeric(as.matrix(unlist(obs[,13:14]))) #transform coodinate columns to numeric
+obs= read.csv("data/USGS_DRO_flat.csv", header=T) #read observations
+# obs[,13:14] <- as.numeric(as.matrix(unlist(obs[,13:14]))) #transform coodinate columns to numeric
 
-SpeciesOnly <- as.matrix(unique(obs$name)) #gets all species names to search in the following lines
+obs<-cleannames(obs, "name")
+
+
+SpeciesOnly <- as.matrix(unique(obs$gs)) #gets all species names to search in the following lines
 TaxObsFull=c()
 TaxObs <- tax_name(SpeciesOnly[1:483],get = c("genus","family","order"), db="itis", rows=1) #searches taxonomy and picks hte first line if asked to choose.
 TaxObsFull = rbind(TaxObsFull,TaxObs)# get taxonomy
@@ -26,11 +29,11 @@ TaxObsFull = rbind(TaxObsFull,TaxObs) # get taxonomy
 TaxObs <- tax_name(SpeciesOnly[c(3209:3600)],get = c("genus","family","order"), db="itis", rows=1) #searches taxonomy and picks hte first line if asked to choose.
 TaxObsFull = rbind(TaxObsFull,TaxObs) # get taxonomy
 
-SpTax=merge(obs,TaxObsFull,by.x="name",by.y="query",all=T) #link taxonomy with actual original table
+SpTax=merge(obs,TaxObsFull,by.x="gs",by.y="query",all=T) #link taxonomy with actual original table
 write.table(SpTax, file="AllTaxaWithTaxonomy.csv", sep=',') #write a file wiht all the data together
 
-SpTax=read.csv("AllTaxaWithTaxonomy.csv")
-  
+SpTax=read.csv("data/AllTaxaWithTaxonomy.csv")
+
 SpTaxnoNA <- SpTax[!is.na(SpTax$latitude),] #get rid of observations with no latitude
 SpTaxnoNA <- SpTaxnoNA[!is.na(SpTaxnoNA$longitude),] # get rid of observations with no longitude
 coordinates(SpTaxnoNA) <- c("longitude", "latitude") # make those points spatial points
@@ -42,27 +45,27 @@ obs_MD <- over(SpTaxnoNA, marylandST) #identifies points that fall within MD
 SpTaxnoNADF = data.frame(SpTaxnoNA)
 obsMDOnly <- subset(SpTaxnoNADF,obs_MD[,'OBJECTID']!="<NA>") #only selects the points that are in MD
 coordinates(obsMDOnly) <- c("longitude","latitude") # creates a spatial DF for those from MD only
-write.table(obsMDOnly, file="MDObsWithTaxa.csv", sep=',')
+write.table(obsMDOnly, file="data/MDObsWithTaxa.csv", sep=',')
 
 ################################################################################
 ##########AFTER ALL TEH FILES HAVE BEEN TREATED, WE CAN JUST LOAD THE FULL FILES
 #################################################################################
 
 
-SpTaxnoNA <- read.csv(file="AllTaxaWithTaxonomy.csv", header=T) #reads all the data points
+SpTaxnoNA <- read.csv(file="data/AllTaxaWithTaxonomy.csv", header=T) #reads all the data points
 SpTaxnoNA <- SpTaxnoNA[!is.na(SpTaxnoNA$latitude),] #get rid of observations with no latitude
 SpTaxnoNA <- SpTaxnoNA[!is.na(SpTaxnoNA$longitude),] # get rid of observations with no longitude
 coordinates(SpTaxnoNA) <- c("longitude", "latitude") # make those points spatial points
 
-obsMDOnly <- read.csv(file="MDObsWithTaxa.csv", header=T) #reads all the MD data points
+obsMDOnly <- read.csv(file="data/MDObsWithTaxa.csv", header=T) #reads all the MD data points
 coordinates(obsMDOnly) <- c("longitude", "latitude") # make those points spatial points
 
 ###read all map files
 
-marylandST <- readOGR(dsn = "./stateBoundaries/Maryland_Political_Boundaries__State_Boundary", 
+marylandST <- readOGR(dsn = "./stateBoundaries/Maryland_Political_Boundaries__State_Boundary",
                       layer = "Maryland_Political_Boundaries__State_Boundary")
 
-marylandCt <- readOGR(dsn = "./stateBoundaries/Maryland_Physical_Boundaries__County_Boundaries_Generalized", 
+marylandCt <- readOGR(dsn = "./stateBoundaries/Maryland_Physical_Boundaries__County_Boundaries_Generalized",
                       layer = "Maryland_Physical_Boundaries__County_Boundaries_Generalized")
 proj4string(SpTaxnoNA) <- marylandST@proj4string
 
@@ -112,7 +115,9 @@ ObsMDBees= ObsMDBees[ObsMDBees$family!="Chrysididae",]
 ObsMDBees= ObsMDBees[ObsMDBees$family!="Crabronidae",]
 ObsMDBees= ObsMDBees[ObsMDBees$family!="Scoliidae",] # leave all the things that are bees
 ObsMDBees = ObsMDBees[!is.na(ObsMDBees$name),] #get rid of lines with NA in species name
-ObsMDBees = droplevels(ObsMDBees) 
+ObsMDBees = droplevels(ObsMDBees)
+
+
 
 write.csv(ObsMDBees, file="ObsMDBeesConservStat.csv") #write table with all this organized data
 

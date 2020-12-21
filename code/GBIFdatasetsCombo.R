@@ -39,10 +39,11 @@ GBIFfam=GBIFMD.df[GBIFMD.df$family==families[i],]
 GBIFBeesOnly=rbind(GBIFBeesOnly,GBIFfam)
 }
 GBIFBeesOnly=droplevels(GBIFBeesOnly)
-GBIFBeesOnly <- cleannames(GBIFBeesOnly %>% rename(gs=species) %>% dplyr::select(-genus))
+GBIFBeesOnly <- cleannames(GBIFBeesOnly %>% dplyr::rename(gs = species) %>% dplyr::select(-genus))
 
 names(GBIFBeesOnly)
 
+GBIFBeesOnly %>% anti_join(traits, by = c("genus", "species")) %>% group_by(gs) %>% dplyr::summarize(n())
 
 plot(marylandST)
 points(GBIFMD, pch=20, col=GBIFMD$genus) #plots the points in MD and colors them by species
