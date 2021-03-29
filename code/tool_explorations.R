@@ -1,9 +1,11 @@
 # code to keep track of tools I'm playing with and test them out
 
 # install.packages("natserv")
-library(natserv)
+library(natserv) #this is how we get naturserve status
+library(rgbif) #how we get gbif observations
 library(tidyverse)
 # vignette(package ="natserv")
+vignette(package ="rgbif")
 # View(ns_search_spp(text ="Triepeolus"))
 ns_search_spp(text ="Triepeolus") # first result is 20x15
 ?ns_search_spp
@@ -91,8 +93,7 @@ res <- natserv:::ns_POST(url = "https://explorer.natureserve.org/api/data/specie
                  , modifiedSince = modified_since))
 format_res<-natserv:::parse_search(res)
 
-library(natserv)
-library(tidyverse)
+#solution to issue of weird data structure from this package
 unnested <- ns_search_spp(text_adv = list(searchToken ="Andrena"
                                         , matchAgainst ="scientificName"
                                         , operator ="contains")
@@ -101,3 +102,51 @@ unnested <- ns_search_spp(text_adv = list(searchToken ="Andrena"
   unnest (cols = "subnations", names_repair ="unique") %>%
   filter(subnationCode =="MD")
 unnested
+
+###
+# see if I can figure out how to get occurrence records in MD
+# not sure how it deals with string matching in `scientificName`
+andrenaOcc<-occ_search(scientificName ="Andrena", stateProvince ="Maryland", limit = 1e4)
+andData<-andrenaOcc$data
+head(andData)
+
+# e.g. for searching all plants (but how to download? Can rgbif do this?)
+#https://www.gbif.org/occurrence/taxonomy?basis_of_record=OBSERVATION&basis_of_record=HUMAN_OBSERVATION&basis_of_record=PRESERVED_SPECIMEN&taxon_key=7707728&state_province=Maryland&advanced=1&occurrence_status=present
+
+# get it so search returns <1e5 results
+MD_vasc <- occ_search(taxonKey = 7707728
+                    , stateProvince = "Maryland", year="1999, 2019"
+                    , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
+                    , hasCoordinate = T
+                    , limit = 1e5)
+
+vasc_flat<-flatten(MD_vasc)
+
+length(MD_vasc[[3]])
+MD_vasc[[2]][[3]]
+
+md_vasc_obs<-bind_rows(MD_vasc[[2]][[3]], MD_vasc[[3]][[3]])
+str(md_vasc_obs)
+md_vasc_obs %>% group_by(acceptedTaxonKey, year) %>% summarize(obs =n()) %>% ggplot(aes(obs))+geom_histogram()+facet_wrap(~year)+theme_classic()+labs(y="species", x="occurrences")+scale_y_log10()
+
+vasc_UL<-unlist(MD_vasc)
+head(vasc_UL)
+MD_vasc
+#ans: use occ_download()
+
+try_vacsular<-occ_download(c(
+  pred("basisOfRecord", "OBSERVATION")
+  , pred("basisOfRecord", "HUMAN_OBSERVATION")
+  , pred("basisOfRecord", "PRESERVED_SPECIMEN")
+  , pred("taxonKey", "7707728")
+  # , pred("country","US")
+  # , pred("occurrenceStatus", "present")
+  , pred("hasCoordinate", TRUE)
+)
+  , user = "mroswell"
+  , pwd = "Epeoloides!1"
+  , email = "mroswell@umd.edu"
+)
+
+occ_download_get(try_vacsular, path = "data", overwrite = T)
+occ_download_meta(try_vacsular)
