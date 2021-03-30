@@ -173,6 +173,11 @@ pdf(file = "figures/GBIF_taxon_freq.pdf")
 once/tenx
 dev.off()
 
+specfreq_TOT<-withstats2 %>% group_by( state_status = simple, species) %>%
+  summarize(records =n()) %>%
+  group_by( state_status) %>%
+  summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n())
+
 #ans: use occ_download()
 
 # try_vacsular<-occ_download(c(
