@@ -51,6 +51,9 @@ data/fromR/ObsMDBeesSamGBIFConservStat.csv
 data/fromR/ObsMDBeesSamGBIFConservStatMR.csv
 data/state*
 
+# .pdfs (probably figures, might consider not ignoring)
+*.pdf
+
 
 
 #rproject file
