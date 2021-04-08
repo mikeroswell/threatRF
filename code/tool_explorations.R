@@ -114,20 +114,54 @@ head(andData)
 # e.g. for searching all plants (but how to download? Can rgbif do this?)
 #https://www.gbif.org/occurrence/taxonomy?basis_of_record=OBSERVATION&basis_of_record=HUMAN_OBSERVATION&basis_of_record=PRESERVED_SPECIMEN&taxon_key=7707728&state_province=Maryland&advanced=1&occurrence_status=present
 
-# get it so search returns <1e5 results
-MD_vasc <- occ_search(taxonKey = 7707728
-                    , stateProvince = "Maryland", year="1999, 2019"
+# See if we can get the taxonKey for Lepidoptera and then for bees
+
+#don't know how to do this smart but using the webtool drop down I found the taxon keys for the bee families, then make a semicolon-separated string to search.
+halic<-7908
+apida<-4334
+andre<-7901
+megac<-7911
+colle<-7905
+melli<-4345
+
+keyall<-paste(halic, apida, andre, megac, colle, melli, sep=";")
+
+MD_hym <- occ_search(taxonKey = keyall
+                    , stateProvince = "Maryland", year="1989, 2019"
                     , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
                     , hasCoordinate = T
                     , limit = 1e5)
 
-vasc_flat<-flatten(MD_vasc)
+MD_lep<- occ_search(taxonKey = 797
+                               , stateProvince = "Maryland", year="1989, 2019"
+                               , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
+                               , hasCoordinate = T
+                               , limit = 1e5)
 
-length(MD_vasc[[3]])
-MD_vasc[[2]][[3]]
+# get it so search returns <1e5 results
+MD_vasc <- occ_search(taxonKey = 7707728
+                      , stateProvince = "Maryland", year="1999, 2019"
+                      , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
+                      , hasCoordinate = T
+                      , limit = 1e5)
 
-md_vasc_obs<-bind_rows(MD_vasc[[2]][[3]], MD_vasc[[3]][[3]])
-str(md_vasc_obs)
+mdVascOld <- occ_search(taxonKey = 7707728
+                        , stateProvince = "Maryland", year="1989, 1998"
+                        , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
+                        , hasCoordinate = T
+                        , limit = 1e5)
+
+
+
+
+
+# vasc_flat<-flatten(MD_vasc)
+#
+# length(MD_vasc[[3]])
+# MD_vasc[[2]][[3]]
+
+md_vasc_obs<-bind_rows(MD_vasc[[2]][[3]], MD_vasc[[3]][[3]], mdVascOld[[2]][[3]], mdVascOld[[3]][[3]])
+
 md_vasc_obs %>% group_by(acceptedTaxonKey, year) %>% summarize(obs =n()) %>% ggplot(aes(obs))+geom_histogram()+facet_wrap(~year)+theme_classic()+labs(y="species", x="occurrences")+scale_y_log10()
 
 
@@ -151,12 +185,15 @@ plant_stats$scientificName
 withstats<-plants_gs %>% select(-gs) %>% left_join(plant_stats, by=c("withspace"="scientificName"))
 withstats2<-withstats %>% mutate(simple =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat", ifelse(roundedSRank %in% c("S4", "S5"), "secure", "unranked")))
 
+# write data to .csv
+write.csv(withstats, "data/plants_1989-2019.csv")
+
 plants_summary<-withstats2 %>% group_by(year,state_status = simple) %>% summarize(spp =n_distinct(speciesKey), families =n_distinct(familyKey), records= n() )
 sppy<-plants_summary %>% ggplot(aes(year, spp, color = state_status))+geom_line()+theme_classic()+scale_y_log10()
 fpy<-plants_summary %>% ggplot(aes(year, families, color = state_status))+geom_line()+theme_classic()+scale_y_log10()
 opy<-plants_summary %>% ggplot(aes(year, records, color = state_status))+geom_line()+theme_classic()+scale_y_log10()
 
-pdf(file ="figures/GBIF_observations.pdf")
+pdf(file ="figures/GBIF_plant_observations.pdf")
 sppy/fpy/opy
 dev.off()
 
@@ -176,7 +213,8 @@ dev.off()
 specfreq_TOT<-withstats2 %>% group_by( state_status = simple, species) %>%
   summarize(records =n()) %>%
   group_by( state_status) %>%
-  summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n())
+  summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())
+
 
 #ans: use occ_download()
 
