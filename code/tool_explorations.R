@@ -113,7 +113,7 @@ head(andData)
 
 # e.g. for searching all plants (but how to download? Can rgbif do this?)
 #https://www.gbif.org/occurrence/taxonomy?basis_of_record=OBSERVATION&basis_of_record=HUMAN_OBSERVATION&basis_of_record=PRESERVED_SPECIMEN&taxon_key=7707728&state_province=Maryland&advanced=1&occurrence_status=present
-
+bind.gbif<-function(gbif){bind_rows(gbif[[2]][[3]], gbif[[3]][[3]])}
 # See if we can get the taxonKey for Lepidoptera and then for bees
 
 #don't know how to do this smart but using the webtool drop down I found the taxon keys for the bee families, then make a semicolon-separated string to search.
@@ -132,12 +132,14 @@ MD_hym <- occ_search(taxonKey = keyall
                     , hasCoordinate = T
                     , limit = 1e5)
 
+hym_flat<-bind.gbif(MD_hym)
+
 MD_lep<- occ_search(taxonKey = 797
                                , stateProvince = "Maryland", year="1989, 2019"
                                , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
                                , hasCoordinate = T
                                , limit = 1e5)
-
+lep_flat<-bind.gbif(MD_lep)
 # get it so search returns <1e5 results
 MD_vasc <- occ_search(taxonKey = 7707728
                       , stateProvince = "Maryland", year="1999, 2019"
