@@ -1,1 +1,2 @@
 data/plants* filter=lfs diff=lfs merge=lfs -text
+data/fromR/plants* filter=lfs diff=lfs merge=lfs -text

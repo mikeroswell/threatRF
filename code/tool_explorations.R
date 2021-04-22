@@ -1,21 +1,13 @@
-# code to keep track of tools I'm playing with and test them out
+#get plant occurrences and statuses
 
-# install.packages("natserv")
 library(natserv) #this is how we get naturserve status
 library(rgbif) #how we get gbif observations
 library(tidyverse)
 library(patchwork)
-# vignette(package ="natserv")
-# vignette(package ="rgbif")
-# View(ns_search_spp(text ="Triepeolus"))
-# ns_search_spp(text ="Triepeolus") # first result is 20x15
-# ?ns_search_spp
-# View(ns_search_spp(text_adv = list(searchToken ="Andrena", matchAgainst ="scientificName", operator ="contains"), location = list(nation ="US", subnation ="MD")))
 
+# when downloading data from gbif, will need to combine different record types into DF
+bind.gbif<-function(gbif){bind_rows(gbif[[2]][[3]], gbif[[3]][[3]])}
 
-#play with the code and get what I want: a dataframe with 1 row per location
-# ideally returns a row for national status when requested and a different row
-# for any subnational status requested, with attendent status
 
 # reminder about special fucntions from natserv: This seems like a clever way to deal with optional arguments, come back to this.
 `%||%` <- function(x, y) if (is.null(x) || length(x) == 0) y else x
@@ -95,25 +87,27 @@ library(patchwork)
 # format_res<-natserv:::parse_search(res)
 
 #solution to issue of weird data structure from this package
-unnested <- ns_search_spp(text_adv = list(searchToken ="Andrena"
-                                        , matchAgainst ="scientificName"
-                                        , operator ="contains")
-                        , location = list(nation ="US", subnation ="MD"))[[1]] %>%
-  unnest(cols=nations) %>%
-  unnest (cols = "subnations", names_repair ="unique") %>%
-  filter(subnationCode =="MD")
-unnested
+# unnested <- ns_search_spp(text_adv = list(searchToken ="Andrena"
+#                                         , matchAgainst ="scientificName"
+#                                         , operator ="contains")
+#                         , location = list(nation ="US", subnation ="MD"))[[1]] %>%
+#   unnest(cols=nations) %>%
+#   unnest (cols = "subnations", names_repair ="unique") %>%
+#   filter(subnationCode =="MD")
+# unnested
 
 ###
 # see if I can figure out how to get occurrence records in MD
 # not sure how it deals with string matching in `scientificName`
-andrenaOcc<-occ_search(scientificName ="Andrena", stateProvince ="Maryland", limit = 1e4)
-andData<-andrenaOcc$data
-head(andData)
+# andrenaOcc<-occ_search(scientificName ="Andrena", stateProvince ="Maryland", limit = 1e4)
+# andData<-andrenaOcc$data
+# head(andData)
 
 # e.g. for searching all plants (but how to download? Can rgbif do this?)
 #https://www.gbif.org/occurrence/taxonomy?basis_of_record=OBSERVATION&basis_of_record=HUMAN_OBSERVATION&basis_of_record=PRESERVED_SPECIMEN&taxon_key=7707728&state_province=Maryland&advanced=1&occurrence_status=present
-bind.gbif<-function(gbif){bind_rows(gbif[[2]][[3]], gbif[[3]][[3]])}
+
+
+
 # See if we can get the taxonKey for Lepidoptera and then for bees
 
 #don't know how to do this smart but using the webtool drop down I found the taxon keys for the bee families, then make a semicolon-separated string to search.
