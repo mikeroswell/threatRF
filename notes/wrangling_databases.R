@@ -134,5 +134,6 @@ remotes::install_github("MirzaCengic/climatedata")
 library(climatedata)
 # ?check_models
 # check_models()
+#using a janky version of climatedata's fucntino
 source("code/get_chelsa_revised.R")
 get_chelsa(period = "current", output_dir = "data/fromR/lfs")
