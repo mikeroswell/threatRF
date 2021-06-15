@@ -137,3 +137,6 @@ library(climatedata)
 #using a janky version of climatedata's fucntino
 source("code/get_chelsa_revised.R")
 get_chelsa(period = "current", output_dir = "data/fromR/lfs")
+
+
+
