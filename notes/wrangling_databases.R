@@ -122,12 +122,17 @@
 ###############################
 
 # find a package for downloading chelsa data
+# this one is fancy, it fits models
 # https://github.com/luismurao/ntbox
 # remotes::install_github("luismurao/ntbox")
-
-
-remotes::install_github("luismurao/ntbox")
-library(ntbox)
-
+# library(ntbox)
 #the function I want here has a nice simple name
-?get_chelsa
+# ?get_chelsa
+
+#this one looks simpler
+remotes::install_github("MirzaCengic/climatedata")
+library(climatedata)
+# ?check_models
+# check_models()
+source("code/get_chelsa_revised.R")
+get_chelsa(period = "current", output_dir = "data/fromR/lfs")
