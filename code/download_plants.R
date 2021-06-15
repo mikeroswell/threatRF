@@ -68,12 +68,12 @@ plants_of_MD<-unique(plants_gs$withspace) #2468 1999-2019
 
 #next, download status classifications from natureserve
 plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plantae", level = "kingdom")
-                , location = list(nation ="US", subnation ="MD") #this filters to only include species that have a MD status, but retains status for all localities
-                , page = 0
-                , per_page = 5e3)[[1]] %>%
-    unnest(cols=nations) %>%
-    unnest (cols = "subnations", names_repair ="unique") %>%
-    filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
+                             , location = list(nation ="US", subnation ="MD") #this filters to only include species that have a MD status, but retains status for all localities
+                             , page = 0
+                             , per_page = 5e3)[[1]] %>%
+  unnest(cols=nations) %>%
+  unnest (cols = "subnations", names_repair ="unique") %>%
+  filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 
 #write just the natureserve data to file
 write.csv(plant_stats, "data/fromR/lfs/plant_NS_data")
@@ -86,30 +86,45 @@ withstats<-plants_gs %>%
 # don't delete info, but here is where we can simplify status (also an e.g.)
 withstats2<-withstats %>%
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
-                        , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
-                                 , "unranked")))
+                               , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
+                                        , "unranked")))
 # get the climate data
 get_chelsa(period = "current", output_dir = "data/fromR/lfs")
 
 #make a raster stack
-bc <- raster::stack(list.files("data/fromR/lfs/current/", full.name =T))
+bc <- raster::stack(list.files("data/fromR/lfs/current/", full.name = T))
 
 
 # need to speed this up. See here https://stackoverflow.com/a/50883635/8400969
 # add bioclimatic value for each observation
-chelsa_points<-withstats2 %>%
+good_coords<- withstats2 %>%
+  filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) # some errors, check workflow that they weren't introduced here.
+
+#df of lat and long
+localities <- good_coords %>%
   group_by(decimalLatitude, decimalLongitude) %>%
   summarize(n()) %>%
-  select(latitude = decimalLatitude, longitude = decimalLongitude) %>%
-  summarize(raster::extract(bc, .), .parallel =T)
+  select( longitude = decimalLongitude, latitude = decimalLatitude)
+
+
+#crop the rasters based on extent
+bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
+
+#shrink the rasters
+focused<-raster::crop(bc, bounds)
+
+# get the data
+chelsa_points<-data.frame(cbind(localities
+                                , raster::extract(focused, localities)))
 
 # merge chelsa with occurrence
+clim_stat <- left_join(good_coords, chelsa_points
+                       , by = c("decimalLatitude" = "latitude"
+                                , "decimalLongitude" = "longitude"))
 
-clim_stat <- left_join(withstats2, chelsa_points, by = c(decimalLatitude = latitude, decimalLongitude = longitude))
-
-
+names(clim_stat)<-make.names(clim_stat)
 # write data to .csv
-write.csv(climstat, "data/fromR/lfs/plants_1989-2019_with_status_and_climate.csv", row.names =F)
+write.csv(clim_stat, "data/fromR/lfs/plants_1989-2019_with_status_and_climate.csv", row.names =F)
 
 
 
