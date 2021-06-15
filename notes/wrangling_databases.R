@@ -118,4 +118,16 @@
 # occ_download_meta(try_vacsular)
 #
 #
+################################
+###############################
 
+# find a package for downloading chelsa data
+# https://github.com/luismurao/ntbox
+# remotes::install_github("luismurao/ntbox")
+
+
+remotes::install_github("luismurao/ntbox")
+library(ntbox)
+
+#the function I want here has a nice simple name
+?get_chelsa
