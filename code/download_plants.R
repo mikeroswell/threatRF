@@ -17,7 +17,8 @@ uscore_binomial<-function(x){gsub("+ + *", "+_+",x)}
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 
-
+###############################################
+# get plant occurrence data from gbif
 # get it so search returns <1e5 results
 MD_vasc <- occ_search(taxonKey = 7707728
                       , stateProvince = "Maryland", year="2002, 2021"
@@ -33,14 +34,7 @@ mdVascOld <- occ_search(taxonKey = 7707728
 
 
 
-
-
-
-
 md_vasc_obs <- bind_rows(bind.gbif(MD_vasc), bind.gbif(mdVascOld))
-
-
-#make a few summary plots
 
 #histogram of species frequency by year
 # md_vasc_obs %>%
@@ -60,10 +54,17 @@ plants_gs<-md_vasc_obs %>%
   separate(acceptedScientificName, sep =" "
            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
-         , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms, why not!
+         , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
+
+# write gbif data to file (make these steps modular since they take a long time)
+write.csv(plants_gs, "data/fromR/lfs/plants_direct_from_gbif.csv", row.names = F)
+
+# plants_gs <- read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
 
 #get a list of all binomials in the GBIF dataset
 plants_of_MD<-unique(plants_gs$withspace) #2468 1999-2019
+
+###################################################
 
 #next, download status classifications from natureserve
 plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plantae", level = "kingdom")
@@ -73,6 +74,9 @@ plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plant
     unnest(cols=nations) %>%
     unnest (cols = "subnations", names_repair ="unique") %>%
     filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
+
+#write just the natureserve data to file
+write.csv(plant_stats, "data/fromR/lfs/plant_NS_data")
 
 #merge status and occcurrence
 withstats<-plants_gs %>%
@@ -84,10 +88,33 @@ withstats2<-withstats %>%
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                         , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                  , "unranked")))
+# get the climate data
+get_chelsa(period = "current", output_dir = "data/fromR/lfs")
+
+#make a raster stack
+bc <- raster::stack(list.files("data/fromR/lfs/current/", full.name =T))
+
+
+# need to speed this up. See here https://stackoverflow.com/a/50883635/8400969
+# add bioclimatic value for each observation
+chelsa_points<-withstats2 %>%
+  group_by(decimalLatitude, decimalLongitude) %>%
+  summarize(n()) %>%
+  select(latitude = decimalLatitude, longitude = decimalLongitude) %>%
+  summarize(raster::extract(bc, .), .parallel =T)
+
+# merge chelsa with occurrence
+
+clim_stat <- left_join(withstats2, chelsa_points, by = c(decimalLatitude = latitude, decimalLongitude = longitude))
+
 
 # write data to .csv
-write.csv(withstats2, "data/fromR/lfs/plants_1989-2019.csv")
+write.csv(climstat, "data/fromR/lfs/plants_1989-2019_with_status_and_climate.csv", row.names =F)
 
+
+
+############################################
+# data exploration
 #how many species, families, and records are their in each year by conservation status?
 plants_summary<-withstats2 %>%
   group_by(year,state_status = simple_status) %>%
@@ -154,7 +181,4 @@ specfreq_TOT<-withstats2 %>%
   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())
 
 
-#download CHELSA data
-get_chelsa(period = "current", output_dir = "data/fromR/lfs")
 
-#get CHELSA values for each of the observations
