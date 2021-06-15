@@ -4,12 +4,18 @@ library(natserv) #this is how we get naturserve status
 library(rgbif) #how we get gbif observations
 library(tidyverse)
 library(patchwork)
+# raster has conflicts with dplyr.
+# library(raster) #working with raster data (has fancy things to load parts of file, process, move on)
+library(climatedata) #should be useful for downloading chelsa data programatically. Requires an update tho. Right now using chelsa v1 but should prob. use v2.
+source("code/get_chelsa_revised.R") #hand-edited version of main function that works fine
 
 # when downloading data from gbif, will need to combine different record types into DF
 bind.gbif<-function(gbif){bind_rows(gbif[[2]][[3]], gbif[[3]][[3]])}
 
 #deal with complex species name rules with a fucntion to grab just the binomials
 uscore_binomial<-function(x){gsub("+ + *", "+_+",x)}
+
+`%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 
 
 # get it so search returns <1e5 results
@@ -148,3 +154,7 @@ specfreq_TOT<-withstats2 %>%
   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())
 
 
+#download CHELSA data
+get_chelsa(period = "current", output_dir = "data/fromR/lfs")
+
+#get CHELSA values for each of the observations
