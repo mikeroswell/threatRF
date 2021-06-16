@@ -62,7 +62,7 @@ write.csv(plants_gs, "data/fromR/lfs/plants_direct_from_gbif.csv", row.names = F
 # plants_gs <- read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
 
 #get a list of all binomials in the GBIF dataset
-plants_of_MD<-unique(plants_gs$withspace) #2468 1999-2019
+plants_of_MD<-unique(plants_gs$withspace) #2659 in updated year range
 
 ###################################################
 
@@ -76,8 +76,9 @@ plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plant
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 
 #write just the natureserve data to file
-write.csv(plant_stats, "data/fromR/lfs/plant_NS_data")
+# write.csv(plant_stats, "data/fromR/lfs/plant_NS_data.csv")
 
+# plant_stats<-read.csv("data/lfs/plant_NS_data.csv")
 #merge status and occcurrence
 withstats<-plants_gs %>%
   select(-gs) %>%
@@ -117,12 +118,12 @@ focused<-raster::crop(bc, bounds)
 chelsa_points<-data.frame(cbind(localities
                                 , raster::extract(focused, localities)))
 
+names(chelsa_points)<-make.names(chelsa_points)
 # merge chelsa with occurrence
 clim_stat <- left_join(good_coords, chelsa_points
                        , by = c("decimalLatitude" = "latitude"
                                 , "decimalLongitude" = "longitude"))
 
-names(clim_stat)<-make.names(clim_stat)
 # write data to .csv
 write.csv(clim_stat, "data/fromR/lfs/plants_1989-2019_with_status_and_climate.csv", row.names =F)
 
