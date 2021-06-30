@@ -4,6 +4,8 @@ library(natserv) #this is how we get naturserve status
 library(rgbif) #how we get gbif observations
 library(tidyverse)
 library(patchwork)
+library(sp)
+library(rgdal)
 # raster has conflicts with dplyr.
 # library(raster) #working with raster data (has fancy things to load parts of file, process, move on)
 library(climatedata) #should be useful for downloading chelsa data programatically. Requires an update tho. Right now using chelsa v1 but should prob. use v2.
@@ -76,12 +78,14 @@ plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plant
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 
 #write just the natureserve data to file
-# write.csv(plant_stats, "data/fromR/lfs/plant_NS_data")
+write.csv(plant_stats[,-21], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
+
+# plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") #generates an error, weird.
 
 #merge status and occcurrence
 withstats<-plants_gs %>%
   select(-gs) %>%
-  left_join(plant_stats, by=c("withspace"="scientificName"))
+  left_join(plant_stats[,-21], by=c("withspace"="scientificName"))
 
 # don't delete info, but here is where we can simplify status (also an e.g.)
 withstats2<-withstats %>%
@@ -91,11 +95,15 @@ withstats2<-withstats %>%
 # get the climate data
 get_chelsa(period = "current", output_dir = "data/fromR/lfs")
 
+
 #make a raster stack
 bc <- raster::stack(list.files("data/fromR/lfs/current/", full.name = T))
 
+# map(13:19, function(layr){
+#   print(layr)
+#   raster::raster(paste0("data/fromR/lfs/current/CHELSA_bio10_", layr, ".tif"))
+# })
 
-# need to speed this up. See here https://stackoverflow.com/a/50883635/8400969
 # add bioclimatic value for each observation
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) # some errors, check workflow that they weren't introduced here.
@@ -114,18 +122,48 @@ bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitu
 focused<-raster::crop(bc, bounds)
 
 # get the data
-chelsa_points<-as.data.frame(cbind(localities
-                                , raster::extract(focused, localities)))
-rownames(chelsa_points)<-NULL
+chelsa_matrix<-data.frame(raster::extract(focused, localities))
+names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
+chelsa_points<-bind_cols(localities, chelsa_matrix)
+
+# correlations not super low, deal with later
+try_cors<-cor(chelsa_matrix, use = "na.or.complete")
+
+dcors<-lower.tri(try_cors)
+high_cors<-which(abs(dcors*try_cors)>0.7, arr.ind =T)
+high_cors
+
 
 # merge chelsa with occurrence
 clim_stat <- left_join(good_coords, chelsa_points
                        , by = c("decimalLatitude" = "latitude"
                                 , "decimalLongitude" = "longitude"))
+lulc_shape<-readOGR("data/LULC_2010/")
+ll<-SpatialPoints(localities)
 
-names(clim_stat)<-make.names(clim_stat)
+proj4string(lulc_shape)
+proj4string(ll)<-proj4string(lulc_shape)
+tictoc::tic()
+lulc2010<-sp::over(ll, lulc_shape)
+tictoc::toc()
+
+climUseStat<-left_join(clim_stat %>%
+                         rename(latitude = decimalLatitude
+                                           , longitude = decimalLongitude)
+                       , bind_cols(localities, lulc2010))
+
+# names(clim_stat)<-make.names(clim_stat)
 # write data to .csv
-write.csv(clim_stat, "data/fromR/lfs/plants_1989-2019_with_status_and_climate.csv", row.names =F)
+data.table::fwrite(climUseStat[,-172], "data/fromR/lfs/plants_1989-2019_with_status_climate_landUse.csv", row.names =F)
+
+#####################################
+# explore bioclim data
+
+# play with clim_stat
+names(chelsa_points[,2:])
+names(clim_stat)
+
+
 
 
 
