@@ -8,3 +8,5 @@ data/fromR/lfs/plants_1989-2019.csv filter=lfs diff=lfs merge=lfs -text
 data/fromR/lfs/plants_direct_from_gbif.csv filter=lfs diff=lfs merge=lfs -text
 data/fromR/lfs/current filter=lfs diff=lfs merge=lfs -text
 /data/fromR/lfs* filter=lfs diff=lfs merge=lfs -text
+data/GIS_downloads/* filter=lfs diff=lfs merge=lfs -text
+*.tif filter=lfs diff=lfs merge=lfs -text
