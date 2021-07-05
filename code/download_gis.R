@@ -70,14 +70,15 @@ links <- XML::xpathSApply(parsed, "//a/@href")
 todl<-links[grepl(CIC, links)]
 fns<-gsub(CIC, "", todl)
 
+dir.create("data/GIS_downloads/LC2013")
 map(todl, function(landcover){
   short<-gsub(CIC, "", landcover)
   newfile<-paste0("data/GIS_downloads/LC2013/", short )
   tryCatch(download.file(landcover, destfile = newfile, timeout = 900), error= function(e){print(paste0(landcover, " did not download"))})
   if(file.exists(newfile)){
-    unzip(newfile, exdir = paste0(gsub(".zip", "", newfile), "_unzipped"))
+    unzip(newfile, exdir = gsub(".zip", "", newfile))
   }
-  if(file.exists(paste0(gsub(".zip", "", newfile), "_unzipped"))){
+  if(dir.exists(gsub(".zip", "", newfile))){
     file.remove(newfile)
     print(paste0("everything worked for ", short))
   }
@@ -100,9 +101,9 @@ map(todlLU, function(landuse){
   newfile<-paste0("data/GIS_downloads/LU2013/", fn)
   tryCatch(download.file(landuse, destfile = newfile), error= function(e){print(paste0(landuse, "did not download"))})
   if(file.exists(newfile)){
-    unzip(newfile, exdir = paste0(gsub("_LandUse.zip", "", newfile), "_unzipped"))
+    unzip(newfile, exdir = gsub(".zip", "", newfile))
   }
-  if(file.exists(paste0(gsub("_LandUse.zip", "", newfile), "_unzipped"))){
+  if(dir.exists(gsub(".zip", "", newfile))){
     file.remove(newfile)
     print(paste0("everything worked for ", fn))
   }
