@@ -32,4 +32,4 @@ data/GIS_downloads/LULC2002_unzipped filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/LULC2010_unzipped filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/stateBoundaries filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/LC2013 filter=lfs diff=lfs merge=lfs -text
-
+data/fromR/lfs/plants_1989-2019_with_status_climate_landUse.csv filter=lfs diff=lfs merge=lfs -text
