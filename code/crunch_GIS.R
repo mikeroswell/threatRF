@@ -2,7 +2,9 @@
 library(raster)
 library(tidyverse)
 
-
+# get the occcurence data
+withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
+# get the coordinates (may require additional manipulation)
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) # some errors, check workflow that they weren't introduced here.
 
@@ -16,8 +18,17 @@ localities <- good_coords %>%
 #crop the rasters based on extent
 bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
 
+####################################
+# start computing 1 km buffers
 
 
+# see if slope data is ccredible
+alle_slope<-raster("data/GIS_downloads/Allegany_slope.tiff")
+# produces error, cooncerning:
+slope_cropped<-raster::crop(alle_slope, bounds)
+target_slope<-raster::extract(alle_slope, localities)
+plot(slope)
+summary(target_slope)
 ###############################
 # extract bioclimatic variables
 
