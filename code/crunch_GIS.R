@@ -63,7 +63,7 @@ bigLU_stack<-raster::stack(rerast, quick = T)
 alle_slope<-raster("data/GIS_downloads/Allegany_slope.tiff")
 # produces error, cooncerning:
 slope_cropped<-raster::crop(alle_slope, bounds)
-target_slope<-data.frame(raster::extract(alle_slope, data.frame(ungroup(localities)))
+target_slope<-data.frame(raster::extract(alle_slope, data.frame(ungroup(localities))))
 plot(alle_slope)
 summary(target_slope)
 
