@@ -38,6 +38,7 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
+
 # large files
 data/USGS_DRO_flat.csv
 data/MDObsWithTaxa.csv
