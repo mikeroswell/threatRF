@@ -7,7 +7,6 @@ data/fromR/lfs/plant_NS_data.csv filter=lfs diff=lfs merge=lfs -text
 data/fromR/lfs/plants_1989-2019.csv filter=lfs diff=lfs merge=lfs -text
 data/fromR/lfs/plants_direct_from_gbif.csv filter=lfs diff=lfs merge=lfs -text
 data/fromR/lfs/current filter=lfs diff=lfs merge=lfs -text
-/data/fromR/lfs* filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/ filter=lfs diff=lfs merge=lfs -text
 *.tif filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/LU2013 filter=lfs diff=lfs merge=lfs -text
@@ -20,9 +19,6 @@ data/GIS_downloads/elevation.tif filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/parcels_unzipped filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/stateBoundaries filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/ filter=lfs diff=lfs merge=lfs -text
-data/GIS_downloads/** filter=lfs diff=lfs merge=lfs -text
-data/GIS_downloads/**/** filter=lfs diff=lfs merge=lfs -text
-data/GIS_downloads/**/**/** filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/LU2013 filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/elevation.tif filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/parcels_unzipped filter=lfs diff=lfs merge=lfs -text
