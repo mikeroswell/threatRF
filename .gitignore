@@ -51,6 +51,7 @@ data/fromR/ObsMDBeesSamGBIFConservStat.csv
 data/fromR/ObsMDBeesSamGBIFConservStatMR.csv
 data/state*
 data/GIS_downloads/LC2013/DOR*
+*_combined.tif
 
 # .pdfs (probably figures, might consider not ignoring)
 *.pdf
