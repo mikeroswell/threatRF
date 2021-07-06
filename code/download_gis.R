@@ -1,5 +1,11 @@
 # code to download gis data
 library(tidyverse)
+library(sp)
+library(rgdal)
+# raster has conflicts with dplyr.
+# library(raster) #working with raster data (has fancy things to load parts of file, process, move on)
+library(climatedata) #should be useful for downloading chelsa data programatically. Requires an update tho. Right now using chelsa v1 but should prob. use v2.
+source("code/get_chelsa_revised.R") #hand-edited version of main function that works fine
 
 # unique IDs for the layers I want
 LULC1973<-"e98677701fb547a695b2f650bb19f35e"
@@ -108,3 +114,71 @@ map(todlLU, function(landuse){
     print(paste0("everything worked for ", fn))
   }
 })
+
+
+##############################
+# was in downlaod_plants but think at least some of this belongs in here and other parts in crunch_GIS to keep workflows distinct and load fewer packages and maybe less data at any given time.
+
+# get the climate data
+get_chelsa(period = "current", output_dir = "data/fromR/lfs")
+
+
+#make a raster stack
+bc <- raster::stack(list.files("data/fromR/lfs/current/", full.name = T))
+
+# map(13:19, function(layr){
+#   print(layr)
+#   raster::raster(paste0("data/fromR/lfs/current/CHELSA_bio10_", layr, ".tif"))
+# })
+
+# add bioclimatic value for each observation
+good_coords<- withstats2 %>%
+  filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) # some errors, check workflow that they weren't introduced here.
+
+#df of lat and long
+localities <- good_coords %>%
+  group_by(decimalLatitude, decimalLongitude) %>%
+  summarize(n()) %>%
+  select( longitude = decimalLongitude, latitude = decimalLatitude)
+
+
+#crop the rasters based on extent
+bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
+
+#shrink the rasters
+focused<-raster::crop(bc, bounds)
+
+# get the data
+chelsa_matrix<-data.frame(raster::extract(focused, localities))
+names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
+chelsa_points<-bind_cols(localities, chelsa_matrix)
+
+# correlations not super low, deal with later
+try_cors<-cor(chelsa_matrix, use = "na.or.complete")
+
+dcors<-lower.tri(try_cors)
+high_cors<-which(abs(dcors*try_cors)>0.7, arr.ind =T)
+high_cors
+
+
+# merge chelsa with occurrence
+clim_stat <- left_join(good_coords, chelsa_points
+                       , by = c("decimalLatitude" = "latitude"
+                                , "decimalLongitude" = "longitude"))
+lulc_shape<-readOGR("data/LULC_2010/")
+ll<-SpatialPoints(localities)
+
+proj4string(lulc_shape)
+proj4string(ll)<-proj4string(lulc_shape)
+tictoc::tic()
+lulc2010<-sp::over(ll, lulc_shape)
+tictoc::toc()
+
+climUseStat<-left_join(clim_stat %>%
+                         rename(latitude = decimalLatitude
+                                , longitude = decimalLongitude)
+                       , bind_cols(localities, lulc2010))
+
+# names(clim_stat)<-make.names(clim_stat)
+# write data to .csv
+data.table::fwrite(climUseStat[,-172], "data/fromR/lfs/plants_1989-2019_with_status_climate_landUse.csv", row.names =F)
