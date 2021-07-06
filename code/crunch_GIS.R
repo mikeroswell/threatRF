@@ -18,10 +18,11 @@ localities <- good_coords %>%
   summarize(n()) %>%
   select( longitude = decimalLongitude, latitude = decimalLatitude)
 
-localities
+# localities
 #crop the rasters based on extent
 bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
 
+rm(withstats2, good_coords)
 ####################################
 # start computing 1 km buffers
 # LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
@@ -41,12 +42,15 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 # mosaic_rasters(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif", of = "GTiff")
 # bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
 
+
 rerast<-map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
   extent(rast)<-extent(bounds)
   return(rast)
 })
 # rerast
+try_mos<-do.call(raster::mosaic, rerast)
+# apparently have different resolutions to deal with here.
 
 # do only the points (more data rich)
 tic()
