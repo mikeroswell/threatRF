@@ -1,6 +1,8 @@
 # extract buffers for occurrence data and compute some summary stats
 library(raster)
 library(tidyverse)
+library(rgdal)
+library(gdalUtils)
 
 # get the occcurence data
 withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
@@ -14,21 +16,41 @@ localities <- good_coords %>%
   summarize(n()) %>%
   select( longitude = decimalLongitude, latitude = decimalLatitude)
 
-
+localities
 #crop the rasters based on extent
 bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
 
 ####################################
 # start computing 1 km buffers
+LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
+alle_LU<-raster("data/GIS_downloads/LU2013/ALLE_24001_LandUse/ALLE_24001_LandUse.tif")
+LU2013_layrs<-list.dirs("data/GIS_downloads/LU2013")[-1]
+LU_tifs<-unlist(map(LU2013_layrs, function(dr){
+  list.files(dr, pattern = "*LandUse.tif$")
+}))
+LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
+  paste0(LU2013_layrs[county], "/", LU_tifs[county])
+}))
+LU_tifs_full
+
+#create a blank canvas
+writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff")
+# paste all the files into it
+mosaic_rasters(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif", of = "GTiff")
+
+
 
 
 # see if slope data is ccredible
 alle_slope<-raster("data/GIS_downloads/Allegany_slope.tiff")
 # produces error, cooncerning:
 slope_cropped<-raster::crop(alle_slope, bounds)
-target_slope<-raster::extract(alle_slope, localities)
-plot(slope)
+target_slope<-data.frame(raster::extract(alle_slope, localities))
+plot(alle_slope)
 summary(target_slope)
+
+extent(alle_slope)
+extent(localities)
 ###############################
 # extract bioclimatic variables
 
