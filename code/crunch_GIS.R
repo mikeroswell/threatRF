@@ -48,6 +48,15 @@ rerast<-map(LU_tifs_full, function(lyr){
 })
 # rerast
 
+# do only the points (more data rich)
+tic()
+landUsePoints<-map_dfr(rerast, function(county){
+  raster::extract(county, localities
+                  )
+})
+
+# get number of types in 1 km buffer
+toc()
 # plan(strategy = "multiprocess", workers=5)
 tic()
 landUseTypes1Km<-map_dfr(rerast, function(county){
@@ -58,7 +67,7 @@ landUseTypes1Km<-map_dfr(rerast, function(county){
 })
 toc()
 
-bigLU_stack<-raster::stack(rerast, quick = T)
+# bigLU_stack<-raster::stack(rerast, quick = T)
 # see if slope data is ccredible
 alle_slope<-raster("data/GIS_downloads/Allegany_slope.tiff")
 # produces error, cooncerning:
