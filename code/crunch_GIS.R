@@ -3,6 +3,8 @@ library(raster)
 library(tidyverse)
 library(rgdal)
 library(gdalUtils)
+# library(furrr)
+library(tictoc)
 
 # get the occcurence data
 withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
@@ -22,8 +24,8 @@ bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitu
 
 ####################################
 # start computing 1 km buffers
-LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
-alle_LU<-raster("data/GIS_downloads/LU2013/ALLE_24001_LandUse/ALLE_24001_LandUse.tif")
+# LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
+# alle_LU<-raster("data/GIS_downloads/LU2013/ALLE_24001_LandUse/ALLE_24001_LandUse.tif")
 LU2013_layrs<-list.dirs("data/GIS_downloads/LU2013")[-1]
 LU_tifs<-unlist(map(LU2013_layrs, function(dr){
   list.files(dr, pattern = "*LandUse.tif$")
@@ -31,21 +33,37 @@ LU_tifs<-unlist(map(LU2013_layrs, function(dr){
 LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
   paste0(LU2013_layrs[county], "/", LU_tifs[county])
 }))
-LU_tifs_full
+# LU_tifs_full
 
-#create a blank canvas
-writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff")
-# paste all the files into it
-mosaic_rasters(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif", of = "GTiff")
+# #create a blank canvas
+# writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff")
+# # paste all the files into it
+# mosaic_rasters(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif", of = "GTiff")
+# bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
 
+rerast<-map(LU_tifs_full, function(lyr){
+  rast = raster(lyr)
+  extent(rast)<-extent(bounds)
+  return(rast)
+})
+# rerast
 
+# plan(strategy = "multiprocess", workers=5)
+tic()
+landUseTypes1Km<-map_dfr(rerast, function(county){
+  raster::extract(county, localities
+                  , buffer =1000
+                  , fun = length
+  )
+})
+toc()
 
-
+bigLU_stack<-raster::stack(rerast, quick = T)
 # see if slope data is ccredible
 alle_slope<-raster("data/GIS_downloads/Allegany_slope.tiff")
 # produces error, cooncerning:
 slope_cropped<-raster::crop(alle_slope, bounds)
-target_slope<-data.frame(raster::extract(alle_slope, localities))
+target_slope<-data.frame(raster::extract(alle_slope, data.frame(ungroup(localities)))
 plot(alle_slope)
 summary(target_slope)
 
