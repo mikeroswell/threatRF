@@ -1,10 +1,14 @@
 # extract buffers for occurrence data and compute some summary stats
-library(raster)
+library(raster) # raster data
 library(tidyverse)
-library(rgdal)
-library(gdalUtils)
+library(rgdal) # works with a library on machine to crunch data
+library(gdalUtils) # more gdal fucntionality
 # library(furrr)
 library(tictoc)
+library(sf) #vector data
+library(tigris) #county data
+options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the data.
+
 
 # get the occcurence data
 withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
@@ -23,12 +27,24 @@ localities <- good_coords %>%
 bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
 
 rm(withstats2, good_coords)
+
+###################################
+# get boundaries for each county in MD, DE, PA, VA, WV
+statbord<-c("MD", "DE", "PA", "VA", "WV")
+allco<-st_as_sf(map_dfr(statbord, function(co){
+  counties(co, resolution = "5m")
+}))
+# determine which county each point sits in (no buffer)
+sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = st_crs(allco))
+withco<-st_join(sfed, allco)
+# try adding buffer!
+mybufs<-st_buffer(sfed, dist = 1000)
 ####################################
 # start computing 1 km buffers
 # LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
 # alle_LU<-raster("data/GIS_downloads/LU2013/ALLE_24001_LandUse/ALLE_24001_LandUse.tif")
-LU2013_layrs<-list.dirs("data/GIS_downloads/LU2013")[-1]
-LU_tifs<-unlist(map(LU2013_layrs, function(dr){
+LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
+LU_tifs <- unlist(map(LU2013_layrs, function(dr){
   list.files(dr, pattern = "*LandUse.tif$")
 }))
 LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
@@ -108,12 +124,37 @@ chelsa_matrix<-data.frame(raster::extract(focused, localities))
 names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
 chelsa_points<-bind_cols(localities, chelsa_matrix)
 
+rm(bc)
+rm(focused)
+rm(bounds)
+rm(localities)
+gc()
 # correlations not super low, deal with later
-try_cors<-cor(chelsa_matrix, use = "na.or.complete")
+# try_cors<-cor(chelsa_matrix, use = "na.or.complete")
 
-dcors<-lower.tri(try_cors)
-high_cors<-which(abs(dcors*try_cors)>0.7, arr.ind =T)
-high_cors
+# dcors<-lower.tri(try_cors)
+# high_cors<-which(abs(dcors*try_cors)>0.7, arr.ind =T)
+# high_cors
+
+# select maximum number of variables without getting collinearity
+future::plan(strategy = "multiprocess", workers = 7)
+
+min_vars <- map(2:19, function(nvars){
+  combo = combn(19, nvars, simplify = F)
+  big_list = furrr::future_map(combo, function(chosen){
+    #print(chosen)
+    try_cors = cor(chelsa_matrix[,c(chosen)])
+    dcors = lower.tri(try_cors)
+    high_cors = which(abs(dcors*try_cors)>0.7, arr.ind =T)
+    if_else(is.null(high_cors), return(list(combo, try_cors)), return(NULL))
+  })
+  sum_cors = map(big_list, function(this_combo){
+    sum(abs(this_combo[[2]]), na.rm =T)
+  })
+  winner = base::which.min(sum_cors)
+  return(big_list[[winner]][[1]])
+})
+
 
 
 # merge chelsa with occurrence
