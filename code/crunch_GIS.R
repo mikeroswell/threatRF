@@ -20,7 +20,7 @@ good_coords<- withstats2 %>%
 localities <- good_coords %>%
   group_by(decimalLatitude, decimalLongitude) %>%
   summarize(n()) %>%
-  select( longitude = decimalLongitude, latitude = decimalLatitude)
+  dplyr::select( longitude = decimalLongitude, latitude = decimalLatitude)
 
 # localities
 #crop the rasters based on extent
@@ -33,12 +33,19 @@ rm(withstats2, good_coords)
 statbord<-c("MD", "DE", "PA", "VA", "WV")
 allco<-st_as_sf(map_dfr(statbord, function(co){
   counties(co, resolution = "5m")
-}))
+})) # not sure what the projection is here
 # determine which county each point sits in (no buffer)
-sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = st_crs(allco))
-withco<-st_join(sfed, allco)
+sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = st_crs(allco)) %>% st_transform(3488) #transform to NAD83(NSRS2007) / California Albers
+withco<-st_join(sfed, allco %>% st_transform(3488))
 # try adding buffer!
+#I thnk this just worked in amarel.
 mybufs<-st_buffer(sfed, dist = 1000)
+bufcos<-st_intersects(mybufs, allco %>% st_transform(3488))
+co_combs<-unique(bufcos) # unique combinations of counties
+co_combs
+
+
+
 ####################################
 # start computing 1 km buffers
 # LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
@@ -53,10 +60,10 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 # LU_tifs_full
 
 # #create a blank canvas
-# writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff")
-# # paste all the files into it
-# mosaic_rasters(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif", of = "GTiff")
-# bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
+writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff")
+# paste all the files into it
+mosaic_rasters(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif", of = "GTiff")
+bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
 
 
 rerast<-map(LU_tifs_full, function(lyr){
@@ -64,19 +71,25 @@ rerast<-map(LU_tifs_full, function(lyr){
   extent(rast)<-extent(bounds)
   return(rast)
 })
+
 # rerast
+tic()
 try_mos<-do.call(raster::mosaic, rerast)
+toc()
 # apparently have different resolutions to deal with here.
 
 # do only the points (more data rich)
+sped<-as(sfed, "Spatial")
 tic()
-landUsePoints<-map(rerast, function(county){
-  raster::extract(county, localities
+landUsePoints<-future_map(rerast, function(county){
+  raster::extract(county, sfed
   )
 })
 toc()
+# <10 sec on most recent run on amarel, but returned only NAs
 
 # get number of types in 1 km buffer
+# this won't work as written becuase some buffers fall outside counties, need to get the buffer script working first.
 
 # plan(strategy = "multiprocess", workers=5)
 tic()
@@ -139,23 +152,28 @@ gc()
 # select maximum number of variables without getting collinearity
 future::plan(strategy = "multiprocess", workers = 7)
 
-min_vars <- map(2:19, function(nvars){
+min_vars <- map(19:18, function(nvars){
   combo = combn(19, nvars, simplify = F)
-  big_list = furrr::future_map(combo, function(chosen){
-    #print(chosen)
-    try_cors = cor(chelsa_matrix[,c(chosen)])
+  big_list = map(combo, function(chosen){
+    submat = apply(chelsa_matrix[,c(chosen)], 2, as.numeric)
+    try_cors = cor(submat, use = "complete.obs")
+    # print(try_cors)
     dcors = lower.tri(try_cors)
     high_cors = which(abs(dcors*try_cors)>0.7, arr.ind =T)
-    if_else(is.null(high_cors), return(list(combo, try_cors)), return(NULL))
+
+    if_else(!length(high_cors)>0, return(list(combo, try_cors)), return(NULL))
   })
   sum_cors = map(big_list, function(this_combo){
-    sum(abs(this_combo[[2]]), na.rm =T)
+    sc = sum(abs(this_combo[[2]]), na.rm =T)
+    # print(sc)
+    return(sc)
   })
   winner = base::which.min(sum_cors)
-  return(big_list[[winner]][[1]])
+  # print(sum_cors[[winner]])
+  return(list(winner, sum_cors= sum_cors[[winner]], big_list[[winner]]))
 })
 
-
+min_vars[[1]]
 
 # merge chelsa with occurrence
 clim_stat <- left_join(good_coords, chelsa_points
