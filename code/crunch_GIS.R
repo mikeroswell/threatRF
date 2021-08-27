@@ -44,6 +44,16 @@ bufcos<-st_intersects(mybufs, allco %>% st_transform(3488))
 co_combs<-unique(bufcos) # unique combinations of counties
 co_combs
 
+#this all seems like it is working. maybe map to see if it's right!
+# ggplot(allco) +
+#   geom_sf() +
+#   theme_classic() +
+#   geom_sf(data = mybufs, color = "red")
+
+# looks basically right. There are some weird points that are very far from the state of Maryland, and also some that appear to be slightly outside. I'm not going to worry about it for now, as I'm pretty fired up that this is working at all!
+
+
+
 
 
 ####################################
