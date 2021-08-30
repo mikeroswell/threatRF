@@ -3,7 +3,7 @@ library(raster) # raster data
 library(tidyverse)
 library(rgdal) # works with a library on machine to crunch data
 library(gdalUtils) # more gdal fucntionality
-# library(furrr)
+library(furrr)
 library(tictoc)
 library(sf) #vector data
 library(tigris) #county data
@@ -61,19 +61,26 @@ co_combs
 # LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
 # alle_LU<-raster("data/GIS_downloads/LU2013/ALLE_24001_LandUse/ALLE_24001_LandUse.tif")
 LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
+
 LU_tifs <- unlist(map(LU2013_layrs, function(dr){
   list.files(dr, pattern = "*LandUse.tif$")
 }))
+
 LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
   paste0(LU2013_layrs[county], "/", LU_tifs[county])
 }))
 # LU_tifs_full
 
+# this looks like it's a nope. Too much data for the laptop
 # #create a blank canvas
-writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff")
-# paste all the files into it
-mosaic_rasters(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif", of = "GTiff")
-bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
+# writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff", overwrite =T)
+
+# # paste all the files into it
+# mosaic_rasters(gdalfile = LU_tifs_full
+#                , dst_dataset = "data/GIS_downloads/LU_combined.tif"
+#                , of = "GTiff" )
+# bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
+
 
 
 rerast<-map(LU_tifs_full, function(lyr){
@@ -82,26 +89,41 @@ rerast<-map(LU_tifs_full, function(lyr){
   return(rast)
 })
 
-# rerast
-tic()
-try_mos<-do.call(raster::mosaic, rerast)
-toc()
+# # rerast
+# ?raster::mosaic
+# tic()
+# try_mos<-do.call(raster::mosaic, rerast)
+# toc()
+#
+# # from https://stackoverflow.com/a/15306786/8400969
+# setMethod('mosaic', signature(x='list', y='missing'),
+#           function(x, y, fun, tolerance=0.1, filename=""){
+#             stopifnot(missing(y))
+#             args <- x
+#             if (!missing(fun)) args$fun <- fun
+#             if (!missing(tolerance)) args$tolerance<- tolerance
+#             if (!missing(filename)) args$filename<- filename
+#             do.call(mosaic, args)
+#           })
+#
+# low_tolerance <- raster::mosaic(rerast, tolerance =0.1)
 # apparently have different resolutions to deal with here.
 
 # do only the points (more data rich)
 sped<-as(sfed, "Spatial")
 tic()
-landUsePoints<-future_map(rerast, function(county){
+landUsePoints<-map(rerast, function(county){
   raster::extract(county, sfed
   )
 })
 toc()
 # <10 sec on most recent run on amarel, but returned only NAs
+# this is where I should focus on troubleshooting next.
 
 # get number of types in 1 km buffer
 # this won't work as written becuase some buffers fall outside counties, need to get the buffer script working first.
 
-# plan(strategy = "multiprocess", workers=5)
+plan(strategy = "multiprocess", workers=5)
 tic()
 landUseTypes1Km<-map(rerast, function(county){
   raster::extract(county, localities
