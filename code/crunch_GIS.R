@@ -3,7 +3,7 @@ library(raster) # raster data
 library(tidyverse)
 library(rgdal) # works with a library on machine to crunch data
 library(gdalUtils) # more gdal fucntionality
-library(furrr)
+# library(furrr) # if paralllellizing
 library(tictoc)
 library(sf) #vector data
 library(tigris) #county data
@@ -38,11 +38,17 @@ allco<-st_as_sf(map_dfr(statbord, function(co){
 sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = st_crs(allco)) %>% st_transform(3488) #transform to NAD83(NSRS2007) / California Albers
 withco<-st_join(sfed, allco %>% st_transform(3488))
 # try adding buffer!
-#I thnk this just worked in amarel.
+# this takes<6 seconds on laptop
+
 mybufs<-st_buffer(sfed, dist = 1000)
+
+tic()
 bufcos<-st_intersects(mybufs, allco %>% st_transform(3488))
+toc()
+# 37 seconds
+
 co_combs<-unique(bufcos) # unique combinations of counties
-co_combs
+
 
 #this all seems like it is working. maybe map to see if it's right!
 # ggplot(allco) +
@@ -53,13 +59,8 @@ co_combs
 # looks basically right. There are some weird points that are very far from the state of Maryland, and also some that appear to be slightly outside. I'm not going to worry about it for now, as I'm pretty fired up that this is working at all!
 
 
-
-
-
 ####################################
 # start computing 1 km buffers
-# LU2013<-readOGR("data/GIS_downloads/LU2013/ALLE_24001_LandUse/")
-# alle_LU<-raster("data/GIS_downloads/LU2013/ALLE_24001_LandUse/ALLE_24001_LandUse.tif")
 LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
 
 LU_tifs <- unlist(map(LU2013_layrs, function(dr){
@@ -80,8 +81,6 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 #                , dst_dataset = "data/GIS_downloads/LU_combined.tif"
 #                , of = "GTiff" )
 # bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
-
-
 
 rerast<-map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
@@ -111,12 +110,30 @@ rerast<-map(LU_tifs_full, function(lyr){
 
 # do only the points (more data rich)
 sped<-as(sfed, "Spatial")
+
 tic()
 landUsePoints<-map(rerast, function(county){
-  raster::extract(county, sfed
+  raster::extract(county, sped
   )
 })
 toc()
+
+#maybe check if everything is still NA
+head(landUsePoints)
+
+#looks like it, what is the overlal setup here?
+str(landUsePoints)
+
+# this has 24 items that are not NA. As in all!
+length(which(!is.na(landUsePoints)))
+
+# no, it's all NA
+good_data <- map(landUsePoints, function(x){
+  x[complete.cases(x),]
+})
+
+
+good_data
 # <10 sec on most recent run on amarel, but returned only NAs
 # this is where I should focus on troubleshooting next.
 
