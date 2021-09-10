@@ -3,7 +3,7 @@ library(raster) # raster data
 library(tidyverse)
 library(rgdal) # works with a library on machine to crunch data
 library(gdalUtils) # more gdal fucntionality
-# library(furrr) # if paralllellizing
+library(furrr) # if paralllellizing
 library(tictoc)
 library(sf) #vector data
 library(tigris) #county data
@@ -35,15 +35,15 @@ allco<-st_as_sf(map_dfr(statbord, function(co){
   counties(co, resolution = "5m")
 })) # not sure what the projection is here
 # determine which county each point sits in (no buffer)
-sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = st_crs(allco)) %>% st_transform(3488) #transform to NAD83(NSRS2007) / California Albers
-withco<-st_join(sfed, allco %>% st_transform(3488))
+sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = st_crs(allco)) %>% st_transform(4326) #transform to NAD83(NSRS2007) / California Albers
+withco<-st_join(sfed, allco %>% st_transform(4326))
 # try adding buffer!
 # this takes<6 seconds on laptop
 
 mybufs<-st_buffer(sfed, dist = 1000)
 
 tic()
-bufcos<-st_intersects(mybufs, allco %>% st_transform(3488))
+bufcos<-st_intersects(mybufs, allco %>% st_transform(4326))
 toc()
 # 37 seconds
 
@@ -84,7 +84,8 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 
 rerast<-map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
-  extent(rast)<-extent(bounds)
+  raster::crs(rast) <- "EPSG:4326"
+  # extent(rast)<-extent(bounds)
   return(rast)
 })
 
@@ -109,31 +110,45 @@ rerast<-map(LU_tifs_full, function(lyr){
 # apparently have different resolutions to deal with here.
 
 # do only the points (more data rich)
-sped<-as(sfed, "Spatial")
+sped<-as(sfed, "Spatial") # this is a spatial points dataframe
+
+plan(strategy = "multiprocess", workers = 6)
 
 tic()
-landUsePoints<-map(rerast, function(county){
-  raster::extract(county, sped
-  )
+landUsePoints_sf<-future_map(rerast, function(county){
+  if(compareCRS(county, sped)){raster::extract(county, sped)}
+  else{return("check CRS")}
 })
 toc()
 
-#maybe check if everything is still NA
-head(landUsePoints)
+sum(complete.cases(landUsePoints_sf))
+# now 2 seconds.
 
-#looks like it, what is the overlal setup here?
-str(landUsePoints)
+plot(rerast[[1]])
 
-# this has 24 items that are not NA. As in all!
-length(which(!is.na(landUsePoints)))
 
-# no, it's all NA
-good_data <- map(landUsePoints, function(x){
-  x[complete.cases(x),]
+
+pdf("figures/testmap.pdf")
+future_map(rerast, function(co){
+  rasterVis::gplot(co)+
+    geom_tile(aes(fill=factor(value)))+
+    theme_classic() +
+    xlim(-80, -72) +
+    ylim(32, 45)
 })
+dev.off()
 
 
-good_data
+
+# 1009 seconds on laptop most recently
+landUsePoints # hooray, this seems to work, double check and get good info
+sum(is.na(landUsePoints[[1]]))
+landUsePoints[[1]]+landUsePoints[[2]]
+
+
+asSum<-rowSums(do.call(cbind, landUsePoints), na.rm =T)
+asMax<-apply(do.call(cbind,landUsePoints),1, function(x){max(x, na.rm =T)})
+all.equal(asMax, asSum)
 # <10 sec on most recent run on amarel, but returned only NAs
 # this is where I should focus on troubleshooting next.
 
@@ -141,6 +156,7 @@ good_data
 # this won't work as written becuase some buffers fall outside counties, need to get the buffer script working first.
 
 plan(strategy = "multiprocess", workers=5)
+
 tic()
 landUseTypes1Km<-map(rerast, function(county){
   raster::extract(county, localities
@@ -154,6 +170,8 @@ toc()
 tic()
 first_co<-raster::extract(rerast[[1]], localities, buffer = 1000, fun = function(x){length(unique(x))})
 toc()
+
+
 # bigLU_stack<-raster::stack(rerast, quick = T)
 # see if slope data is ccredible
 alle_slope<-raster("data/GIS_downloads/Allegany_slope.tiff")
