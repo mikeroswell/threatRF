@@ -81,14 +81,25 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 #                , dst_dataset = "data/GIS_downloads/LU_combined.tif"
 #                , of = "GTiff" )
 # bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
+# plan(strategy= "multiprocess", workers = 6)
+# tic()
+# rerast<-future_map(LU_tifs_full, function(lyr){
+#   rast = raster(lyr)
+#   tryCatch(raster::projectRaster(rast, crs = "EPSG:4326")
+#            , error = function(e){print(paste(lyr, "failed"))})
+#   # extent(rast)<-extent(bounds)
+#   return(rast)
+# })
+# toc()
 
-rerast<-map(LU_tifs_full, function(lyr){
-  rast = raster(lyr)
-  raster::crs(rast) <- "EPSG:4326"
-  # extent(rast)<-extent(bounds)
-  return(rast)
-})
+# just do it once on laptop to get the workflow tested and then run on cluster
 
+
+tic()
+first_reproj <- projectRaster(
+   raster(LU_tifs_full[[1]])
+   , crs = "EPSG:4326")
+toc()
 # # rerast
 # ?raster::mosaic
 # tic()
@@ -126,7 +137,22 @@ sum(complete.cases(landUsePoints_sf))
 
 plot(rerast[[1]])
 
+pdf("figures/test_reproj.pdf")
+rasterVis::gplot(first_reproj)+
+  geom_tile(aes(fill=value))+
+  theme_classic() +
+  layer_spatial(sped)
+  # xlim(-80, -72) +
+  # ylim(32, 45)
+dev.off()
 
+show(first_reproj)
+plot(first_reproj)
+
+
+data.frame(first_reproj) %>% ggplot()+
+  geom_raster()+
+  theme_classic()
 
 pdf("figures/testmap.pdf")
 future_map(rerast, function(co){
