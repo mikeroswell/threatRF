@@ -94,11 +94,18 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 
 # just do it once on laptop to get the workflow tested and then run on cluster
 
+plan(strategy = "multiprocess", workers = 15)
 
 tic()
-first_reproj <- projectRaster(
-   raster(LU_tifs_full[[1]])
-   , crs = "EPSG:4326")
+future_map(1:length(LU_tifs_full), function(rast){
+  reproj = tryCatch(projectRaster(
+     raster(LU_tifs_full[[rast]])
+     , crs = "EPSG:4326"), 
+     error = function(e){print(paste0("county ", rast, " failed"))}
+     )
+  save(reproj, file = paste0("data/fromR/lfs/LU2013_", rast, ".rda"))
+  
+     
 toc()
 # # rerast
 # ?raster::mosaic
@@ -123,14 +130,32 @@ toc()
 # do only the points (more data rich)
 sped<-as(sfed, "Spatial") # this is a spatial points dataframe
 
+
+
 plan(strategy = "multiprocess", workers = 6)
+
+
+# try going the other way (projec the points first!)
+
+
+LU1<-raster::raster(LU_tifs_full[[1]])
+sfed_repro<-spTransform(sped
+                       , projection(LU1) )
+show(LU1)
+sfed_repro
 
 tic()
 landUsePoints_sf<-future_map(rerast, function(county){
-  if(compareCRS(county, sped)){raster::extract(county, sped)}
+  if(compareCRS(county, sped)){raster::extract(county, sfed_repro)}
   else{return("check CRS")}
 })
 toc()
+
+tic()
+test_extraction<-raster::extract(first_reproj, sped)
+toc()
+
+sum(complete.cases(test_extraction))
 
 sum(complete.cases(landUsePoints_sf))
 # now 2 seconds.
