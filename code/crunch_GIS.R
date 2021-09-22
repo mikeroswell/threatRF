@@ -94,19 +94,19 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 
 # just do it once on laptop to get the workflow tested and then run on cluster
 
-plan(strategy = "multiprocess", workers = 15)
-
-tic()
-future_map(1:length(LU_tifs_full), function(rast){
-  reproj = tryCatch(projectRaster(
-     raster(LU_tifs_full[[rast]])
-     , crs = "EPSG:4326"), 
-     error = function(e){print(paste0("county ", rast, " failed"))}
-     )
-  save(reproj, file = paste0("data/fromR/lfs/LU2013_", rast, ".rda"))
-  
-     
-toc()
+# plan(strategy = "multiprocess", workers = 15)
+# 
+# tic()
+# future_map(1:length(LU_tifs_full), function(rast){
+#   reproj = tryCatch(projectRaster(
+#      raster(LU_tifs_full[[rast]])
+#      , crs = "EPSG:4326"), 
+#      error = function(e){print(paste0("county ", rast, " failed"))}
+#      )
+#   save(reproj, file = paste0("data/fromR/lfs/LU2013_", rast, ".rda"))
+#   
+#      
+# toc()
 # # rerast
 # ?raster::mosaic
 # tic()
@@ -132,7 +132,7 @@ sped<-as(sfed, "Spatial") # this is a spatial points dataframe
 
 
 
-plan(strategy = "multiprocess", workers = 6)
+# plan(strategy = "multiprocess", workers = 6)
 
 
 # try going the other way (projec the points first!)
@@ -140,7 +140,7 @@ plan(strategy = "multiprocess", workers = 6)
 
 LU1<-raster::raster(LU_tifs_full[[1]])
 sfed_repro<-spTransform(sped
-                       , projection(LU1) )
+                        , projection(LU1) )
 
 # need to check the numbers, since the counts of points in the two reprojections didn't match.
 
@@ -170,8 +170,8 @@ rasterVis::gplot(first_reproj)+
   geom_tile(aes(fill=value))+
   theme_classic() +
   layer_spatial(sped)
-  # xlim(-80, -72) +
-  # ylim(32, 45)
+# xlim(-80, -72) +
+# ylim(32, 45)
 dev.off()
 
 show(first_reproj)
@@ -209,7 +209,7 @@ all.equal(asMax, asSum)
 # get number of types in 1 km buffer
 # this won't work as written becuase some buffers fall outside counties, need to get the buffer script working first.
 
-plan(strategy = "multiprocess", workers=5)
+# plan(strategy = "multiprocess", workers=5)
 
 tic()
 landUseTypes1Km<-map(rerast, function(county){
@@ -271,7 +271,7 @@ gc()
 # high_cors
 
 # select maximum number of variables without getting collinearity
-future::plan(strategy = "multiprocess", workers = 7)
+# future::plan(strategy = "multiprocess", workers = 7)
 
 min_vars <- map(19:18, function(nvars){
   combo = combn(19, nvars, simplify = F)
@@ -281,7 +281,7 @@ min_vars <- map(19:18, function(nvars){
     # print(try_cors)
     dcors = lower.tri(try_cors)
     high_cors = which(abs(dcors*try_cors)>0.7, arr.ind =T)
-
+    
     if_else(!length(high_cors)>0, return(list(combo, try_cors)), return(NULL))
   })
   sum_cors = map(big_list, function(this_combo){
