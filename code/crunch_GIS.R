@@ -141,15 +141,18 @@ plan(strategy = "multiprocess", workers = 6)
 LU1<-raster::raster(LU_tifs_full[[1]])
 sfed_repro<-spTransform(sped
                        , projection(LU1) )
-show(LU1)
-sfed_repro
 
-tic()
-landUsePoints_sf<-future_map(rerast, function(county){
-  if(compareCRS(county, sped)){raster::extract(county, sfed_repro)}
-  else{return("check CRS")}
-})
-toc()
+# need to check the numbers, since the counts of points in the two reprojections didn't match.
+
+withco %>% group_by(NAME) %>% summarize(n())
+
+
+# tic()
+# landUsePoints_sf<-future_map(rerast, function(county){
+#   if(compareCRS(county, sped)){raster::extract(county, sfed_repro)}
+#   else{return("check CRS")}
+# })
+# toc()
 
 tic()
 test_extraction<-raster::extract(first_reproj, sped)
