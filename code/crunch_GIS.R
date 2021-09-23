@@ -8,7 +8,8 @@ library(tictoc)
 library(sf) #vector data
 library(tigris) #county data
 options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the data.
-
+# Projection for rasters
+my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
 
 # get the occcurence data
 withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
@@ -24,28 +25,37 @@ localities <- good_coords %>%
 
 # localities
 #crop the rasters based on extent
-bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
+# bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
 
 rm(withstats2, good_coords)
 
 ###################################
 # get boundaries for each county in MD, DE, PA, VA, WV
 statbord<-c("MD", "DE", "PA", "VA", "WV")
+
+# reprojec to match rasters
 allco<-st_as_sf(map_dfr(statbord, function(co){
-  counties(co, resolution = "5m")
-})) # not sure what the projection is here
+  counties(co, resolution = "5m") %>% st_transform(crs = st_crs(my_pr))
+})) 
+
 # determine which county each point sits in (no buffer)
-sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = st_crs(allco)) %>% st_transform(4326) #transform to NAD83(NSRS2007) / California Albers
-withco<-st_join(sfed, allco %>% st_transform(4326))
-# try adding buffer!
-# this takes<6 seconds on laptop
+sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = "EPSG:4326") %>% st_transform(crs = st_crs(my_pr)) 
 
-mybufs<-st_buffer(sfed, dist = 1000)
-
+# this takes ~4 seconds on laptop
 tic()
-bufcos<-st_intersects(mybufs, allco %>% st_transform(4326))
+withco<-st_join(sfed, allco)
 toc()
-# 37 seconds
+
+# try adding buffer!
+# about 6 secs on laptop
+tic()
+mybufs<-st_buffer(sfed, dist = 1000)
+toc()
+
+# about 3 seconds on laptop
+tic()
+bufcos<-st_intersects(mybufs, allco)
+toc()
 
 co_combs<-unique(bufcos) # unique combinations of counties
 
@@ -60,7 +70,7 @@ co_combs<-unique(bufcos) # unique combinations of counties
 
 
 ####################################
-# start computing 1 km buffers
+# load the land use 2013 dataset, for now this is a test of workflow
 LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
 
 LU_tifs <- unlist(map(LU2013_layrs, function(dr){
@@ -70,62 +80,22 @@ LU_tifs <- unlist(map(LU2013_layrs, function(dr){
 LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
   paste0(LU2013_layrs[county], "/", LU_tifs[county])
 }))
-# LU_tifs_full
 
-# this looks like it's a nope. Too much data for the laptop
-# #create a blank canvas
-# writeRaster(raster(bounds), "data/GIS_downloads/LU_combined.tif", format = "GTiff", overwrite =T)
 
-# # paste all the files into it
-# mosaic_rasters(gdalfile = LU_tifs_full
-#                , dst_dataset = "data/GIS_downloads/LU_combined.tif"
-#                , of = "GTiff" )
-# bigLU<-mosaic(gdalfile = LU_tifs_full, dst_dataset = "data/GIS_downloads/LU_combined.tif")
-# plan(strategy= "multiprocess", workers = 6)
-# tic()
-# rerast<-future_map(LU_tifs_full, function(lyr){
-#   rast = raster(lyr)
-#   tryCatch(raster::projectRaster(rast, crs = "EPSG:4326")
-#            , error = function(e){print(paste(lyr, "failed"))})
-#   # extent(rast)<-extent(bounds)
-#   return(rast)
-# })
-# toc()
+
+plan(strategy= "multiprocess", workers = 6)
+tic()
+rerast<-future_map(LU_tifs_full, function(lyr){
+  rast = raster(lyr)
+  set_proj = raster::projectRaster(rast, crs = my_pr)
+  # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
+  return(set_proj)
+})
+toc()
 
 # just do it once on laptop to get the workflow tested and then run on cluster
 
-# plan(strategy = "multiprocess", workers = 15)
-# 
-# tic()
-# future_map(1:length(LU_tifs_full), function(rast){
-#   reproj = tryCatch(projectRaster(
-#      raster(LU_tifs_full[[rast]])
-#      , crs = "EPSG:4326"), 
-#      error = function(e){print(paste0("county ", rast, " failed"))}
-#      )
-#   save(reproj, file = paste0("data/fromR/lfs/LU2013_", rast, ".rda"))
-#   
-#      
-# toc()
-# # rerast
-# ?raster::mosaic
-# tic()
-# try_mos<-do.call(raster::mosaic, rerast)
-# toc()
-#
-# # from https://stackoverflow.com/a/15306786/8400969
-# setMethod('mosaic', signature(x='list', y='missing'),
-#           function(x, y, fun, tolerance=0.1, filename=""){
-#             stopifnot(missing(y))
-#             args <- x
-#             if (!missing(fun)) args$fun <- fun
-#             if (!missing(tolerance)) args$tolerance<- tolerance
-#             if (!missing(filename)) args$filename<- filename
-#             do.call(mosaic, args)
-#           })
-#
-# low_tolerance <- raster::mosaic(rerast, tolerance =0.1)
-# apparently have different resolutions to deal with here.
+
 
 # do only the points (more data rich)
 sped<-as(sfed, "Spatial") # this is a spatial points dataframe
@@ -143,9 +113,9 @@ sfed_repro<-spTransform(sped
                         , projection(LU1) )
 
 # need to check the numbers, since the counts of points in the two reprojections didn't match.
-
+tic()
 withco %>% group_by(NAME) %>% summarize(n())
-
+toc()
 
 # tic()
 # landUsePoints_sf<-future_map(rerast, function(county){
@@ -155,7 +125,7 @@ withco %>% group_by(NAME) %>% summarize(n())
 # toc()
 
 tic()
-test_extraction<-raster::extract(first_reproj, sped)
+test_extraction<-raster::extract(LU1, sfed_repro)
 toc()
 
 sum(complete.cases(test_extraction))
