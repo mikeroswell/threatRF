@@ -1,8 +1,8 @@
 # extract buffers for occurrence data and compute some summary stats
 library(raster) # raster data
 library(tidyverse)
-library(rgdal) # works with a library on machine to crunch data
-library(gdalUtils) # more gdal fucntionality
+# library(rgdal) # works with a library on machine to crunch data
+# library(gdalUtils) # more gdal fucntionality
 library(furrr) # if paralllellizing
 library(tictoc)
 library(sf) #vector data
@@ -35,11 +35,15 @@ statbord<-c("MD", "DE", "PA", "VA", "WV")
 
 # reprojec to match rasters
 allco<-st_as_sf(map_dfr(statbord, function(co){
-  counties(co, resolution = "5m") %>% st_transform(crs = st_crs(my_pr))
+  counties(co, resolution = "5m") %>% 
+    st_transform(crs = st_crs(my_pr))
 })) 
 
 # determine which county each point sits in (no buffer)
-sfed<-st_as_sf(localities, coords = c('longitude', 'latitude'), crs = "EPSG:4326") %>% st_transform(crs = st_crs(my_pr)) 
+sfed<-st_as_sf(localities
+               , coords = c('longitude', 'latitude')
+               , crs = "EPSG:4326") %>% 
+  st_transform(crs = st_crs(my_pr)) 
 
 # this takes ~4 seconds on laptop
 tic()
@@ -83,14 +87,14 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 
 
 
-plan(strategy= "multiprocess", workers = 6)
 tic()
-rerast<-future_map(LU_tifs_full, function(lyr){
+rerast<-map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
-  set_proj = raster::projectRaster(rast, crs = my_pr)
+  # set_proj = raster::projectRaster(rast, crs = my_pr)
+  if(projection(rast)==my_pr){rast}
+  else{print(paste(lyr, "has messed up projection info, it is", projection(rast), "should be", my_proj))}
   # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
-  return(set_proj)
-})
+ })
 toc()
 
 # just do it once on laptop to get the workflow tested and then run on cluster
@@ -98,35 +102,25 @@ toc()
 
 
 # do only the points (more data rich)
-sped<-as(sfed, "Spatial") # this is a spatial points dataframe
+sped<-as(sfed, "Spatial") %>% spTransform(my_pr) # this is a spatial points dataframe. Shouldn't need to do this but there is an issue with the furrr workflow
 
-
-
-# plan(strategy = "multiprocess", workers = 6)
-
-
-# try going the other way (projec the points first!)
-
-
-LU1<-raster::raster(LU_tifs_full[[1]])
-sfed_repro<-spTransform(sped
-                        , projection(LU1) )
-
-# need to check the numbers, since the counts of points in the two reprojections didn't match.
+plan(strategy = "multiprocess", workers = 6)
 tic()
-withco %>% group_by(NAME) %>% summarize(n())
+LU_extraction<-future_map(rerast, function(co){
+  raster::extract(co, sped)
+})
 toc()
 
-# tic()
-# landUsePoints_sf<-future_map(rerast, function(county){
-#   if(compareCRS(county, sped)){raster::extract(county, sfed_repro)}
-#   else{return("check CRS")}
-# })
-# toc()
+# <2 min
 
-tic()
-test_extraction<-raster::extract(LU1, sfed_repro)
-toc()
+per_co<-map(LU_extraction, function(co){
+  sum(complete.cases(co))
+})
+
+
+sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. either some points fall into multiplce county rasters or an error. Ignore for now. 
+
+head(LU_extraction)
 
 sum(complete.cases(test_extraction))
 
