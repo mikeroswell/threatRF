@@ -120,55 +120,32 @@ per_co<-map(LU_extraction, function(co){
 
 sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. either some points fall into multiplce county rasters or an error. Ignore for now. 
 
-head(LU_extraction)
-
-sum(complete.cases(test_extraction))
-
-sum(complete.cases(landUsePoints_sf))
-# now 2 seconds.
-
-plot(rerast[[1]])
-
-pdf("figures/test_reproj.pdf")
-rasterVis::gplot(first_reproj)+
-  geom_tile(aes(fill=value))+
-  theme_classic() +
-  layer_spatial(sped)
-# xlim(-80, -72) +
-# ylim(32, 45)
-dev.off()
-
-show(first_reproj)
-plot(first_reproj)
 
 
-data.frame(first_reproj) %>% ggplot()+
-  geom_raster()+
-  theme_classic()
+# this was a plot for a single county
+# pdf("figures/test_reproj.pdf")
+# rasterVis::gplot(first_reproj)+
+#   geom_tile(aes(fill=value))+
+#   theme_classic() +
+#   layer_spatial(sped)
+# # xlim(-80, -72) +
+# # ylim(32, 45)
+# dev.off()
 
-pdf("figures/testmap.pdf")
-future_map(rerast, function(co){
-  rasterVis::gplot(co)+
-    geom_tile(aes(fill=factor(value)))+
-    theme_classic() +
-    xlim(-80, -72) +
-    ylim(32, 45)
-})
-dev.off()
+
+# this just plots the rasters, no points
+# pdf("figures/testmap.pdf")
+# future_map(rerast, function(co){
+#   rasterVis::gplot(co)+
+#     geom_tile(aes(fill=factor(value)))+
+#     theme_classic() +
+#     xlim(-80, -72) +
+#     ylim(32, 45)
+# })
+# dev.off()
 
 
 
-# 1009 seconds on laptop most recently
-landUsePoints # hooray, this seems to work, double check and get good info
-sum(is.na(landUsePoints[[1]]))
-landUsePoints[[1]]+landUsePoints[[2]]
-
-
-asSum<-rowSums(do.call(cbind, landUsePoints), na.rm =T)
-asMax<-apply(do.call(cbind,landUsePoints),1, function(x){max(x, na.rm =T)})
-all.equal(asMax, asSum)
-# <10 sec on most recent run on amarel, but returned only NAs
-# this is where I should focus on troubleshooting next.
 
 # get number of types in 1 km buffer
 # this won't work as written becuase some buffers fall outside counties, need to get the buffer script working first.
