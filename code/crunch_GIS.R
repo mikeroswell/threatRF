@@ -39,6 +39,30 @@ allco<-st_as_sf(map_dfr(statbord, function(co){
     st_transform(crs = st_crs(my_pr))
 })) 
 
+# make a key of counties with GEOID to match the rasters. This should work for
+# the 2013 LU rasters, not sure if it will also work for LC.
+
+####################################
+# load the land use 2013 dataset, for now this is a test of workflow
+LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
+
+LU_tifs <- unlist(map(LU2013_layrs, function(dr){
+  list.files(dr, pattern = "*LandUse.tif$")
+}))
+
+LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
+  paste0(LU2013_layrs[county], "/", LU_tifs[county])
+}))
+
+
+
+cokey<-data.frame(LU_tifs) %>% 
+  separate(LU_tifs, into= c("first_four", "GEOID", "crap"), sep = "_") %>% 
+  rownames_to_column(var="rasterID")
+
+# add the new data back to allco
+allco<-allco %>% left_join(cokey)
+
 # determine which county each point sits in (no buffer)
 sfed<-st_as_sf(localities
                , coords = c('longitude', 'latitude')
@@ -50,13 +74,14 @@ tic()
 withco<-st_join(sfed, allco)
 toc()
 
+
 # try adding buffer!
 # about 6 secs on laptop
 tic()
 mybufs<-st_buffer(sfed, dist = 1000)
 toc()
 
-# about 3 seconds on laptop
+# about 35 seconds on laptop
 tic()
 bufcos<-st_intersects(mybufs, allco)
 toc()
@@ -73,41 +98,21 @@ co_combs<-unique(bufcos) # unique combinations of counties
 # looks basically right. There are some weird points that are very far from the state of Maryland, and also some that appear to be slightly outside. I'm not going to worry about it for now, as I'm pretty fired up that this is working at all!
 
 
-####################################
-# load the land use 2013 dataset, for now this is a test of workflow
-LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
-
-LU_tifs <- unlist(map(LU2013_layrs, function(dr){
-  list.files(dr, pattern = "*LandUse.tif$")
-}))
-
-LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
-  paste0(LU2013_layrs[county], "/", LU_tifs[county])
-}))
-
-
-
+# this is where the LU tifs actually get loaded into R's brain
 tic()
 rerast<-map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
-  # set_proj = raster::projectRaster(rast, crs = my_pr)
   if(projection(rast)==my_pr){rast}
   else{print(paste(lyr, "has messed up projection info, it is", projection(rast), "should be", my_proj))}
   # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
- })
+})
 toc()
 
-# just do it once on laptop to get the workflow tested and then run on cluster
-
-
-
-# do only the points (more data rich)
-sped<-as(sfed, "Spatial") %>% spTransform(my_pr) # this is a spatial points dataframe. Shouldn't need to do this but there is an issue with the furrr workflow
-
+# extract points (this is simple)
 plan(strategy = "multiprocess", workers = 6)
 tic()
-LU_extraction<-future_map(rerast, function(co){
-  raster::extract(co, sped)
+LU_extraction<-future_map(rerast, .options = furrr_options(packages = "sf"), function(co){
+  raster::extract(co, sfed)
 })
 toc()
 
@@ -118,10 +123,58 @@ per_co<-map(LU_extraction, function(co){
 })
 
 
-sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. either some points fall into multiplce county rasters or an error. Ignore for now. 
+sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. either some points fall into multiple county rasters or an error. Ignore for now. 
 
+# multco<-c(3,5)
+# 
+# allco[c(multco),]
+# 
+# 
+# # this is working to make the mosaic. Setting tolerance quite high seems to be the trick. 
+# test_mos<-mosaic(rerast[[1]], rerast[[2]], tolerance = 0.5, fun = "min")
+# 
+# 
+# allco$COUNTYFP
 
+plan(strategy = "multiprocess", workers = 4)
+tic()
+co_mos <- future_map(co_combs
+                     , .options = furrr_options(packages = "sf")
+                     , function(multco){
+                       if(length(multco)>0){
+                        rasters = allco[multco,]$rasterID
+                        if(length(rasters)>0){
+                          comprast = rasters[complete.cases(rasters)]
+                          if(length(comprast)>1){
+                             rlist = rerast[as.numeric(comprast)]
+                             rlist$fun= min
+                             rlist$na.rm = t
+                             rlist$tolerance = 0.5
+                             tryCatch(do.call(mosaic, rlist), error=function(e){print(paste("this combo failed", multco))})
+                           }
+                           
+                           if(length(comprast)==1){
+                             rerast[[comprast]]}
+                        }
+                        else{print(multco)
+                          return(list())}
+                       }
+                       
+                       else{print(multco)
+                         return(list())}
+                     })
+toc()
 
+LU_tifs
+merge(rerast[[1]], rerast[[2]])
+
+origin(rerast[[1]])
+origin(rerast[[2]])
+withco
+sfed
+co_combs
+bufcos
+allco[100,]
 # this was a plot for a single county
 # pdf("figures/test_reproj.pdf")
 # rasterVis::gplot(first_reproj)+
@@ -149,6 +202,8 @@ sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. ei
 
 # get number of types in 1 km buffer
 # this won't work as written becuase some buffers fall outside counties, need to get the buffer script working first.
+head(bufcos)
+str(bufcos)
 
 # plan(strategy = "multiprocess", workers=5)
 
@@ -262,4 +317,3 @@ climUseStat<-left_join(clim_stat %>%
 
 # names(clim_stat)<-make.names(clim_stat)
 # write data to .csv
-data.table::fwrite(climUseStat[,-172], "data/fromR/lfs/plants_1989-2019_with_status_climate_landUse.csv", row.names =F)
