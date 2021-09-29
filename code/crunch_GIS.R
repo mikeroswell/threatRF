@@ -136,9 +136,9 @@ sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. ei
 # 
 # allco$COUNTYFP
 
-plan(strategy = "multiprocess", workers = 4)
+# plan(strategy = "multiprocess", workers = 4)
 tic()
-co_mos <- future_map(co_combs
+co_mos <- map(co_combs
                      , .options = furrr_options(packages = "sf")
                      , function(multco){
                        if(length(multco)>0){
@@ -165,16 +165,6 @@ co_mos <- future_map(co_combs
                      })
 toc()
 
-LU_tifs
-merge(rerast[[1]], rerast[[2]])
-
-origin(rerast[[1]])
-origin(rerast[[2]])
-withco
-sfed
-co_combs
-bufcos
-allco[100,]
 # this was a plot for a single county
 # pdf("figures/test_reproj.pdf")
 # rasterVis::gplot(first_reproj)+
