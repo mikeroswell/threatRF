@@ -139,7 +139,7 @@ sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. ei
 # plan(strategy = "multiprocess", workers = 4)
 tic()
 co_mos <- map(co_combs
-                     , .options = furrr_options(packages = "sf")
+                     # , .options = furrr_options(packages = "sf")
                      , function(multco){
                        if(length(multco)>0){
                         rasters = allco[multco,]$rasterID
