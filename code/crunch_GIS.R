@@ -1,5 +1,6 @@
 # extract buffers for occurrence data and compute some summary stats
 library(raster) # raster data
+rasterOptions(maxmemory = 1e+09)
 library(tidyverse)
 # library(rgdal) # works with a library on machine to crunch data
 # library(gdalUtils) # more gdal fucntionality
@@ -33,12 +34,20 @@ rm(withstats2, good_coords)
 # get boundaries for each county in MD, DE, PA, VA, WV
 statbord<-c("MD", "DE", "PA", "VA", "WV")
 
-# reprojec to match rasters
+# reproject to match rasters
 allco<-st_as_sf(map_dfr(statbord, function(co){
   counties(co, resolution = "5m") %>% 
     st_transform(crs = st_crs(my_pr))
 })) 
 
+
+
+my_ext<-extent(allco)
+# extr<-extend(rerast[[1]], extent(allco))
+
+par(mfrow(c(1,2)))
+plot(extr)
+plot(rerast[[1]])
 # make a key of counties with GEOID to match the rasters. This should work for
 # the 2013 LU rasters, not sure if it will also work for LC.
 
@@ -139,10 +148,13 @@ co_combs<-unique(bufcos) # unique combinations of counties
 
 
 # this is where the LU tifs actually get loaded into R's brain
+plan(strategy = "multiprocess", workers = 3)
 tic()
-rerast<-map(LU_tifs_full, function(lyr){
+future_map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
-  if(projection(rast)==my_pr){rast}
+  if(projection(rast)==my_pr){
+    writeRaster(extend(rast, extent(allco)), filename = lyr, overwrite = T)
+  }
   else{print(paste(lyr, "has messed up projection info, it is", projection(rast), "should be", my_proj))}
   # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
 })
@@ -163,14 +175,13 @@ LC_extraction<-future_map(LC_rast, .options = furrr_options(packages = "sf"), fu
 })
 toc()
 
+tic()
+trystack<-raster::stack(rerast, tolerance =0.5)
+toc()
 
 
 
-rawval<-replicate(10, sample(c(1:10, NA), size = 10, replace =T), simplify = F)
-sapply(rawval, cbind)
-
-mymin<-function(x)ifelse(sum(x, na.rm=T)>0, min(x, na.rm =T), NA)
-tomin<-function(x){sapply(x, cbind) %>%  apply(MARGIN = 1, FUN = mymin)}
+tomin<-function(x){do.call(pmin.int, c(x, na.rm=TRUE))}
 
 
 
@@ -201,6 +212,10 @@ toc()
 tic()
 big_mos<-moser(rast_list = rerast, tolerance = 0.5, funlist = "min")
 toc()
+# do I need merge?
+tic()
+test_merge <- merge(rerast[[1]], rerast[[2]], tolerance = 0.5, fun = "min")
+toc()
 # multco<-c(3,5)
 # 
 # allco[c(multco),]
@@ -210,36 +225,43 @@ toc()
 tic()
 test_mos<-mosaic(rerast[[1]], rerast[[2]], tolerance = 0.5, fun = "min")
 toc()
+
+tic()
+crop_first<-raster::stack(raster::extend(rerast[[1]], raster::extent(allco)), raster::extend(rerast[[2]], raster::extent(allco)), tolerance = 0.5, fun = "min" )
+toc()
+
+# 31037.159 sec elapsed
+# that's a long long time. Yikes.
 # 
 # allco$COUNTYFP
 
 # plan(strategy = "multiprocess", workers = 4)
 tic()
 co_mos <- map(co_combs
-                     # , .options = furrr_options(packages = "sf")
-                     , function(multco){
-                       if(length(multco)>0){
-                        rasters = allco[multco,]$rasterID
-                        if(length(rasters)>0){
-                          comprast = rasters[complete.cases(rasters)]
-                          if(length(comprast)>1){
-                             rlist = rerast[as.numeric(comprast)]
-                             rlist$fun= min
-                             rlist$na.rm = t
-                             rlist$tolerance = 0.5
-                             tryCatch(do.call(mosaic, rlist), error=function(e){print(paste("this combo failed", multco))})
-                           }
-                           
-                           if(length(comprast)==1){
-                             rerast[[comprast]]}
-                        }
-                        else{print(multco)
-                          return(list())}
-                       }
-                       
-                       else{print(multco)
-                         return(list())}
-                     })
+              # , .options = furrr_options(packages = "sf")
+              , function(multco){
+                if(length(multco)>0){
+                  rasters = allco[multco,]$rasterID
+                  if(length(rasters)>0){
+                    comprast = rasters[complete.cases(rasters)]
+                    if(length(comprast)>1){
+                      rlist = rerast[as.numeric(comprast)]
+                      rlist$fun= min
+                      rlist$na.rm = t
+                      rlist$tolerance = 0.5
+                      tryCatch(do.call(mosaic, rlist), error=function(e){print(paste("this combo failed", multco))})
+                    }
+                    
+                    if(length(comprast)==1){
+                      rerast[[comprast]]}
+                  }
+                  else{print(multco)
+                    return(list())}
+                }
+                
+                else{print(multco)
+                  return(list())}
+              })
 toc()
 
 # this was a plot for a single county
@@ -267,120 +289,4 @@ toc()
 
 
 
-# get number of types in 1 km buffer
-# this won't work as written becuase some buffers fall outside counties, need to get the buffer script working first.
-head(bufcos)
-str(bufcos)
-
-# plan(strategy = "multiprocess", workers=5)
-
-tic()
-landUseTypes1Km<-map(rerast, function(county){
-  raster::extract(county, localities
-                  , buffer =1000
-                  , fun = length
-  )
-})
-toc()
-
-# running into serious memory issues
-tic()
-first_co<-raster::extract(rerast[[1]], localities, buffer = 1000, fun = function(x){length(unique(x))})
-toc()
-
-
-# bigLU_stack<-raster::stack(rerast, quick = T)
-# see if slope data is ccredible
-alle_slope<-raster("data/GIS_downloads/Allegany_slope.tiff")
-# produces error, cooncerning:
-slope_cropped<-raster::crop(alle_slope, bounds)
-target_slope<-data.frame(raster::extract(alle_slope, data.frame(ungroup(localities))))
-plot(alle_slope)
-summary(target_slope)
-
-extent(alle_slope)
-extent(localities)
-###############################
-# extract bioclimatic variables
-
-# first create stack of the 19 layers
-# then crop to match occurrence extents
-# then extract value at leach locale
-# finally (not yet implemented) eliminate variables to reduce collinearity
-
-#make a raster stack
-bc <- raster::stack(list.files("data/fromR/lfs/current/", full.names = T))
-
-# add bioclimatic value for each observation
-
-#shrink the rasters
-focused<-raster::crop(bc, bounds)
-
-# get the data
-chelsa_matrix<-data.frame(raster::extract(focused, localities))
-names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
-chelsa_points<-bind_cols(localities, chelsa_matrix)
-
-rm(bc)
-rm(focused)
-rm(bounds)
-rm(localities)
-gc()
-# correlations not super low, deal with later
-# try_cors<-cor(chelsa_matrix, use = "na.or.complete")
-
-# dcors<-lower.tri(try_cors)
-# high_cors<-which(abs(dcors*try_cors)>0.7, arr.ind =T)
-# high_cors
-
-# select maximum number of variables without getting collinearity
-# future::plan(strategy = "multiprocess", workers = 7)
-
-min_vars <- map(19:18, function(nvars){
-  combo = combn(19, nvars, simplify = F)
-  big_list = map(combo, function(chosen){
-    submat = apply(chelsa_matrix[,c(chosen)], 2, as.numeric)
-    try_cors = cor(submat, use = "complete.obs")
-    # print(try_cors)
-    dcors = lower.tri(try_cors)
-    high_cors = which(abs(dcors*try_cors)>0.7, arr.ind =T)
-    
-    if_else(!length(high_cors)>0, return(list(combo, try_cors)), return(NULL))
-  })
-  sum_cors = map(big_list, function(this_combo){
-    sc = sum(abs(this_combo[[2]]), na.rm =T)
-    # print(sc)
-    return(sc)
-  })
-  winner = base::which.min(sum_cors)
-  # print(sum_cors[[winner]])
-  return(list(winner, sum_cors= sum_cors[[winner]], big_list[[winner]]))
-})
-
-min_vars[[1]]
-
-# merge chelsa with occurrence
-clim_stat <- left_join(good_coords, chelsa_points
-                       , by = c("decimalLatitude" = "latitude"
-                                , "decimalLongitude" = "longitude"))
-# this loads the shape file into R's brain
-lulc_shape<-readOGR("data/LULC_2010/")
-# there is a special data format for coordinates
-ll<-SpatialPoints(localities)
-# and this data format has attributes related to projection etc. that needs to match across layers
-proj4string(lulc_shape)
-proj4string(ll)<-proj4string(lulc_shape)
-
-# this took a while, but it is extracting the land use categorization associated with each point. Should write down how long it actually takes
-tictoc::tic()
-lulc2010<-sp::over(ll, lulc_shape)
-tictoc::toc()
-
-# putting all the data together
-climUseStat<-left_join(clim_stat %>%
-                         rename(latitude = decimalLatitude
-                                , longitude = decimalLongitude)
-                       , bind_cols(localities, lulc2010))
-
-# names(clim_stat)<-make.names(clim_stat)
-# write data to .csv
+# get number of t
