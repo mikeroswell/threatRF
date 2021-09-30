@@ -2,8 +2,8 @@
 library(raster) # raster data
 rasterOptions(maxmemory = 1e+09)
 library(tidyverse)
-# library(rgdal) # works with a library on machine to crunch data
-# library(gdalUtils) # more gdal fucntionality
+library(rgdal) # works with a library on machine to crunch data
+library(gdalUtils) # more gdal fucntionality
 library(furrr) # if paralllellizing
 library(tictoc)
 library(sf) #vector data
@@ -258,14 +258,17 @@ clim_stat <- left_join(good_coords, chelsa_points
                        , by = c("decimalLatitude" = "latitude"
                                 , "decimalLongitude" = "longitude"))
 # this loads the shape file into R's brain
-lulc_shape<-readOGR("data/LULC_2010/")
+lulc_years<-c(2002, 2010, 1973)
+
+lulc_shape <- map(lulc_years, function(yr){
+  read_sf(paste0("data/GIS_downloads/LULC", yr, "_unzipped/"))
+})
 # there is a special data format for coordinates
-ll<-SpatialPoints(localities)
-# and this data format has attributes related to projection etc. that needs to match across layers
-proj4string(lulc_shape)
-proj4string(ll)<-proj4string(lulc_shape)
+
 
 # this took a while, but it is extracting the land use categorization associated with each point. Should write down how long it actually takes
+
+# use st join for this
 tictoc::tic()
 lulc2010<-sp::over(ll, lulc_shape)
 tictoc::toc()
