@@ -1,3 +1,4 @@
+beg<-Sys.time()
 # extract buffers for occurrence data and compute some summary stats
 library(raster) # raster data
 rasterOptions(maxmemory = 1e+09)
@@ -31,7 +32,7 @@ bounds<-raster::extent(matrix(c(min(localities$longitude)
                                 , max(localities$longitude)
                                 , max(localities$latitude)), nrow = 2))
 
-rm(withstats2, good_coords)
+rm(withstats2)
 
 ###################################
 # get boundaries for each county in MD, DE, PA, VA, WV
@@ -115,7 +116,7 @@ sfed<-st_as_sf(localities
 # this is where the LU tifs actually get loaded into R's brain
 
 tic()
-map(LU_tifs_full, function(lyr){
+rerast<-map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
   if(projection(rast)==my_pr){
     return(rast)
@@ -277,7 +278,9 @@ lulc_shape <- map(lulc_years, function(yr){
 
 # use st join for this
 old_LULC<-map(lulc_shape, function(yr){
-  st_join(sfed, yr)
+  st_join(sfed, yr) %>% select(-c( "COUNTY"
+                                  , "ShapeSTAre"
+                                  , "ShapeSTLen" ))
 })
 
 
@@ -298,4 +301,17 @@ chel_sf<-st_as_sf(chelsa_points
          , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
 
-st_join(chel_sf, LU_reduction)
+chel_LU<-chel_sf %>% mutate(LU2013 = LU_reduction, LC2013 = LC_reduction) 
+alldat<-chel_LU %>% st_join(old_LULC[[1]]) %>% st_join(old_LULC[[2]]) %>% st_join(old_LULC[[3]] %>% filter(!is.na(OBJECTID)))
+str(alldat)
+
+nona<-alldat %>% drop_na() %>% st_as_sf()
+
+obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species)
+         , coords = c("lon",  "lat")
+         , crs = "EPSG:4326") %>% 
+  st_transform(crs = st_crs(my_pr)) 
+
+
+indi<-st_join(nona, obs)
+took<-Sys.time()-beg
