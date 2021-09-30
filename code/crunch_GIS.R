@@ -162,34 +162,34 @@ LU_reduction <- tomin(LU_extraction)
 # }
 
 
-# plan(strategy = "multiprocess", workers = 4)
-tic()
-co_mos <- map(co_combs
-              # , .options = furrr_options(packages = "sf")
-              , function(multco){
-                if(length(multco)>0){
-                  rasters = allco[multco,]$rasterID
-                  if(length(rasters)>0){
-                    comprast = rasters[complete.cases(rasters)]
-                    if(length(comprast)>1){
-                      rlist = rerast[as.numeric(comprast)]
-                      rlist$fun= min
-                      rlist$na.rm = t
-                      rlist$tolerance = 0.5
-                      tryCatch(do.call(mosaic, rlist), error=function(e){print(paste("this combo failed", multco))})
-                    }
-                    
-                    if(length(comprast)==1){
-                      rerast[[comprast]]}
-                  }
-                  else{print(multco)
-                    return(list())}
-                }
-                
-                else{print(multco)
-                  return(list())}
-              })
-toc()
+# # plan(strategy = "multiprocess", workers = 4)
+# tic()
+# co_mos <- map(co_combs
+#               # , .options = furrr_options(packages = "sf")
+#               , function(multco){
+#                 if(length(multco)>0){
+#                   rasters = allco[multco,]$rasterID
+#                   if(length(rasters)>0){
+#                     comprast = rasters[complete.cases(rasters)]
+#                     if(length(comprast)>1){
+#                       rlist = rerast[as.numeric(comprast)]
+#                       rlist$fun= min
+#                       rlist$na.rm = t
+#                       rlist$tolerance = 0.5
+#                       tryCatch(do.call(mosaic, rlist), error=function(e){print(paste("this combo failed", multco))})
+#                     }
+#                     
+#                     if(length(comprast)==1){
+#                       rerast[[comprast]]}
+#                   }
+#                   else{print(multco)
+#                     return(list())}
+#                 }
+#                 
+#                 else{print(multco)
+#                   return(list())}
+#               })
+# toc()
 
 # this was a plot for a single county
 # pdf("figures/test_reproj.pdf")
@@ -201,19 +201,78 @@ toc()
 # # ylim(32, 45)
 # dev.off()
 
+# CHELSA back in this file
+#make a raster stack
+bc <- raster::stack(list.files("data/fromR/lfs/current/", full.names = T))
 
-# this just plots the rasters, no points
-# pdf("figures/testmap.pdf")
-# future_map(rerast, function(co){
-#   rasterVis::gplot(co)+
-#     geom_tile(aes(fill=factor(value)))+
-#     theme_classic() +
-#     xlim(-80, -72) +
-#     ylim(32, 45)
-# })
-# dev.off()
+# add bioclimatic value for each observation
 
+#shrink the rasters
+focused<-raster::crop(bc, bounds)
 
+# get the data
+chelsa_matrix<-data.frame(raster::extract(focused, localities))
+names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
+chelsa_points<-bind_cols(localities, chelsa_matrix)
 
+rm(bc)
+rm(focused)
+rm(bounds)
+rm(localities)
+gc()
+# correlations not super low, deal with later
+# try_cors<-cor(chelsa_matrix, use = "na.or.complete")
 
-# get number of t
+# dcors<-lower.tri(try_cors)
+# high_cors<-which(abs(dcors*try_cors)>0.7, arr.ind =T)
+# high_cors
+
+# select maximum number of variables without getting collinearity
+future::plan(strategy = "multiprocess", workers = 7)
+
+min_vars <- map(19:18, function(nvars){
+  combo = combn(19, nvars, simplify = F)
+  big_list = map(combo, function(chosen){
+    submat = apply(chelsa_matrix[,c(chosen)], 2, as.numeric)
+    try_cors = cor(submat, use = "complete.obs")
+    # print(try_cors)
+    dcors = lower.tri(try_cors)
+    high_cors = which(abs(dcors*try_cors)>0.7, arr.ind =T)
+    
+    if_else(!length(high_cors)>0, return(list(combo, try_cors)), return(NULL))
+  })
+  sum_cors = map(big_list, function(this_combo){
+    sc = sum(abs(this_combo[[2]]), na.rm =T)
+    # print(sc)
+    return(sc)
+  })
+  winner = base::which.min(sum_cors)
+  # print(sum_cors[[winner]])
+  return(list(winner, sum_cors= sum_cors[[winner]], big_list[[winner]]))
+})
+
+min_vars[[1]]
+
+# merge chelsa with occurrence
+clim_stat <- left_join(good_coords, chelsa_points
+                       , by = c("decimalLatitude" = "latitude"
+                                , "decimalLongitude" = "longitude"))
+# this loads the shape file into R's brain
+lulc_shape<-readOGR("data/LULC_2010/")
+# there is a special data format for coordinates
+ll<-SpatialPoints(localities)
+# and this data format has attributes related to projection etc. that needs to match across layers
+proj4string(lulc_shape)
+proj4string(ll)<-proj4string(lulc_shape)
+
+# this took a while, but it is extracting the land use categorization associated with each point. Should write down how long it actually takes
+tictoc::tic()
+lulc2010<-sp::over(ll, lulc_shape)
+tictoc::toc()
+
+# putting all the data together
+climUseStat<-left_join(clim_stat %>%
+                         rename(latitude = decimalLatitude
+                                , longitude = decimalLongitude)
+                       , bind_cols(localities, lulc2010))
+
