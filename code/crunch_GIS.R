@@ -274,7 +274,7 @@ old_LULC<-map(lulc_shape, function(yr){
   st_join(sfed, yr)
 })
 
-old_LULC[[1]]
+
 # putting all the data together
 climUseStat<-left_join(clim_stat %>%
                          rename(latitude = decimalLatitude
