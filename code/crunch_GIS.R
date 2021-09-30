@@ -26,7 +26,10 @@ localities <- good_coords %>%
 
 # localities
 #crop the rasters based on extent
-# bounds<-raster::extent(matrix(c(min(localities$longitude), min(localities$latitude), max(localities$longitude), max(localities$latitude)), nrow = 2))
+bounds<-raster::extent(matrix(c(min(localities$longitude)
+                                , min(localities$latitude)
+                                , max(localities$longitude)
+                                , max(localities$latitude)), nrow = 2))
 
 rm(withstats2, good_coords)
 
@@ -227,31 +230,37 @@ gc()
 # high_cors<-which(abs(dcors*try_cors)>0.7, arr.ind =T)
 # high_cors
 
-# select maximum number of variables without getting collinearity
-future::plan(strategy = "multiprocess", workers = 7)
-
-min_vars <- map(19:18, function(nvars){
-  combo = combn(19, nvars, simplify = F)
-  big_list = map(combo, function(chosen){
-    submat = apply(chelsa_matrix[,c(chosen)], 2, as.numeric)
-    try_cors = cor(submat, use = "complete.obs")
-    # print(try_cors)
-    dcors = lower.tri(try_cors)
-    high_cors = which(abs(dcors*try_cors)>0.7, arr.ind =T)
-    
-    if_else(!length(high_cors)>0, return(list(combo, try_cors)), return(NULL))
-  })
-  sum_cors = map(big_list, function(this_combo){
-    sc = sum(abs(this_combo[[2]]), na.rm =T)
-    # print(sc)
-    return(sc)
-  })
-  winner = base::which.min(sum_cors)
-  # print(sum_cors[[winner]])
-  return(list(winner, sum_cors= sum_cors[[winner]], big_list[[winner]]))
-})
-
-min_vars[[1]]
+# # select maximum number of variables without getting collinearity
+# future::plan(strategy = "multiprocess", workers = 4)
+# 
+# min_vars <- future_map(15:13, function(nvars){
+#   combo = combn(19, nvars, simplify = F)
+#   big_list = map(combo, function(chosen){
+#     submat = apply(chelsa_matrix[,c(chosen)], 2, as.numeric)
+#     try_cors = cor(submat, use = "complete.obs")
+#     # print(try_cors)
+#     dcors = lower.tri(try_cors)
+#     high_cors = which(abs(dcors*try_cors)>0.7, arr.ind =T)
+#     if_else(length(high_cors)==0, return(list(combo, try_cors)), return(NULL))
+#   })
+#   sum_cors = # ifelse(is.null(big_list), big_list, 
+#                     map(big_list, function(this_combo){
+#     sc = sum(abs(this_combo[[2]]), na.rm =T)
+#     mc = sum(abs(this_combo[[2]])>0.7)
+#     # print(sc)
+#     return(c(sc, mc))
+#   })#)
+#   winner = base::which.min(sapply(sum_cors, rbind)[1,])
+#   # print(sum_cors[[winner]])
+#   return(list(winner
+#               , sum_cors = sapply(sum_cors, rbind)[1,winner]
+#               , hc = sapply(sum_cors, rbind)[2,winner]
+#               , chels_red = ifelse(is.null(big_list[[winner]])
+#                                    , NA
+#                                    , big_list[[winner]])))
+# })
+# 
+# just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
 
 # merge chelsa with occurrence
 clim_stat <- left_join(good_coords, chelsa_points
@@ -274,6 +283,7 @@ old_LULC<-map(lulc_shape, function(yr){
   st_join(sfed, yr)
 })
 
+just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
 
 # putting all the data together
 climUseStat<-left_join(clim_stat %>%
