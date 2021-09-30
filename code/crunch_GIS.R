@@ -262,10 +262,7 @@ gc()
 # 
 # just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
 
-# merge chelsa with occurrence
-clim_stat <- left_join(good_coords, chelsa_points
-                       , by = c("decimalLatitude" = "latitude"
-                                , "decimalLongitude" = "longitude"))
+
 # this loads the shape file into R's brain
 lulc_years<-c(1973, 2002, 2010)
 
@@ -283,11 +280,22 @@ old_LULC<-map(lulc_shape, function(yr){
   st_join(sfed, yr)
 })
 
-just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
+
+# merge chelsa with occurrence
+# clim_stat <- left_join(good_coords, chelsa_points
+#                        , by = c("decimalLatitude" = "latitude"
+#                                 , "decimalLongitude" = "longitude"))
+# just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
 
 # putting all the data together
-climUseStat<-left_join(clim_stat %>%
-                         rename(latitude = decimalLatitude
-                                , longitude = decimalLongitude)
-                       , bind_cols(localities, lulc2010))
+# climUseStat<-left_join(clim_stat %>%
+#                          rename(latitude = decimalLatitude
+#                                 , longitude = decimalLongitude)
+#                        , bind_cols(localities, lulc2010))
 
+chel_sf<-st_as_sf(chelsa_points
+         , coords = c('longitude', 'latitude')
+         , crs = "EPSG:4326") %>% 
+  st_transform(crs = st_crs(my_pr)) 
+
+st_join(chel_sf, LU_reduction)
