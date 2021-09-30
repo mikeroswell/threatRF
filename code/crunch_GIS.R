@@ -55,6 +55,46 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 }))
 
 
+# do similar for the land cover
+LC2013_layrs <- list.dirs("data/GIS_downloads/LC2013")
+LC2013_trim<-LC2013_layrs[grepl("data/GIS_downloads/LC2013/.*/.*.", LC2013_layrs)]
+LC2013_trim
+
+# LC_test<-raster::raster("data/GIS_downloads/LC2013/ALLE_24001/ALLE_24001/ALLE_24001.img")
+
+
+LC_tifs <- unlist(map(LC2013_layrs, function(dr){
+  list.files(dr, pattern = "*.img$")
+}))
+
+LC_tifs_full<-unlist(map(1:length(LC2013_trim), function(county){
+  paste0(LC2013_trim[county], "/", LC_tifs[county])
+}))
+
+LC_rast<-map(LC_tifs_full[1:24], function(rfile){
+  print(rfile)
+  raster(rfile)
+})
+
+
+# do similar for the land cover
+LC2013_layrs <- list.dirs("data/GIS_downloads/LC2013")
+
+
+LC_test<-raster::raster("data/GIS_downloads/LC2013/ALLE_24001/ALLE_24001/ALLE_24001.img")
+
+LC_tifs <- unlist(map(LC2013_layrs, function(dr){
+  list.files(dr, pattern = ".img$", full.names =T)
+}))
+
+
+
+LC_rast<-map(LC_tifs, function(rfile){
+  print(rfile)
+  raster(rfile)
+})
+
+
 
 cokey<-data.frame(LU_tifs) %>% 
   separate(LU_tifs, into= c("first_four", "GEOID", "crap"), sep = "_") %>% 
@@ -116,6 +156,13 @@ LU_extraction<-future_map(rerast, .options = furrr_options(packages = "sf"), fun
 })
 toc()
 
+plan(strategy = "multiprocess", workers = 6)
+tic()
+LC_extraction<-future_map(LC_rast, .options = furrr_options(packages = "sf"), function(co){
+  raster::extract(co, sfed)
+})
+toc()
+
 # <2 min
 
 per_co<-map(LU_extraction, function(co){
@@ -125,14 +172,31 @@ per_co<-map(LU_extraction, function(co){
 
 sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. either some points fall into multiple county rasters or an error. Ignore for now. 
 
+# try again to make a mosaic with all the points
+moser <- function(rast_list, tolerance, funlist){
+  rast_list$tolerance = tolerance
+  # rast_list$na.rm =T
+  rast_list$fun = funlist
+  do.call(mosaic, rast_list)
+}
+# made the moser equation maybe simpler, testing again
+tic()
+mosTest<-moser(rast_list = c(rerast[[1]], rerast[[2]]), tolerance = 0.5, funlist = "min")
+toc()
+
+#going nowhere on this so far.
+tic()
+big_mos<-moser(rast_list = rerast, tolerance = 0.5, funlist = "min")
+toc()
 # multco<-c(3,5)
 # 
 # allco[c(multco),]
 # 
 # 
 # # this is working to make the mosaic. Setting tolerance quite high seems to be the trick. 
-# test_mos<-mosaic(rerast[[1]], rerast[[2]], tolerance = 0.5, fun = "min")
-# 
+tic()
+test_mos<-mosaic(rerast[[1]], rerast[[2]], tolerance = 0.5, fun = "min")
+toc()
 # 
 # allco$COUNTYFP
 
