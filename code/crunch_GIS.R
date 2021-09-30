@@ -163,6 +163,19 @@ LC_extraction<-future_map(LC_rast, .options = furrr_options(packages = "sf"), fu
 })
 toc()
 
+
+
+
+rawval<-replicate(10, sample(c(1:10, NA), size = 10, replace =T), simplify = F)
+sapply(rawval, cbind)
+
+mymin<-function(x)ifelse(sum(x, na.rm=T)>0, min(x, na.rm =T), NA)
+tomin<-function(x){sapply(x, cbind) %>%  apply(MARGIN = 1, FUN = mymin)}
+
+
+
+LC_reduction<-tomin(LC_extraction)
+LU_reduction <- tomin(LU_extraction)
 # <2 min
 
 per_co<-map(LU_extraction, function(co){
