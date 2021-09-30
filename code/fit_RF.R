@@ -3,11 +3,10 @@
 library(tidyverse)
 library(randomForest)
 
-tofit<- read.csv("data/fromR/lfs/plants_1989-2019_with_status_climate_landUse.csv")
+load(file="data/fromR/to_predict.RDA")
 
-head(tofit)
-names(tofit)
-tofit<-tofit %>% group_by(genus, species) %>%
+
+tofit<-indi %>% group_by(genus, species) %>%
   mutate(maxlat = max(latitude, na.rm =T)
          , minlat = min(latitude, na.rm = T)
          , maxlon = max(longitude, na.rm = T)

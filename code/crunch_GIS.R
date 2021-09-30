@@ -284,6 +284,15 @@ old_LULC<-map(lulc_shape, function(yr){
 })
 
 
+# do I have slope data?
+
+
+slope<-raster("data/GIS_downloads/slope.tif")
+
+pslope<-projectRaster(slope, crs = my_pr)
+
+slope_points<-raster::extract(pslope, sfed)
+
 # merge chelsa with occurrence
 # clim_stat <- left_join(good_coords, chelsa_points
 #                        , by = c("decimalLatitude" = "latitude"
@@ -301,7 +310,7 @@ chel_sf<-st_as_sf(chelsa_points
          , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
 
-chel_LU<-chel_sf %>% mutate(LU2013 = LU_reduction, LC2013 = LC_reduction) 
+chel_LU<-chel_sf %>% mutate(LU2013 = LU_reduction, LC2013 = LC_reduction, slope = slope_points) 
 alldat<-chel_LU %>% st_join(old_LULC[[1]]) %>% st_join(old_LULC[[2]]) %>% st_join(old_LULC[[3]] %>% filter(!is.na(OBJECTID)))
 str(alldat)
 
@@ -314,4 +323,6 @@ obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitu
 
 
 indi<-st_join(nona, obs)
+save(indi, file="data/fromR/to_predict.RDA")
 took<-Sys.time()-beg
+took

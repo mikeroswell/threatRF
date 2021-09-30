@@ -90,12 +90,6 @@ withstats2<-withstats %>%
 
 
 data.table::fwrite(withstats2, "data/fromR/lfs/plants_with_status.csv", row.names = F)
-#####################################
-# explore bioclim data
-
-# play with clim_stat
-names(chelsa_points[,2:])
-names(clim_stat)
 
 
 
