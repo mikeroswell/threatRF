@@ -42,14 +42,9 @@ allco<-st_as_sf(map_dfr(statbord, function(co){
 
 
 
-my_ext<-extent(allco)
-# extr<-extend(rerast[[1]], extent(allco))
+# my_ext<-extent(allco)
 
-par(mfrow(c(1,2)))
-plot(extr)
-plot(rerast[[1]])
-# make a key of counties with GEOID to match the rasters. This should work for
-# the 2013 LU rasters, not sure if it will also work for LC.
+
 
 ####################################
 # load the land use 2013 dataset, for now this is a test of workflow
@@ -66,31 +61,11 @@ LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
 
 # do similar for the land cover
 LC2013_layrs <- list.dirs("data/GIS_downloads/LC2013")
-LC2013_trim<-LC2013_layrs[grepl("data/GIS_downloads/LC2013/.*/.*.", LC2013_layrs)]
-LC2013_trim
-
-# LC_test<-raster::raster("data/GIS_downloads/LC2013/ALLE_24001/ALLE_24001/ALLE_24001.img")
-
 
 LC_tifs <- unlist(map(LC2013_layrs, function(dr){
   list.files(dr, pattern = "*.img$")
 }))
 
-LC_tifs_full<-unlist(map(1:length(LC2013_trim), function(county){
-  paste0(LC2013_trim[county], "/", LC_tifs[county])
-}))
-
-LC_rast<-map(LC_tifs_full[1:24], function(rfile){
-  print(rfile)
-  raster(rfile)
-})
-
-
-# do similar for the land cover
-LC2013_layrs <- list.dirs("data/GIS_downloads/LC2013")
-
-
-LC_test<-raster::raster("data/GIS_downloads/LC2013/ALLE_24001/ALLE_24001/ALLE_24001.img")
 
 LC_tifs <- unlist(map(LC2013_layrs, function(dr){
   list.files(dr, pattern = ".img$", full.names =T)
@@ -98,19 +73,15 @@ LC_tifs <- unlist(map(LC2013_layrs, function(dr){
 
 
 
-LC_rast<-map(LC_tifs, function(rfile){
-  print(rfile)
-  raster(rfile)
-})
-
-
-
-cokey<-data.frame(LU_tifs) %>% 
-  separate(LU_tifs, into= c("first_four", "GEOID", "crap"), sep = "_") %>% 
-  rownames_to_column(var="rasterID")
-
-# add the new data back to allco
-allco<-allco %>% left_join(cokey)
+# # make a key of counties with GEOID to match the rasters. This should work for
+# # the 2013 LU rasters, not sure if it will also work for LC.
+# 
+# cokey<-data.frame(LU_tifs) %>% 
+#   separate(LU_tifs, into= c("first_four", "GEOID", "crap"), sep = "_") %>% 
+#   rownames_to_column(var="rasterID")
+# 
+# # add the new data back to allco
+# allco<-allco %>% left_join(cokey)
 
 # determine which county each point sits in (no buffer)
 sfed<-st_as_sf(localities
@@ -118,49 +89,46 @@ sfed<-st_as_sf(localities
                , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
 
-# this takes ~4 seconds on laptop
-tic()
-withco<-st_join(sfed, allco)
-toc()
+# # this takes ~4 seconds on laptop
+# tic()
+# withco<-st_join(sfed, allco)
+# toc()
 
 
-# try adding buffer!
-# about 6 secs on laptop
-tic()
-mybufs<-st_buffer(sfed, dist = 1000)
-toc()
+# # try adding buffer!
+# # about 6 secs on laptop
+# tic()
+# mybufs<-st_buffer(sfed, dist = 1000)
+# toc()
 
-# about 35 seconds on laptop
-tic()
-bufcos<-st_intersects(mybufs, allco)
-toc()
-
-co_combs<-unique(bufcos) # unique combinations of counties
-
-
-#this all seems like it is working. maybe map to see if it's right!
-# ggplot(allco) +
-#   geom_sf() +
-#   theme_classic() +
-#   geom_sf(data = mybufs, color = "red")
-
-# looks basically right. There are some weird points that are very far from the state of Maryland, and also some that appear to be slightly outside. I'm not going to worry about it for now, as I'm pretty fired up that this is working at all!
+# # about 35 seconds on laptop
+# tic()
+# bufcos<-st_intersects(mybufs, allco)
+# toc()
+# 
+# co_combs<-unique(bufcos) # unique combinations of counties
 
 
 # this is where the LU tifs actually get loaded into R's brain
-plan(strategy = "multiprocess", workers = 3)
+
 tic()
-future_map(LU_tifs_full, function(lyr){
+map(LU_tifs_full, function(lyr){
   rast = raster(lyr)
   if(projection(rast)==my_pr){
-    writeRaster(extend(rast, extent(allco)), filename = lyr, overwrite = T)
+    return(rast)
   }
   else{print(paste(lyr, "has messed up projection info, it is", projection(rast), "should be", my_proj))}
   # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
 })
 toc()
 
+LC_rast<-map(LC_tifs, function(rfile){
+  print(rfile)
+  raster(rfile)
+})
+
 # extract points (this is simple)
+# this workflow is fine. More elegant parallelization migth be available with clusterR
 plan(strategy = "multiprocess", workers = 6)
 tic()
 LU_extraction<-future_map(rerast, .options = furrr_options(packages = "sf"), function(co){
@@ -168,72 +136,31 @@ LU_extraction<-future_map(rerast, .options = furrr_options(packages = "sf"), fun
 })
 toc()
 
-plan(strategy = "multiprocess", workers = 6)
+
 tic()
 LC_extraction<-future_map(LC_rast, .options = furrr_options(packages = "sf"), function(co){
   raster::extract(co, sfed)
 })
 toc()
 
-tic()
-trystack<-raster::stack(rerast, tolerance =0.5)
-toc()
-
-
-
 tomin<-function(x){do.call(pmin.int, c(x, na.rm=TRUE))}
 
 
-
+# there is a chance that some points correspond to tiles on multiple rasters. Arbitrarily pick one. This is probably handled elegantly in a more idiomatic workflow.
 LC_reduction<-tomin(LC_extraction)
 LU_reduction <- tomin(LU_extraction)
 # <2 min
 
-per_co<-map(LU_extraction, function(co){
-  sum(complete.cases(co))
-})
 
 
-sum(unlist(per_co)) # actually a bit bigger than total number of points, i.e. either some points fall into multiple county rasters or an error. Ignore for now. 
+# # try again to make a mosaic with all the points
+# moser <- function(rast_list, tolerance, funlist){
+#   rast_list$tolerance = tolerance
+#   # rast_list$na.rm =T
+#   rast_list$fun = funlist
+#   do.call(mosaic, rast_list)
+# }
 
-# try again to make a mosaic with all the points
-moser <- function(rast_list, tolerance, funlist){
-  rast_list$tolerance = tolerance
-  # rast_list$na.rm =T
-  rast_list$fun = funlist
-  do.call(mosaic, rast_list)
-}
-# made the moser equation maybe simpler, testing again
-tic()
-mosTest<-moser(rast_list = c(rerast[[1]], rerast[[2]]), tolerance = 0.5, funlist = "min")
-toc()
-
-#going nowhere on this so far.
-tic()
-big_mos<-moser(rast_list = rerast, tolerance = 0.5, funlist = "min")
-toc()
-# do I need merge?
-tic()
-test_merge <- merge(rerast[[1]], rerast[[2]], tolerance = 0.5, fun = "min")
-toc()
-# multco<-c(3,5)
-# 
-# allco[c(multco),]
-# 
-# 
-# # this is working to make the mosaic. Setting tolerance quite high seems to be the trick. 
-tic()
-test_mos<-mosaic(rerast[[1]], rerast[[2]], tolerance = 0.5, fun = "min")
-toc()
-
-tic()
-crop_first<-raster::stack(raster::extend(rerast[[1]], raster::extent(allco)), raster::extend(rerast[[2]], raster::extent(allco)), tolerance = 0.5, fun = "min" )
-toc()
-
-# 31037.159 sec elapsed
-# that's a long long time. Yikes.
-# 
-# allco$COUNTYFP
 
 # plan(strategy = "multiprocess", workers = 4)
 tic()
