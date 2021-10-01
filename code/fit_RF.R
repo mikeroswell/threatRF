@@ -82,13 +82,37 @@ plot(noname_RF_training)
 noname_RF_preds<- predict(noname_RF_training, newdata = tofit_complete %>% filter(simple_status =="NONE"))
 summary(noname_RF_preds)
 str(noname_RF_preds)
-with_preds<-bind_cols(tofit_complete %>% filter(simple_status =="NONE"), noname_RF_preds)
+with_preds<-bind_cols(tofit_complete %>% filter(simple_status =="NONE"), predicted=noname_RF_preds) %>% droplevels()
 
-
-prediction_rates = with_preds %>% group_by(genus, species) %>% summarize(records = n(), threatrate = sum(noname_RF_preds =="threatened")/n())
-prediction_rates %>% ggplot(aes(records, threatrate))+
+threatrate <- function(x){sum(x$predicted=="threatened")/length(x$predicted)}
+prediction_rates = with_preds %>% group_by(genus, species) %>% dplyr::summarize(records = n(), tr =threatrate(.) ) 
+prediction_rates %>% ggplot(aes(records,tr))+
+  geom_point(alpha = 0.5) +
   scale_x_log10()+
-  scale_y_log10()+
-  geom_jitter()+
   theme_classic()
 
+
+includes_training<-predict(first_RF_training, newdata = tofit_complete)
+
+all_pred<-tofit_complete %>% bind_cols(pred_stat = includes_training)
+
+get_a_picture<-all_pred %>% group_by(genus, species, simple_status) %>% summarize(agree = sum(as.character(pred_stat) == as.character(simple_status))/n(), frequency_threatened = sum(pred_stat =="threatened")/n(), n_obs= n())
+
+get_a_picture %>% ggplot(aes(simple_status, frequency_threatened, color = log(n_obs)))+
+  ggbeeswarm::geom_quasirandom( dodge.width = 0.9, alpha = 0.9, size = 1.2)+
+  theme_classic() +
+  scale_color_viridis_c()
+
+
+geta
+
+includes_training<-predict(noname_RF_training, newdata = tofit_complete)
+
+all_pred<-tofit_complete %>% bind_cols(pred_stat = includes_training)
+
+get_a_picture<-all_pred %>% group_by(genus, species, simple_status) %>% summarize(agree = sum(as.character(pred_stat) == as.character(simple_status))/n(), p_t = sum(pred_stat =="threatened")/n(), obs= n())
+
+get_a_picture %>% ggplot(aes(simple_status, p_t, color = log(obs)))+
+  ggbeeswarm::geom_quasirandom( dodge.width = 0.9, size = 0.7)+
+  theme_classic() +
+  scale_color_viridis_c()
