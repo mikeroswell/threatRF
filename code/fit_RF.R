@@ -5,7 +5,7 @@ library(randomForest)
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 
 load(file="data/fromR/to_predict.RDA")
-unique(indi$roundedSRank)
+# unique(indi$roundedSRank)
 
 tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
                               lon = sf::st_coordinates(.)[,2]) %>% 
@@ -16,6 +16,7 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          , minlon = min(lon, na.rm = T)
          , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
                                    , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))) %>% 
+  filter(!exotic) %>% 
   sf::st_drop_geometry()
 
 
@@ -24,14 +25,10 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
 
 
 
-tofit_trimmed<-tofit %>% 
-  ungroup %>% 
-  select(-c(  ))
-
 
 names(tofit)<-gsub("\\.", "A", names(tofit))
 
-predictors<-  names(tofit)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
+predictors<-  names(tofit)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "exotic", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
 
 
 
@@ -52,15 +49,12 @@ first_RF_training <- randomForest(as.formula(paste0("simple_status ~ ", paste(pr
 
 first_RF_training
 plot(first_RF_training)
-data.frame(first_RF_training$importance) %>% arrange(desc(MeanDecreaseGini))
+data.frame(first_RF_training$importance) %>% arrange(desc(MeanDecreaseAccuracy))
+
+data.frame(first_RF_training$importance) %>% arrange(desc(MeanDecreaseAccuracy))
 pdf("figures/toy_model_variable_importance.pdf")
 varImpPlot(first_RF_training)
 dev.off()
-
-first_RF_preds<- predict(first_RF_training, newdata = tofit_complete %>% filter(simple_status =="NONE"))
-summary(first_RF_preds)
-str(first_RF_preds)
-with_preds<-bind_cols(tofit_complete %>% filter(simple_status =="NONE"), first_RF_preds)
 
 
 # get rid of variables that work as species names
@@ -114,7 +108,7 @@ phigh<-predict(first_RF_training, newdata = tofit_complete)
 plow<-predict(noname_RF_training, newdata = tofit_complete)
 pname<-predict(withname_RF_training, newdata = tofit_complete)
 
-all_pred<-tofit_complete %>% bind_cols(phigh_stat = phigh, plow_stat = plow)
+all_pred<-tofit_complete %>% bind_cols(phigh_stat = phigh) # , plow_stat = plow)
 
 get_a_picture <- function(x, prediction){
   print(prediction)
@@ -131,7 +125,7 @@ picture<-function(df){df %>% ggplot(aes(simple_status, frequency_threatened, col
   scale_color_viridis_c()}
 
 pdf("figures/threat_prediction_frequency.pdf")
-picture(get_a_picture("phigh_stat"))
+picture(get_a_picture(all_pred, "phigh_stat"))
 dev.off()
 
 # make some maps
@@ -143,10 +137,58 @@ resf<-sf::st_as_sf(all_pred
 fancy_sf<-resf %>%  group_by(genus, species, simple_status) %>%   
   mutate(agree = sum(as.character(phigh_stat) == as.character(simple_status))/n()
             , frequency_threatened = sum(phigh_stat =="threatened")/n()
-            , n_obs= n()
-         , best_guess = if_else(simple_status =="NONE", phigh_stat, simple_status))
+            , n_obs= n() ) %>% 
+           ungroup() %>% 
+         mutate(status_guess = if_else(as.character(simple_status) =="NONE", paste("predicted", as.character(phigh_stat), sep = "_"), as.character(simple_status)))
 
-fancy_sf %>% ggplot(aes(color = best_guess))+
-  geom_sf(size = 1, alpha =0.8) +
+table(fancy_sf$status_guess)
+pdf("figures/prediction_map.pdf")
+fancy_sf %>% ggplot(aes(color = status_guess))+
+  geom_sf(size = 0.7) +
   theme_classic() +
+  scale_color_brewer(palette = "Dark2") +
+  theme(legend.position = "bottom")
+  
+dev.off()
+
+sum_tab<-get_a_picture(all_pred, "phigh_stat") %>% group_by(genus, species, simple_status, n_obs, frequency_threatened) %>% 
+  summarize(n()) %>% arrange(desc(frequency_threatened)) 
+
+sum_tab %>% filter(simple_status =="NONE") %>% group_by(genus) %>% summarize(mft = mean(frequency_threatened), spp = n()) %>% ggplot(aes(spp, mft))+geom_point()+theme_class
+
+all_pred %>% ggplot(aes(slope, phigh, color=simple_status))+
+  geom_jitter(height = 0.1, width =10)+
+  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
+  theme_classic()+
   scale_color_viridis_d()
+
+pdf("figures/bioclim7_matters.pdf")
+all_pred %>% ggplot(aes(bioclim7, phigh, color=simple_status))+
+  geom_jitter(alpha = 0.6)+
+  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
+  theme_classic()+
+  scale_color_viridis_d()+
+  labs(x = "annual temperature range", y = "predicted status", color = "input status")
+dev.off()
+
+pdf("figures/slope_matters.pdf")
+all_pred %>% ggplot(aes(slope, phigh, color=simple_status))+
+  geom_jitter(alpha = 0.6)+
+  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
+  theme_classic()+
+  scale_color_viridis_d()+
+  labs(x = "slope", y = "predicted status", color = "input status")
+dev.off()
+
+pdf("figures/hottest_month.pdf")
+all_pred %>% ggplot(aes(bioclim5, phigh, color=simple_status))+
+  geom_jitter(alpha = 0.6)+
+  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
+  theme_classic()+
+  scale_color_viridis_d()+
+  labs(x = "temps of hottest month", y = "predicted status", color = "input status")
+dev.off()
+
+
+head(sum_tab)
+View(sum_tab)

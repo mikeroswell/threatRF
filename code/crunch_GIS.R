@@ -316,7 +316,7 @@ str(alldat)
 
 nona<-alldat %>% drop_na() %>% st_as_sf()
 
-obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species)
+obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species, exotic = exotic...17)
          , coords = c("lon",  "lat")
          , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
