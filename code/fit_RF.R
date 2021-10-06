@@ -17,7 +17,8 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
                                    , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))) %>% 
   filter(!exotic) %>% 
-  sf::st_drop_geometry()
+  sf::st_drop_geometry() %>% 
+  mutate(Random_Pred = runif(1))
 
 
 # tofit %>% mutate(gs = paste(genus, species, sep = "_")) %>% group_by(simple_status) %>% summarize(genera = n_distinct(genus), spp = n_distinct(gs))
@@ -33,7 +34,7 @@ predictors<-  names(tofit)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", 
 
 
 
-tofit_complete<-tofit %>% drop_na(eval(predictors))
+tofit_complete<-tofit %>% drop_na(eval(predictors)) 
 # tofit_complete %>% filter(simple_status %in% c("threatened", "secure")) %>% droplevels() %>% group_by(simple_status) %>% summarize(n())
 
 
@@ -41,7 +42,7 @@ first_RF_training <- randomForest(as.formula(paste0("simple_status ~ ", paste(pr
                            
                          , data = tofit_complete %>% filter(simple_status %in% c("threatened", "secure")) %>% droplevels()
                          # , ytest = c("threat", "secure")
-                         , importance=TRUE
+                         , importance = TRUE
                          , na.action = na.exclude
                          , type = "classification"
 )
@@ -51,10 +52,21 @@ first_RF_training
 plot(first_RF_training)
 data.frame(first_RF_training$importance) %>% arrange(desc(MeanDecreaseAccuracy))
 
-data.frame(first_RF_training$importance) %>% arrange(desc(MeanDecreaseAccuracy))
-pdf("figures/toy_model_variable_importance.pdf")
-varImpPlot(first_RF_training)
+data.frame(first_RF_training$importanceSD) %>% arrange(desc(MeanDecreaseAccuracy))
+
+first_RF_training$importanceSD
+
+pdf("figures/var_importance.pdf")
+varImpPlot(first_RF_training, n.var = 7, main = "variable importance vs. random predictor")
 dev.off()
+
+sd(tofit_complete$bioclim7)
+sd(tofit_complete$bioclim5)
+
+
+
+data.frame(importance(first_RF_training)) %>% arrange(desc(MeanDecreaseAccuracy))
+first_RF_training$importance/first_RF_training$importanceSD
 
 
 # get rid of variables that work as species names
