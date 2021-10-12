@@ -19,7 +19,9 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
   filter(!exotic) %>% 
   sf::st_drop_geometry() %>% 
   mutate(Random_Pred = runif(1))
-
+mu<-function(x){ifelse(is.numeric(x), mean(x, na.rm =T), x[1])}
+sig<- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), x[1])}
+tofit_summary <-tofit%>% group_by(genus, species) %>% summarize_all(.funs = c("mu", "sig"))
 
 # tofit %>% mutate(gs = paste(genus, species, sep = "_")) %>% group_by(simple_status) %>% summarize(genera = n_distinct(genus), spp = n_distinct(gs))
 
@@ -27,7 +29,9 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
 
 
 
-names(tofit)<-gsub("\\.", "A", names(tofit))
+# names(tofit)<-gsub("\\.", "A", names(tofit))
+
+names(tofit_summary)<-gsub("\\.", "A", names(tofit_summary))
 
 predictors<-  names(tofit)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "exotic", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
 
@@ -35,6 +39,8 @@ predictors<-  names(tofit)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", 
 
 
 tofit_complete<-tofit %>% drop_na(eval(predictors)) 
+
+tofit_summary_commplete<-tofit_summary %>% drop_na()
 # tofit_complete %>% filter(simple_status %in% c("threatened", "secure")) %>% droplevels() %>% group_by(simple_status) %>% summarize(n())
 
 
@@ -46,6 +52,18 @@ first_RF_training <- randomForest(as.formula(paste0("simple_status ~ ", paste(pr
                          , na.action = na.exclude
                          , type = "classification"
 )
+
+summarized_RF_training <- randomForest(as.formula(paste0("as.factor(simple_status_mu) ~ ", paste(names(tofit_summary_commplete)[!(grepl("status", names(tofit_summary_commplete))|grepl("Rank", names(tofit_summary_commplete)))], collapse= "+")))
+                                  
+                                  , data = tofit_summary_commplete %>% filter(simple_status_mu %in% c(2,3)) %>% droplevels()
+                                  # , ytest = c("threat", "secure")
+                                  , importance = TRUE
+                                  , na.action = na.exclude
+                                  , type = "classification"
+)
+
+summarized_RF_training
+varImpPlot(summarized_RF_training)
 
 
 first_RF_training
@@ -59,6 +77,7 @@ first_RF_training$importanceSD
 pdf("figures/var_importance.pdf")
 varImpPlot(first_RF_training, n.var = 7, main = "variable importance vs. random predictor")
 dev.off()
+
 
 sd(tofit_complete$bioclim7)
 sd(tofit_complete$bioclim5)
@@ -114,7 +133,9 @@ varImpPlot(noname_RF_training)
 dev.off()
 
 
-
+presum<-predict(summarized_RF_training, newdata = tofit_summary_commplete)
+simple_pred<-tofit_summary_commplete %>% bind_cols(presum)
+predictions_from_summary<-tofit %>% left_join(tofit_summary_commplete %>% bind_cols(presum=presum))
 
 phigh<-predict(first_RF_training, newdata = tofit_complete)
 plow<-predict(noname_RF_training, newdata = tofit_complete)
@@ -131,6 +152,14 @@ get_a_picture <- function(x, prediction){
               , n_obs= n())
 }
 
+simple_pred %>% ggplot(aes(as.factor(simple_status_mu), presum))+
+  ggbeeswarm::geom_beeswarm()+
+  theme_classic()
+
+simple_pred %>% ggplot(aes(as.factor(simple_status_mu), presum))+
+  geom_violin()+
+  theme_classic()
+
 picture<-function(df){df %>% ggplot(aes(simple_status, frequency_threatened, color = log(n_obs)))+
   ggbeeswarm::geom_quasirandom( dodge.width = 0.9, alpha = 0.9, size = 1.2)+
   theme_classic() +
@@ -140,11 +169,20 @@ pdf("figures/threat_prediction_frequency.pdf")
 picture(get_a_picture(all_pred, "phigh_stat"))
 dev.off()
 
+
+
+picture(get_a_picture(predictions_from_summary, "presum"))
 # make some maps
 
 resf<-sf::st_as_sf(all_pred
                    , coords = c("lat", "lon")
                    , crs = "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs")
+
+
+resf_sum<-sf::st_as_sf(predictions_from_summary
+                   , coords = c("lat", "lon")
+                   , crs = "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs")
+
 
 fancy_sf<-resf %>%  group_by(genus, species, simple_status) %>%   
   mutate(agree = sum(as.character(phigh_stat) == as.character(simple_status))/n()
@@ -160,7 +198,23 @@ fancy_sf %>% ggplot(aes(color = status_guess))+
   theme_classic() +
   scale_color_brewer(palette = "Dark2") +
   theme(legend.position = "bottom")
-  
+
+pdf("figures/predictions_at_species_level.pdf")
+resf_sum %>% filter(!is.na(presum)) %>% 
+  mutate(status_guess = if_else(as.character(simple_status) =="NONE", paste("predicted", c("threatened", "secure")[presum], sep = "_"), as.character(simple_status))) %>%  
+  ggplot(aes(color =status_guess))+
+  geom_sf(size = 0.7) +
+  scale_color_brewer(palette = "Dark2") +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+dev.off()
+
+
+resf_sum %>% ggplot(aes(bioclim3_sig, presum, color = simple_status))+geom_point()+theme_classic()
+resf_sum %>% ggplot(aes(bioclim4_sig, presum, color = simple_status))+geom_point()+theme_classic()
+
+
 dev.off()
 
 sum_tab<-get_a_picture(all_pred, "phigh_stat") %>% group_by(genus, species, simple_status, n_obs, frequency_threatened) %>% 

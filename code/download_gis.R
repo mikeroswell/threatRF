@@ -50,9 +50,11 @@ download.file("https://lidar.geodata.md.gov/imap/rest/services/Statewide/MD_stat
 #super high res rasters for Land Use from Chesapeake Conservancy
 download.file("https://cicwebresources.blob.core.windows.net/cbp-1m-lu-2013/data/Maryland_1m_LU.zip"
               , "data/GIS_downloads/LU2013", timeout = 900) #longer timeout for huge files.
+# 20211012 this faiiled, need to check it out
 
 download.file("https://cicwebresources.blob.core.windows.net/chesapeakebaylandcover/MD/_MD_STATEWIDE.zip"
               , "data/GIS_downloads/LC2013", timeout = 900)
+# 20211012 this faiiled, need to check it out
 
 
 # unzip files
