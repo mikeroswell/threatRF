@@ -52,29 +52,31 @@ allco<-st_as_sf(map_dfr(statbord, function(co){
 
 ####################################
 # load the land use 2013 dataset, for now this is a test of workflow
-LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
-
-LU_tifs <- unlist(map(LU2013_layrs, function(dr){
-  list.files(dr, pattern = "*LandUse.tif$")
-}))
-
-LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
-  paste0(LU2013_layrs[county], "/", LU_tifs[county])
-}))
 
 
-# do similar for the land cover
-LC2013_layrs <- list.dirs("data/GIS_downloads/LC2013")
-
-LC_tifs <- unlist(map(LC2013_layrs, function(dr){
-  list.files(dr, pattern = "*.img$")
-}))
-
-
-LC_tifs <- unlist(map(LC2013_layrs, function(dr){
-  list.files(dr, pattern = ".img$", full.names =T)
-}))
-
+# LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
+# 
+# LU_tifs <- unlist(map(LU2013_layrs, function(dr){
+#   list.files(dr, pattern = "*LandUse.tif$")
+# }))
+# 
+# LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
+#   paste0(LU2013_layrs[county], "/", LU_tifs[county])
+# }))
+# 
+# 
+# # do similar for the land cover
+# LC2013_layrs <- list.dirs("data/GIS_downloads/LC2013")
+# 
+# LC_tifs <- unlist(map(LC2013_layrs, function(dr){
+#   list.files(dr, pattern = "*.img$")
+# }))
+# 
+# 
+# LC_tifs <- unlist(map(LC2013_layrs, function(dr){
+#   list.files(dr, pattern = ".img$", full.names =T)
+# }))
+# 
 
 
 # # make a key of counties with GEOID to match the rasters. This should work for
@@ -113,97 +115,39 @@ sfed<-st_as_sf(localities
 # co_combs<-unique(bufcos) # unique combinations of counties
 
 
-# this is where the LU tifs actually get loaded into R's brain
+# this is where the 2013  LU/LC tifs actually get loaded into R's brain
+LC2013<-raster("data/GIS_downloads/LC2013_unzipped/MD_STATEWIDE.tif")
+# verify projection
+projection(LC2013)==my_pr
 
+LU2013<-raster("data/GIS_downloads/LU2013_unzipped/Maryland_1m_LU.tif")
+projection(LC2013)==my_pr
+
+# tic()
+# rerast<-map(LU_tifs_full, function(lyr){
+#   rast = raster(lyr)
+#   if(projection(rast)==my_pr){
+#     return(rast)
+#   }
+#   else{print(paste(lyr, "has messed up projection info, it is", projection(rast), "should be", my_proj))}
+#   # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
+# })
+# toc()
+# 
+# LC_rast<-map(LC_tifs, function(rfile){
+#   print(rfile)
+#   raster(rfile)
+# })
 tic()
-rerast<-map(LU_tifs_full, function(lyr){
-  rast = raster(lyr)
-  if(projection(rast)==my_pr){
-    return(rast)
-  }
-  else{print(paste(lyr, "has messed up projection info, it is", projection(rast), "should be", my_proj))}
-  # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
-})
+LC2013_points<-raster::extract(LC2013, sfed)
 toc()
 
-LC_rast<-map(LC_tifs, function(rfile){
-  print(rfile)
-  raster(rfile)
-})
-
-# extract points (this is simple)
-# this workflow is fine. More elegant parallelization migth be available with clusterR
-plan(strategy = "multiprocess", workers = 6)
 tic()
-LU_extraction<-future_map(rerast, .options = furrr_options(packages = "sf"), function(co){
-  raster::extract(co, sfed)
-})
-toc()
-
-
-tic()
-LC_extraction<-future_map(LC_rast, .options = furrr_options(packages = "sf"), function(co){
-  raster::extract(co, sfed)
-})
+LU2013_points<- raster::extract(LU2013, sfed)
 toc()
 
 tomin<-function(x){do.call(pmin.int, c(x, na.rm=TRUE))}
 
-
-# there is a chance that some points correspond to tiles on multiple rasters. Arbitrarily pick one. This is probably handled elegantly in a more idiomatic workflow.
-LC_reduction<-tomin(LC_extraction)
-LU_reduction <- tomin(LU_extraction)
-# <2 min
-
-
-
-# # try again to make a mosaic with all the points
-# moser <- function(rast_list, tolerance, funlist){
-#   rast_list$tolerance = tolerance
-#   # rast_list$na.rm =T
-#   rast_list$fun = funlist
-#   do.call(mosaic, rast_list)
-# }
-
-
-# # plan(strategy = "multiprocess", workers = 4)
-# tic()
-# co_mos <- map(co_combs
-#               # , .options = furrr_options(packages = "sf")
-#               , function(multco){
-#                 if(length(multco)>0){
-#                   rasters = allco[multco,]$rasterID
-#                   if(length(rasters)>0){
-#                     comprast = rasters[complete.cases(rasters)]
-#                     if(length(comprast)>1){
-#                       rlist = rerast[as.numeric(comprast)]
-#                       rlist$fun= min
-#                       rlist$na.rm = t
-#                       rlist$tolerance = 0.5
-#                       tryCatch(do.call(mosaic, rlist), error=function(e){print(paste("this combo failed", multco))})
-#                     }
-#                     
-#                     if(length(comprast)==1){
-#                       rerast[[comprast]]}
-#                   }
-#                   else{print(multco)
-#                     return(list())}
-#                 }
-#                 
-#                 else{print(multco)
-#                   return(list())}
-#               })
-# toc()
-
-# this was a plot for a single county
-# pdf("figures/test_reproj.pdf")
-# rasterVis::gplot(first_reproj)+
-#   geom_tile(aes(fill=value))+
-#   theme_classic() +
-#   layer_spatial(sped)
-# # xlim(-80, -72) +
-# # ylim(32, 45)
-# dev.off()
 
 # CHELSA back in this file
 #make a raster stack
