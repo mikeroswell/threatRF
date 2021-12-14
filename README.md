@@ -23,3 +23,8 @@ have not installed git lfs. For more information on git lfs, see
 December 14 2021 re-downloaded GIS layers... not because the data changed, but
 because some statewide datasets were actually available. I ran into issues with
 the macos archive utility but using `unzip` version 6.0 worked just fine.
+
+Seems like there are some basic issues with lining up the CC datasets and the aryalnd LULC data, won't be easy to classify changes from these data. NLCD has 
+pre-existing change classes which might mean it is a good dataset for exploration, which is what this is. 
+
+Deleting the 2013 CC dataset. Likely to do same with LULC from state of MD
