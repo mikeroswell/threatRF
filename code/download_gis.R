@@ -4,7 +4,7 @@ library(sp)
 library(rgdal)
 # raster has conflicts with dplyr.
 # library(raster) #working with raster data (has fancy things to load parts of file, process, move on)
-library(climatedata) #should be useful for downloading chelsa data programatically. Requires an update tho. Right now using chelsa v1 but should prob. use v2.
+# library(climatedata) #should be useful for downloading chelsa data programatically. Requires an update tho. Right now using chelsa v1 but should prob. use v2.
 source("code/get_chelsa_revised.R") #hand-edited version of main function that works fine
 
 # unique IDs for the layers I want
@@ -44,16 +44,16 @@ map(layers, function(x){
 # download.file("https://geodata.md.gov/imap/rest/services/%20PlanningCadastre/MD_PropertyData/MapServer/exts/MDiMapDataDownload/customLayers/0", "data/GIS_downloads/parcel")
 
 #slopes
-download.file("https://lidar.geodata.md.gov/imap/rest/services/Statewide/MD_statewide_slope_m/ImageServer/exportImage?bbox=182999.96769999713,26372.607708967,570465.2458305534,233618.1246000008"
-              , "data/GIS_downloads/slope")
-
+# download.file("https://lidar.geodata.md.gov/imap/rest/services/Statewide/MD_statewide_slope_m/ImageServer/exportImage?bbox=182999.96769999713,26372.607708967,570465.2458305534,233618.1246000008"
+#               , "data/GIS_downloads/slope")
+options(timeout = 900)
 #super high res rasters for Land Use from Chesapeake Conservancy
 download.file("https://cicwebresources.blob.core.windows.net/cbp-1m-lu-2013/data/Maryland_1m_LU.zip"
-              , "data/GIS_downloads/LU2013", timeout = 900) #longer timeout for huge files.
+              , "data/GIS_downloads/LU2013.zip", ) #longer timeout for huge files.
 # 20211012 this faiiled, need to check it out
 
 download.file("https://cicwebresources.blob.core.windows.net/chesapeakebaylandcover/MD/_MD_STATEWIDE.zip"
-              , "data/GIS_downloads/LC2013", timeout = 900)
+              , "data/GIS_downloads/LC2013.zip", timeout = 900)
 # 20211012 this faiiled, need to check it out
 
 
@@ -63,62 +63,12 @@ zippy<- c(layers, "LU2013", "LC2013")
 
 map(zippy, function(fn){
   dir.create(paste0("data/GIS_downloads/", fn, "_unzipped" ))
-  unzip(paste0("data/GIS_downloads/", fn), exdir = paste0("data/GIS_downloads/", fn, "_unzipped"))
+  unzip(paste0("data/GIS_downloads/", fn), exdir = paste0("data/GIS_downloads/", fn, "_unzipped"), unzip = "/usr/bin/unzip")
   file.remove(paste0("data/GIS_downloads/", fn))
 })
 
-# chesapeake conservancy files
 
-# Land Cover first
-doc<-httr::GET("https://www.chesapeakeconservancy.org/conservation-innovation-center/high-resolution-data/land-cover-data-project/")
-
-CIC<-"https://cicwebresources.blob.core.windows.net/chesapeakebaylandcover/MD/"
-parsed<-XML::htmlParse(doc)
-links <- XML::xpathSApply(parsed, "//a/@href")
-todl<-links[grepl(CIC, links)]
-fns<-gsub(CIC, "", todl)
-
-dir.create("data/GIS_downloads/LC2013")
-map(todl, function(landcover){
-  short<-gsub(CIC, "", landcover)
-  newfile<-paste0("data/GIS_downloads/LC2013/", short )
-  tryCatch(download.file(landcover, destfile = newfile, timeout = 900), error= function(e){print(paste0(landcover, " did not download"))})
-  if(file.exists(newfile)){
-    unzip(newfile, exdir = gsub(".zip", "", newfile))
-  }
-  if(dir.exists(gsub(".zip", "", newfile))){
-    file.remove(newfile)
-    print(paste0("everything worked for ", short))
-  }
-})
-
-
-# land use second
-
-docLU<- httr::GET("https://www.chesapeakeconservancy.org/conservation-innovation-center/high-resolution-data/land-use-data-project/")
-
-CICLU<-"https://cicwebresources.blob.core.windows.net/cbp-1m-lu-2013/data/"
-
-parsedLU<-XML::htmlParse(docLU)
-linksLU <- XML::xpathSApply(parsedLU, "//a/@href")
-todlLU<-unlist(map(gsub(".zip", "", fns), function(counties){linksLU[grepl(counties, linksLU)]}))
-
-dir.create("data/GIS_downloads/LU2013/")
-map(todlLU, function(landuse){
-  fn<-gsub(CICLU, "", landuse)
-  newfile<-paste0("data/GIS_downloads/LU2013/", fn)
-  tryCatch(download.file(landuse, destfile = newfile), error= function(e){print(paste0(landuse, "did not download"))})
-  if(file.exists(newfile)){
-    unzip(newfile, exdir = gsub(".zip", "", newfile))
-  }
-  if(dir.exists(gsub(".zip", "", newfile))){
-    file.remove(newfile)
-    print(paste0("everything worked for ", fn))
-  }
-})
-
-
-##############################
+#############################
 # was in downlaod_plants but think at least some of this belongs in here and other parts in crunch_GIS to keep workflows distinct and load fewer packages and maybe less data at any given time.
 
 # get the climate data
