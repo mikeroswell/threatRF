@@ -254,7 +254,8 @@ chel_sf<-st_as_sf(chelsa_points
          , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
 
-chel_LU<-chel_sf %>% mutate(LU2013 = LU_reduction, LC2013 = LC_reduction, slope = slope_points) 
+chel_LU<-chel_sf %>% mutate(LU2013_points, LC2013_points
+                            , slope = slope_points) 
 alldat<-chel_LU %>% st_join(old_LULC[[1]]) %>% st_join(old_LULC[[2]]) %>% st_join(old_LULC[[3]] %>% filter(!is.na(OBJECTID)))
 str(alldat)
 

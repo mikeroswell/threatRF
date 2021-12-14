@@ -6,16 +6,16 @@ library(rgdal)
 # library(raster) #working with raster data (has fancy things to load parts of file, process, move on)
 # library(climatedata) #should be useful for downloading chelsa data programatically. Requires an update tho. Right now using chelsa v1 but should prob. use v2.
 source("code/get_chelsa_revised.R") #hand-edited version of main function that works fine
-
-# unique IDs for the layers I want
-LULC1973<-"e98677701fb547a695b2f650bb19f35e"
-LULC2002<-"96116be90edb4e8d933048f345c3a487"
-LULC2010<-"97717f333baf4e79abb7ab8098a99ee5"
+# 
+# # unique IDs for the layers I want
+# LULC1973<-"e98677701fb547a695b2f650bb19f35e"
+# LULC2002<-"96116be90edb4e8d933048f345c3a487"
+# LULC2010<-"97717f333baf4e79abb7ab8098a99ee5"
 # parcels <- "042c633a05df48fa8561f245fccdd750" # no dice with this one
 parcels <- "dc2d4fec9e814cb98b418babffec16a4"
 slope <- "9268765c1c6e468c880e98482673de63" # no dice with this one
 
-layers<- c("LULC2010", "LULC2002", "LULC2010", "parcels", "elevation")
+layers<- c( "parcels", "elevation")n# "LULC2010", "LULC2002", "LULC2010",
 
 getlayer <- function(x,y){
   download.file(paste0("http://data.imap.maryland.gov/datasets/", get(x), "_", y, ".zip")
@@ -46,20 +46,24 @@ map(layers, function(x){
 #slopes
 # download.file("https://lidar.geodata.md.gov/imap/rest/services/Statewide/MD_statewide_slope_m/ImageServer/exportImage?bbox=182999.96769999713,26372.607708967,570465.2458305534,233618.1246000008"
 #               , "data/GIS_downloads/slope")
-options(timeout = 900)
-#super high res rasters for Land Use from Chesapeake Conservancy
-download.file("https://cicwebresources.blob.core.windows.net/cbp-1m-lu-2013/data/Maryland_1m_LU.zip"
-              , "data/GIS_downloads/LU2013.zip", ) #longer timeout for huge files.
-# 20211012 this faiiled, need to check it out
-
-download.file("https://cicwebresources.blob.core.windows.net/chesapeakebaylandcover/MD/_MD_STATEWIDE.zip"
-              , "data/GIS_downloads/LC2013.zip", timeout = 900)
-# 20211012 this faiiled, need to check it out
+# options(timeout = 900)
+# #super high res rasters for Land Use from Chesapeake Conservancy
+# download.file("https://cicwebresources.blob.core.windows.net/cbp-1m-lu-2013/data/Maryland_1m_LU.zip"
+#               , "data/GIS_downloads/LU2013.zip", ) #longer timeout for huge files.
+# # 20211012 this faiiled, need to check it out
+# 
+# download.file("https://cicwebresources.blob.core.windows.net/chesapeakebaylandcover/MD/_MD_STATEWIDE.zip"
+#               , "data/GIS_downloads/LC2013.zip", timeout = 900)
+# # 20211012 this faiiled, problem was with unzip utility
 
 
 # unzip files
+# unlink("data/GIS_downloads/LC2013_unzipped/", recursive =T)
+# unlink("data/GIS_downloads/LU2013_unzipped/", recursive =T)
+# 
 
-zippy<- c(layers, "LU2013", "LC2013")
+
+zippy<- c(layers) #, "LU2013", "LC2013"
 
 map(zippy, function(fn){
   dir.create(paste0("data/GIS_downloads/", fn, "_unzipped" ))
