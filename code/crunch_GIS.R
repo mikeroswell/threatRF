@@ -16,14 +16,9 @@ my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +d
 # see what I can see with this NLCD data so far
 
 nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", pattern = "*tiff$")
-nlcd
-
 nlcd_stack<-raster::stack(
   c(sapply(nlcd, FUN = function(x){paste0("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", x)}))
 )
-
-
-raster::projection(nlcd_stack)
 
 
 # get the occcurence data
@@ -62,100 +57,21 @@ allco<-st_as_sf(map_dfr(statbord, function(co){
 # my_ext<-extent(allco)
 
 
-
-####################################
-# load the land use 2013 dataset, for now this is a test of workflow
-
-
-# LU2013_layrs <- list.dirs("data/GIS_downloads/LU2013")[-1]
-# 
-# LU_tifs <- unlist(map(LU2013_layrs, function(dr){
-#   list.files(dr, pattern = "*LandUse.tif$")
-# }))
-# 
-# LU_tifs_full<-unlist(map(1:length(LU2013_layrs), function(county){
-#   paste0(LU2013_layrs[county], "/", LU_tifs[county])
-# }))
-# 
-# 
-# # do similar for the land cover
-# LC2013_layrs <- list.dirs("data/GIS_downloads/LC2013")
-# 
-# LC_tifs <- unlist(map(LC2013_layrs, function(dr){
-#   list.files(dr, pattern = "*.img$")
-# }))
-# 
-# 
-# LC_tifs <- unlist(map(LC2013_layrs, function(dr){
-#   list.files(dr, pattern = ".img$", full.names =T)
-# }))
-# 
-
-
-# # make a key of counties with GEOID to match the rasters. This should work for
-# # the 2013 LU rasters, not sure if it will also work for LC.
-# 
-# cokey<-data.frame(LU_tifs) %>% 
-#   separate(LU_tifs, into= c("first_four", "GEOID", "crap"), sep = "_") %>% 
-#   rownames_to_column(var="rasterID")
-# 
-# # add the new data back to allco
-# allco<-allco %>% left_join(cokey)
-
-# determine which county each point sits in (no buffer)
 sfed<-st_as_sf(localities
                , coords = c('longitude', 'latitude')
                , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
 
-# # this takes ~4 seconds on laptop
-# tic()
-# withco<-st_join(sfed, allco)
-# toc()
-
-
-# # try adding buffer!
-# # about 6 secs on laptop
-# tic()
-# mybufs<-st_buffer(sfed, dist = 1000)
-# toc()
-
-# # about 35 seconds on laptop
-# tic()
-# bufcos<-st_intersects(mybufs, allco)
-# toc()
-# 
-# co_combs<-unique(bufcos) # unique combinations of counties
-
-
-
-# tic()
-# rerast<-map(LU_tifs_full, function(lyr){
-#   rast = raster(lyr)
-#   if(projection(rast)==my_pr){
-#     return(rast)
-#   }
-#   else{print(paste(lyr, "has messed up projection info, it is", projection(rast), "should be", my_proj))}
-#   # if getting different values for points based on poorly clipped rasters, may need to get the rasters to crop by the borders in `statbord`
-# })
-# toc()
-# 
-# LC_rast<-map(LC_tifs, function(rfile){
-#   print(rfile)
-#   raster(rfile)
-# })
 
 tic()
 nlcd_points<-raster::extract(nlcd_stack, sfed)
 toc()
-nlcd_point<-nlcd_points
-str(nlcd_point)
-colnames(nlcd_point)
-colnames(nlcd_point)<-gsub("NLCD_", ""
-                            , gsub("_L48_.*", "", colnames(nlcd_point) ))
-nlcd_point
 
-tomin<-function(x){do.call(pmin.int, c(x, na.rm=TRUE))}
+colnames(nlcd_points)<-gsub("NLCD_", ""
+                            , gsub("_L48_.*", "", colnames(nlcd_points) ))
+
+# tomin<-function(x){do.call(pmin.int, c(x, na.rm=TRUE))}
+
 
 
 # CHELSA back in this file
@@ -172,11 +88,7 @@ chelsa_matrix<-data.frame(raster::extract(focused, localities))
 names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
 chelsa_points<-bind_cols(localities, chelsa_matrix)
 
-rm(bc)
-rm(focused)
-rm(bounds)
-rm(localities)
-gc()
+
 # correlations not super low, deal with later
 # try_cors<-cor(chelsa_matrix, use = "na.or.complete")
 
@@ -215,28 +127,11 @@ gc()
 # })
 # 
 # just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
-
-
-# this loads the shape file into R's brain
-lulc_years<-c(1973, 2002, 2010)
-
-lulc_shape <- map(lulc_years, function(yr){
-  read_sf(paste0("data/GIS_downloads/LULC", yr, "_unzipped/")) %>% 
-    st_transform(crs = my_pr)
-})
-# there is a special data format for coordinates
-
-
-# this took a while, but it is extracting the land use categorization associated with each point. Should write down how long it actually takes
-
-# use st join for this
-old_LULC<-map(lulc_shape, function(yr){
-  st_join(sfed, yr) %>% select(-c( "COUNTY"
-                                  , "ShapeSTAre"
-                                  , "ShapeSTLen" ))
-})
-
-
+rm(bc)
+rm(focused)
+rm(bounds)
+rm(localities)
+gc()
 # do I have slope data?
 
 
@@ -258,17 +153,14 @@ slope_points<-raster::extract(pslope, sfed)
 #                                 , longitude = decimalLongitude)
 #                        , bind_cols(localities, lulc2010))
 
-chel_sf<-st_as_sf(chelsa_points
-         , coords = c('longitude', 'latitude')
-         , crs = "EPSG:4326") %>% 
-  st_transform(crs = st_crs(my_pr)) 
+mysf<-function(x){st_as_sf(x
+                           , coords = c('longitude', 'latitude')
+                           , crs = "EPSG:4326") %>% 
+    st_transform(crs = st_crs(my_pr)) }
+chel_sf<-mysf(chelsa_points)
 
-chel_LU<-chel_sf %>% mutate(LU2013_points, LC2013_points
-                            , slope = slope_points) 
-alldat<-chel_LU %>% st_join(old_LULC[[1]]) %>% st_join(old_LULC[[2]]) %>% st_join(old_LULC[[3]] %>% filter(!is.na(OBJECTID)))
-str(alldat)
-
-nona<-alldat %>% drop_na() %>% st_as_sf()
+nlcd_chel_sf<-bind_cols(chel_sf, nlcd_points) %>% 
+  mutate(slope = slope_points) 
 
 obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species, exotic = exotic...17)
          , coords = c("lon",  "lat")
@@ -276,7 +168,7 @@ obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitu
   st_transform(crs = st_crs(my_pr)) 
 
 
-indi<-st_join(nona, obs)
+indi<-st_join(nlcd_chel_sf, obs)
 save(indi, file="data/fromR/to_predict.RDA")
 took<-Sys.time()-beg
 took
