@@ -15,10 +15,9 @@ my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +d
 
 # see what I can see with this NLCD data so far
 
-nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", pattern = "*tiff$")
-nlcd_stack<-raster::stack(
-  c(sapply(nlcd, FUN = function(x){paste0("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", x)}))
-)
+nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", pattern = "*tiff$", full.names = T)
+nlcd_stack<-raster::stack(nlcd))
+
 
 
 # get the occcurence data
@@ -86,7 +85,7 @@ focused<-raster::crop(bc, bounds)
 # get the data
 chelsa_matrix<-data.frame(raster::extract(focused, localities))
 names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
-chelsa_points<-bind_cols(localities, chelsa_matrix)
+chelsa_points<-bind_cols(localities, chelsa_matrix, nlcd_points)
 
 
 # correlations not super low, deal with later

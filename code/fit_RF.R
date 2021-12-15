@@ -17,11 +17,12 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
                                    , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))) %>% 
   filter(!exotic) %>% 
-  sf::st_drop_geometry() %>% 
-  mutate(Random_Pred = runif(1))
-mu<-function(x){ifelse(is.numeric(x), mean(x, na.rm =T), x[1])}
-sig<- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), x[1])}
-tofit_summary <-tofit%>% group_by(genus, species) %>% summarize_all(.funs = c("mu", "sig"))
+  sf::st_drop_geometry()
+mu<-function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x))}
+sig<- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), length(unique(x)))}
+tofit_summary <-tofit%>% group_by(genus, species) %>%
+  summarize_all(.funs = c("mu", "sig")) %>% 
+    mutate(Random_Pred = runif(1))
 
 # tofit %>% mutate(gs = paste(genus, species, sep = "_")) %>% group_by(simple_status) %>% summarize(genera = n_distinct(genus), spp = n_distinct(gs))
 
@@ -31,31 +32,37 @@ tofit_summary <-tofit%>% group_by(genus, species) %>% summarize_all(.funs = c("m
 
 # names(tofit)<-gsub("\\.", "A", names(tofit))
 
-names(tofit_summary)<-gsub("\\.", "A", names(tofit_summary))
+# names(tofit_summary)<-gsub("\\.", "A", names(tofit_summary))
 
 predictors<-  names(tofit)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "exotic", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
 
 
 
 
-tofit_complete<-tofit %>% drop_na(eval(predictors)) 
+# tofit_complete<-tofit %>% drop_na(eval(predictors)) 
 
 tofit_summary_commplete<-tofit_summary %>% drop_na()
 # tofit_complete %>% filter(simple_status %in% c("threatened", "secure")) %>% droplevels() %>% group_by(simple_status) %>% summarize(n())
 
 
-first_RF_training <- randomForest(as.formula(paste0("simple_status ~ ", paste(predictors, collapse= "+")))
-                           
-                         , data = tofit_complete %>% filter(simple_status %in% c("threatened", "secure")) %>% droplevels()
-                         # , ytest = c("threat", "secure")
-                         , importance = TRUE
-                         , na.action = na.exclude
-                         , type = "classification"
-)
-
-summarized_RF_training <- randomForest(as.formula(paste0("as.factor(simple_status_mu) ~ ", paste(names(tofit_summary_commplete)[!(grepl("status", names(tofit_summary_commplete))|grepl("Rank", names(tofit_summary_commplete)))], collapse= "+")))
+# first_RF_training <- randomForest(as.formula(paste0("simple_status ~ ", paste(predictors, collapse= "+")))
+#                            
+#                          , data = tofit_complete %>% filter(simple_status %in% c("threatened", "secure")) %>% droplevels()
+#                          # , ytest = c("threat", "secure")
+#                          , importance = TRUE
+#                          , na.action = na.exclude
+#                          , type = "classification"
+# )
+# 
+summarized_RF_training <- randomForest(as.formula(paste0("as.factor(simple_status_mu) ~ "
+                                                         , paste(names(tofit_summary_commplete)[
+                                                           !(grepl("status", names(tofit_summary_commplete))
+                                                             |grepl("Rank", names(tofit_summary_commplete)))]
+                                                           , collapse= "+")))
                                   
-                                  , data = tofit_summary_commplete %>% filter(simple_status_mu %in% c(2,3)) %>% droplevels()
+                                  , data = tofit_summary_commplete 
+                                  %>% filter(simple_status_mu %in% c(2,3)) 
+                                  %>% droplevels()
                                   # , ytest = c("threat", "secure")
                                   , importance = TRUE
                                   , na.action = na.exclude
@@ -66,13 +73,12 @@ summarized_RF_training
 varImpPlot(summarized_RF_training)
 
 
-first_RF_training
-plot(first_RF_training)
-data.frame(first_RF_training$importance) %>% arrange(desc(MeanDecreaseAccuracy))
+plot(summarized_RF_training)
+data.frame(summarized_RF_training$importance) %>% arrange(desc(MeanDecreaseAccuracy))
 
 data.frame(first_RF_training$importanceSD) %>% arrange(desc(MeanDecreaseAccuracy))
 
-first_RF_training$importanceSD
+summarized_RF_training$importanceSD
 
 pdf("figures/var_importance.pdf")
 varImpPlot(first_RF_training, n.var = 7, main = "variable importance vs. random predictor")
