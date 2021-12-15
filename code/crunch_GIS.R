@@ -13,6 +13,19 @@ options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the 
 # Projection for rasters
 my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
 
+# see what I can see with this NLCD data so far
+
+nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", pattern = "*tiff$")
+nlcd
+
+nlcd_stack<-raster::stack(
+  c(sapply(nlcd, FUN = function(x){paste0("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", x)}))
+)
+
+
+raster::projection(nlcd_stack)
+
+
 # get the occcurence data
 withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
 # get the coordinates (may require additional manipulation)
@@ -115,13 +128,6 @@ sfed<-st_as_sf(localities
 # co_combs<-unique(bufcos) # unique combinations of counties
 
 
-# this is where the 2013  LU/LC tifs actually get loaded into R's brain
-LC2013<-raster("data/GIS_downloads/LC2013_unzipped/MD_STATEWIDE.tif")
-# verify projection
-projection(LC2013)==my_pr
-
-LU2013<-raster("data/GIS_downloads/LU2013_unzipped/Maryland_1m_LU.tif")
-projection(LC2013)==my_pr
 
 # tic()
 # rerast<-map(LU_tifs_full, function(lyr){
@@ -138,13 +144,16 @@ projection(LC2013)==my_pr
 #   print(rfile)
 #   raster(rfile)
 # })
-tic()
-LC2013_points<-raster::extract(LC2013, sfed)
-toc()
 
 tic()
-LU2013_points<- raster::extract(LU2013, sfed)
+nlcd_points<-raster::extract(nlcd_stack, sfed)
 toc()
+nlcd_point<-nlcd_points
+str(nlcd_point)
+colnames(nlcd_point)
+colnames(nlcd_point)<-gsub("NLCD_", ""
+                            , gsub("_L48_.*", "", colnames(nlcd_point) ))
+nlcd_point
 
 tomin<-function(x){do.call(pmin.int, c(x, na.rm=TRUE))}
 
@@ -271,3 +280,6 @@ indi<-st_join(nona, obs)
 save(indi, file="data/fromR/to_predict.RDA")
 took<-Sys.time()-beg
 took
+
+# this is how to remove temp files if needed
+# removeTmpFiles()
