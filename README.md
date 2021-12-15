@@ -20,11 +20,21 @@ have not installed git lfs. For more information on git lfs, see
 [here](https://git-lfs.github.com/). 
 
 # Notes to self
-December 14 2021 re-downloaded GIS layers... not because the data changed, but
+* December 14 2021 re-downloaded GIS layers... not because the data changed, but
 because some statewide datasets were actually available. I ran into issues with
 the macos archive utility but using `unzip` version 6.0 worked just fine.
 
-Seems like there are some basic issues with lining up the CC datasets and the aryalnd LULC data, won't be easy to classify changes from these data. NLCD has 
-pre-existing change classes which might mean it is a good dataset for exploration, which is what this is. 
+  Seems like there are some basic issues with lining up the CC datasets and the
+aryalnd LULC data, won't be easy to classify changes from these data. NLCD has
+pre-existing change classes which might mean it is a good dataset for
+exploration, which is what this is.
 
-Deleting the 2013 CC dataset. Likely to do same with LULC from state of MD
+  Deleting the 2013 CC dataset. Likely to do same with LULC from state of MD
+
+* December 15 2021: got the NLCD data up and they seem adequate for preliminary
+analyses. But I don't yet know how to access a smaller dataset programatically.
+It seems possible that with a few lines of code could download the entire lower
+48, crop, and dispose of the original in a programmatic workflow. For now, I
+just went to https://www.mrlc.gov/viewer/, used my mouse to define a bounding
+box around the state of Maryland, and had them email me a .zip file. Return to
+this at a later date when downstream analysis is firmer.
