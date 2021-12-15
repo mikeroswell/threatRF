@@ -16,7 +16,7 @@ my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +d
 # see what I can see with this NLCD data so far
 
 nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", pattern = "*tiff$", full.names = T)
-nlcd_stack<-raster::stack(nlcd))
+nlcd_stack<-raster::stack(nlcd)
 
 
 
@@ -84,8 +84,8 @@ focused<-raster::crop(bc, bounds)
 
 # get the data
 chelsa_matrix<-data.frame(raster::extract(focused, localities))
-names(chelsa_matrix)<-sapply(1:19, function(x)paste0("bioclim", x))
-chelsa_points<-bind_cols(localities, chelsa_matrix, nlcd_points)
+names(chelsa_matrix)<-sapply(0:19, function(x)paste0("bioclim", x))
+chelsa_points<-bind_cols(localities, chelsa_matrix[,2:20], data.frame(apply(nlcd_points, 2, as.character)))
 
 
 # correlations not super low, deal with later
@@ -126,12 +126,12 @@ chelsa_points<-bind_cols(localities, chelsa_matrix, nlcd_points)
 # })
 # 
 # just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
-rm(bc)
-rm(focused)
-rm(bounds)
-rm(localities)
-gc()
-# do I have slope data?
+# rm(bc)
+# rm(focused)
+# rm(bounds)
+# rm(localities)
+# gc()
+# # do I have slope data?
 
 
 slope<-raster("data/GIS_downloads/slope.tif")
@@ -156,9 +156,8 @@ mysf<-function(x){st_as_sf(x
                            , coords = c('longitude', 'latitude')
                            , crs = "EPSG:4326") %>% 
     st_transform(crs = st_crs(my_pr)) }
-chel_sf<-mysf(chelsa_points)
 
-nlcd_chel_sf<-bind_cols(chel_sf, nlcd_points) %>% 
+chel_sf<-mysf(chelsa_points) %>% 
   mutate(slope = slope_points) 
 
 obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species, exotic = exotic...17)
@@ -167,7 +166,7 @@ obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitu
   st_transform(crs = st_crs(my_pr)) 
 
 
-indi<-st_join(nlcd_chel_sf, obs)
+indi<-st_join(chel_sf, obs)
 save(indi, file="data/fromR/to_predict.RDA")
 took<-Sys.time()-beg
 took

@@ -34,14 +34,14 @@ tofit_summary <-tofit%>% group_by(genus, species) %>%
 
 # names(tofit_summary)<-gsub("\\.", "A", names(tofit_summary))
 
-predictors<-  names(tofit)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "exotic", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
+predictors<-  names(tofit_summary)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "exotic", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
 
 
-
+predictors
 
 # tofit_complete<-tofit %>% drop_na(eval(predictors)) 
 
-tofit_summary_commplete<-tofit_summary %>% drop_na()
+tofit_summary_complete<-tofit_summary %>% drop_na()
 # tofit_complete %>% filter(simple_status %in% c("threatened", "secure")) %>% droplevels() %>% group_by(simple_status) %>% summarize(n())
 
 
@@ -56,8 +56,8 @@ tofit_summary_commplete<-tofit_summary %>% drop_na()
 # 
 summarized_RF_training <- randomForest(as.formula(paste0("as.factor(simple_status_mu) ~ "
                                                          , paste(names(tofit_summary_commplete)[
-                                                           !(grepl("status", names(tofit_summary_commplete))
-                                                             |grepl("Rank", names(tofit_summary_commplete)))]
+                                                           !(grepl("status", names(tofit_summary_complete))
+                                                             |grepl("Rank", names(tofit_summary_complete)))][3:74]
                                                            , collapse= "+")))
                                   
                                   , data = tofit_summary_commplete 
