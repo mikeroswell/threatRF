@@ -157,7 +157,7 @@ dev.off()
 
 #get some overall stats
 specfreq_TOT<-withstats2 %>%
-  group_by( state_status = simple, species) %>%
+  group_by( state_status = simple_status, species) %>%
   summarize(records =n()) %>%
   group_by( state_status) %>%
   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())

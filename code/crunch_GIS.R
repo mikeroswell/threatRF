@@ -8,9 +8,9 @@ library(tidyverse)
 library(furrr) # if paralllellizing
 library(tictoc)
 library(sf) #vector data
-library(tigris) #county data
-options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the data.
-# Projection for rasters
+# library(tigris) #county data
+# options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the data.
+# # Projection for rasters
 my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
 
 # see what I can see with this NLCD data so far
@@ -42,14 +42,14 @@ bounds<-raster::extent(matrix(c(min(localities$longitude)
 rm(withstats2)
 
 ###################################
-# get boundaries for each county in MD, DE, PA, VA, WV
-statbord<-c("MD", "DE", "PA", "VA", "WV")
-
-# reproject to match rasters
-allco<-st_as_sf(map_dfr(statbord, function(co){
-  counties(co, resolution = "5m") %>% 
-    st_transform(crs = st_crs(my_pr))
-})) 
+# # get boundaries for each county in MD, DE, PA, VA, WV
+# statbord<-c("MD", "DE", "PA", "VA", "WV")
+# 
+# # reproject to match rasters
+# allco<-st_as_sf(map_dfr(statbord, function(co){
+#   counties(co, resolution = "5m") %>% 
+#     st_transform(crs = st_crs(my_pr))
+# })) 
 
 
 
