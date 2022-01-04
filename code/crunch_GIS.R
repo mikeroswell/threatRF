@@ -3,21 +3,17 @@ beg<-Sys.time()
 library(raster) # raster data
 rasterOptions(maxmemory = 1e+09)
 library(tidyverse)
+`%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # library(rgdal) # works with a library on machine to crunch data
 # library(gdalUtils) # more gdal fucntionality
 library(furrr) # if paralllellizing
 library(tictoc)
 library(sf) #vector data
-# library(tigris) #county data
-# options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the data.
+library(rnaturalearth)
+library(tigris) #county data
+options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the data.
 # # Projection for rasters
 my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
-
-# see what I can see with this NLCD data so far
-
-nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/", pattern = "*tiff$", full.names = T)
-nlcd_stack<-raster::stack(nlcd)
-
 
 
 # get the occcurence data
@@ -25,6 +21,8 @@ withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
 # get the coordinates (may require additional manipulation)
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) # some errors, check workflow that they weren't introduced here.
+
+# drop non-MD points
 
 #df of lat and long
 localities <- good_coords %>%
@@ -51,17 +49,35 @@ rm(withstats2)
 #     st_transform(crs = st_crs(my_pr))
 # })) 
 
+# get MD state boundary
+MD_boundary<- counties("MD", resolution = "5m") %>% 
+  st_union() %>% 
+  st_transform(crs = st_crs(my_pr))
+# check work
+# ggplot() + geom_sf(data = MD_boundary, mapping=aes()
+#                    , color="black"
+#                    , fill = "white"
+#                    , size=0.25)
 
-
-# my_ext<-extent(allco)
-
-
-sfed<-st_as_sf(localities
+sfed_all<-st_as_sf(localities
                , coords = c('longitude', 'latitude')
                , crs = "EPSG:4326") %>% 
-  st_transform(crs = st_crs(my_pr)) 
+  st_transform(crs = st_crs(my_pr))
 
+sfed_MD<-sfed_all %>% mutate(in_MD = lengths(st_within(sfed_all, MD_boundary)))
 
+sfed <- sfed_MD %>% filter(in_MD ==1) %>% select(-in_MD)
+
+sfed_outside <- sfed_MD %>% filter(in_MD ==0) %>% select (-in_MD)
+  
+
+# see what I can see with this NLCD data so far
+
+nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/"
+                   , pattern = "*tiff$", full.names = T)
+nlcd_stack<-raster::stack(nlcd)
+
+# extract
 tic()
 nlcd_points<-raster::extract(nlcd_stack, sfed)
 toc()
@@ -83,9 +99,9 @@ bc <- raster::stack(list.files("data/fromR/lfs/current/", full.names = T))
 focused<-raster::crop(bc, bounds)
 
 # get the data
-chelsa_matrix<-data.frame(raster::extract(focused, localities))
+chelsa_matrix<-data.frame(raster::extract(focused, sfed))
 names(chelsa_matrix)<-sapply(0:19, function(x)paste0("bioclim", x))
-chelsa_points<-bind_cols(localities, chelsa_matrix[,2:20], data.frame(apply(nlcd_points, 2, as.character)))
+chelsa_points<-bind_cols(localities[which(sfed_MD$in_MD ==1)], chelsa_matrix[,2:20], data.frame(apply(nlcd_points, 2, as.character)))
 
 
 # correlations not super low, deal with later
@@ -160,7 +176,9 @@ mysf<-function(x){st_as_sf(x
 chel_sf<-mysf(chelsa_points) %>% 
   mutate(slope = slope_points) 
 
-obs<-st_as_sf(good_coords %>% select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species, exotic = exotic...17)
+
+obs<-st_as_sf(good_coords %>% 
+                select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species, exotic = exotic...17)
          , coords = c("lon",  "lat")
          , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
