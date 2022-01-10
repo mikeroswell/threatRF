@@ -7,6 +7,8 @@ library(randomForest)
 load(file="data/fromR/to_predict.RDA")
 # unique(indi$roundedSRank)
 
+# get classifications more balanced
+
 tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
                               lon = sf::st_coordinates(.)[,2]) %>% 
   group_by(genus, species) %>%
@@ -15,11 +17,20 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          , maxlon = max(lon, na.rm = T)
          , minlon = min(lon, na.rm = T)
          , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
-                                   , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))) %>% 
+                                          , if_else(roundedSRank =="S3", "intermediate"
+                                                    , if_else(roundedSRank %in% c("S1", "SH"), "critical"
+                                                              if_else(roundedSRank ==2, "threatened", "NONE")
+                                                              )
+                                                    )
+                                          )
+                                  )
+         ) %>% 
   filter(!exotic) %>% 
   sf::st_drop_geometry()
+
 mu<-function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x))}
 sig<- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), length(unique(x)))}
+
 tofit_summary <-tofit%>% group_by(genus, species) %>%
   summarize_all(.funs = c("mu", "sig")) %>% 
     mutate(Random_Pred = runif(1))
@@ -33,11 +44,11 @@ tofit_summary <-tofit%>% group_by(genus, species) %>%
 # names(tofit)<-gsub("\\.", "A", names(tofit))
 
 # names(tofit_summary)<-gsub("\\.", "A", names(tofit_summary))
-
-predictors<-  names(tofit_summary)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "exotic", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
-
-
-predictors
+# 
+# predictors<-  names(tofit_summary)[names(tofit) %ni% c( "roundedSRank", "roundedNRank", "roundedGRank", "genus", "species", "exotic", "lat", "lon", "simple_status", "geometry", names(tofit)[grepl("OBJECTID*", names(tofit))], names(tofit)[grepl("Descriptio*", names(tofit))] )]
+# 
+# 
+# predictors
 
 # tofit_complete<-tofit %>% drop_na(eval(predictors)) 
 
@@ -61,7 +72,7 @@ summarized_RF_training <- randomForest(as.formula(paste0("as.factor(simple_statu
                                                            , collapse= "+")))
                                   
                                   , data = tofit_summary_complete 
-                                  %>% filter(simple_status_mu %in% c(2,3)) 
+                                  %>% filter(simple_status_mu %in% 2:4) 
                                   %>% droplevels()
                                   # , ytest = c("threat", "secure")
                                   , importance = TRUE

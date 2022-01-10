@@ -38,3 +38,7 @@ It seems possible that with a few lines of code could download the entire lower
 just went to https://www.mrlc.gov/viewer/, used my mouse to define a bounding
 box around the state of Maryland, and had them email me a .zip file. Return to
 this at a later date when downstream analysis is firmer.
+
+* January 4 2022: Using tigris county borders to define state of MD. Includes
+water. Have not yet determined if there is a strong bias in terms of
+conservation status of points inside and outside this boundary.

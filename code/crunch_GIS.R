@@ -20,7 +20,8 @@ my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +d
 withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
 # get the coordinates (may require additional manipulation)
 good_coords<- withstats2 %>%
-  filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) # some errors, check workflow that they weren't introduced here.
+  filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
+  mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
 # drop non-MD points
 
@@ -101,7 +102,7 @@ focused<-raster::crop(bc, bounds)
 # get the data
 chelsa_matrix<-data.frame(raster::extract(focused, sfed))
 names(chelsa_matrix)<-sapply(0:19, function(x)paste0("bioclim", x))
-chelsa_points<-bind_cols(localities[which(sfed_MD$in_MD ==1)], chelsa_matrix[,2:20], data.frame(apply(nlcd_points, 2, as.character)))
+chelsa_points<-bind_cols(localities[which(sfed_MD$in_MD ==1),], chelsa_matrix[,2:20], data.frame(apply(nlcd_points, 2, as.character)))
 
 
 # correlations not super low, deal with later
@@ -178,13 +179,33 @@ chel_sf<-mysf(chelsa_points) %>%
 
 
 obs<-st_as_sf(good_coords %>% 
-                select(lon = decimalLongitude, lat = decimalLatitude, roundedSRank, roundedNRank, roundedGRank, genus, species, exotic = exotic...17)
+                select(lon = decimalLongitude
+                       , lat = decimalLatitude
+                       , roundedSRank
+                       , roundedNRank
+                       , roundedGRank
+                       , genus
+                       , species
+                       , exotic = exotic...17
+                       , UID)
          , coords = c("lon",  "lat")
          , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
 
 
 indi<-st_join(chel_sf, obs)
+
+# check conservation status of omitted observations
+# good_coords %>% anti_join(indi) %>% mutate(nsp= n_distinct(species), nobs = n()) %>% 
+#   group_by(roundedSRank) %>% 
+#   summarize(spp = n_distinct(species), obs = n(), spProp = spp/mean(nsp), obsProp = obs/mean(nobs)) 
+# 
+# indi%>% mutate(nsp= n_distinct(species), nobs = n()) %>% 
+#   group_by(roundedSRank) %>% 
+#   summarize(spp = n_distinct(species), obs = n(), spProp = spp/mean(nsp), obsProp = obs/mean(nobs))
+# looks like the dropped ones have S2, S4, S5 spp overrepresented, unranked under-represented
+# I think this will be fine overall. 
+head(good_coords)
 save(indi, file="data/fromR/to_predict.RDA")
 took<-Sys.time()-beg
 took
