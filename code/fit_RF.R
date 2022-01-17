@@ -47,7 +47,26 @@ train <- classed[-test_rows, ] # 240 rows
 train %>% group_by(simple_status_mu) %>% summarize(n()) # quite close to expected 2:1 in this run
 test %>% group_by(simple_status_mu) %>% summarize(n()) # good bit more even
 
-{
+# drop problematic variables
+
+get_unique <- function(x) {
+  x[sapply(x
+                  , function(y) {
+                    is.factor(y) | is.character(y)})]
+}
+
+
+
+nomatch<-function(x, y){
+  colnames(x)[!sapply(1:length(colnames(x)), function(x.name){
+   all(y[ ,x.name] %in% x[ ,x.name])
+  })]
+}
+
+
+
+nomatch(get_unique(train), get_unique(test))
+
 # get classifications more balanced
 
 # tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
@@ -122,7 +141,11 @@ tictoc::tic()
 train_rf<- fit_rf(train, my_mod)
 tictoc::toc()
 
-
+# test that thing!
+# first step is fixing factor levels
+test$X2001_2019_change_index_mu<-factor(test$X2001_2019_change_index_mu, levels = levels(classed$X2001_2019_change_index_mu))
+test_rf_discrete<-predict(train_rf, test)
+test_rf_prob<-predict(train_rf, test, type = "prob")
 ##################################
 
 summarized_RF_training <- randomForest(
