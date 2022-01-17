@@ -5,12 +5,14 @@ fit_rf <- function(data, formu){ # set up to take formula as a string
 
   # Define tuning parameter grid
   # mtry = Number of variables randomly sampled as candidate variables per tree
-  fitGrid <- expand.grid(mtry=seq(10, 20, 2))
+  fitGrid <- expand.grid(mtry=seq(3, 33, 2))
   
   # Define tuning and training method
   fitControl <- caret::trainControl(method="repeatedcv"
                                     , number=10
-                                    , repeats=10) #tenfold cross-validation, i think
+                                    , repeats=10  #tenfold cross-validation, i think
+                                    # , verboseIter = T
+                                    )
   
   # Train RF model
   rf_fit <- caret::train(formu 
@@ -21,7 +23,9 @@ fit_rf <- function(data, formu){ # set up to take formula as a string
                          , tuneGrid = fitGrid # try trees with different numbers of variables
                          , trControl = fitControl # cross validation
                          , na.action = na.pass # shouldn't be an issues here
-                         , verbose = T # might tell me something interesting.
+                         # , verbose = T 
+                         , importance = T
+                         # might tell me something interesting.
                          )
   
   # Plot RF tuning results

@@ -1,7 +1,8 @@
 # code to fit RF models to occurrence data with covariates
 
 library(tidyverse)
-library(fasterize)
+library(randomForest)
+
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # custom summary functions
@@ -90,20 +91,25 @@ train_rf<- fit_rf(train, my_mod)
 tictoc::toc()
 
 # test that thing!
-# first step is fixing factor levels
-# test$X2001_2019_change_index_mu<-factor(test$X2001_2019_change_index_mu, levels = levels(classed$X2001_2019_change_index_mu))
 test_rf_discrete<-predict(train_rf, test)
 sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 73%
-# slightly better tha expected from the tuning
+# slightly better than expected from the tuning
 train_rf
 
-test_rf_prob<-predict(train_rf, test, type = "prob")
-
-test_rf_prob
-
 # refit with all data
-
 final_rf<-fit_rf(classed, my_mod)
+
+plot(varImp(final_rf))
+final_rf$finalModel$importance
+# variable importance plots!
+varImpPlot(final_rf$finalModel)
+
+with_rf_pack<-randomForest::randomForest(formula = my_mod
+                                         , data = classed
+                                         , importance = T
+                                         , verbose =T)
+
+varImpPlot(with_rf_pack)
 
 # make predictions on the new data
 predict_unclassified<-predict(final_rf, tofit_summary_complete %>% 
@@ -144,7 +150,7 @@ w_preds %>%
 base_rast <- raster::raster(w_preds, resolution = 5000, crs = sf::st_crs(w_preds) ) # hopefully means 5 km
 
 
-threat_thres<-0.9 # threshhold for saying something is probably threatened
+threat_thres<-0.9 # threshold for saying something is probably threatened
 
 rast_pred <- w_preds %>%
   filter(had_status =="predicted") %>% 
@@ -158,8 +164,8 @@ rast_pred <- w_preds %>%
     , field = "p.threatened"
     , na.rm = FALSE)
   
-rast_pred
-plot(rast_pred)
+
+# plot(rast_pred)
 
 ggplot()+
   geom_tile(data = as.data.frame(as(rast_pred, "SpatialPixelsDataFrame"))
