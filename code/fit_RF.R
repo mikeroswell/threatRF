@@ -1,6 +1,7 @@
 # code to fit RF models to occurrence data with covariates
 
 library(tidyverse)
+library(fasterize)
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # custom summary functions
@@ -105,152 +106,68 @@ test_rf_prob
 final_rf<-fit_rf(classed, my_mod)
 
 # make predictions on the new data
-predict_unclassified<-predict(final_rf, tofit_summary_complete %>% filter(simple_status_mu =="1"))
-
-##################################
-
-summarized_RF_training <- randomForest(
-                                       
-                                       , data = tofit_summary_complete 
-                                       %>% filter(simple_status_mu %in% 2:3) 
-                                       %>% droplevels()
-                                       # , ytest = c("threat", "secure")
-                                       , importance = TRUE
-                                       , na.action = na.exclude
-                                       , type = "classification"
-)
-
-# can classifier see which ones have status?
-
-summarized_RF_training <- randomForest(as.formula(paste0("as.factor(simple_status_mu) ~ "
-                                                         , paste(names(tofit_summary_complete)[
-                                                           !(grepl("status", names(tofit_summary_complete))
-                                                             |grepl("Rank", names(tofit_summary_complete)))][3:74]
-                                                           , collapse= "+")))
-                                       
-                                       , data = tofit_summary_complete 
-                                       %>% filter(simple_status_mu %in% 1:3) 
-                                       %>% droplevels()
-                                       # , ytest = c("threat", "secure")
-                                       , importance = TRUE
-                                       , na.action = na.exclude
-                                       , type = "classification"
-)
+predict_unclassified<-predict(final_rf, tofit_summary_complete %>% 
+                                filter(simple_status_mu ==1)
+                                       , type="prob")
 
 
 
 
-summarized_RF_training$confusion
-varImpPlot(summarized_RF_training)
+prob_preds<-tofit_summary_complete %>% 
+  filter(simple_status_mu ==1) %>% 
+  select(genus, species) %>% 
+  bind_cols(predict_unclassified) %>% 
+  rename("rel_secure"="2", "threatened" = "3")
 
 
-plot(summarized_RF_training)
-data.frame(summarized_RF_training$importance) %>% arrange(desc(MeanDecreaseAccuracy))
+w_preds <- indi %>% left_join(prob_preds, by = c("genus", "species"))
+
+w_preds <- w_preds %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
+                                           , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))
+                   , p.threatened = if_else(is.na(threatened), as.numeric(simple_status =="threatened"), threatened)
+                   , had_status = if_else(is.na(threatened), "had_status", "predicted")
+                   )
 
 
-
-summarized_RF_training$importanceSD
-
-presum<-predict(summarized_RF_training, newdata = tofit_summary_complete)
-simple_pred<-tofit_summary_complete %>% bind_cols(presum)
-predictions_from_summary<-tofit %>% left_join(tofit_summary_complete %>% bind_cols(presum=presum))
-
-get_a_picture <- function(x, prediction){
-  print(prediction)
-  x %>% 
-    group_by(genus, species, simple_status) %>% 
-    summarize(agree = sum(as.character(get(prediction)) == as.character(simple_status))/n()
-              , frequency_threatened = sum(get(prediction) =="threatened")/n()
-              , n_obs= n())
-}
-
-simple_pred %>% ggplot(aes(as.factor(simple_status_mu), presum))+
-  ggbeeswarm::geom_beeswarm(groupOnX = F)+
-  theme_classic()
-
-simple_pred %>% ggplot(aes(as.factor(simple_status_mu), presum))+
-  geom_violin()+
-  theme_classic()
-
-picture<-function(df){df %>% ggplot(aes(simple_status, frequency_threatened, color = log(n_obs)))+
-  ggbeeswarm::geom_quasirandom( dodge.width = 0.9, alpha = 0.9, size = 1.2)+
+# plot predictions at the observation level
+w_preds %>% 
+  ggplot(aes(color = p.threatened))+
+  geom_sf(size = 0.2) +
+  scale_color_viridis_c() +
   theme_classic() +
-  scale_color_viridis_c()}
+  theme(legend.position = "bottom") +
+  facet_wrap(~had_status, nrow= 2)
 
-picture(get_a_picture(predictions_from_summary, "presum"))
-# make some maps
+# rasterize predictions
 
-
-resf_sum<-sf::st_as_sf(predictions_from_summary
-                   , coords = c("lat", "lon")
-                   , crs = "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs")
+# first make a raster that includes the state of MD
+base_rast <- raster::raster(w_preds, resolution = 5000, crs = sf::st_crs(w_preds) ) # hopefully means 5 km
 
 
-resf_sum %>% filter(!is.na(presum)) %>% 
-  mutate(status_guess = if_else(as.character(simple_status) =="NONE", paste("predicted", c("threatened", "secure")[presum], sep = "_"), as.character(simple_status))) %>%  
-  ggplot(aes(color =status_guess))+
-  geom_sf(size = 0.7) +
-  scale_color_brewer(palette = "Dark2") +
-  theme_classic() +
-  theme(legend.position = "bottom")
+threat_thres<-0.9 # threshhold for saying something is probably threatened
 
-resf_sum %>% ggplot(aes(maxlat_mu, presum, color = simple_status))+
-  geom_jitter(height = 0.2, width =300, alpha = 0.5, size = 0.4)+
-  theme_classic()
+rast_pred <- w_preds %>%
+  filter(had_status =="predicted") %>% 
+  raster::rasterize(
+    y = base_rast
+    , fun = function(x, ...){
+          if_else(sum(na.omit(x))>0
+                  , sum(na.omit(x) > threat_thres)/sum(na.omit(x) > 0)
+                  , 0)
+      }
+    , field = "p.threatened"
+    , na.rm = FALSE)
+  
+rast_pred
+plot(rast_pred)
 
-resf_sum %>% ggplot(aes(bioclim7_sig, presum, color = simple_status))+
-  geom_jitter(height = 0.2, width =0.5, alpha = 0.5, size = 0.4)+
-  theme_classic()
-
-resf_sum %>% ggplot(aes(bioclim3_mu, presum, color = simple_status))+
-  geom_jitter(height = 0.2, width =0.5, alpha = 0.5, size = 0.4)+
-  theme_classic()
-
-resf_sum %>% ggplot(aes(bioclim3_sig, presum, color = simple_status))+
-  geom_jitter(height = 0.2, width =0.5, alpha = 0.5, size = 0.4)+
-  theme_classic()
-
-
-dev.off()
-
-sum_tab<-get_a_picture(all_pred, "phigh_stat") %>% group_by(genus, species, simple_status, n_obs, frequency_threatened) %>% 
-  summarize(n()) %>% arrange(desc(frequency_threatened)) 
-
-sum_tab %>% filter(simple_status =="NONE") %>% group_by(genus) %>% summarize(mft = mean(frequency_threatened), spp = n()) %>% ggplot(aes(spp, mft))+geom_point()+theme_class
-
-all_pred %>% ggplot(aes(slope, phigh, color=simple_status))+
-  geom_jitter(height = 0.1, width =10)+
-  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
-  theme_classic()+
-  scale_color_viridis_d()
-
-pdf("figures/bioclim7_matters.pdf")
-all_pred %>% ggplot(aes(bioclim7, phigh, color=simple_status))+
-  geom_jitter(alpha = 0.6)+
-  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
-  theme_classic()+
-  scale_color_viridis_d()+
-  labs(x = "annual temperature range", y = "predicted status", color = "input status")
-dev.off()
-
-pdf("figures/slope_matters.pdf")
-all_pred %>% ggplot(aes(slope, phigh, color=simple_status))+
-  geom_jitter(alpha = 0.6)+
-  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
-  theme_classic()+
-  scale_color_viridis_d()+
-  labs(x = "slope", y = "predicted status", color = "input status")
-dev.off()
-
-pdf("figures/hottest_month.pdf")
-all_pred %>% ggplot(aes(bioclim5, phigh, color=simple_status))+
-  geom_jitter(alpha = 0.6)+
-  # geom_smooth(method = "glm", method.args = list(family = "binomial"))+
-  theme_classic()+
-  scale_color_viridis_d()+
-  labs(x = "temps of hottest month", y = "predicted status", color = "input status")
-dev.off()
+ggplot()+
+  geom_tile(data = as.data.frame(as(rast_pred, "SpatialPixelsDataFrame"))
+            , aes(x = x, y = y, fill = layer))+
+  scale_fill_viridis_c() +
+  coord_equal() +
+  theme_void() +
+  labs(fill = "proportion observations \nwith predicted probability \nof being threatened \n>90% ")
 
 
-head(sum_tab)
-View(sum_tab)
+
