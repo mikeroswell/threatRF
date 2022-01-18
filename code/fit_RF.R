@@ -87,21 +87,25 @@ my_mod
 
 source("code/RF_tuner.R")
 tictoc::tic()
-train_rf<- fit_rf(train, my_mod)
+train_rf_up<- fit_rf(train, my_mod, up =T)
+train_rf_orig<-fit_rf(train, my_mod, up =F)
 tictoc::toc()
 
 # test that thing!
-test_rf_discrete<-predict(train_rf, test)
+test_rf_discrete<-predict(train_rf_up, test)
 sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 73%
+
+test_rf_discrete_o<-predict(train_rf_orig, test)
+sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 73%
 # slightly better than expected from the tuning
 confusion<-test %>% mutate(prediction=test_rf_discrete[1])
 confusion %>%
   mutate(gotit =simple_status_mu ==prediction ) %>%  
   group_by(simple_status_mu) %>% summarize(e_rate = sum(gotit)/n(),correct = sum(gotit), tot = n())
 
-37/60
-# refit with all data
-final_rf<-fit_rf(classed, my_mod)
+# refit with all data? If so, need to make sure hyperparameters are saved etc.,
+# otherwise this can be a very different model
+# final_rf<-fit_rf(classed, my_mod)
 
 # plot(varImp(final_rf))
 # variable importance plots!

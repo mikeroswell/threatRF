@@ -1,0 +1,81 @@
+---
+title: "RF_terminology_and_methods"
+author: "Michael Roswell"
+date: "1/18/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(caret)
+library(tidyverse)
+library(randomForest)
+```
+
+# definitions
+- Discrimination: $p(threat|threatened)>p(threat|secure)$
+- Calibration: $p(threat)~R$, $R$ is the true rate of threat among all spp. 
+- Accuracy: $\sum(predicted=true)/n_{predictions}$
+- Cohen's kappa: $\kappa = (accuracy - E(accuracy|R))/(1-E(accuracy|R))$
+- AUC: the area under the ROC curve, which plots the true positive rate on the y
+against the false positive rate on the x; the thing that makes them change is
+the threshold for calling something a positive. Idea is that if you're lax about
+what constitutes a positive, you should get a high frequency of both false and
+true positives, if you're strict you should get few of either. But if you have a
+good model, you should be able to get the true positive rate close to 1 without
+needing to also make a lot of false positives. 
+
+# test dataset 
+It is considered best practice in Machine Learning to hold out some
+random/representative portion of the data as a test dataset. This is held out
+from all the fitting, and the predictions on this dataset are compared with the
+measured truth to obtain measures of model performance. By convention, this is a
+single sample (the more data the better) on which the performance indicator of
+interest (AUC, kappa, accuracy...) is computed after all adjustments to the
+model are made. These data should not be resampled/shuffled back in in the
+fitting procedure, if the goal is to assess model performance.
+
+# using test data for final model fit? 
+In a small-data application, is there a conceptual problem with the following
+procedure:
+1.  split the dataset into a training/validation set and a test set
+1.  tune and fit the model with the training/validation data
+1.  test the winning model form this procedure on the test data
+1.  maintain all hyperparemeters but refit the model with the test data still in
+there before making predictions. The assumption is that the model performance is
+better, but not worse, than it was when you did the test, and you'll get the
+best predictions this way.
+
+# class imbalance
+Obviously, if the classes have unequal membership in the training data, any
+model should predict more of the majority class. In fact, always predicting the
+majority class in a two-class problem guarantees accuracy of the prevalence of
+the majority class. In some cases, improved model predictions can be obtained by
+training on a dataset that is more balanced. However, results are far from
+guaranteed, especially with small data. There are several methods for balancing
+the classess, mainly bootstrapping the minority class to match the size of the
+majority class, or rarefying the majority class, or creating new minority class
+data synthetically (SMOTE), or using weights in training. Balancing the dataset,
+if it helps, should help with calibration, but not so much with discrimination,
+so AUC shouldn't really change too much but $\kappa$ might. If this improved
+performance carries over to the test data, it may be real (although we lack
+power to see this in our system)
+
+
+
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
