@@ -94,22 +94,20 @@ tictoc::toc()
 test_rf_discrete<-predict(train_rf, test)
 sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 73%
 # slightly better than expected from the tuning
-train_rf
+confusion<-test %>% mutate(prediction=test_rf_discrete[1])
+confusion %>%
+  mutate(gotit =simple_status_mu ==prediction ) %>%  
+  group_by(simple_status_mu) %>% summarize(e_rate = sum(gotit)/n(),correct = sum(gotit), tot = n())
 
+37/60
 # refit with all data
 final_rf<-fit_rf(classed, my_mod)
 
-plot(varImp(final_rf))
-final_rf$finalModel$importance
+# plot(varImp(final_rf))
 # variable importance plots!
+pdf("figures/plant_importance.pdf")
 varImpPlot(final_rf$finalModel)
-
-with_rf_pack<-randomForest::randomForest(formula = my_mod
-                                         , data = classed
-                                         , importance = T
-                                         , verbose =T)
-
-varImpPlot(with_rf_pack)
+dev.off()
 
 # make predictions on the new data
 predict_unclassified<-predict(final_rf, tofit_summary_complete %>% 
@@ -136,6 +134,7 @@ w_preds <- w_preds %>% mutate(simple_status = factor(if_else(roundedSRank %in% c
 
 
 # plot predictions at the observation level
+pdf("figures/probability_threatened.pdf")
 w_preds %>% 
   ggplot(aes(color = p.threatened))+
   geom_sf(size = 0.2) +
@@ -143,6 +142,7 @@ w_preds %>%
   theme_classic() +
   theme(legend.position = "bottom") +
   facet_wrap(~had_status, nrow= 2)
+dev.off()
 
 # rasterize predictions
 
@@ -163,9 +163,10 @@ rast_pred <- w_preds %>%
       }
     , field = "p.threatened"
     , na.rm = FALSE)
+
   
 
-# plot(rast_pred)
+pdf("figures/example_raster_with_proportion_probably_threatened.pdf")
 
 ggplot()+
   geom_tile(data = as.data.frame(as(rast_pred, "SpatialPixelsDataFrame"))
@@ -175,5 +176,12 @@ ggplot()+
   theme_void() +
   labs(fill = "proportion observations \nwith predicted probability \nof being threatened \n>90% ")
 
+dev.off()
 
+w_preds %>%
+  sf::st_drop_geometry() %>% 
+  filter(had_status == "predicted") %>% 
+  group_by(genus, species) %>% 
+  summarize(threat_pred = mean(p.threatened)) %>% 
+  arrange(desc(threat_pred))
 
