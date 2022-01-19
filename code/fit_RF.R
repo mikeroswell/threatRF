@@ -91,20 +91,29 @@ train_rf_up<- fit_rf(train, my_mod, up_sample =T)
 train_rf_orig<-fit_rf(train, my_mod, up_sample =F)
 tictoc::toc()
 
+train_rf_up$finalModel # looks much better here
+train_rf_orig$finalModel
 # test that thing!
 test_rf_discrete<-predict(train_rf_up, test)
-sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 70%
+sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 680%
 
 test_rf_discrete_o<-predict(train_rf_orig, test)
-sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 70%
-est_rf_discrete==test_rf_discrete_o
+sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 7%
+test_rf_discrete==test_rf_discrete_o
 # slightly better than expected from the tuning
-confusion<-test %>% mutate(prediction=test_rf_discrete[1])
+confusion<-test %>% ungroup() %>% mutate(prediction=test_rf_discrete, no_up=test_rf_discrete_o)
 confusion %>%
-  mutate(gotit =simple_status_mu ==prediction ) %>%  
-  group_by(simple_status_mu) %>% summarize(e_rate = sum(gotit)/n(),correct = sum(gotit), tot = n())
+  mutate(gotit_up = case_when(simple_status_mu == prediction~1, TRUE ~ 0 )
+         , gotit_orig = case_when(simple_status_mu == no_up~1, TRUE  ~ 0 )
+         ) %>%  
+  group_by(simple_status_mu) %>% 
+  summarize( up_correct = sum(gotit_up)
+            , e_rate_up = sum(gotit_up)/n()
+             , e_rate = sum(gotit_orig)/n()
+             , tot = n())
 
-# I don't think there is a difference with the up-sampling
+# but isn't much better in test. Good to go with it for now? Maybe. 
+
 
 # refit with all data? If so, need to make sure hyperparameters are saved etc.,
 # otherwise this can be a very different model
