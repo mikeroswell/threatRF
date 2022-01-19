@@ -39,6 +39,9 @@ tofit_summary_complete<-tofit_summary %>% drop_na()
 # for the testing and training dataset, drop the ones with unkown status
 classed<-tofit_summary_complete %>% filter(simple_status_mu != 1) # 1 corresponds to "NONE"
 
+# set random seed so results are same each time
+set.seed(888)
+
 n_obs<-nrow(classed)
 # separate data into train and test
 test_rows<-sample(1:n_obs, round(0.2*n_obs))
@@ -87,30 +90,41 @@ my_mod
 
 source("code/RF_tuner.R")
 tictoc::tic()
-train_rf_up<- fit_rf(train, my_mod, up_sample =T)
-train_rf_orig<-fit_rf(train, my_mod, up_sample =F)
+train_rf_up<- fit_rf(train, my_mod, sampling="up")
+train_rf_down<- fit_rf(train, my_mod, sampling = "down")
+
+train_rf_orig<-fit_rf(train, my_mod)
 tictoc::toc()
 
-train_rf_up$finalModel # looks much better here
-train_rf_orig$finalModel
 # test that thing!
+train_rf_up$finalModel
 test_rf_discrete<-predict(train_rf_up, test)
-sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 680%
+sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 73%
 
+train_rf_down$finalModel
+test_rf_discrete_d<-predict(train_rf_down, test)
+sum(test$simple_status_mu == test_rf_discrete_d)/length(test_rf_discrete_d) # 75
+
+train_rf_orig$finalModel
 test_rf_discrete_o<-predict(train_rf_orig, test)
 sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 7%
-test_rf_discrete==test_rf_discrete_o
+
+
+
+
+
 # slightly better than expected from the tuning
-confusion<-test %>% ungroup() %>% mutate(prediction=test_rf_discrete, no_up=test_rf_discrete_o)
+confusion<-test %>% ungroup() %>% mutate(prediction=test_rf_discrete, orig=test_rf_discrete_o, down = test_rf_discrete_d)
 confusion %>%
   mutate(gotit_up = case_when(simple_status_mu == prediction~1, TRUE ~ 0 )
-         , gotit_orig = case_when(simple_status_mu == no_up~1, TRUE  ~ 0 )
+         , gotit_orig = case_when(simple_status_mu == orig~1, TRUE  ~ 0 )
+         , gotit_down = case_when(simple_status_mu == down~1, TRUE  ~ 0 )
          ) %>%  
   group_by(simple_status_mu) %>% 
-  summarize( up_correct = sum(gotit_up)
-            , e_rate_up = sum(gotit_up)/n()
-             , e_rate = sum(gotit_orig)/n()
-             , tot = n())
+  summarize( e_rate_up = sum(gotit_up)/n()
+            , e_rate_orig = sum(gotit_orig)/n()
+            ,  e_rate_down = sum(gotit_orig)/n()
+            , tot = n())
 
 # but isn't much better in test. Good to go with it for now? Maybe. 
 

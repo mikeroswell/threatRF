@@ -48,7 +48,7 @@ write.csv(leps_gs, "data/fromR/lfs/leps_direct_from_gbif.csv", row.names = F)
 
 lep_flat
 leps_of_MD<-unique(leps_gs$withspace) 
-length(leps_of_MD) #1515
+length(leps_of_MD) #1749
 ###################################################
 
 #next, download status classifications from natureserve
