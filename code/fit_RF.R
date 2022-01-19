@@ -87,21 +87,24 @@ my_mod
 
 source("code/RF_tuner.R")
 tictoc::tic()
-train_rf_up<- fit_rf(train, my_mod, up =T)
-train_rf_orig<-fit_rf(train, my_mod, up =F)
+train_rf_up<- fit_rf(train, my_mod, up_sample =T)
+train_rf_orig<-fit_rf(train, my_mod, up_sample =F)
 tictoc::toc()
 
 # test that thing!
 test_rf_discrete<-predict(train_rf_up, test)
-sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 73%
+sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 70%
 
 test_rf_discrete_o<-predict(train_rf_orig, test)
-sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 73%
+sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 70%
+est_rf_discrete==test_rf_discrete_o
 # slightly better than expected from the tuning
 confusion<-test %>% mutate(prediction=test_rf_discrete[1])
 confusion %>%
   mutate(gotit =simple_status_mu ==prediction ) %>%  
   group_by(simple_status_mu) %>% summarize(e_rate = sum(gotit)/n(),correct = sum(gotit), tot = n())
+
+# I don't think there is a difference with the up-sampling
 
 # refit with all data? If so, need to make sure hyperparameters are saved etc.,
 # otherwise this can be a very different model

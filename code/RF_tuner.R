@@ -1,19 +1,27 @@
 # function to fit RF models taken from Chris Free 
 # https://github.com/cfree14/domoic_acid/blob/29e49da9ec4b16b6d416d389d37867e4b4b7f95d/code/functions/fit_rf.R
 
-fit_rf <- function(data, formu, up=TRUE){ # set up to take formula as a string
+fit_rf <- function(data, formu, up_sample=TRUE){ # set up to take formula as a string
 
   # Define tuning parameter grid
   # mtry = Number of variables randomly sampled as candidate variables per tree
-  fitGrid <- expand.grid(mtry=seq(3, 33, 2))
+  fitGrid <- expand.grid(mtry=seq(3, 33, 1))
   
   # Define tuning and training method
-  fitControl <- caret::trainControl(method="repeatedcv"
+  if(up_sample){
+    fitControl <- caret::trainControl(method="repeatedcv"
                                     , number=10
                                     , repeats=10  #tenfold cross-validation, i think
                                     # , verboseIter = T
-                                    , if(up){sampling = "up"}
+                                    , sampling = "up"
                                     )
+  }
+  else{
+    fitControl <- caret::trainControl(method="repeatedcv"
+                                         , number=10
+                                         , repeats=10  #tenfold cross-validation, i think
+                                         # , verboseIter = T
+  )}
   
   # Train RF model
   rf_fit <- caret::train(formu 
