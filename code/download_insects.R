@@ -52,7 +52,7 @@ length(leps_of_MD) #1749
 ###################################################
 
 #next, download status classifications from natureserve
-lep_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Lepidoptera", level = "order")
+lep_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Lepidoptera", level = "order", kingdom = "Animalia")
                              , location = list(nation ="US", subnation ="MD") #this filters to only include species that have a MD status, but retains status for all localities
                              , page = 0
                              , per_page = 5e3)[[1]] %>%
@@ -60,5 +60,8 @@ lep_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Lepidop
   unnest (cols = "subnations", names_repair ="unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 
+lep_stats %>% group_by(roundedSRank) %>% summarize(n())
+# of those 300ish sp, pretty evenly split between (S5, S4, [S1, {S2, S3}]), SNR. 
+
 #write just the natureserve data to file
-write.csv(plant_stats[,-21], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
+write.csv(lep_stats[,-21], "data/fromR/lfs/lep_NS_data.csv", row.names = F)
