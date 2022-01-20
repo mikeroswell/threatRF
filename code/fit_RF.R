@@ -98,12 +98,12 @@ tictoc::toc()
 
 # test that thing!
 train_rf_up$finalModel
-test_rf_discrete<-predict(train_rf_up, test)
-sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 73%
+test_rf_discrete<-predict(train_rf_up, test) #13% OOB
+sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 75% accuracy on test
 
 train_rf_down$finalModel
-test_rf_discrete_d<-predict(train_rf_down, test)
-sum(test$simple_status_mu == test_rf_discrete_d)/length(test_rf_discrete_d) # 75
+test_rf_discrete_d<-predict(train_rf_down, test) # 36% oob
+sum(test$simple_status_mu == test_rf_discrete_d)/length(test_rf_discrete_d) # 75% accuracy on test
 
 train_rf_orig$finalModel
 test_rf_discrete_o<-predict(train_rf_orig, test)
@@ -114,18 +114,19 @@ sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 7%
 
 
 # slightly better than expected from the tuning
-confusion<-test %>% ungroup() %>% mutate(prediction=test_rf_discrete, orig=test_rf_discrete_o, down = test_rf_discrete_d)
+confusion<-test %>% ungroup() %>% mutate(prediction=test_rf_discrete
+                                         , orig=test_rf_discrete_o
+                                         , down = test_rf_discrete_d)
 confusion %>%
   mutate(gotit_up = case_when(simple_status_mu == prediction~1, TRUE ~ 0 )
          , gotit_orig = case_when(simple_status_mu == orig~1, TRUE  ~ 0 )
          , gotit_down = case_when(simple_status_mu == down~1, TRUE  ~ 0 )
          ) %>%  
   group_by(simple_status_mu) %>% 
-  summarize( e_rate_up = sum(gotit_up)/n()
-            , e_rate_orig = sum(gotit_orig)/n()
-            ,  e_rate_down = sum(gotit_orig)/n()
+  summarize( e_rate_up = 1-sum(gotit_up)/n()
+            , e_rate_orig = 1-sum(gotit_orig)/n()
+            ,  e_rate_down = 1-sum(gotit_down)/n()
             , tot = n())
-
 # but isn't much better in test. Good to go with it for now? Maybe. 
 
 
@@ -136,11 +137,13 @@ confusion %>%
 # plot(varImp(final_rf))
 # variable importance plots!
 pdf("figures/plant_importance.pdf")
-varImpPlot(final_rf$finalModel)
+varImpPlot(train_rf_orig$finalModel)
+varImpPlot(train_rf_up$finalModel)
+varImpPlot(train_rf_down$finalModel)
 dev.off()
 
 # make predictions on the new data
-predict_unclassified<-predict(final_rf, tofit_summary_complete %>% 
+predict_unclassified<-predict(train_rf_orig, tofit_summary_complete %>% 
                                 filter(simple_status_mu ==1)
                                        , type="prob")
 
@@ -181,30 +184,40 @@ base_rast <- raster::raster(w_preds, resolution = 5000, crs = sf::st_crs(w_preds
 
 
 threat_thres<-0.9 # threshold for saying something is probably threatened
-
+over_thresh<-function(x, ...){
+  if_else(sum(na.omit(x))>0
+          , sum(na.omit(x) > threat_thres)/sum(na.omit(x) > 0)
+          , 0)}
 rast_pred <- w_preds %>%
   filter(had_status =="predicted") %>% 
   raster::rasterize(
     y = base_rast
-    , fun = function(x, ...){
-          if_else(sum(na.omit(x))>0
-                  , sum(na.omit(x) > threat_thres)/sum(na.omit(x) > 0)
-                  , 0)
-      }
+    , fun =function(x, ...){c(
+      mean(x)
+      , over_thresh(x)    
+      , sd(x))}
     , field = "p.threatened"
     , na.rm = FALSE)
 
-  
 
 pdf("figures/example_raster_with_proportion_probably_threatened.pdf")
-
-ggplot()+
-  geom_tile(data = as.data.frame(as(rast_pred, "SpatialPixelsDataFrame"))
-            , aes(x = x, y = y, fill = layer))+
-  scale_fill_viridis_c() +
-  coord_equal() +
-  theme_void() +
-  labs(fill = "proportion observations \nwith predicted probability \nof being threatened \n>90% ")
+x<-1
+map(1:3, function(x){
+  
+  ggplot()+
+    geom_tile(data = as.data.frame(as(rast_pred[[x]], "SpatialPixelsDataFrame"))
+              , aes(x = x, y = y, fill = .data[[paste0("layer.", x)]]
+                    )
+              )+
+    scale_fill_viridis_c() +
+    coord_equal() +
+    theme_void() +
+    labs(fill = c(
+      "mean of predicted threat \nprobability across all \noccurrences in cell"
+      , "proportion observations \nwith predicted probability \nof being threatened \n>90% "
+      , "standard deviation of \npredicted threat probability \nacross occurrences in cell" )[x]
+    )
+})
 
 dev.off()
 
