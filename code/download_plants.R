@@ -53,13 +53,15 @@ plants_gs<-md_vasc_obs %>%
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
 
+plants_gs<-plants_gs %>% filter(!grepl("\\.", .$species))
+
 # write gbif data to file (make these steps modular since they take a long time)
 write.csv(plants_gs, "data/fromR/lfs/plants_direct_from_gbif.csv", row.names = F)
 
 # plants_gs <- read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
 
 #get a list of all binomials in the GBIF dataset
-plants_of_MD<-unique(plants_gs$withspace) #2468 1999-2019
+plants_of_MD<-unique(plants_gs$withspace) #2620 1999-2021
 
 ###################################################
 

@@ -31,24 +31,33 @@ bind.gbif<-function(gbif){bind_rows(gbif[[2]][[3]], gbif[[3]][[3]])}
 # 
 # hym_flat<-bind.gbif(MD_hym)
 
-MD_lep<- occ_search(taxonKey = 797
-                    , stateProvince = "Maryland", year="1989, 2021"
+MD_lep_old<- occ_search(taxonKey = 797
+                    , stateProvince = "Maryland", year="1989, 2005"
                     , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
                     , hasCoordinate = T
                     , limit = 1e5)
-lep_flat<-bind.gbif(MD_lep)
+lep_flat_old<-bind.gbif(MD_lep_old)
+
+MD_lep_new<- occ_search(taxonKey = 797
+                        , stateProvince = "Maryland", year="2006, 2021"
+                        , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
+                        , hasCoordinate = T
+                        , limit = 1e5)
+lep_flat_new<-bind.gbif(MD_lep_new)
+
+lep_flat <-bind_rows(lep_flat_new, lep_flat_old)
 
 leps_gs<-lep_flat %>% separate(acceptedScientificName, sep =" "
                       , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
-
+leps_gs<-leps_gs %>% filter(!grepl("\\.", .$species))
 # write gbif data to file (make these steps modular since they take a long time)
 write.csv(leps_gs, "data/fromR/lfs/leps_direct_from_gbif.csv", row.names = F)
 
 lep_flat
 leps_of_MD<-unique(leps_gs$withspace) 
-length(leps_of_MD) #1749
+length(leps_of_MD) #1763
 ###################################################
 
 #next, download status classifications from natureserve
@@ -65,3 +74,14 @@ lep_stats %>% group_by(roundedSRank) %>% summarize(n())
 
 #write just the natureserve data to file
 write.csv(lep_stats[,-21], "data/fromR/lfs/lep_NS_data.csv", row.names = F)
+
+lepstat<-read.csv("data/fromR/lfs/lep_NS_data.csv")
+lepocc<-read.csv("data/fromR/lfs/leps_direct_from_gbif.csv")
+
+lep_joined<-lepocc %>% 
+  left_join(lepstat, by=c("withspace"="scientificName")) %>% 
+  mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
+                               , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
+                                        , "unranked")))
+  
+lep_joined %>% group_by(simple_status) %>% summarize(obs = n(), spp = n_distinct(withspace))

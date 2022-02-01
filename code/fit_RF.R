@@ -96,19 +96,36 @@ train_rf_down<- fit_rf(train, my_mod, sampling = "down")
 train_rf_orig<-fit_rf(train, my_mod)
 tictoc::toc()
 
+# save(train_rf_down, file = "data/fromR/lfs/rf_down_plants.rda")
+# save(train_rf_up, file = "data/fromR/lfs/rf_up_plants.rda")
+# save(train_rf_orig, file = "data/fromR/lfs/rf_base_plants.rda")
+
 # test that thing!
 train_rf_up$finalModel
 test_rf_discrete<-predict(train_rf_up, test) #13% OOB
-sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 75% accuracy on test
+sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 61% accuracy on test
+
+test %>% 
+  bind_cols(is.correct = test$simple_status_mu ==test_rf_discrete) %>% 
+  group_by(simple_status_mu) %>% 
+  summarize(n=n(), correct = sum(is.correct), prop.correct = sum(is.correct)/n())
 
 train_rf_down$finalModel
 test_rf_discrete_d<-predict(train_rf_down, test) # 36% oob
 sum(test$simple_status_mu == test_rf_discrete_d)/length(test_rf_discrete_d) # 75% accuracy on test
+test %>% 
+  bind_cols(is.correct = test$simple_status_mu ==test_rf_discrete_d) %>% 
+  group_by(simple_status_mu) %>% 
+  summarize(n=n(), correct = sum(is.correct), prop.correct = sum(is.correct)/n())
 
 train_rf_orig$finalModel
 test_rf_discrete_o<-predict(train_rf_orig, test)
-sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 7%
+sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 62%
 
+test %>% 
+  bind_cols(is.correct = test$simple_status_mu ==test_rf_discrete_o) %>% 
+  group_by(simple_status_mu) %>% 
+  summarize(n=n(), correct = sum(is.correct), prop.correct = sum(is.correct)/n())
 
 
 
