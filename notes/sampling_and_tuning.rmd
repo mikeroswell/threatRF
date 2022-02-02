@@ -100,12 +100,8 @@ fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take form
   # Plot RF tuning results
   rf_fit$bestTune
   rf_tune <- rf_fit$results
-  g <- ggplot(rf_tune, aes(x=mtry, y=Kappa)) +
-    labs(x="Number of variables\nsampled at each split" , y="Cohen's kappa", main="Random forest model tune") +
-    geom_line() +
-    geom_point() +
-    theme_bw()
-  print(g)
+ 
+  
   
   # Return fit
   return(rf_fit)
@@ -127,27 +123,66 @@ my_mod<-as.formula(paste0("as.factor(Attrition) ~ "
 # hard code model list
 mlist<-c("tune_up", "one_up", "tune_down", "one_down", "tune_base", "one_base")
 
-fit_rf(example_train_dat
-       , my_mod
-       , tune = T
-       , sampling = NULL)
-
 
 
 all_mods<-map(mlist
-                     
-                     , function(mod){
-  cl <- makePSOCKcluster(6)
+               , function(mod){
+
+  mopt = str_split(mod, "_")
+  cl <- makePSOCKcluster(7)
   registerDoParallel(cl)
-  mopt<-str_split(mod, "_")
-  fit_rf(formu = my_mod
+  rf = fit_rf(formu = my_mod
           , data = example_train_dat
-          , sampling = ifelse(mopt[[1]][2]=="up", "up"
-                               , ifelse(mopt[[1]][2]=="down", "down"
-                                         , NULL))
+          , if(is.null(mopt[[1]][2])){sampling = NULL}else{
+            sampling = ifelse(mopt[[1]][2]=="up", "up", "down")}
           , tune =if_else(mopt[[1]][1]=="tune", TRUE, FALSE)
   )
+  return(rf)
   stopCluster(cl)
 })
 
+
+all_mods[[1]]$results %>% 
+  ggplot(aes(x=mtry, y=Kappa)) +
+    labs(x="Number of variables\nsampled at each split" , y="Cohen's kappa", main="Random forest model tune") +
+    geom_line() +
+    geom_point() +
+    theme_bw()
+
+map(all_mods, function(rf){
+    rf$results %>% ggplot(aes(x=mtry, y=Kappa)) +
+    labs(x="Number of variables\nsampled at each split" , y="Cohen's kappa", main="Random forest model tune") +
+    geom_line() +
+    geom_point() +
+    theme_bw()})
+
 ```
+My first impression from those graphs is that, yeah, tunning matters! It looks
+like huge variation in kapp with mtry, and it looks kind of directional too. The
+default of $\sqrt(N_features)$ seems like it's not that far from optimal here,
+but that seems lucky.
+
+```{r other things about these fits}
+map(all_mods, function(x){
+  print(x$finalModel)})
+
+# based on oob and confusion, looks like upsampling might help
+
+# let's just do the predictions
+
+preds<-map_dfr(1:6, function(x){
+  pre = predict(all_mods[[x]]
+                , dat[,c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))])
+  truth = dat[,2]
+  data.frame(pre, truth, mod = mlist[x])
+})
+  
+preds %>% 
+  mutate(correct = pre ==truth) %>% 
+  group_by(mod, truth) %>% 
+  summarize(rate = round(sum(correct)/n(),2)
+            , instances = n())
+```
+This seems to support the idea that tuning isn't worth the the computing time or
+the data reduction.
