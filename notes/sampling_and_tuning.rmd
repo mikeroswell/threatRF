@@ -1,0 +1,153 @@
+---
+title: "testing_and_validation"
+author: "Michael Roswell"
+date: "2/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '../') 
+library(tidyverse)
+library(caret)
+library(doParallel)
+
+```
+I downloaded this dataset
+https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset/download
+to have an unbalanced, simulated dataset to work with. First, just going to look
+at it really quickly.
+```{r load and peek, results = FALSE}
+
+# load data
+dat<-read.csv("data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
+head(dat)
+str(dat)
+# this is the target
+table(dat$Attrition)
+
+# there are more cases here, but also the clss imbalance is more severe. 
+# before continuing, let's just drop a ton of data from the "No" class. 
+# I'll be a bit lazy and test on a random sample from the whole dataset later,
+# so I won't worry too much about the train/test split for now.
+
+example_train_dat<-bind_rows(
+  # the nos
+  dat %>% 
+    filter(Attrition == "No") %>%
+    slice_sample(n = 200)
+  # te yeses
+  , dat %>% filter(Attrition == "Yes") %>% 
+    slice_sample(n = 100)
+)
+```
+
+Overall, I want to use Random Forest to create a predictive model for
+classification. In setting this up, there are a few decisions to make, and
+because there are so few data, I'm not sure I can just try things and test them
+to evaluate which decision is best in a reasonable manner.
+
+Three basic questions are:
+
+1. How important is model tuning in this context? Based on this
+[article](https://bmcmedinformdecismak.biomedcentral.com/track/pdf/10.1186/s12911-021-01688-3.pdf),
+I'm wondering if with datasets this small, will the gain in predictive power
+from tuning be too low/ hard to assess to warrant sacrificing data to tuning...
+I say "sacrificing" because if I tune using e.g. 10x repeated 10-fold cross
+validation, then each forest only sees what, 90% of the data and each tree also
+sees 10% fewer data. Can I perhaps improve my out of sample error rates/ AUC/
+Cohen's kappa more by simply including more of the data in each tree/forest?
+
+1. I've heard that over/undersampling to address class imbalance can help, although I'm skeptical this is the case based on SO posts such as [this one](https://stats.stackexchange.com/q/357466/171222). If I were to just try all three (no data resampling, over, and under), is it better to compare out of sample predictive ability by 
+     a. holding out some portion of my data from all the training steps, and then using this held out dataset as a one-off unbiased test (subject to high variance, though) of the final model from each sampling procedure (three tests total)
+     a. Assessing the out of sample predictions through leave-one-out cross-validation, where I guess I fix the hyperameters and retrain on each subset of the data, testing more the combination of sampling method/hyperparameters than a specific RF classifier?
+    a. Assess out of sample predictions through k-fold cross validation, with the scope of inference as (b), above
+         - If this is done wth repeated k-fold cross validation, should I worry how the repeated sampling of some datapoints in either side of the split is going to bias my estimate?
+         
+```{r set set up the training setups}
+# function to fit RF models taken from Chris Free 
+# https://github.com/cfree14/domoic_acid/blob/29e49da9ec4b16b6d416d389d37867e4b4b7f95d/code/functions/fit_rf.R
+
+fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take formula as a string
+
+  # Define tuning parameter grid
+  # mtry = Number of variables randomly sampled as candidate variables per tree
+  fitGrid <- expand.grid(mtry=seq(2, 25, 1))
+  
+  # Define tuning and training method
+
+  
+  fC = caret::trainControl(method = ifelse(tune, "repeatedcv", "none")
+      , number = ifelse(tune, 10, NA)
+      , repeats = ifelse(tune, 10, NA)
+      , sampling =  sampling)
+  
+  
+  # Train RF model
+  rf_fit <- caret::train(formu 
+                         , data = data
+                         , method = "rf" # this implements randomForest::randomForest but with controls 
+                         , distribution = "bernoulli" 
+                         , metric = "Kappa" # for more robust results with class imbalance
+                         , tuneGrid =if(tune){fitGrid} else{NULL} # try trees with different numbers of variables
+                         , trControl = fC # cross validation and samplling
+                         , na.action = na.pass # shouldn't be an issues here
+                         # , verbose = T 
+                         , importance = T
+                         # might tell me something interesting.
+                         )
+  
+  # Plot RF tuning results
+  rf_fit$bestTune
+  rf_tune <- rf_fit$results
+  g <- ggplot(rf_tune, aes(x=mtry, y=Kappa)) +
+    labs(x="Number of variables\nsampled at each split" , y="Cohen's kappa", main="Random forest model tune") +
+    geom_line() +
+    geom_point() +
+    theme_bw()
+  print(g)
+  
+  # Return fit
+  return(rf_fit)
+  
+}
+```
+
+```{r set up models}
+
+# no feature selection- use all variables, except employee count 
+# since it is always 1 in train data
+# standardHours always same
+# over18 always yes
+my_mod<-as.formula(paste0("as.factor(Attrition) ~ "
+                  , paste(names(example_train_dat)[c(1, 3:8, 10:21,
+                                                     23:26, 28:length(names(example_train_dat)))]
+                          , collapse = "+")))
+
+# hard code model list
+mlist<-c("tune_up", "one_up", "tune_down", "one_down", "tune_base", "one_base")
+
+fit_rf(example_train_dat
+       , my_mod
+       , tune = T
+       , sampling = NULL)
+
+
+
+all_mods<-map(mlist
+                     
+                     , function(mod){
+  cl <- makePSOCKcluster(6)
+  registerDoParallel(cl)
+  mopt<-str_split(mod, "_")
+  fit_rf(formu = my_mod
+          , data = example_train_dat
+          , sampling = ifelse(mopt[[1]][2]=="up", "up"
+                               , ifelse(mopt[[1]][2]=="down", "down"
+                                         , NULL))
+          , tune =if_else(mopt[[1]][1]=="tune", TRUE, FALSE)
+  )
+  stopCluster(cl)
+})
+
+```
