@@ -6,17 +6,22 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE
+                      , dev = "ragg_png")
 knitr::opts_knit$set(root.dir = '../') 
 library(tidyverse)
 library(caret)
 library(doParallel)
+library(pROC)
+library(ROCR)
 
 ```
+
 I downloaded this dataset
 https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset/download
 to have an unbalanced, simulated dataset to work with. First, just going to look
 at it really quickly.
+
 ```{r load and peek, results = FALSE}
 
 # load data
@@ -28,18 +33,19 @@ table(dat$Attrition)
 
 # there are more cases here, but also the clss imbalance is more severe. 
 # before continuing, let's just drop a ton of data from the "No" class. 
-# I'll be a bit lazy and test on a random sample from the whole dataset later,
-# so I won't worry too much about the train/test split for now.
 
+no_row<-which(dat$Attrition=="No")
+yes_row<-which(dat$Attrition == "Yes")
+nkeep<-sample(no_row, 200)
+ykeep<-sample(yes_row, 100)
 example_train_dat<-bind_rows(
   # the nos
-  dat %>% 
-    filter(Attrition == "No") %>%
-    slice_sample(n = 200)
+  dat[ykeep,]
   # te yeses
-  , dat %>% filter(Attrition == "Yes") %>% 
-    slice_sample(n = 100)
+  , dat[nkeep, ]
 )
+
+test_dat<-dat[-c(ykeep, nkeep),]
 ```
 
 Overall, I want to use Random Forest to create a predictive model for
@@ -58,11 +64,24 @@ validation, then each forest only sees what, 90% of the data and each tree also
 sees 10% fewer data. Can I perhaps improve my out of sample error rates/ AUC/
 Cohen's kappa more by simply including more of the data in each tree/forest?
 
-1. I've heard that over/undersampling to address class imbalance can help, although I'm skeptical this is the case based on SO posts such as [this one](https://stats.stackexchange.com/q/357466/171222). If I were to just try all three (no data resampling, over, and under), is it better to compare out of sample predictive ability by 
-     a. holding out some portion of my data from all the training steps, and then using this held out dataset as a one-off unbiased test (subject to high variance, though) of the final model from each sampling procedure (three tests total)
-     a. Assessing the out of sample predictions through leave-one-out cross-validation, where I guess I fix the hyperameters and retrain on each subset of the data, testing more the combination of sampling method/hyperparameters than a specific RF classifier?
-    a. Assess out of sample predictions through k-fold cross validation, with the scope of inference as (b), above
-         - If this is done wth repeated k-fold cross validation, should I worry how the repeated sampling of some datapoints in either side of the split is going to bias my estimate?
+1. I've heard that over/undersampling to address class imbalance can help,
+although I'm skeptical this is the case based on SO posts such as [this
+one](https://stats.stackexchange.com/q/357466/171222). If I were to just try all
+three (no data resampling, over, and under), is it better to compare out of
+sample predictive ability by
+     a. holding out some portion of my data from all the training steps, and
+     then using this held out dataset as a one-off unbiased test (subject to
+     high variance, though) of the final model from each sampling procedure
+     (three tests total)
+     a. Assessing the out of sample predictions through leave-one-out
+     cross-validation, where I guess I fix the hyperameters and retrain on each
+     subset of the data, testing more the combination of sampling
+     method/hyperparameters than a specific RF classifier?
+     a. Assess out of sample predictions through k-fold cross validation, with
+     the scope of inference as (b), above
+         - If this is done wth repeated k-fold cross validation, should I worry
+         how the repeated sampling of some datapoints in either side of the
+         split is going to bias my estimate?
          
 ```{r set set up the training setups}
 # function to fit RF models taken from Chris Free 
@@ -80,7 +99,8 @@ fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take form
   fC = caret::trainControl(method = ifelse(tune, "repeatedcv", "none")
       , number = ifelse(tune, 10, NA)
       , repeats = ifelse(tune, 10, NA)
-      , sampling =  sampling)
+      , sampling =  sampling
+      , summaryFunction = twoClassSummary)
   
   
   # Train RF model
@@ -88,7 +108,7 @@ fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take form
                          , data = data
                          , method = "rf" # this implements randomForest::randomForest but with controls 
                          , distribution = "bernoulli" 
-                         , metric = "Kappa" # for more robust results with class imbalance
+                         #, metric = "kappa" # for more robust results with class imbalance
                          , tuneGrid =if(tune){fitGrid} else{NULL} # try trees with different numbers of variables
                          , trControl = fC # cross validation and samplling
                          , na.action = na.pass # shouldn't be an issues here
@@ -133,7 +153,7 @@ all_mods<-map(mlist
   registerDoParallel(cl)
   rf = fit_rf(formu = my_mod
           , data = example_train_dat
-          , if(is.null(mopt[[1]][2])){sampling = NULL}else{
+          , if(mopt[[1]][2]=="base"){sampling = NULL}else{
             sampling = ifelse(mopt[[1]][2]=="up", "up", "down")}
           , tune =if_else(mopt[[1]][1]=="tune", TRUE, FALSE)
   )
@@ -143,23 +163,24 @@ all_mods<-map(mlist
 
 
 all_mods[[1]]$results %>% 
-  ggplot(aes(x=mtry, y=Kappa)) +
-    labs(x="Number of variables\nsampled at each split" , y="Cohen's kappa", main="Random forest model tune") +
+  ggplot(aes(x=mtry, y=auc)) +
+    labs(x="Number of variables\nsampled at each split" , y="auc", main="Random forest model tune") +
     geom_line() +
     geom_point() +
     theme_bw()
 
 map(all_mods, function(rf){
-    rf$results %>% ggplot(aes(x=mtry, y=Kappa)) +
-    labs(x="Number of variables\nsampled at each split" , y="Cohen's kappa", main="Random forest model tune") +
+    rf$results %>% ggplot(aes(x=mtry, y=AUC)) +
+    labs(x="Number of variables\nsampled at each split" , y="AUC", main="Random forest model tune") +
     geom_line() +
     geom_point() +
     theme_bw()})
 
 ```
+
 My first impression from those graphs is that, yeah, tunning matters! It looks
 like huge variation in kapp with mtry, and it looks kind of directional too. The
-default of $\sqrt(N_features)$ seems like it's not that far from optimal here,
+default of $\sqrt(N_{features})$ seems like it's not that far from optimal here,
 but that seems lucky.
 
 ```{r other things about these fits}
@@ -172,17 +193,25 @@ map(all_mods, function(x){
 
 preds<-map_dfr(1:6, function(x){
   pre = predict(all_mods[[x]]
-                , dat[,c(1, 3:8, 10:21
-                         , 23:26, 28:length(names(example_train_dat)))])
-  truth = dat[,2]
-  data.frame(pre, truth, mod = mlist[x])
+                , test_dat[,c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                , type = "prob")
+  predictions = prediction(pre, test_dat[,2])
+  auc = performance(predictions, measure = "auc")
+  data.frame(pre
+             , truth = test_dat[,2]
+             , accuracy = pre ==test_dat[,2]
+             , predictions, auc)
 })
   
 preds %>% 
-  mutate(correct = pre ==truth) %>% 
   group_by(mod, truth) %>% 
-  summarize(rate = round(sum(correct)/n(),2)
-            , instances = n())
+  summarize(rate = round(mean(accuracy),2)
+            , instances = n()
+            , auc = mean(auc))
 ```
+
 This seems to support the idea that tuning isn't worth the the computing time or
-the data reduction.
+the data reduction, at least for this dataset. But perhaps it's just that the
+defaults were good for this dataset. And, it's pretty hard to tell from this
+whether up/downsampling helps, but it's not obvious it does.
