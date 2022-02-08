@@ -16,6 +16,15 @@ library(pROC)
 library(ROCR)
 
 ```
+# Overview 
+I have been overwhelmed by the number of steps at which decisions have
+to get made when doing predictive modelling, and wanted to step back to review
+options at each of those steps, and get a picture of both the literature answers
+to which one/ combination to prefer and why, as well as behavior with a dataset
+that closely ressembles the one I"m ultimatley trying to learn from.
+
+
+# Data
 
 I downloaded this dataset
 https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset/download
@@ -30,6 +39,7 @@ head(dat)
 str(dat)
 # this is the target
 table(dat$Attrition)
+set.seed(999)
 
 # there are more cases here, but also the clss imbalance is more severe. 
 # before continuing, let's just drop a ton of data from the "No" class. 
@@ -48,6 +58,9 @@ example_train_dat<-bind_rows(
 test_dat<-dat[-c(ykeep, nkeep),]
 ```
 
+
+# Objectives 
+
 Overall, I want to use Random Forest to create a predictive model for
 classification. In setting this up, there are a few decisions to make, and
 because there are so few data, I'm not sure I can just try things and test them
@@ -57,11 +70,13 @@ Three basic questions are:
 
 1. How important is model tuning in this context? Based on this
 [article](https://bmcmedinformdecismak.biomedcentral.com/track/pdf/10.1186/s12911-021-01688-3.pdf),
-I'm wondering if with datasets this small, will the gain in predictive power
-from tuning be too low/ hard to assess to warrant sacrificing data to tuning...
-I say "sacrificing" because if I tune using e.g. 10x repeated 10-fold cross
-validation, then each forest only sees what, 90% of the data and each tree also
-sees 10% fewer data. Can I perhaps improve my out of sample error rates/ AUC/
+and [this](https://doi.org/10.1002/widm.1301) one, I'm wondering if with
+datasets this small, will the gain in predictive power from tuning be too low/
+hard to assess to warrant sacrificing data to tuning... I say "sacrificing"
+because if I tune using e.g. 10x repeated 10-fold cross validation, then each
+forest only sees what, 90% of the data and each tree also sees 10% fewer data.
+Ah! But with `tuneRanger`, I can tune on oob results and skip the cv! Still, the
+question remains, can I perhaps improve my out of sample error rates/ AUC/
 Cohen's kappa more by simply including more of the data in each tree/forest?
 
 1. I've heard that over/undersampling to address class imbalance can help,
@@ -83,11 +98,14 @@ sample predictive ability by
          how the repeated sampling of some datapoints in either side of the
          split is going to bias my estimate?
          
-```{r set set up the training setups}
-# function to fit RF models taken from Chris Free 
-# https://github.com/cfree14/domoic_acid/blob/29e49da9ec4b16b6d416d389d37867e4b4b7f95d/code/functions/fit_rf.R
+# Test with simulated data
 
-fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take formula as a string
+First step is to set some rules for how the learners are supposed to learn. 
+         
+```{r set set up the training setups}
+# function to fit RF models 
+
+fit_rf <- function(data, formu, sampling = NULL, tuneMethod = "none"){ # set up to take formula as a string
 
   # Define tuning parameter grid
   # mtry = Number of variables randomly sampled as candidate variables per tree
@@ -96,10 +114,11 @@ fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take form
   # Define tuning and training method
 
   
-  fC = caret::trainControl(method = ifelse(tune, "repeatedcv", "none")
-      , number = ifelse(tune, 10, NA)
-      , repeats = ifelse(tune, 10, NA)
+  fC = caret::trainControl(method = tuneMethod
+      , number = ifelse(tuneMethod =="repeatedcv", 10, NA)
+      , repeats = ifelse(tuneMethod != "none", 10, NA)
       , sampling =  sampling
+      , classProbs = TRUE
       , summaryFunction = twoClassSummary)
   
   
@@ -108,8 +127,8 @@ fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take form
                          , data = data
                          , method = "rf" # this implements randomForest::randomForest but with controls 
                          , distribution = "bernoulli" 
-                         #, metric = "kappa" # for more robust results with class imbalance
-                         , tuneGrid =if(tune){fitGrid} else{NULL} # try trees with different numbers of variables
+                         , metric = "ROC" # for more robust results with class imbalance
+                         , tuneGrid =if(tuneMethod !="none"){fitGrid} else{NULL} # try trees with different numbers of variables
                          , trControl = fC # cross validation and samplling
                          , na.action = na.pass # shouldn't be an issues here
                          # , verbose = T 
@@ -129,6 +148,10 @@ fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take form
 }
 ```
 
+Next, I want to write model formulas that match this dataset, and fit them as
+above. Begin exploring how they did or at least think they did on the training
+data.
+
 ```{r set up models}
 
 # no feature selection- use all variables, except employee count 
@@ -136,12 +159,14 @@ fit_rf <- function(data, formu, sampling = NULL, tune =T){ # set up to take form
 # standardHours always same
 # over18 always yes
 my_mod<-as.formula(paste0("as.factor(Attrition) ~ "
-                  , paste(names(example_train_dat)[c(1, 3:8, 10:21,
-                                                     23:26, 28:length(names(example_train_dat)))]
+                  , paste(names(example_train_dat)[c(1, 3:8, 10:21
+       , 23:26, 28:length(names(example_train_dat)))]
                           , collapse = "+")))
 
 # hard code model list
-mlist<-c("tune_up", "one_up", "tune_down", "one_down", "tune_base", "one_base")
+mlist<-c("repeatedcv_up", "none_up", "oob_up"
+         ,"repeatedcv_down", "none_down", "oob_down"
+         , "repeatedcv_base", "none_base", "oob_base")
 
 
 
@@ -155,53 +180,71 @@ all_mods<-map(mlist
           , data = example_train_dat
           , if(mopt[[1]][2]=="base"){sampling = NULL}else{
             sampling = ifelse(mopt[[1]][2]=="up", "up", "down")}
-          , tune =if_else(mopt[[1]][1]=="tune", TRUE, FALSE)
+          , tuneMethod = mopt[[1]][1]
   )
   return(rf)
   stopCluster(cl)
 })
 
 
-all_mods[[1]]$results %>% 
-  ggplot(aes(x=mtry, y=auc)) +
-    labs(x="Number of variables\nsampled at each split" , y="auc", main="Random forest model tune") +
-    geom_line() +
-    geom_point() +
-    theme_bw()
+# for the repeaated cv method, I can see how much the hyperparameter matters
 
 map(all_mods, function(rf){
-    rf$results %>% ggplot(aes(x=mtry, y=AUC)) +
-    labs(x="Number of variables\nsampled at each split" , y="AUC", main="Random forest model tune") +
+  if(!is.null(rf$results$ROC)){
+    rf$results %>% ggplot(aes(x=mtry, y=ROC)) +
+    labs(x="Number of variables\nsampled at each split" , y="auc"
+         , main="Random forest model tune") +
     geom_line() +
     geom_point() +
-    theme_bw()})
+    theme_bw()}
+  })
 
 ```
 
-My first impression from those graphs is that, yeah, tunning matters! It looks
-like huge variation in kapp with mtry, and it looks kind of directional too. The
+My first impression from those graphs is that, yeah, tunning matters! The
 default of $\sqrt(N_{features})$ seems like it's not that far from optimal here,
-but that seems lucky.
+but that seems lucky. I don't know if there is anything we can generalize about
+the number of features, the number of cases, and the extent to which the default
+can be off from the optimal values. One powerful-seeming idea is that if there
+are a lot of weakly- and strongly-informative features, a small `mtry` lets you
+exploit the weak ones, whereas if there are only a few features with any real
+predictive value, it's much better to use a large `mtry` than to build a model
+by averaging a lot of bad trees. Since we probably wouldn't use RF if we already
+knew which world we're in, it seems hard to game.
+
+# start the competitions
+
+Now we'll use the test data to compete the models, and also look at the summary
+stats.
 
 ```{r other things about these fits}
-map(all_mods, function(x){
-  print(x$finalModel)})
+map(1:length(mlist), function(x){
+  print(mlist[x])
+  print(all_mods[[x]]$finalModel)
+  print(all_mods[[x]]$results)
+  })
 
 # based on oob and confusion, looks like upsampling might help
 
 # let's just do the predictions
 
-preds<-map_dfr(1:6, function(x){
+preds<-map_dfr(1:length(mlist), function(x){
   pre = predict(all_mods[[x]]
                 , test_dat[,c(1, 3:8, 10:21
                          , 23:26, 28:length(names(example_train_dat)))]
                 , type = "prob")
-  predictions = prediction(pre, test_dat[,2])
-  auc = performance(predictions, measure = "auc")
+  predictions = prediction(pre[,2], test_dat[,2])
+  preval = predict(all_mods[[x]]
+                , test_dat[,c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                )
+  auc = performance(predictions, measure = "auc")@y.values[[1]] 
   data.frame(pre
              , truth = test_dat[,2]
-             , accuracy = pre ==test_dat[,2]
-             , predictions, auc)
+             , accuracy = preval ==test_dat[,2]
+             , predictions = predictions@predictions 
+             , auc
+             , mod = mlist[[x]])
 })
   
 preds %>% 
@@ -211,7 +254,88 @@ preds %>%
             , auc = mean(auc))
 ```
 
-This seems to support the idea that tuning isn't worth the the computing time or
-the data reduction, at least for this dataset. But perhaps it's just that the
-defaults were good for this dataset. And, it's pretty hard to tell from this
-whether up/downsampling helps, but it's not obvious it does.
+
+# impressions
+
+It looks like I can't really do anything that severely improves or degrades 
+model performance here. This seems to fit with my sense that different 
+cross-validation methods generally point in the same direction. It's not at all 
+obvious to me that in the world of small datasets, I should tend to prefer one
+method of cross-validation over another. Probably, if it does make a difference,
+this suggests the model may not be good anyways. 
+
+I think it's nice to have a held-out dataset as this held-out data can be used
+to test any model regardless of how the training data are used in the training
+and validation stages, but I can see how it is a bit scary to do this when there
+are few data. The workflow of tunign via CV and then building a final model with
+all trainign data seems pretty efficient in terms of using data, too.
+
+It's pretty hard to tell from this whether up/downsampling helps, but it's not 
+obvious it does, and theory suggests it won't, so I think we should avoid it. 
+
+# more pieces to explore 
+
+Another thing for me to figure out now is a workflow where instead of fitting a
+model with cross-validation, I just want to test it with cross-validation. I
+think for this we can just use LOOCV with `caret`.  
+
+```{r test models without tuning, but with cross validation}
+assess_with_LOOCV <- map(c("none", "down", "none") , function(samp){
+  caret::train(my_mod 
+                , data = example_train_dat
+                , method = "rf" # this implements randomForest::randomForest but with controls 
+                , distribution = "bernoulli" 
+                , metric = "ROC" # for more robust results with class imbalance
+                , tuneGrid = expand.grid(.mtry = 5)
+               , tuneLethgnth = 1
+                , trControl = caret::trainControl(method = "LOOCV"
+                  , sampling = if(samp == "none"){NULL} else{samp}
+                  , classProbs = TRUE
+                  , summaryFunction = twoClassSummary)
+              , na.action = na.pass # shouldn't be an issues here
+              # , verbose = T 
+              , importance = T)
+})
+
+map(assess_with_LOOCV, function(x){
+  print(x$results)})
+
+preds_2<-map_dfr(1:length(assess_with_LOOCV), function(x){
+  pre = predict(assess_with_LOOCV[[x]]
+                , test_dat[,c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                , type = "prob")
+  predictions = prediction(pre[,2], test_dat[,2])
+  preval = predict(assess_with_LOOCV[[x]]
+                , test_dat[,c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                )
+  auc = performance(predictions, measure = "auc")@y.values[[1]] 
+  data.frame(pre
+             , truth = test_dat[,2]
+             , accuracy = preval ==test_dat[,2]
+             , predictions = predictions@predictions 
+             , auc
+             , mod = x)
+})
+
+preds_2%>% 
+  group_by(mod, truth) %>% 
+  summarize(rate = round(mean(accuracy),2)
+            , instances = n()
+            , auc = mean(auc))
+```
+
+# final thoughts
+
+The thing that seems nice about doing 10-fold cv rather than doing the LOOCV is
+getting an estimate of the variability in AUC. It's really hard for me to know
+when a difference between two scores is noise vs. is the real deal, and there's
+no opportunity for that with only a single replicate AUC. I think I'd be
+comfortable with throwing out a tiny bit of data to get this estimate in any
+workflow, because point estimates without any sense of variablity make me
+nervous. Actually, this is a good argument for skipping the holdout on a small
+dataset if we feel ok about just using default hyperparameters, is that rather
+than getting a single estimate of model perofrmance, we can get a mean with a
+distribution about it.
+

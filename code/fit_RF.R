@@ -88,17 +88,25 @@ my_mod<-as.formula(paste0("as.factor(simple_status_mu) ~ "
 
 my_mod
 
-source("code/RF_tuner.R")
+tictoc::tic()
+rf_up_fulldata<- fit_rf(classed, my_mod, sampling="up")
+rf_down_fulldata<- fit_rf(classed, my_mod, sampling = "down")
+
+rf_orig_fulldata<-fit_rf(classed, my_mod)
+tictoc::toc()
+
+# save(train_rf_down, file = "data/fromR/lfs/rf_down_plants.rda")
+# save(train_rf_up, file = "data/fromR/lfs/rf_up_plants.rda")
+# save(train_rf_orig, file = "data/fromR/lfs/rf_base_plants.rda")
+
+
+# see if including more data massively increases kappa
 tictoc::tic()
 train_rf_up<- fit_rf(train, my_mod, sampling="up")
 train_rf_down<- fit_rf(train, my_mod, sampling = "down")
 
 train_rf_orig<-fit_rf(train, my_mod)
 tictoc::toc()
-
-# save(train_rf_down, file = "data/fromR/lfs/rf_down_plants.rda")
-# save(train_rf_up, file = "data/fromR/lfs/rf_up_plants.rda")
-# save(train_rf_orig, file = "data/fromR/lfs/rf_base_plants.rda")
 
 # test that thing!
 train_rf_up$finalModel
