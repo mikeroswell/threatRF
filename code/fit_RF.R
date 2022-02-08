@@ -1,7 +1,10 @@
 # code to fit RF models to occurrence data with covariates
 
 library(tidyverse)
-library(randomForest)
+library(doParallel)
+library(caret)
+library(pROC)
+library(ROCR)
 
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
@@ -37,7 +40,9 @@ tofit_summary <-tofit%>% group_by(genus, species) %>%
 tofit_summary_complete<-tofit_summary %>% drop_na()
 
 # for the testing and training dataset, drop the ones with unkown status
-classed<-tofit_summary_complete %>% filter(simple_status_mu != 1) # 1 corresponds to "NONE"
+classed<-tofit_summary_complete %>% 
+  filter(simple_status_mu != 1) %>% 
+  mutate(simple_status_mu = if_else(simple_status_mu ==3, "secure", "threatened"))# 1 corresponds to "NONE"
 
 # set random seed so results are same each time
 set.seed(888)
@@ -73,7 +78,7 @@ nomatch<-function(x, y){
 
 
 
-my_mod<-as.formula(paste0("as.factor(simple_status_mu) ~ "
+my_mod<-as.formula(paste0("simple_status_mu ~ "
                   , paste(names(tofit_summary_complete)[
                     !(grepl("status", names(tofit_summary_complete))
                       | grepl("Rank", names(tofit_summary_complete))
@@ -86,14 +91,45 @@ my_mod<-as.formula(paste0("as.factor(simple_status_mu) ~ "
                   ))
 
 
-my_mod
-
+source("code/RF_tuner.R")
 tictoc::tic()
-rf_up_fulldata<- fit_rf(classed, my_mod, sampling="up")
-rf_down_fulldata<- fit_rf(classed, my_mod, sampling = "down")
+cl <- makePSOCKcluster(7)
+registerDoParallel(cl)
 
-rf_orig_fulldata<-fit_rf(classed, my_mod)
+#models using training data, assessed with 10-fold cv
+up_train <-  fit_rf(data = train, formu = my_mod, sampling="up", tuneMethod = "repeatedcv")
+down_train <- fit_rf(data = train
+                           , my_mod, sampling = "down", tuneMethod = "repeatedcv")
+orig_train <- fit_rf(train
+                           , my_mod, tuneMethod = "repeatedcv")
+
+# models using training data, with tuning, 10-fold cv
+up_tune <- fit_rf(train 
+                              , my_mod, sampling="up", tuneMethod = "repeatedcv", mtry =2:25 )
+down_tune <- fit_rf(train
+                                , my_mod, sampling = "down", tuneMethod = "repeatedcv", mtry =2:25)
+orig_tune <- fit_rf(train 
+                                , my_mod, tuneMethod = "repeatedcv", mtry =2:25)
+
+
+#models using full dataset, no tuning
+up_fulldata <- fit_rf(train 
+                         , my_mod, sampling="up", tuneMethod = "LOOCV")
+down_fulldata <- fit_rf(train 
+                           , my_mod, sampling = "down", tuneMethod = "LOOCV")
+orig_fulldata <- fit_rf(train 
+                           , my_mod, tuneMethod = "LOOCV")
+stopCluster(cl)
 tictoc::toc()
+
+map(c("up", "down", "orig"), function(sampling){
+  map(c("train", "tune", "fulldata"), function(data_provided){
+ print( get(paste(sampling, data_provided, sep = "_"))$results)
+  })
+})
+
+
+
 
 # save(train_rf_down, file = "data/fromR/lfs/rf_down_plants.rda")
 # save(train_rf_up, file = "data/fromR/lfs/rf_up_plants.rda")
