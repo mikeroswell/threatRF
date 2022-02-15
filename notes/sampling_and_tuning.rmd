@@ -108,7 +108,7 @@ First step is to set some rules for how the learners are supposed to learn.
 ```{r set set up the training setups}
 # function to fit RF models 
 
-fit_rf <- function(data, formu, sampling = NULL, tuneMethod = "none"){ # set up to take formula as a string
+fit_rf <- function(data, formu, sampling = NULL, tuneMethod = "none", repeats = NULL){ # set up to take formula as a string
 
   # Define tuning parameter grid
   # mtry = Number of variables randomly sampled as candidate variables per tree
@@ -119,7 +119,7 @@ fit_rf <- function(data, formu, sampling = NULL, tuneMethod = "none"){ # set up 
   
   fC = caret::trainControl(method = tuneMethod
       , number = ifelse(tuneMethod =="repeatedcv", 10, NA)
-      , repeats = ifelse(tuneMethod != "none", 10, NA)
+      , repeats = ifelse(is.null(repeats), ifelse(tuneMethod != "none", 10, NA), repeats)
       , sampling =  sampling
       , classProbs = TRUE
       , summaryFunction = twoClassSummary)
@@ -366,7 +366,7 @@ go down that path.
 ```{r try nested cv with caret}
 
 # 10x repeated 10-fold cross validation on outer (100 datasets)
-outer_folds <- createMultiFolds(example_train_dat, k = 10, times = 1)
+outer_folds <- createMultiFolds(example_train_dat$Attrition, k = 10, times = 1)
 
 
 # train model on each fold, get performance estimates
@@ -384,39 +384,70 @@ fold_fits <- map( outer_folds, function(fold){
             , if(mopt[[1]][2]=="base"){sampling = NULL}else{
               sampling = ifelse(mopt[[1]][2]=="up", "up", "down")}
             , tuneMethod = mopt[[1]][1]
+            , repeats =1
     )
     return(rf)
     stopCluster(cl)
 })
 toc()
 # create a list of predictions
+
 plan(strategy = "multiprocess", workers = 7)
-pred_list <- future_map2(function(x, y) { # compute predictions on each of the 100 test sets
+
+auc_fun<- possibly(.f=function(x){performance(x, measure = "auc")@y.values[[1]]}, otherwise = NA)
+
+pred_list <- map2_dfr(.x = 1:length(fold_fits)
+  , .y = outer_folds
+  , .f=function(x, y){ # compute predictions on each of the 100 test sets
    pre = predict(fold_fits[[x]]
-                , test_dat[-y, c(1, 3:8, 10:21
+                , example_train_dat[y, c(1, 3:8, 10:21
                          , 23:26, 28:length(names(example_train_dat)))]
                 , type = "prob")
-  predictions = prediction(pre[,2], test_dat[-y, 2])
-  preval = predict(fold_fits{[[x]]
-                , test_dat[-y, c(1, 3:8, 10:21
+  predictions = prediction(pre[,2], factor(example_train_dat[y, 2], levels = c("yes", "no")))
+  preval = predict(fold_fits[[x]]
+                , example_train_dat[y, c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                )
+  my_auc =  auc_fun(predictions)
+  data.frame(#pre
+             #, truth = example_train_dat[-y, 2]
+             #, 
+              accuracy = sum(preval == example_train_dat[y, 2])/length(y)
+             , oob= mean(fold_fits[[x]]$finalModel$err.rate[y, 1])
+             , positive = mean(fold_fits[[x]]$finalModel$err.rate[y, 2])
+             , negative = mean(fold_fits[[x]]$finalModel$err.rate[y, 3])
+             #, predictions = predictions@predictions 
+             , my_auc
+             , mod = x
+             , mtry = fold_fits[[x]]$finalModel$mtry
+             )
+
+  })
+
+# compare to actual predictions
+preds_2<-map_dfr(1:length(fold_fits), function(x){
+  pre = predict(fold_fits[[x]]
+                , test_dat[,c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                , type = "prob")
+  predictions = prediction(pre[,2], test_dat[,2])
+  preval = predict(fold_fits[[x]]
+                , test_dat[,c(1, 3:8, 10:21
                          , 23:26, 28:length(names(example_train_dat)))]
                 )
   auc = performance(predictions, measure = "auc")@y.values[[1]] 
   data.frame(pre
-             , truth = test_dat[-y, 2]
-             , accuracy = preval ==test_dat[-y, 2]
-             , oob= fold_fits[[x]]$finalModel$err.rate[,1])
-             , positive=fold_fits[[x]]$finalModel$err.rate[,2])
-             , negative = x$finalModel$err.rate[,3])
+             , truth = test_dat[,2]
+             , accuracy = preval ==test_dat[,2]
              , predictions = predictions@predictions 
              , auc
-             , mod = x
-             , mtry = fold_fits[[x]]$finalModel$mtry)
+             , mod = x)
 })
 
-  predict(x, example_train_dat[-y,])}, 
-  x = 1:length(fold_fits), y = folds)
+preds_2%>% 
+  group_by(mod, truth) %>% 
+  summarize(rate = round(mean(accuracy),2)
+            , instances = n()
+            , auc = mean(auc))
 
-
-
-
+```
