@@ -16,6 +16,7 @@ library(caret)
 library(doParallel)
 library(pROC)
 library(ROCR)
+library(tictoc)
 
 ```
 # Overview 
@@ -282,22 +283,22 @@ model with cross-validation, I just want to test it with cross-validation. I
 think for this we can just use LOOCV with `caret`.  
 
 ```{r test models without tuning, but with cross validation}
-assess_with_LOOCV <- map(c("none", "down", "none") , function(samp){
-  caret::train(my_mod 
-                , data = example_train_dat
-                , method = "rf" # this implements randomForest::randomForest but with controls 
-                , distribution = "bernoulli" 
-                , metric = "ROC" # for more robust results with class imbalance
-                , tuneGrid = expand.grid(.mtry = 5)
-               , tuneLethgnth = 1
-                , trControl = caret::trainControl(method = "LOOCV"
-                  , sampling = if(samp == "none"){NULL} else{samp}
-                  , classProbs = TRUE
-                  , summaryFunction = twoClassSummary)
-              , na.action = na.pass # shouldn't be an issues here
-              # , verbose = T 
-              , importance = T)
-})
+# assess_with_LOOCV <- map(c("none", "down", "none") , function(samp){
+#   caret::train(my_mod 
+#                 , data = example_train_dat
+#                 , method = "rf" # this implements randomForest::randomForest but with controls 
+#                 , distribution = "bernoulli" 
+#                 , metric = "ROC" # for more robust results with class imbalance
+#                 , tuneGrid = expand.grid(.mtry = 5)
+#                , tuneLethgnth = 1
+#                 , trControl = caret::trainControl(method = "LOOCV"
+#                   , sampling = if(samp == "none"){NULL} else{samp}
+#                   , classProbs = TRUE
+#                   , summaryFunction = twoClassSummary)
+#               , na.action = na.pass # shouldn't be an issues here
+#               # , verbose = T 
+#               , importance = T)
+# })
 
 map(assess_with_LOOCV, function(x){
   print(x$results)})
@@ -328,7 +329,7 @@ preds_2%>%
             , auc = mean(auc))
 ```
 
-# final thoughts
+# summary so far
 
 The thing that seems nice about doing 10-fold cv rather than doing the LOOCV is
 getting an estimate of the variability in AUC. It's really hard for me to know
@@ -340,4 +341,82 @@ nervous. Actually, this is a good argument for skipping the holdout on a small
 dataset if we feel ok about just using default hyperparameters, is that rather
 than getting a single estimate of model perofrmance, we can get a mean with a
 distribution about it.
+
+# nested cross-validation
+
+If we're really trying to get a hold on whether we can make decent predictions
+from our data with a given approach, and we know we're very tight on data, we 
+probably want to evaluate model performance via cross-validation, in addition to
+tuning via cross-validation. I think for most workflows, keeping a held-out 
+dataset while doing all the troubleshooting etc. makes the most sense, as this
+ensures you don't cheat. But assuming we've commited to an algorithm ahead
+of time, and we documented this, and we have hyper-parameters to tune, I think
+doing nested cross-validation should be fine. 
+
+For reasons I don't yet understand, it seems like **caret** has not been the
+package of choice for doing this, even by Max Kuhn (author). Instead, it seems
+people have invested in setting this up in the newer **tidymodels** package.
+Based on this [awesome exchange on
+github](https://github.com/sebastiansauer/reanalysis-mindful-machine-learning/issues/1#issue-506641549)
+I'm tempted to try doing it in **caret** first. For **tidymodels**, I'll follow
+[this vignette](https://www.tidymodels.org/learn/work/nested-resampling/) if I
+go down that path.
+
+
+```{r try nested cv with caret}
+
+# 10x repeated 10-fold cross validation on outer (100 datasets)
+outer_folds <- createMultiFolds(example_train_dat, k = 10, times = 1)
+
+
+# train model on each fold, get performance estimates
+
+mod <- "repeatedcv_base"
+
+# do all the fits
+tic()
+fold_fits <- map( outer_folds, function(fold){
+    mopt = str_split(mod, "_")
+    cl <- makePSOCKcluster(7)
+    registerDoParallel(cl)
+    rf = fit_rf(formu = my_mod
+            , data = example_train_dat
+            , if(mopt[[1]][2]=="base"){sampling = NULL}else{
+              sampling = ifelse(mopt[[1]][2]=="up", "up", "down")}
+            , tuneMethod = mopt[[1]][1]
+    )
+    return(rf)
+    stopCluster(cl)
+})
+toc()
+# create a list of predictions
+plan(strategy = "multiprocess", workers = 7)
+pred_list <- future_map2(function(x, y) { # compute predictions on each of the 100 test sets
+   pre = predict(fold_fits[[x]]
+                , test_dat[-y, c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                , type = "prob")
+  predictions = prediction(pre[,2], test_dat[-y, 2])
+  preval = predict(fold_fits{[[x]]
+                , test_dat[-y, c(1, 3:8, 10:21
+                         , 23:26, 28:length(names(example_train_dat)))]
+                )
+  auc = performance(predictions, measure = "auc")@y.values[[1]] 
+  data.frame(pre
+             , truth = test_dat[-y, 2]
+             , accuracy = preval ==test_dat[-y, 2]
+             , oob= fold_fits[[x]]$finalModel$err.rate[,1])
+             , positive=fold_fits[[x]]$finalModel$err.rate[,2])
+             , negative = x$finalModel$err.rate[,3])
+             , predictions = predictions@predictions 
+             , auc
+             , mod = x
+             , mtry = fold_fits[[x]]$finalModel$mtry)
+})
+
+  predict(x, example_train_dat[-y,])}, 
+  x = 1:length(fold_fits), y = folds)
+
+
+
 

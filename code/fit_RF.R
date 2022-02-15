@@ -122,14 +122,42 @@ orig_fulldata <- fit_rf(train
 stopCluster(cl)
 tictoc::toc()
 
-map(c("up", "down", "orig"), function(sampling){
-  map(c("train", "tune", "fulldata"), function(data_provided){
- print( get(paste(sampling, data_provided, sep = "_"))$results)
+auc_comp <- map_dfr(c("up", "down", "orig"), function(sampling){
+  map_dfr(c("train", "tune", "fulldata"), function(data_provided){
+    mod_setup = paste(sampling, data_provided, sep = "_")
+ data.frame(mod_setup
+            , get(eval(mod_setup))$results %>% 
+              filter(mtry == get(eval(mod_setup))$finalModel$mtry )
+          )
+  })
+}) %>% 
+  arrange(-ROC)
+
+
+auc_comp<-map_dfr(c("up", "down", "orig"), function(sampling){
+  map_dfr(c("train", "tune", "fulldata"), function(data_provided){
+    mod_setup = paste(sampling, data_provided, sep = "_")
+    data.frame(mod_setup
+               , get(eval(mod_setup))$results %>% 
+                 filter(mtry == get(eval(mod_setup))$finalModel$mtry)
+                , oob= mean(get(eval(mod_setup))$finalModel$err.rate[,1])
+                , secure= mean(get(eval(mod_setup))$finalModel$err.rate[,2])
+                , threatened = mean(get(eval(mod_setup))$finalModel$err.rate[,3])
+    )
   })
 })
 
+auc_comp
 
+map(c("up", "down", "orig"), function(sampling){
+  map(c("train", "tune", "fulldata"), function(data_provided){
+    print(paste(sampling, data_provided, sep = "_"))
+   print( get(paste(sampling, data_provided, sep = "_"))$finalModel$ )
+    
+  })
+})
 
+write.csv(auc_comp, "data/fromR/auc_comparisons.csv", row.names =F) 
 
 # save(train_rf_down, file = "data/fromR/lfs/rf_down_plants.rda")
 # save(train_rf_up, file = "data/fromR/lfs/rf_up_plants.rda")
