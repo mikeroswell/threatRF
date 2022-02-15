@@ -59,6 +59,13 @@ example_train_dat<-bind_rows(
 )
 
 test_dat<-dat[-c(ykeep, nkeep),]
+
+# reordere so it's not all yeses or nos
+
+test_dat<-test_dat[sample(1:nrow(test_dat), replace =T),]
+
+example_train_dat <- example_train_dat[sample(1:nrow(example_train_dat), replace =F),]
+
 ```
 
 
