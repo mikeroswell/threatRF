@@ -373,7 +373,7 @@ go down that path.
 ```{r try nested cv with caret}
 
 # 10x repeated 10-fold cross validation on outer (100 datasets)
-outer_folds <- createMultiFolds(example_train_dat$Attrition, k = 10, times = 1)
+outer_folds <- createMultiFolds(example_train_dat$Attrition, k = 5, times = 1)
 
 
 # train model on each fold, get performance estimates
@@ -382,10 +382,12 @@ mod <- "repeatedcv_base"
 
 # do all the fits
 tic()
+
 fold_fits <- map( outer_folds, function(fold){
     mopt = str_split(mod, "_")
     cl <- makePSOCKcluster(7)
     registerDoParallel(cl)
+  
     rf = fit_rf(formu = my_mod
             , data = example_train_dat
             , if(mopt[[1]][2]=="base"){sampling = NULL}else{
@@ -393,9 +395,11 @@ fold_fits <- map( outer_folds, function(fold){
             , tuneMethod = mopt[[1]][1]
             , repeats =1
     )
-    return(rf)
     stopCluster(cl)
+    return(rf)
+  
 })
+
 toc()
 # create a list of predictions
 
@@ -407,24 +411,24 @@ pred_list <- map2_dfr(.x = 1:length(fold_fits)
   , .y = outer_folds
   , .f=function(x, y){ # compute predictions on each of the 100 test sets
    pre = predict(fold_fits[[x]]
-                , example_train_dat[y, c(1, 3:8, 10:21
+                , example_train_dat[-y, c(1, 3:8, 10:21
                          , 23:26, 28:length(names(example_train_dat)))]
                 , type = "prob")
-  predictions = prediction(pre[,2], factor(example_train_dat[y, 2], levels = c("yes", "no")))
+  predictions = prediction(pre[,2], factor(example_train_dat[-y, 2], levels = c("yes", "no")))
   preval = predict(fold_fits[[x]]
-                , example_train_dat[y, c(1, 3:8, 10:21
+                , example_train_dat[-y, c(1, 3:8, 10:21
                          , 23:26, 28:length(names(example_train_dat)))]
                 )
-  my_auc =  auc_fun(predictions)
+  my_auc =  roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
   data.frame(#pre
-             #, truth = example_train_dat[-y, 2]
+             #, truth = 
              #, 
-              accuracy = sum(preval == example_train_dat[y, 2])/length(y)
-             , oob= mean(fold_fits[[x]]$finalModel$err.rate[y, 1])
-             , positive = mean(fold_fits[[x]]$finalModel$err.rate[y, 2])
-             , negative = mean(fold_fits[[x]]$finalModel$err.rate[y, 3])
+              accuracy = sum(preval == example_train_dat[-y, 2])/length(y)
+             , oob= mean(fold_fits[[x]]$finalModel$err.rate[-y, 1])
+             , positive = mean(fold_fits[[x]]$finalModel$err.rate[-y, 2])
+             , negative = mean(fold_fits[[x]]$finalModel$err.rate[-y, 3])
              #, predictions = predictions@predictions 
-             , my_auc
+             , auc= as.numeric(my_auc$auc)
              , mod = x
              , mtry = fold_fits[[x]]$finalModel$mtry
              )
