@@ -83,6 +83,8 @@ my_mod<-as.formula(paste0("simple_status_mu ~ "
                   , paste(names(tofit_summary_complete)[
                     !(grepl("status", names(tofit_summary_complete))
                       | grepl("Rank", names(tofit_summary_complete))
+                      | grepl("genus", names(tofit_summary_complete))
+                      | grepl("species", names(tofit_summary_complete))
                       # | names(tofit_summary_complete) %in% nomatch(get_categorical(train)
                                                                    # , get_categorical(test))
                       )
@@ -93,9 +95,11 @@ my_mod<-as.formula(paste0("simple_status_mu ~ "
 
 
 
-outer_folds <- createMultiFolds(classed$simple_status_mu, k = 10, times =10)
+outer_folds <- createMultiFolds(classed$simple_status_mu, k = 10, times =5)
 
 source("code/RF_tuner.R")
+
+classy<-classed %>% ungroup() %>% select(-c(genus, species))
 
 fold_fits <- map( outer_folds, function(fold){
   tic()
@@ -103,10 +107,10 @@ fold_fits <- map( outer_folds, function(fold){
   registerDoParallel(cl)
   
   rf = fit_rf(formu = my_mod
-              , data = classed[fold, ]
+              , data = classy[fold, ]
               , sampling = NULL
               , tuneMethod = "repeatedcv"
-              , repeats = 10
+              , repeats = 5
   )
   stopCluster(cl)
   print(toc())
@@ -116,11 +120,11 @@ fold_fits <- map( outer_folds, function(fold){
 assess_method <- map_dfr(1:length(fold_fits), function(x){
   
   pre = predict(fold_fits[[x]]
-                , classed[-outer_folds[[x]]]
+                , classy[-outer_folds[[x]], ] 
                 , type = "prob")
-  predictions = prediction(pre[,2], as.factor(classed[-outer_folds[[x]], "simple_status_mu"]))
+  predictions = prediction(pre[,2], as.factor(classy[-outer_folds[[x]], "simple_status_mu"]))
   preval = predict(fold_fits[[x]]
-                   , classed[-outer_folds[[x]]]
+                   , classy[-outer_folds[[x]], -c("genus", "species")]
   )
   in_auc = fold_fits[[x]]$results %>% 
     filter(mtry == fold_fits[[x]]$finalModel$mtry) %>% 
@@ -130,7 +134,7 @@ assess_method <- map_dfr(1:length(fold_fits), function(x){
   data.frame(#pre
     #, truth = 
     #, 
-    accuracy = sum(preval == example_train_dat[-outer_folds[[x]], 2])/length(y)
+    accuracy = sum(preval == example_train_dat[-outer_folds[[x]], "simple_status_mu"])/length(y)
     , oob= mean(fold_fits[[x]]$finalModel$err.rate[, 1])
     , threat_acc = mean(fold_fits[[x]]$finalModel$err.rate[, 2])
     , sec_acc = mean(fold_fits[[x]]$finalModel$err.rate[, 3])
