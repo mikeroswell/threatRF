@@ -99,7 +99,7 @@ source("code/RF_tuner.R")
 
 fold_fits <- map( outer_folds, function(fold){
   tic()
-  cl <- makePSOCKcluster(7)
+  cl <- makePSOCKcluster(16)
   registerDoParallel(cl)
   
   rf = fit_rf(formu = my_mod
