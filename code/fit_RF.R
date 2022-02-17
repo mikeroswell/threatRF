@@ -5,6 +5,7 @@ library(doParallel)
 library(caret)
 library(pROC)
 library(ROCR)
+library(tictoc)
 
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
@@ -49,13 +50,13 @@ set.seed(888)
 
 n_obs<-nrow(classed)
 # separate data into train and test
-test_rows<-sample(1:n_obs, round(0.2*n_obs))
-test<-classed[test_rows, ] # 60 rows
-train <- classed[-test_rows, ] # 240 rows
-
-# see if threatened ("2") around twice rel. secure ("3") 
-train %>% group_by(simple_status_mu) %>% summarize(n()) # quite close to expected 2:1 in this run
-test %>% group_by(simple_status_mu) %>% summarize(n()) # good bit more even
+# test_rows<-sample(1:n_obs, round(0.2*n_obs))
+# test<-classed[test_rows, ] # 60 rows
+# train <- classed[-test_rows, ] # 240 rows
+# 
+# # see if threatened ("2") around twice rel. secure ("3") 
+# train %>% group_by(simple_status_mu) %>% summarize(n()) # quite close to expected 2:1 in this run
+# test %>% group_by(simple_status_mu) %>% summarize(n()) # good bit more even
 
 # drop problematic variables
 
@@ -82,8 +83,8 @@ my_mod<-as.formula(paste0("simple_status_mu ~ "
                   , paste(names(tofit_summary_complete)[
                     !(grepl("status", names(tofit_summary_complete))
                       | grepl("Rank", names(tofit_summary_complete))
-                      | names(tofit_summary_complete) %in% nomatch(get_categorical(train)
-                                                                   , get_categorical(test))
+                      # | names(tofit_summary_complete) %in% nomatch(get_categorical(train)
+                                                                   # , get_categorical(test))
                       )
                     # these variables will cause problems
                         ]
@@ -91,63 +92,119 @@ my_mod<-as.formula(paste0("simple_status_mu ~ "
                   ))
 
 
+
+outer_folds <- createMultiFolds(classed$simple_status_mu, k = 10, times =10)
+
 source("code/RF_tuner.R")
-tictoc::tic()
-cl <- makePSOCKcluster(7)
-registerDoParallel(cl)
 
-#models using training data, assessed with 10-fold cv
-up_train <-  fit_rf(data = train, formu = my_mod, sampling="up", tuneMethod = "repeatedcv")
-down_train <- fit_rf(data = train
-                           , my_mod, sampling = "down", tuneMethod = "repeatedcv")
-orig_train <- fit_rf(train
-                           , my_mod, tuneMethod = "repeatedcv")
-
-# models using training data, with tuning, 10-fold cv
-up_tune <- fit_rf(train 
-                              , my_mod, sampling="up", tuneMethod = "repeatedcv", mtry =2:25 )
-down_tune <- fit_rf(train
-                                , my_mod, sampling = "down", tuneMethod = "repeatedcv", mtry =2:25)
-orig_tune <- fit_rf(train 
-                                , my_mod, tuneMethod = "repeatedcv", mtry =2:25)
-
-
-#models using full dataset, no tuning
-up_fulldata <- fit_rf(train 
-                         , my_mod, sampling="up", tuneMethod = "LOOCV")
-down_fulldata <- fit_rf(train 
-                           , my_mod, sampling = "down", tuneMethod = "LOOCV")
-orig_fulldata <- fit_rf(train 
-                           , my_mod, tuneMethod = "LOOCV")
-stopCluster(cl)
-tictoc::toc()
-
-auc_comp <- map_dfr(c("up", "down", "orig"), function(sampling){
-  map_dfr(c("train", "tune", "fulldata"), function(data_provided){
-    mod_setup = paste(sampling, data_provided, sep = "_")
- data.frame(mod_setup
-            , get(eval(mod_setup))$results %>% 
-              filter(mtry == get(eval(mod_setup))$finalModel$mtry )
-          )
-  })
-}) %>% 
-  arrange(-ROC)
-
-
-auc_comp<-map_dfr(c("up", "down", "orig"), function(sampling){
-  map_dfr(c("train", "tune", "fulldata"), function(data_provided){
-    mod_setup = paste(sampling, data_provided, sep = "_")
-    data.frame(mod_setup
-               , get(eval(mod_setup))$results %>% 
-                 filter(mtry == get(eval(mod_setup))$finalModel$mtry)
-                , oob= mean(get(eval(mod_setup))$finalModel$err.rate[,1])
-                , secure= mean(get(eval(mod_setup))$finalModel$err.rate[,2])
-                , threatened = mean(get(eval(mod_setup))$finalModel$err.rate[,3])
-    )
-  })
+fold_fits <- map( outer_folds, function(fold){
+  tic()
+  cl <- makePSOCKcluster(7)
+  registerDoParallel(cl)
+  
+  rf = fit_rf(formu = my_mod
+              , data = classed[fold, ]
+              , sampling = NULL
+              , tuneMethod = "repeatedcv"
+              , repeats = 10
+  )
+  stopCluster(cl)
+  print(toc())
+  return(rf)
 })
 
-auc_comp
+assess_method <- map_dfr(1:length(fold_fits), function(x){
+  
+  pre = predict(fold_fits[[x]]
+                , classed[-outer_folds[[x]]]
+                , type = "prob")
+  predictions = prediction(pre[,2], as.factor(classed[-outer_folds[[x]], "simple_status_mu"]))
+  preval = predict(fold_fits[[x]]
+                   , classed[-outer_folds[[x]]]
+  )
+  in_auc = fold_fits[[x]]$results %>% 
+    filter(mtry == fold_fits[[x]]$finalModel$mtry) %>% 
+    pull(ROC)
+  out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
+  #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
+  data.frame(#pre
+    #, truth = 
+    #, 
+    accuracy = sum(preval == example_train_dat[-outer_folds[[x]], 2])/length(y)
+    , oob= mean(fold_fits[[x]]$finalModel$err.rate[, 1])
+    , threat_acc = mean(fold_fits[[x]]$finalModel$err.rate[, 2])
+    , sec_acc = mean(fold_fits[[x]]$finalModel$err.rate[, 3])
+    , n_threat =  sum(classed[-outer_folds[[x]], "simple_status_mu"]=="threatened")
+    , n_sec =  sum(classed[-outer_folds[[x]], "simple_status_mu"]=="secure")
+    
+    #, predictions = predictions@predictions
+    , in_auc 
+    , out_auc  # = as.numeric(my_auc$auc)
+    , mod = x
+    , mtry = fold_fits[[x]]$finalModel$mtry
+  )
+  
+})
+
+
+
+
+# tictoc::tic()
+# cl <- makePSOCKcluster(7)
+# registerDoParallel(cl)
+# 
+# #models using training data, assessed with 10-fold cv
+# up_train <-  fit_rf(data = train, formu = my_mod, sampling="up", tuneMethod = "repeatedcv")
+# down_train <- fit_rf(data = train
+#                            , my_mod, sampling = "down", tuneMethod = "repeatedcv")
+# orig_train <- fit_rf(train
+#                            , my_mod, tuneMethod = "repeatedcv")
+# 
+# # models using training data, with tuning, 10-fold cv
+# up_tune <- fit_rf(train 
+#                               , my_mod, sampling="up", tuneMethod = "repeatedcv", mtry =2:25 )
+# down_tune <- fit_rf(train
+#                                 , my_mod, sampling = "down", tuneMethod = "repeatedcv", mtry =2:25)
+# orig_tune <- fit_rf(train 
+#                                 , my_mod, tuneMethod = "repeatedcv", mtry =2:25)
+# 
+# 
+# #models using full dataset, no tuning
+# up_fulldata <- fit_rf(train 
+#                          , my_mod, sampling="up", tuneMethod = "LOOCV")
+# down_fulldata <- fit_rf(train 
+#                            , my_mod, sampling = "down", tuneMethod = "LOOCV")
+# orig_fulldata <- fit_rf(train 
+#                            , my_mod, tuneMethod = "LOOCV")
+# stopCluster(cl)
+# tictoc::toc()
+# 
+# auc_comp <- map_dfr(c("up", "down", "orig"), function(sampling){
+#   map_dfr(c("train", "tune", "fulldata"), function(data_provided){
+#     mod_setup = paste(sampling, data_provided, sep = "_")
+#  data.frame(mod_setup
+#             , get(eval(mod_setup))$results %>% 
+#               filter(mtry == get(eval(mod_setup))$finalModel$mtry )
+#           )
+#   })
+# }) %>% 
+#   arrange(-ROC)
+# 
+# 
+# auc_comp<-map_dfr(c("up", "down", "orig"), function(sampling){
+#   map_dfr(c("train", "tune", "fulldata"), function(data_provided){
+#     mod_setup = paste(sampling, data_provided, sep = "_")
+#     data.frame(mod_setup
+#                , get(eval(mod_setup))$results %>% 
+#                  filter(mtry == get(eval(mod_setup))$finalModel$mtry)
+#                 , oob= mean(get(eval(mod_setup))$finalModel$err.rate[,1])
+#                 , secure= mean(get(eval(mod_setup))$finalModel$err.rate[,2])
+#                 , threatened = mean(get(eval(mod_setup))$finalModel$err.rate[,3])
+#     )
+#   })
+# })
+# 
+# auc_comp
 
 map(c("up", "down", "orig"), function(sampling){
   map(c("train", "tune", "fulldata"), function(data_provided){
