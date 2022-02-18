@@ -75,7 +75,16 @@ nomatch<-function(x, y){
   })]
 }
 
+x.name = 1
+x = as.data.frame(get_categorical(out.dat))
+y = as.data.frame(get_categorical(in.dat))
+nomatch_rows <-function(x, y){
+ map(1:length(colnames(x)), function(x.name){
+  sapply(x[ , x.name], function(this.row){as.character(this.row) %in% as.character(y[ , x.name])[[1]]})
+  })
+}
 
+nomatch_rows(x,y)
 
 
 
@@ -118,7 +127,9 @@ fold_fits <- map( outer_folds, function(fold){
 })
 
 assess_method <- map_dfr(1:length(fold_fits), function(x){
-  
+  in.dat = classy[outer_folds[[x]], ]
+  out.dat = classy[-outer_folds[[x]], ]
+  new.dat = nomatch_rows(get_categorical(out.dat), get_categorical(in.dat))
   pre = predict(fold_fits[[x]]
                 , classy[-outer_folds[[x]], ] 
                 , type = "prob")
