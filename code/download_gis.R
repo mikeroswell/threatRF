@@ -75,10 +75,21 @@ map(zippy, function(fn){
 #############################
 # was in downlaod_plants but think at least some of this belongs in here and other parts in crunch_GIS to keep workflows distinct and load fewer packages and maybe less data at any given time.
 
-# get the climate data
-get_chelsa(period = "current", output_dir = "data/fromR/lfs")
 
+my_layers<- read.delim("data/envidatS3paths.txt")
 
+# dir.create("data/GIS_downloads/CHELSA")
+
+purrr::map(1:nrow(my_layers), function(ly){
+  options(timeout = 900)
+  download.file(my_layers[ly, ], destfile =
+                  paste0("data/GIS_downloads/CHELSA/"
+                         , gsub("_1981.*\\.tif*$", "\\.tif"
+                                , gsub("^.*CHELSA_", "", my_layers[ly, ])))
+  )
+})
+# had some weird space not going to worry about it. 
+file.rename(list.files("data/GIS_downloads/CHELSA/", full.names = T), gsub("f $", "f", list.files("data/GIS_downloads/CHELSA/", full.names = T)))
 # try again with slope
 # for future reference, this is the start of how to download raster layers from REST server
 # http://servername/ArcGIS/rest/services/ImageServiceName/ImageServer/download?rasterIds=5,6,10,11,12&geometry={"xmin":-1949594.8286481365, "ymin": 882737.0181116117,"xmax":-1946926.2791246006,"ymax":884828.2021675818,"spatialReference":{"wkid":102009}}&geometryType=esriGeometryEnvelope&format=TIFF&f=html
@@ -87,3 +98,5 @@ get_chelsa(period = "current", output_dir = "data/fromR/lfs")
 download.file("https://lidar.geodata.md.gov/imap/rest/directories/arcgisoutput/Statewide/MD_statewide_slope_m_ImageServer/_ags_ca41fc53_e3b8_4997_b25e_b114e9a3d5b9.tif", destfile = "data/GIS_downloads/slope.tif")
 
 
+
+https://os.zhdk.cloud.switch.ch/envicloud/chelsa/chelsa_V2/GLOBAL/climatologies/1981-2010/bio/

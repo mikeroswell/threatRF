@@ -59,32 +59,13 @@ n_obs<-nrow(classed)
 # test %>% group_by(simple_status_mu) %>% summarize(n()) # good bit more even
 
 # drop problematic variables
-
-# subset a data.frame for categorical variables
-get_categorical <- function(x) {
-  x[sapply(x
-                  , function(y) {
-                    is.factor(y) | is.character(y)})]
-}
-
-
 # compare factor levels from two dataframes with identical variables
 nomatch<-function(x, y){
   colnames(x)[!sapply(1:length(colnames(x)), function(x.name){
-   all(y[ ,x.name] %in% x[ ,x.name])
+    all(y[ ,x.name] %in% x[ ,x.name])
   })]
 }
 
-x.name = 1
-x = as.data.frame(get_categorical(out.dat))
-y = as.data.frame(get_categorical(in.dat))
-nomatch_rows <-function(x, y){
- map(1:length(colnames(x)), function(x.name){
-  sapply(x[ , x.name], function(this.row){as.character(this.row) %in% as.character(y[ , x.name])[[1]]})
-  })
-}
-
-nomatch_rows(x,y)
 
 
 
@@ -107,9 +88,14 @@ my_mod<-as.formula(paste0("simple_status_mu ~ "
 outer_folds <- createMultiFolds(classed$simple_status_mu, k = 10, times =5)
 
 source("code/RF_tuner.R")
-
-classy<-classed %>% ungroup() %>% select(-c(genus, species))
-
+# maybe make life easier by dropping some info
+classy<-classed [ , !(grepl("status", names(tofit_summary_complete))
+                                               | grepl("Rank", names(tofit_summary_complete))
+                                               | grepl("genus", names(tofit_summary_complete))
+                                               | grepl("species", names(tofit_summary_complete))
+)
+                                             ]
+# fit models
 fold_fits <- map( outer_folds, function(fold){
   tic()
   cl <- makePSOCKcluster(16)
@@ -126,33 +112,28 @@ fold_fits <- map( outer_folds, function(fold){
   return(rf)
 })
 
+# get performance
 assess_method <- map_dfr(1:length(fold_fits), function(x){
-  in.dat = classy[outer_folds[[x]], ]
   out.dat = classy[-outer_folds[[x]], ]
-  new.dat = nomatch_rows(get_categorical(out.dat), get_categorical(in.dat))
-  pre = predict(fold_fits[[x]]
-                , classy[-outer_folds[[x]], ] 
+  mod = fold_fits[[x]]
+  remod = fix.mod(mod, out.dat)
+  pre = predict(remod
+                , out.dat 
                 , type = "prob")
-  predictions = prediction(pre[,2], as.factor(classy[-outer_folds[[x]], "simple_status_mu"]))
-  preval = predict(fold_fits[[x]]
-                   , classy[-outer_folds[[x]], -c("genus", "species")]
-  )
-  in_auc = fold_fits[[x]]$results %>% 
-    filter(mtry == fold_fits[[x]]$finalModel$mtry) %>% 
+  predictions = prediction(pre[,2], classed[-outer_folds[[x]], "simple_status_mu"])
+  preval = predict(remod, out.dat)
+  in_auc = remod$results %>% 
+    filter(mtry == remod$finalModel$mtry) %>% 
     pull(ROC)
   out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
   #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
-  data.frame(#pre
-    #, truth = 
-    #, 
-    accuracy = sum(preval == example_train_dat[-outer_folds[[x]], "simple_status_mu"])/length(y)
-    , oob= mean(fold_fits[[x]]$finalModel$err.rate[, 1])
-    , threat_acc = mean(fold_fits[[x]]$finalModel$err.rate[, 2])
-    , sec_acc = mean(fold_fits[[x]]$finalModel$err.rate[, 3])
+  data.frame(
+    accuracy = sum(preval == classed[-outer_folds[[x]],] %>% pull(simple_status_mu))/length(preval)
+    , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
+    , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
+    , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
     , n_threat =  sum(classed[-outer_folds[[x]], "simple_status_mu"]=="threatened")
     , n_sec =  sum(classed[-outer_folds[[x]], "simple_status_mu"]=="secure")
-    
-    #, predictions = predictions@predictions
     , in_auc 
     , out_auc  # = as.numeric(my_auc$auc)
     , mod = x
@@ -161,7 +142,7 @@ assess_method <- map_dfr(1:length(fold_fits), function(x){
   
 })
 
-
+assess_method %>% summarize(across(.fns =list(mean = mean, sd = sd)))
 
 
 # tictoc::tic()

@@ -95,7 +95,11 @@ data.table::fwrite(withstats2, "data/fromR/lfs/plants_with_status.csv", row.name
 
 
 
+ns<-read.csv('data/fromR/lfs/plant_NS_data.csv')
+gbif<-read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
+str(ns)
 
+gbif %>% summarize(n_distinct(gs))
 
 ############################################
 # data exploration

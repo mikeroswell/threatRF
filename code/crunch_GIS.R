@@ -92,9 +92,11 @@ colnames(nlcd_points)<-gsub("NLCD_", ""
 
 # CHELSA back in this file
 #make a raster stack
-bc <- raster::stack(list.files("data/fromR/lfs/current/", full.names = T))
+# the "tcc" layers apparently came from a different resolution or something
 
-# add bioclimatic value for each observation
+
+bc <- raster::stack(list.files("data/GIS_downloads/CHELSA", full.names = T)[c(1:62, 67:70)])
+         
 
 #shrink the rasters
 focused<-raster::crop(bc, bounds)
