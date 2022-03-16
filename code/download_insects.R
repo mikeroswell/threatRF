@@ -83,5 +83,7 @@ lep_joined<-lepocc %>%
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                         , "unranked")))
+
+write.csv(lep_joined, "data/fromR/lfs/leps_with_status.csv", row.names =F)
   
 lep_joined %>% group_by(simple_status) %>% summarize(obs = n(), spp = n_distinct(withspace))

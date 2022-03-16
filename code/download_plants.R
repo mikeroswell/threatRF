@@ -77,8 +77,9 @@ plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plant
 #write just the natureserve data to file
 write.csv(plant_stats[,-21], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
 
-# plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") #generates an error, weird.
+plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") #generates an error, weird.
 
+plants_gs<-read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
 #merge status and occcurrence
 withstats<-plants_gs %>%
   select(-gs) %>%
@@ -95,8 +96,9 @@ data.table::fwrite(withstats2, "data/fromR/lfs/plants_with_status.csv", row.name
 
 
 
-ns<-read.csv('data/fromR/lfs/plant_NS_data.csv')
-gbif<-read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
+
+withstats2<-read.csv("data/fromR/lfs/plants_with_status.csv")
+
 str(ns)
 
 gbif %>% summarize(n_distinct(gs))

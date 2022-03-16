@@ -17,7 +17,16 @@ my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +d
 
 
 # get the occcurence data
-withstats2 <- read.csv("data/fromR/lfs/plants_with_status.csv")
+pstats <- read.csv("data/fromR/lfs/plants_with_status.csv") %>%
+  mutate(taxon = "plant") %>% 
+  mutate(georeferencedDate = as.character(georeferencedDate)
+         , datasetID = as.character(datasetID))
+lstats <- read.csv("data/fromR/lfs/leps_with_status.csv") %>%
+  mutate(taxon = "lep") %>% 
+  mutate(georeferencedDate = as.character(georeferencedDate)
+         , datasetID = as.character(datasetID))
+withstats2 <- bind_rows(pstats 
+                     , lstats)
 # get the coordinates (may require additional manipulation)
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
