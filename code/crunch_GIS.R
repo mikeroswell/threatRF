@@ -112,8 +112,17 @@ focused<-raster::crop(bc, bounds)
 
 # get the data
 chelsa_matrix<-data.frame(raster::extract(focused, sfed))
-names(chelsa_matrix)<-sapply(0:19, function(x)paste0("bioclim", x))
-chelsa_points<-bind_cols(localities[which(sfed_MD$in_MD ==1),], chelsa_matrix[,2:20], data.frame(apply(nlcd_points, 2, as.character)))
+
+
+names(chelsa_matrix)<-gsub("_1981.*", "", names(chelsa_matrix))
+
+drop_vars<-names(chelsa_matrix)[which(apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))})<=140000)]
+
+chelsa_complete<-chelsa_matrix[ , c(which(apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))})>140000))]
+
+
+
+chelsa_points<-bind_cols(localities[which(sfed_MD$in_MD ==1),], chelsa_complete, data.frame(apply(nlcd_points, 2, as.character)))
 
 
 # correlations not super low, deal with later
@@ -190,14 +199,15 @@ chel_sf<-mysf(chelsa_points) %>%
 
 
 obs<-st_as_sf(good_coords %>% 
-                select(lon = decimalLongitude
+                dplyr::select(lon = decimalLongitude
                        , lat = decimalLatitude
                        , roundedSRank
                        , roundedNRank
                        , roundedGRank
                        , genus
                        , species
-                       , exotic = exotic...17
+                       , kingdomKey
+                       # , exotic = starts_with("exotic")
                        , UID)
          , coords = c("lon",  "lat")
          , crs = "EPSG:4326") %>% 
