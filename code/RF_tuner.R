@@ -1,11 +1,11 @@
 # function to fit RF models taken from Chris Free 
 # https://github.com/cfree14/domoic_acid/blob/29e49da9ec4b16b6d416d389d37867e4b4b7f95d/code/functions/fit_rf.R
 
-fit_rf <- function(data, formu, sampling = NULL, tuneMethod = "none", repeats = NULL){ # set up to take formula as a string
+fit_rf <- function(data, formu, sampling = NULL, tuneMethod = "none", repeats = NULL, max_mtry = 150){ # set up to take formula as a string
   
   # Define tuning parameter grid
   # mtry = Number of variables randomly sampled as candidate variables per tree
-  fitGrid <- expand.grid(mtry=seq(2, 25, 1))
+  fitGrid <- expand.grid(mtry=seq(2, max_mtry, 1))
   
   # Define tuning and training method
   

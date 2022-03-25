@@ -10,9 +10,13 @@ library(tictoc)
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # custom summary functions
-mu<-function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x))}
-sig<- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), length(unique(x)))}
-
+mu <- function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x))}
+sig <- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), length(unique(x)))}
+# fitting function
+source("code/RF_tuner.R")
+# deal with categories
+source("code/fix_mod.R")
+# get the data
 load(file="data/fromR/to_predict.RDA")
 # unique(indi$roundedSRank)
 
@@ -20,7 +24,7 @@ load(file="data/fromR/to_predict.RDA")
 
 tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
                               lon = sf::st_coordinates(.)[,2]) %>% 
-  group_by(genus, species) %>%
+  group_by(genus, species, kingdomKey) %>%
   mutate(maxlat = max(lat, na.rm =T)
          , minlat = min(lat, na.rm = T)
          , maxlon = max(lon, na.rm = T)
@@ -30,119 +34,200 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
                                                     )
                                           )
          ) %>% 
-  filter(!exotic) %>% 
+  # filter(!exotic) %>%  # need to add this back in. 
   sf::st_drop_geometry()
 
 
-tofit_summary <-tofit%>% group_by(genus, species) %>%
+tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
   summarize_all(.funs = c("mu", "sig")) %>% 
     mutate(Random_Pred = runif(1))
+
+
 # drop na preemptively
 tofit_summary_complete<-tofit_summary %>% drop_na()
 
-# for the testing and training dataset, drop the ones with unkown status
+# for the testing and training dataset, drop the ones with unknown status
 classed<-tofit_summary_complete %>% 
   filter(simple_status_mu != 1) %>% 
   mutate(simple_status_mu = if_else(simple_status_mu ==3, "secure", "threatened"))# 1 corresponds to "NONE"
 
+classed.plant <- classed %>% filter(kingdomKey ==6) 
+classed.lep <- classed %>% filter(kingdomKey ==1) 
 # set random seed so results are same each time
 set.seed(888)
 
-n_obs<-nrow(classed)
-# separate data into train and test
-# test_rows<-sample(1:n_obs, round(0.2*n_obs))
-# test<-classed[test_rows, ] # 60 rows
-# train <- classed[-test_rows, ] # 240 rows
-# 
-# # see if threatened ("2") around twice rel. secure ("3") 
-# train %>% group_by(simple_status_mu) %>% summarize(n()) # quite close to expected 2:1 in this run
-# test %>% group_by(simple_status_mu) %>% summarize(n()) # good bit more even
+# functions for fitting
 
-# drop problematic variables
-# compare factor levels from two dataframes with identical variables
-nomatch<-function(x, y){
-  colnames(x)[!sapply(1:length(colnames(x)), function(x.name){
-    all(y[ ,x.name] %in% x[ ,x.name])
-  })]
+folder <- function(dat, resp, k = 10, times = 5){
+  createMultiFolds(dat[,resp][[1]], k = k, times = times)
+}
+
+make_status_mod<-function(dat = classed){
+  as.formula(paste0("simple_status_mu ~ "
+                  , paste(names(dat)[
+                    !(grepl("status", names(dat))
+                      | grepl("Rank", names(dat))
+                      | grepl("genus", names(dat))
+                      | grepl("species", names(dat))
+                      | grepl("kingdom", names(dat))
+                      | grepl("lat_sig", names(dat))
+                      | grepl("lon_sig", names(dat))
+                      | grepl("UID", names(dat))
+                      | grepl("X2001_2019_change_index", names(dat))
+                       )
+                    
+                    # these variables will cause problems if they have
+                    # cardinality 1, or they give away the answer
+                        ]
+                   , collapse= "+")
+                  ))
+}
+
+my_mod <- make_status_mod()
+
+
+
+
+  
+  
+
+
+
+# maybe make life easier by dropping some info
+dropper<-function(dat){dat[ , !(grepl("simple_status_sig", names(dat))
+                                               | grepl("Rank", names(dat))
+                                               | grepl("genus", names(dat))
+                                               | grepl("species", names(dat))
+                                               | grepl("kingdom", names(dat))
+                                               | grepl("UID", names(dat))
+                                               | grepl("X2001_2019_change_index", names(dat))
+)
+                                             ] 
+}
+
+# get performance
+assess_method <- function(fits = "fold_fits"
+                          , subdat = "classy" 
+                          , fulldat = "main"
+                          , folds = "outer_folds"
+                          , resp = "simple_status_mu"
+                          , pos = "threatened"
+                          , neg = "secure"){
+  map_dfr(1:length(get(fits)), function(x){
+    out.dat = get(subdat)[-get(folds)[[x]], ]
+    mod = get(fits)[[x]]
+    remod = fix.mod(mod, out.dat, resp = resp)
+    pre = predict(remod
+                  , out.dat 
+                  , type = "prob")
+    predictions = prediction(pre[,2], get(fulldat)[-get(folds)[[x]], resp])
+    preval = predict(remod, out.dat)
+    in_auc = remod$results %>% 
+      filter(mtry == remod$finalModel$mtry) %>% 
+      pull(ROC)
+    out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
+    #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
+    data.frame(
+      accuracy = sum(preval == get(fulldat)[-get(folds)[[x]],] %>% pull(get(resp)))/length(preval)
+      , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
+      , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
+      , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
+      , n_threat =  sum(get(fulldat)[-get(folds)[[x]], resp]== pos)
+      , n_sec =  sum(get(fulldat)[-get(folds)[[x]], resp]== neg)
+      , in_auc 
+      , out_auc  # = as.numeric(my_auc$auc)
+      , mod = x
+      , mtry = get(fits)[[x]]$finalModel$mtry
+    )
+  })    
 }
 
 
 
+sum_success <- function(m_assess){
+  m_assess %>% summarize(across(.fns =list(mean = mean, sd = sd)))
+}
 
-my_mod<-as.formula(paste0("simple_status_mu ~ "
-                  , paste(names(tofit_summary_complete)[
-                    !(grepl("status", names(tofit_summary_complete))
-                      | grepl("Rank", names(tofit_summary_complete))
-                      | grepl("genus", names(tofit_summary_complete))
-                      | grepl("species", names(tofit_summary_complete))
-                      # | names(tofit_summary_complete) %in% nomatch(get_categorical(train)
-                                                                   # , get_categorical(test))
-                      )
-                    # these variables will cause problems
-                        ]
-                   , collapse= "+")
-                  ))
-
-
-
-outer_folds <- createMultiFolds(classed$simple_status_mu, k = 10, times =5)
-
-source("code/RF_tuner.R")
-# maybe make life easier by dropping some info
-classy<-classed [ , !(grepl("status", names(tofit_summary_complete))
-                                               | grepl("Rank", names(tofit_summary_complete))
-                                               | grepl("genus", names(tofit_summary_complete))
-                                               | grepl("species", names(tofit_summary_complete))
-)
-                                             ]
-# fit models
-fold_fits <- map( outer_folds, function(fold){
-  tic()
-  cl <- makePSOCKcluster(16)
-  registerDoParallel(cl)
+trees_leps<-map(c("lep", "plant"), function(tax){
+  main <- get(paste0("classed.", tax ))
+  classy <- dropper(main)
+  outer_folds <- folder(classy, "simple_status_mu")
+  # fit models
+  fold_fits <- map(outer_folds, function(fold){
+    tic()
+    cl <- makePSOCKcluster(8)
+    registerDoParallel(cl)
+    
+    rf = fit_rf(formu = my_mod
+                , data = classy[fold, ]
+                , sampling = NULL
+                , tuneMethod = "repeatedcv"
+                , repeats = 5
+    )
+    stopCluster(cl)
+    print(toc())
+    return(rf)
+  })
   
-  rf = fit_rf(formu = my_mod
-              , data = classy[fold, ]
-              , sampling = NULL
-              , tuneMethod = "repeatedcv"
-              , repeats = 5
-  )
-  stopCluster(cl)
-  print(toc())
-  return(rf)
+  m_assess <- assess_method()
+  m_sum <- sum_success(m_assess)
+  
+  return(list(tax, fold_fits, m_assess, m_sum))
 })
 
-# get performance
-assess_method <- map_dfr(1:length(fold_fits), function(x){
-  out.dat = classy[-outer_folds[[x]], ]
-  mod = fold_fits[[x]]
-  remod = fix.mod(mod, out.dat)
-  pre = predict(remod
-                , out.dat 
-                , type = "prob")
-  predictions = prediction(pre[,2], classed[-outer_folds[[x]], "simple_status_mu"])
-  preval = predict(remod, out.dat)
-  in_auc = remod$results %>% 
-    filter(mtry == remod$finalModel$mtry) %>% 
-    pull(ROC)
-  out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
-  #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
+
+pdf('figures/model_stability_question.pdf')
+map_dfr(1:50, function(f){
+  mod<-trees_leps[[2]][[2]][[f]]
   data.frame(
-    accuracy = sum(preval == classed[-outer_folds[[x]],] %>% pull(simple_status_mu))/length(preval)
-    , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
-    , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
-    , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
-    , n_threat =  sum(classed[-outer_folds[[x]], "simple_status_mu"]=="threatened")
-    , n_sec =  sum(classed[-outer_folds[[x]], "simple_status_mu"]=="secure")
-    , in_auc 
-    , out_auc  # = as.numeric(my_auc$auc)
-    , mod = x
-    , mtry = fold_fits[[x]]$finalModel$mtry
+    f, 
+    mtry= mod$finalModel$mtry
   )
   
-})
+}) %>%  ggplot(aes(mtry))+geom_histogram() +
+  theme_classic()+
+  labs(y = "folds with mtry selected") +
+  geom_vline(xintercept = )
 
-assess_method %>% summarize(across(.fns =list(mean = mean, sd = sd)))
+dev.off()
+
+trees_leps[[2]][[3]] %>% ggplot(aes(mtry, out_auc))+
+  geom_point()+
+  theme_classic()+
+  geom_hline(yintercept = 0.5, color = "red")
+
+trees_leps[[2]][[3]] %>% ggplot(aes(mtry, in_auc))+
+  geom_point()+
+  theme_classic()+
+  geom_hline(yintercept = 0.5, color = "red")
+
+trees_leps[[2]][[3]] %>% ggplot(aes(mtry, accuracy))+
+  geom_point()+
+  theme_classic()+
+  geom_hline(yintercept = 0.5, color = "red")
+
+trees_leps[[2]][[3]] %>% ggplot(aes(in_auc, out_auc))+
+  geom_point()+
+  theme_classic()+
+  geom_hline(yintercept = 0.5, color = "red")
+
+trees_leps[[2]][[3]] %>% ggplot(aes(oob_accuracy, out_auc))+
+  geom_point()+
+  theme_classic()+
+  geom_hline(yintercept = 0.5, color = "red")
+
+trees_leps[[2]][[3]] %>% ggplot(aes(oob_accuracy, accuracy))+
+  geom_point()+
+  theme_classic()+
+  geom_hline(yintercept = 0.5, color = "red")
+
+trees_leps[[2]][[3]] %>% ggplot(aes(out_auc))+geom_histogram()+theme_classic()
+
+
+summary(lm(out_auc~oob_accuracy, data = trees_leps[[2]][[3]]))
+summarize(sum(mtry<6)/n()) 
+
+
 
 
 # tictoc::tic()

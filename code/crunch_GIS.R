@@ -116,9 +116,17 @@ chelsa_matrix<-data.frame(raster::extract(focused, sfed))
 
 names(chelsa_matrix)<-gsub("_1981.*", "", names(chelsa_matrix))
 
-drop_vars<-names(chelsa_matrix)[which(apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))})<=140000)]
+drop_vars <- names(chelsa_matrix)[which(
+  apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))}) <= 140000) |
+    which(apply(chelsa_matrix, 2, function(x){length(unique(x))})<4)]
 
-chelsa_complete<-chelsa_matrix[ , c(which(apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))})>140000))]
+apply(chelsa_matrix, 2, function(x){length(unique(x))})
+
+chelsa_complete <- chelsa_matrix[ 
+  , c(which(apply(chelsa_matrix, 2, function(x){
+    sum(complete.cases(x))
+    }) > 140000) & 
+        which(apply(chelsa_matrix, 2, function(x){length(unique(x))}) > 3))]
 
 
 
