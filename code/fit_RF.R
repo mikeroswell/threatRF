@@ -49,15 +49,6 @@ tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
   
 
 
-navars<-tofit_summary %>% filter(!is.na(bio10_sig)) %>% 
-  group_by(kingdomKey) %>% summarize_all(.funs = function(x){sum(is.na(x))})
-
-badvars <- navars[sapply(navars, sum)>0]
-
-
-badvars
-
-View(badvars)
 # drop na preemptively
 tofit_summary_complete<-tofit_summary %>% drop_na()
 
@@ -385,7 +376,7 @@ varImpPlot(train_rf_down$finalModel)
 dev.off()
 
 # make predictions on the new data
-predict_unclassified<-predict(train_rf_orig, tofit_summary_complete %>% 
+predict_unclassified<-predict(train_rf_orig, tofit_summary %>% 
                                 filter(simple_status_mu ==1)
                                        , type="prob")
 
