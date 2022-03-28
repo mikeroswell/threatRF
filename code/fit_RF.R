@@ -10,7 +10,7 @@ library(tictoc)
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # custom summary functions
-mu <- function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x))}
+mu <- function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x, na.rm =T))}
 sig <- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), length(unique(x)))}
 # fitting function
 source("code/RF_tuner.R")
@@ -39,10 +39,25 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
 
 
 tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
+  mutate(ab = n()) %>% 
   summarize_all(.funs = c("mu", "sig")) %>% 
     mutate(Random_Pred = runif(1))
 
+# see what columns have issues of NA
 
+
+  
+
+
+navars<-tofit_summary %>% filter(!is.na(bio10_sig)) %>% 
+  group_by(kingdomKey) %>% summarize_all(.funs = function(x){sum(is.na(x))})
+
+badvars <- navars[sapply(navars, sum)>0]
+
+
+badvars
+
+View(badvars)
 # drop na preemptively
 tofit_summary_complete<-tofit_summary %>% drop_na()
 
