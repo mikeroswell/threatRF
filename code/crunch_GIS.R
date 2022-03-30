@@ -191,7 +191,15 @@ slope<-raster("data/GIS_downloads/slope.tif")
 pslope<-projectRaster(slope, crs = my_pr)
 
 slope_points<-raster::extract(pslope, sfed)
+varimp_run<-map_dfr(1:length(trees_leps[[2]][[2]]), function(x){
+  data.frame(data.frame(trees_leps[[2]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
+})
 
+varimp_run2<-map_dfr(1:length(trees_leps[[1]][[2]]), function(x){
+  data.frame(data.frame(trees_leps[[1]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
+})
+
+varimp_run2 %>% group_by(varName) %>% summarize(meanRank = mean(rnk)) %>% arrange(meanRank)
 # merge chelsa with occurrence
 # clim_stat <- left_join(good_coords, chelsa_points
 #                        , by = c("decimalLatitude" = "latitude"
@@ -242,7 +250,7 @@ indi<-st_join(chel_sf, obs)
 # looks like the dropped ones have S2, S4, S5 spp overrepresented, unranked under-represented
 # I think this will be fine overall. 
 head(good_coords)
-save(indi, file="data/fromR/to_predict.RDA")
+save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
 took
 
