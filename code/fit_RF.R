@@ -154,6 +154,10 @@ sum_success <- function(m_assess){
   m_assess %>% summarize(across(.fns =list(mean = mean, sd = sd)))
 }
 
+# set number of workers for cluster
+cores<-16
+
+# fit models
 trees_leps<-map(c("lep", "plant"), function(tax){
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
@@ -161,7 +165,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   # fit models
   fold_fits <- map(outer_folds, function(fold){
     tic()
-    cl <- makePSOCKcluster(8)
+    cl <- makePSOCKcluster(cores)
     registerDoParallel(cl)
     
     rf = fit_rf(formu = my_mod
