@@ -64,7 +64,7 @@ set.seed(888)
 
 # functions for fitting
 
-folder <- function(dat, resp, k = 10, times = 5){
+folder <- function(dat, resp, k = 10, times = 10){
   createMultiFolds(dat[,resp][[1]], k = k, times = times)
 }
 
@@ -161,7 +161,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   # fit models
   fold_fits <- map(outer_folds, function(fold){
     tic()
-    cl <- makePSOCKcluster(8)
+    cl <- makePSOCKcluster(7)
     registerDoParallel(cl)
     
     rf = fit_rf(formu = my_mod
