@@ -168,7 +168,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
                 , data = classy[fold, ]
                 , sampling = NULL
                 , tuneMethod = "repeatedcv"
-                , repeats = 5
+                , repeats = 10
     )
     stopCluster(cl)
     print(toc())
