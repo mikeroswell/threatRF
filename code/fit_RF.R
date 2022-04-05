@@ -17,7 +17,7 @@ source("code/RF_tuner.R")
 # deal with categories
 source("code/fix_mod.R")
 # get the data
-load(file="data/fromR/to_predict.RDA")
+load(file="data/fromR/lfs/to_predict.RDA")
 # unique(indi$roundedSRank)
 
 
