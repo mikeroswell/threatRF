@@ -17,7 +17,7 @@ source("code/RF_tuner.R")
 # deal with categories
 source("code/fix_mod.R")
 # get the data
-load(file="data/fromR/to_predict.RDA")
+load(file="data/fromR/lfs/to_predict.RDA")
 # unique(indi$roundedSRank)
 
 
@@ -64,7 +64,7 @@ set.seed(888)
 
 # functions for fitting
 
-folder <- function(dat, resp, k = 10, times = 5){
+folder <- function(dat, resp, k = 10, times = 10){
   createMultiFolds(dat[,resp][[1]], k = k, times = times)
 }
 
@@ -165,14 +165,16 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   # fit models
   fold_fits <- map(outer_folds, function(fold){
     tic()
+
     cl <- makePSOCKcluster(cores)
+
     registerDoParallel(cl)
     
     rf = fit_rf(formu = my_mod
                 , data = classy[fold, ]
                 , sampling = NULL
                 , tuneMethod = "repeatedcv"
-                , repeats = 5
+                , repeats = 10
     )
     stopCluster(cl)
     print(toc())
