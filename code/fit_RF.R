@@ -39,7 +39,7 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
 
 
 tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
-  mutate(ab = n()) %>% 
+  # mutate(ab = n()) %>% 
   summarize_all(.funs = c("mu", "sig")) %>% 
     mutate(Random_Pred = runif(1))
 
@@ -155,8 +155,8 @@ sum_success <- function(m_assess){
 }
 
 # set number of workers for cluster
-cores<-16
-
+cores<-7
+co<-0
 # fit models
 trees_leps<-map(c("lep", "plant"), function(tax){
   main <- get(paste0("classed.", tax ))
@@ -164,6 +164,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   outer_folds <- folder(classy, "simple_status_mu")
   # fit models
   fold_fits <- map(outer_folds, function(fold){
+    co <- co +1
     tic()
 
     cl <- makePSOCKcluster(cores)
@@ -178,13 +179,10 @@ trees_leps<-map(c("lep", "plant"), function(tax){
     )
     stopCluster(cl)
     print(toc())
-    return(rf)
+    save(rf, file = paste0("data/fromR/mod_",tax, "_", co, ".RDA"))
   })
   
-  m_assess <- assess_method()
-  m_sum <- sum_success(m_assess)
-  
-  return(list(tax, fold_fits, m_assess, m_sum))
+ return(fold_fits)
 })
 
 trees_leps[[2]][[4]]
