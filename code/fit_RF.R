@@ -180,6 +180,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
     stopCluster(cl)
     print(toc())
     save(rf, file = paste0("data/fromR/mod_",tax, "_", co, ".RDA"))
+    return(rf)
   })
   
  return(fold_fits)
