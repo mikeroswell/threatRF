@@ -177,12 +177,10 @@ trees_leps<-map(c("lep", "plant"), function(tax){
                 , repeats = 10
     )
     stopCluster(cl)
-<<<<<<< HEAD
-s    save(rf, file = paste0("data/fromR/mod_",tax, "_", fold, ".RDA"))
-=======
+   save(rf, file = paste0("data/fromR/mod_",tax, "_", fold, ".RDA"))
+
     print(toc())
-    save(rf, file = paste0("data/fromR/mod_",tax, "_", co, ".RDA"))
->>>>>>> ba7c96418f14b0f130c0f62667d17f6bd8792d53
+    
     return(rf)
   })
   
