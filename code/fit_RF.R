@@ -126,7 +126,7 @@ assess_method <- function(fits = "fold_fits"
     pre = predict(remod
                   , out.dat 
                   , type = "prob")
-    predictions = prediction(pre[,2], get(subdat)[-get(folds)[[x]], resp])
+    predictions = prediction(pre[,2], get(fulldat)[-get(folds)[[x]], resp])
     preval = predict(remod, out.dat)
     in_auc = remod$results %>% 
       filter(mtry == remod$finalModel$mtry) %>% 
@@ -134,11 +134,11 @@ assess_method <- function(fits = "fold_fits"
     out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
     #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
     data.frame(
-      accuracy = sum(preval == get(subdat)[-get(folds)[[x]],] %>% pull(get(resp)))/length(preval)
+      accuracy = sum(preval == get(fulldat)[-get(folds)[[x]],] %>% pull(get(resp)))/length(preval)
       , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
       , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
       , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
-      , n_threat =  sum(get(subdat)[-get(folds)[[x]], resp]== pos)
+      , n_threat =  sum(get(fulldat)[-get(folds)[[x]], resp]== pos)
       , n_sec =  sum(get(fulldat)[-get(folds)[[x]], resp]== neg)
       , in_auc 
       , out_auc  # = as.numeric(my_auc$auc)
@@ -158,61 +158,34 @@ sum_success <- function(m_assess){
 cores<-7
 
 # fit models
+future::plan(strategy = "multiprocess", workers = cores)
+
 trees_leps<-map(c("lep", "plant"), function(tax){
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
   outer_folds <- folder(classy, "simple_status_mu")
   # fit models
-  fold_fits <- map(1:length(outer_folds), function(fold){
+  fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){
     tic()
 
-    cl <- makePSOCKcluster(cores)
-
-    registerDoParallel(cl)
-    s
+  
     rf = fit_rf(formu = my_mod
                 , data = classy[outer_folds[[fold]], ]
                 , sampling = NULL
                 , tuneMethod = "repeatedcv"
                 , repeats = 10
     )
-    stopCluster(cl)
-   save(rf, file = paste0("data/fromR/mod_",tax, "_", fold, ".RDA"))
+
+   save(rf, file = paste0("data/fromR/mod_furrr_",tax, "_", fold, ".RDA"))
 
     print(toc())
-    
-    return(rf)
+    m_assess <- assess_method()
+    m_sum <- sum_success(m_assess)
+    return(list(tax, fold_fits, m_assess, m_sum, fold))
   })
- 
-  m_assess <- assess_method()
-  m_sum <- sum_success(m_assess)
   
-  return(list(tax, fold_fits, m_assess, m_sum))
+ return(fold_fits)
 })
-
-set.seed(888)
-
-tax<-"lep"
-lfit<-trees_leps[[1]]
-main <- get(paste0("classed.", tax ))
-classy <- dropper(main)
-outer_folds <- folder(classy, "simple_status_mu")
-
-
-llong<- assess_method(fits = "lfit")
-lepper<- sum_success(assess_method(fits = "lfit", subdat = "classy"))
-
-tax<-"plant"
-pfit<-trees_leps[[2]]
-main <- get(paste0("classed.", tax ))
-classy <- dropper(main)
-outer_folds <- folder(classy, "simple_status_mu")
-plong<- assess_method(fits = "pfit")
-pepper<- sum_success(assess_method(fits = "pfit", subdat = "classy"))
-
-
-lepper
-pepper
 
 trees_leps[[2]][[4]]
 
@@ -242,14 +215,14 @@ trees_leps[[2]][[3]] %>% ggplot(aes(mtry, in_auc))+
   theme_classic()+
   geom_hline(yintercept = 0.5, color = "red")
 
-plong %>% ggplot(aes(mtry, accuracy))+
+trees_leps[[2]][[3]] %>% ggplot(aes(mtry, accuracy))+
   geom_point()+
   theme_classic()+
   geom_hline(yintercept = 0.5, color = "red")
 
 
 pdf("figures/auc_inner_vs_outer.pdf")
-plong %>% ggplot(aes(in_auc, out_auc, color = oob_accuracy))+
+trees_leps[[2]][[3]] %>% ggplot(aes(in_auc, out_auc, color = oob_accuracy))+
   geom_point()+
   theme_classic()+
   ylim(c(0,1))+
@@ -264,7 +237,7 @@ trees_leps[[2]][[3]] %>% ggplot(aes(oob_accuracy, out_auc))+
   
   geom_hline(yintercept = 0.5, color = "red")
 
-plong %>% ggplot(aes(oob_accuracy, accuracy))+
+trees_leps[[2]][[3]] %>% ggplot(aes(oob_accuracy, accuracy))+
   geom_point()+
   theme_classic()+
   geom_hline(yintercept = 0.5, color = "red")
