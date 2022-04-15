@@ -156,9 +156,12 @@ sum_success <- function(m_assess){
 
 # set number of workers for cluster
 cores<-16
-co<-0
+cl <- makePSOCKcluster(cores)
+
+registerDoParallel(cl)
 # fit models
 trees_leps<-map(c("lep", "plant"), function(tax){
+ 
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
   outer_folds <- folder(classy, "simple_status_mu")
@@ -166,18 +169,15 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   fold_fits <- map(1:length(outer_folds), function(fold){
     tic()
 
-    cl <- makePSOCKcluster(cores)
-
-    registerDoParallel(cl)
-    s
+   #  clusterExport(cl = cl, envir = environment())
     rf = fit_rf(formu = my_mod
                 , data = classy[outer_folds[[fold]], ]
                 , sampling = NULL
                 , tuneMethod = "repeatedcv"
                 , repeats = 10
     )
-    stopCluster(cl)
-   save(rf, file = paste0("data/fromR/mod_",tax, "_", fold, ".RDA"))
+
+   save(list(rf, fold), file = paste0("data/fromR/mod2_",tax, "_", fold, ".RDA"))
 
     print(toc())
     
@@ -186,9 +186,10 @@ trees_leps<-map(c("lep", "plant"), function(tax){
  
   m_assess <- assess_method()
   m_sum <- sum_success(m_assess)
-  
+  gc()
   return(list(tax, fold_fits, m_assess, m_sum))
 })
+stopCluster(cl)
 
 set.seed(888)
 
