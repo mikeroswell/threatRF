@@ -119,14 +119,14 @@ assess_method <- function(fits = "fold_fits"
                           , resp = "simple_status_mu"
                           , pos = "threatened"
                           , neg = "secure"){
-  map_dfr(1:length(get(fits)), function(x){
-    out.dat = get(subdat)[-get(folds)[[x]], ]
-    mod = get(fits)[[x]]
+  map_dfr(1:length(get(eval(fits))), function(x){
+    out.dat = get(eval(subdat))[-get(eval(folds))[[x]], ]
+    mod = get(eval(fits))[[x]]
     remod = fix.mod(mod, out.dat, resp = resp)
     pre = predict(remod
                   , out.dat 
                   , type = "prob")
-    predictions = prediction(pre[,2], get(fulldat)[-get(folds)[[x]], resp])
+    predictions = prediction(pre[,2], get(eval(subdat))[-get(eval(folds))[[x]], resp])
     preval = predict(remod, out.dat)
     in_auc = remod$results %>% 
       filter(mtry == remod$finalModel$mtry) %>% 
@@ -134,12 +134,12 @@ assess_method <- function(fits = "fold_fits"
     out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
     #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
     data.frame(
-      accuracy = sum(preval == get(fulldat)[-get(folds)[[x]],] %>% pull(get(resp)))/length(preval)
+      accuracy = sum(preval == get(subdat)[-get(folds)[[x]],] %>% pull(get(resp)))/length(preval)
       , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
       , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
       , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
-      , n_threat =  sum(get(fulldat)[-get(folds)[[x]], resp]== pos)
-      , n_sec =  sum(get(fulldat)[-get(folds)[[x]], resp]== neg)
+      , n_threat =  sum(get(subdat)[-get(folds)[[x]], resp]== pos)
+      , n_sec =  sum(get(subdat)[-get(folds)[[x]], resp]== neg)
       , in_auc 
       , out_auc  # = as.numeric(my_auc$auc)
       , mod = x
@@ -157,6 +157,7 @@ sum_success <- function(m_assess){
 # set number of workers for cluster
 
 cores<-16
+co<-0
 
 # fit models
 future::plan(strategy = "multiprocess", workers = cores)
@@ -166,12 +167,13 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
   outer_folds <- folder(classy, "simple_status_mu")
+  save(outer_folds, file = "data/fromR/outerFolds.RDA")
   # fit models
-  fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){
+  fold_fits <- furrr::future_map(1:5, function(fold){ # length(outer_folds)
     tic()
+    co<-co+1
 
-
-    rf = fit_rf(formu = my_mod
+    rf <- fit_rf(formu = my_mod
                 , data = classy[outer_folds[[fold]], ]
                 , sampling = NULL
                 , tuneMethod = "repeatedcv"
@@ -180,11 +182,18 @@ trees_leps<-map(c("lep", "plant"), function(tax){
 
 
     print(toc())
-    m_assess <- assess_method()
-    m_sum <- sum_success(m_assess)
-    return(list(tax, fold_fits, m_assess, m_sum, fold))
+   
+    return(rf)
+    
   })
-
+  save(fold_fits, file = "data/fromR/fold_fits.RDA")
+  print("did the fits")
+  # m_assess <- assess_method()
+  # print("assess method ran")
+  # m_sum <- sum_success(m_assess)
+  # print(co)
+  # print(exists(fold_fits))
+  return(list(tax, fold_fits, outer_folds))
 })
 
 trees_leps[[2]][[4]]
