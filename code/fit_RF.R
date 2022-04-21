@@ -162,6 +162,7 @@ cores<-16
 future::plan(strategy = "multiprocess", workers = cores)
 
 trees_leps<-map(c("lep", "plant"), function(tax){
+ 
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
   outer_folds <- folder(classy, "simple_status_mu")
@@ -169,7 +170,10 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){
     tic()
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> 3f92fddd858b5ba44df9b741053f9961c991acb6
 
     rf = fit_rf(formu = my_mod
                 , data = classy[outer_folds[[fold]], ]
@@ -178,16 +182,18 @@ trees_leps<-map(c("lep", "plant"), function(tax){
                 , repeats = 10
     )
 
+<<<<<<< HEAD
 
    # save(rf, file = paste0("data/fromR/mod_furrr_",tax, "_", fold, ".RDA"))
+=======
+>>>>>>> 3f92fddd858b5ba44df9b741053f9961c991acb6
 
     print(toc())
     m_assess <- assess_method()
     m_sum <- sum_success(m_assess)
     return(list(tax, fold_fits, m_assess, m_sum, fold))
   })
-  
- return(fold_fits)
+
 })
 
 trees_leps[[2]][[4]]
