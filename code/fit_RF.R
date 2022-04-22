@@ -111,48 +111,7 @@ dropper<-function(dat){dat[ , !(grepl("simple_status_sig", names(dat))
                                              ] 
 }
 
-# get performance
-assess_method <- function(fits = "fold_fits"
-                          , subdat = "classy" 
-                          , fulldat = "main"
-                          , folds = "outer_folds"
-                          , resp = "simple_status_mu"
-                          , pos = "threatened"
-                          , neg = "secure"){
-  map_dfr(1:length(get(eval(fits))), function(x){
-    out.dat = get(eval(subdat))[-get(eval(folds))[[x]], ]
-    mod = get(eval(fits))[[x]]
-    remod = fix.mod(mod, out.dat, resp = resp)
-    pre = predict(remod
-                  , out.dat 
-                  , type = "prob")
-    predictions = prediction(pre[,2], get(eval(subdat))[-get(eval(folds))[[x]], resp])
-    preval = predict(remod, out.dat)
-    in_auc = remod$results %>% 
-      filter(mtry == remod$finalModel$mtry) %>% 
-      pull(ROC)
-    out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
-    #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
-    data.frame(
-      accuracy = sum(preval == get(subdat)[-get(folds)[[x]],] %>% pull(get(resp)))/length(preval)
-      , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
-      , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
-      , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
-      , n_threat =  sum(get(subdat)[-get(folds)[[x]], resp]== pos)
-      , n_sec =  sum(get(subdat)[-get(folds)[[x]], resp]== neg)
-      , in_auc 
-      , out_auc  # = as.numeric(my_auc$auc)
-      , mod = x
-      , mtry = get(fits)[[x]]$finalModel$mtry
-    )
-  })    
-}
 
-
-
-sum_success <- function(m_assess){
-  m_assess %>% summarize(across(.fns =list(mean = mean, sd = sd)))
-}
 
 # set number of workers for cluster
 
@@ -198,9 +157,56 @@ trees_leps<-map(c("lep", "plant"), function(tax){
 
 save(trees_leps, file="data/fromR/lfs/100_100_fits_20220422.rda")
 
-trees_leps[[2]][[4]]
+load("data/fromR/lfs/100_100_fits_20220422.rda")
+# get performance
+assess_method <- function(fits = "fold_fits"
+                          , subdat = "classy" 
+                          , fulldat = "main"
+                          , folds = "outer_folds"
+                          , resp = "simple_status_mu"
+                          , pos = "threatened"
+                          , neg = "secure"){
+  map_dfr(1:length(get(eval(fits))), function(x){
+    out.dat = get(eval(subdat))[-get(eval(folds))[[x]], ]
+    mod = get(eval(fits))[[x]]
+    remod = fix.mod(mod, out.dat, resp = resp)
+    pre = predict(remod
+                  , out.dat 
+                  , type = "prob")
+    predictions = prediction(pre[,2], get(eval(subdat))[-get(eval(folds))[[x]], resp])
+    preval = predict(remod, out.dat)
+    in_auc = remod$results %>% 
+      filter(mtry == remod$finalModel$mtry) %>% 
+      pull(ROC)
+    out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
+    #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
+    data.frame(
+      accuracy = sum(preval == get(subdat)[-get(folds)[[x]],] %>% pull(get(resp)))/length(preval)
+      , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
+      , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
+      , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
+      , n_threat =  sum(get(subdat)[-get(folds)[[x]], resp]== pos)
+      , n_sec =  sum(get(subdat)[-get(folds)[[x]], resp]== neg)
+      , in_auc 
+      , out_auc  # = as.numeric(my_auc$auc)
+      , mod = x
+      , mtry = get(fits)[[x]]$finalModel$mtry
+    )
+  })    
+}
 
-trees_leps[[2]][[2]]
+
+
+sum_success <- function(m_assess){
+  m_assess %>% summarize(across(.fns =list(mean = mean, sd = sd)))
+}
+
+assess_method(
+  fits = "trees_leps[[2]][[2]]"
+  subdat = "dropper"
+)
+
+
 pdf('figures/model_stability_question.pdf')
 map_dfr(1:50, function(f){
   mod<-trees_leps[[2]][[2]][[f]]
@@ -266,140 +272,6 @@ summarize(sum(mtry<6)/n())
 
 save(trees_leps, file ="data/fromR/trees_leps_mods.rda")
 
-# tictoc::tic()
-# cl <- makePSOCKcluster(7)
-# registerDoParallel(cl)
-# 
-# #models using training data, assessed with 10-fold cv
-# up_train <-  fit_rf(data = train, formu = my_mod, sampling="up", tuneMethod = "repeatedcv")
-# down_train <- fit_rf(data = train
-#                            , my_mod, sampling = "down", tuneMethod = "repeatedcv")
-# orig_train <- fit_rf(train
-#                            , my_mod, tuneMethod = "repeatedcv")
-# 
-# # models using training data, with tuning, 10-fold cv
-# up_tune <- fit_rf(train 
-#                               , my_mod, sampling="up", tuneMethod = "repeatedcv", mtry =2:25 )
-# down_tune <- fit_rf(train
-#                                 , my_mod, sampling = "down", tuneMethod = "repeatedcv", mtry =2:25)
-# orig_tune <- fit_rf(train 
-#                                 , my_mod, tuneMethod = "repeatedcv", mtry =2:25)
-# 
-# 
-# #models using full dataset, no tuning
-# up_fulldata <- fit_rf(train 
-#                          , my_mod, sampling="up", tuneMethod = "LOOCV")
-# down_fulldata <- fit_rf(train 
-#                            , my_mod, sampling = "down", tuneMethod = "LOOCV")
-# orig_fulldata <- fit_rf(train 
-#                            , my_mod, tuneMethod = "LOOCV")
-# stopCluster(cl)
-# tictoc::toc()
-# 
-# auc_comp <- map_dfr(c("up", "down", "orig"), function(sampling){
-#   map_dfr(c("train", "tune", "fulldata"), function(data_provided){
-#     mod_setup = paste(sampling, data_provided, sep = "_")
-#  data.frame(mod_setup
-#             , get(eval(mod_setup))$results %>% 
-#               filter(mtry == get(eval(mod_setup))$finalModel$mtry )
-#           )
-#   })
-# }) %>% 
-#   arrange(-ROC)
-# 
-# 
-# auc_comp<-map_dfr(c("up", "down", "orig"), function(sampling){
-#   map_dfr(c("train", "tune", "fulldata"), function(data_provided){
-#     mod_setup = paste(sampling, data_provided, sep = "_")
-#     data.frame(mod_setup
-#                , get(eval(mod_setup))$results %>% 
-#                  filter(mtry == get(eval(mod_setup))$finalModel$mtry)
-#                 , oob= mean(get(eval(mod_setup))$finalModel$err.rate[,1])
-#                 , secure= mean(get(eval(mod_setup))$finalModel$err.rate[,2])
-#                 , threatened = mean(get(eval(mod_setup))$finalModel$err.rate[,3])
-#     )
-#   })
-# })
-# 
-# auc_comp
-
-map(c("up", "down", "orig"), function(sampling){
-  map(c("train", "tune", "fulldata"), function(data_provided){
-    print(paste(sampling, data_provided, sep = "_"))
-   print( get(paste(sampling, data_provided, sep = "_"))$finalModel$ )
-    
-  })
-})
-
-write.csv(auc_comp, "data/fromR/auc_comparisons.csv", row.names =F) 
-
-#what would a stable mmodel look like?
-
-sd(rbinom(50, 27, 0.72)/50)
-
-# save(train_rf_down, file = "data/fromR/lfs/rf_down_plants.rda")
-# save(train_rf_up, file = "data/fromR/lfs/rf_up_plants.rda")
-# save(train_rf_orig, file = "data/fromR/lfs/rf_base_plants.rda")
-
-
-# see if including more data massively increases kappa
-tictoc::tic()
-train_rf_up<- fit_rf(train, my_mod, sampling="up")
-train_rf_down<- fit_rf(train, my_mod, sampling = "down")
-
-train_rf_orig<-fit_rf(train, my_mod)
-tictoc::toc()
-
-# test that thing!
-train_rf_up$finalModel
-test_rf_discrete<-predict(train_rf_up, test) #13% OOB
-sum(test$simple_status_mu == test_rf_discrete)/length(test_rf_discrete) # 61% accuracy on test
-
-test %>% 
-  bind_cols(is.correct = test$simple_status_mu ==test_rf_discrete) %>% 
-  group_by(simple_status_mu) %>% 
-  summarize(n=n(), correct = sum(is.correct), prop.correct = sum(is.correct)/n())
-
-train_rf_down$finalModel
-test_rf_discrete_d<-predict(train_rf_down, test) # 36% oob
-sum(test$simple_status_mu == test_rf_discrete_d)/length(test_rf_discrete_d) # 75% accuracy on test
-test %>% 
-  bind_cols(is.correct = test$simple_status_mu ==test_rf_discrete_d) %>% 
-  group_by(simple_status_mu) %>% 
-  summarize(n=n(), correct = sum(is.correct), prop.correct = sum(is.correct)/n())
-
-train_rf_orig$finalModel
-test_rf_discrete_o<-predict(train_rf_orig, test)
-sum(test$simple_status_mu == test_rf_discrete_o)/length(test_rf_discrete_o) # 62%
-
-test %>% 
-  bind_cols(is.correct = test$simple_status_mu ==test_rf_discrete_o) %>% 
-  group_by(simple_status_mu) %>% 
-  summarize(n=n(), correct = sum(is.correct), prop.correct = sum(is.correct)/n())
-
-
-
-
-# slightly better than expected from the tuning
-confusion<-test %>% ungroup() %>% mutate(prediction=test_rf_discrete
-                                         , orig=test_rf_discrete_o
-                                         , down = test_rf_discrete_d)
-confusion %>%
-  mutate(gotit_up = case_when(simple_status_mu == prediction~1, TRUE ~ 0 )
-         , gotit_orig = case_when(simple_status_mu == orig~1, TRUE  ~ 0 )
-         , gotit_down = case_when(simple_status_mu == down~1, TRUE  ~ 0 )
-         ) %>%  
-  group_by(simple_status_mu) %>% 
-  summarize( e_rate_up = 1-sum(gotit_up)/n()
-            , e_rate_orig = 1-sum(gotit_orig)/n()
-            ,  e_rate_down = 1-sum(gotit_down)/n()
-            , tot = n())
-# but isn't much better in test. Good to go with it for now? Maybe. 
-
-
-# refit with all data? If so, need to make sure hyperparameters are saved etc.,
-# otherwise this can be a very different model
-# final_rf<-fit_rf(classed, my_mod)
 
 # plot(varImp(final_rf))
 # variable importance plots!
