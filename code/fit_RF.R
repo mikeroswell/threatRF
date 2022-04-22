@@ -169,7 +169,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   outer_folds <- folder(classy, "simple_status_mu")
   save(outer_folds, file = "data/fromR/outerFolds.RDA")
   # fit models
-  fold_fits <- furrr::future_map(1:5, function(fold){ # length(outer_folds)
+  fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){ # 
     tic()
     co<-co+1
 
@@ -195,6 +195,8 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   # print(exists(fold_fits))
   return(list(tax, fold_fits, outer_folds))
 })
+
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20220422.rda")
 
 trees_leps[[2]][[4]]
 
