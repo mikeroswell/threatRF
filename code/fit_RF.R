@@ -208,12 +208,17 @@ plant_assess<-assess_method(
   
 )
 
+hist(plant_assess$mtry)
+
+
 # scan for relatioships between accuracy, AUC, and mtry
 plant_assess %>% 
   ggplot(aes(mtry, out_auc, color = accuracy)) + 
   geom_point()+
   theme_classic()
 
+
+summary(lm(out_auc~mtry, data = lep_assess))
 
 pdf("figures/accuracy_and_CV.pdf")
 plant_assess %>% 
@@ -254,6 +259,43 @@ lep_assess %>%
 # look at distribution of auc
 hist(lep_assess$out_auc)
 
+# check out variable importances
+
+varimp_run<-map_dfr(1:2, function(tax){
+  map_dfr(1:length(trees_leps[[tax]][[2]]), function(x){
+    data.frame(data.frame(trees_leps[[tax]][[2]][[x]]$finalModel$importance) %>%
+               arrange(desc(MeanDecreaseAccuracy)) %>% 
+               rownames_to_column() %>%  
+               mutate(rnk = row_number(), foldrep = x,  taxon = c("lep", "plant")[tax]) %>% 
+               select(rnk, MeanDecreaseAccuracy, varName = rowname, foldrep, taxon))
+  })
+})
+
+vimp_sum<-varimp_run %>% 
+  group_by(varName, taxon) %>% 
+  summarize(meanRank = mean(rnk)) %>% 
+  arrange(meanRank)
+
+head(vimp_sum, 20)
+
+# fit final models
+n_cores <- 7 
+final_fits <- map(c("lep", "plant"), function(tax){
+  main <- get(paste0("classed.", tax ))
+  classy <- dropper(main)
+  cl <- makePSOCKcluster(n_cores)
+  registerDoParallel(cl)
+    # fit models
+  rf <- fit_rf(formu = my_mod
+                 , data = classy
+                 , sampling = NULL
+                 , tuneMethod = "repeatedcv"
+                 , repeats = 10
+    )
+  stopCluster(cl)
+    return(rf)
+    
+  })
 
 # make predictions on the new data
 predict_unclassified<-predict(train_rf_orig, tofit_summary %>% 
