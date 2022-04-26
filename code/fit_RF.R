@@ -2,10 +2,12 @@
 
 library(tidyverse)
 library(doParallel)
+library(furrr)
 library(caret)
 library(pROC)
 library(ROCR)
 library(tictoc)
+library(patchwork)
 
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
@@ -20,10 +22,8 @@ source("code/fix_mod.R")
 load(file="data/fromR/lfs/to_predict.RDA")
 # unique(indi$roundedSRank)
 
-
-
-tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
-                              lon = sf::st_coordinates(.)[,2]) %>% 
+almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
+                                   lon = sf::st_coordinates(.)[,2]) %>% 
   group_by(genus, species, kingdomKey) %>%
   mutate(maxlat = max(lat, na.rm =T)
          , minlat = min(lat, na.rm = T)
@@ -31,9 +31,11 @@ tofit<-indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          , minlon = min(lon, na.rm = T)
          , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
                                           , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")
-                                                    )
-                                          )
-         ) %>% 
+         )
+         )
+  )
+
+tofit <-almost %>% 
   # filter(!exotic) %>%  # need to add this back in. 
   sf::st_drop_geometry()
 
@@ -207,8 +209,32 @@ plant_assess<-assess_method(
   
 )
 
-hist(plant_assess$mtry)
+plant_auc_hist <- plant_assess %>% 
+  ggplot(aes(out_auc))+ 
+  geom_histogram()+
+  geom_vline(xintercept = mean(plant_assess$out_auc), color = "red") +
+  geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
+  labs(x = "AUROC on unseen data in 10x repeated 10-fold cross validation"
+       , y = "frequency") +
+  geom_text(aes(x = 0.1, y = 12), label = "plantae",) +
+  xlim(c(0,1))+
+  theme_classic()
 
+lep_auc_hist <- lep_assess %>% 
+  ggplot(aes(out_auc))+ 
+  geom_histogram()+
+  geom_vline(xintercept = mean(lep_assess$out_auc), color = "red") +
+  geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
+  labs(x = ""
+       , y = "frequency") +
+  geom_text(x = 0.1, y = 46, label = "lepidoptera") +
+  xlim(c(0,1))+
+  theme_classic()
+
+
+pdf("figures/model_performance_historgrams.pdf")
+lep_auc_hist / plant_auc_hist
+dev.off()
 
 # scan for relatioships between accuracy, AUC, and mtry
 plant_assess %>% 
@@ -315,7 +341,8 @@ threshlist<-map(1:2, function(tax){
   thresh <- thresh.df[which.max(thresh.df$sens + thresh.df$spec), ]
   taxon <- c("lepidoptera", "plantae")[tax]
 
-   return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh)))
+   return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh), 
+               train.preds = data.frame(preds, taxon, genus = raw$genus, species = raw$species)))
 })
 
 save(threshlist, file = "data/fromR/threshlist.rda")
@@ -338,76 +365,82 @@ predict_unclassified <- map_dfr(c(1, 2), function(tax){
             , preds
             , taxon = c("lepidoptera", "plantae")[tax])
 })
+
+predict_preclassified<-map_dfr(1:2, function(tax){
+  threshlist[[tax]]$train.preds
+})
   
 # combine predictions with original data
-w_preds <- tofit %>% left_join(predict_unclassified, by = c("genus", "species"))
+w_preds <- almost %>% ungroup() %>% left_join(bind_rows(predict_unclassified, predict_preclassified), by = c("genus", "species")) 
 
-w_preds <- w_preds %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
-                                           , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))
-                   , p.threatened = if_else(is.na(threatened), as.numeric(simple_status =="threatened"), threatened)
-                   , had_status = if_else(is.na(threatened), "had_status", "predicted")
-                   )
+
 
 
 # plot predictions at the observation level
 pdf("figures/probability_threatened.pdf")
 w_preds %>% 
-  ggplot(aes(color = p.threatened))+
-  geom_sf(size = 0.2) +
+  filter(!is.na(taxon)) %>% 
+  mutate(existing = c("no prior status", "known threatened", "known relatively secure")[as.numeric(simple_status)]) %>% 
+  ggplot(aes(color = threatened))+
+  geom_sf(size = 0.1) +
   scale_color_viridis_c() +
   theme_classic() +
   theme(legend.position = "bottom") +
-  facet_wrap(~had_status, nrow= 2)
+  facet_grid(existing ~ taxon) + 
+  labs(color = "predicted probability \nspecies is threatened")
 dev.off()
 
 # rasterize predictions
 
 # first make a raster that includes the state of MD
-base_rast <- raster::raster(w_preds, resolution = 5000, crs = sf::st_crs(w_preds) ) # hopefully means 5 km
+base_rast <- raster::raster(w_preds, resolution = 8000, crs = sf::st_crs(w_preds) ) # hopefully means 8 km
 
 
-threat_thres<-0.9 # threshold for saying something is probably threatened
+threat_thres<-0.8 # threshold for saying something is probably threatened
 over_thresh<-function(x, ...){
   if_else(sum(na.omit(x))>0
           , sum(na.omit(x) > threat_thres)/sum(na.omit(x) > 0)
           , 0)}
-rast_pred <- w_preds %>%
-  filter(had_status =="predicted") %>% 
+rast_pred <- map(c("lepidoptera", "plantae"), function(tax){
+  w_preds %>%
+  filter(taxon == tax, simple_status =="NONE") %>% 
   raster::rasterize(
     y = base_rast
     , fun =function(x, ...){c(
       mean(x)
       , over_thresh(x)    
       , sd(x))}
-    , field = "p.threatened"
+    , field = "threatened"
     , na.rm = FALSE)
-
+})
 
 pdf("figures/example_raster_with_proportion_probably_threatened.pdf")
-x<-1
-map(1:3, function(x){
-  
-  ggplot()+
-    geom_tile(data = as.data.frame(as(rast_pred[[x]], "SpatialPixelsDataFrame"))
+
+map(1:2, function(tax){
+  map(1:3, function(x){
+    ggplot()+
+    geom_tile(data = as.data.frame(as(rast_pred[[tax]][[x]], "SpatialPixelsDataFrame"))
               , aes(x = x, y = y, fill = .data[[paste0("layer.", x)]]
                     )
               )+
     scale_fill_viridis_c() +
     coord_equal() +
     theme_void() +
-    labs(fill = c(
+    labs(title = c("lepidoptera", "plantae")[tax]
+         , fill = c(
       "mean of predicted threat \nprobability across all \noccurrences in cell"
-      , "proportion observations \nwith predicted probability \nof being threatened \n>90% "
+      , "proportion observations \nwith predicted probability \nof being threatened \n>80% "
       , "standard deviation of \npredicted threat probability \nacross occurrences in cell" )[x]
     )
+  })
 })
 
 dev.off()
 
 w_preds %>%
   sf::st_drop_geometry() %>% 
-  filter(had_status == "predicted") %>% 
-  group_by(genus, species) %>% 
-  summarize(threat_pred = mean(p.threatened)) %>% 
+  filter(simple_status == "NONE") %>% 
+  group_by(genus, species, taxon) %>% 
+  summarize(threat_pred = mean(threatened)) %>% 
   arrange(desc(threat_pred))
 
