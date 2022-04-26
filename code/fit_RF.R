@@ -179,7 +179,6 @@ assess_method <- function(fits = NULL
       filter(mtry == remod$finalModel$mtry) %>% 
       pull(ROC)
     out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
-    #roc(response = example_train_dat[-y, 2], predictor = pre$Yes)
     data.frame(
       accuracy = sum(preval == subdat[-folds[[x]],] %>% pull(resp))/length(preval)
       , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
@@ -297,22 +296,51 @@ final_fits <- map(c("lep", "plant"), function(tax){
     
   })
 
+save(final_fits, file = "data/fromR/lfs/final_fits.RDA")
+
+# get "optimal" thresholds
+threshlist<-map(1:2, function(tax){
+  kk <- c(1,6)[tax]
+  raw <- tofit_summary_complete %>% 
+    filter(kingdomKey == kk, simple_status_mu != 1)
+  dat <- dropper(raw)
+  preds <- predict(object = fix.mod(final_fits[[tax]]
+                                      , dat
+                                      , simple_status_mu)
+                     , newdata = dat
+                     , type = "prob")
+  perf = performance(prediction(preds[1], dat$simple_status_mu-2), "sens", "spec")
+
+  thresh.df <- data.frame(cut = perf@alpha.values[[1]], sens = perf@x.values[[1]], spec = perf@y.values[[1]])
+  thresh <- thresh.df[which.max(thresh.df$sens + thresh.df$spec), ]
+  taxon <- c("lepidoptera", "plantae")[tax]
+
+   return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh)))
+})
+
+save(threshlist, file = "data/fromR/threshlist.rda")
+
+ 
+
 # make predictions on the new data
-predict_unclassified<-predict(train_rf_orig, tofit_summary %>% 
-                                filter(simple_status_mu ==1)
-                                       , type="prob")
-
-
-
-
-prob_preds<-tofit_summary_complete %>% 
-  filter(simple_status_mu ==1) %>% 
-  select(genus, species) %>% 
-  bind_cols(predict_unclassified) %>% 
-  rename("rel_secure"="2", "threatened" = "3")
-
-
-w_preds <- indi %>% left_join(prob_preds, by = c("genus", "species"))
+predict_unclassified <- map_dfr(c(1, 2), function(tax){
+  kk <- c(1,6)[tax]
+  raw <- tofit_summary_complete %>% 
+    filter(kingdomKey == kk, simple_status_mu == 1)
+  dat <- dropper(raw)
+  preds <- predict(object = fix.mod(final_fits[[tax]]
+                                    , dat
+                                    , simple_status_mu)
+                   , newdata = dat
+                   , type="prob")
+  
+  bind_cols(raw %>% select(genus, species)
+            , preds
+            , taxon = c("lepidoptera", "plantae")[tax])
+})
+  
+# combine predictions with original data
+w_preds <- tofit %>% left_join(predict_unclassified, by = c("genus", "species"))
 
 w_preds <- w_preds %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
                                            , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))
