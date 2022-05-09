@@ -36,7 +36,7 @@ almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
   )
 
 tofit <-almost %>% 
-  # filter(!exotic) %>%  # need to add this back in. 
+  filter(!exotic) %>%  # need to add this back in. 
   sf::st_drop_geometry()
 
 
@@ -302,6 +302,18 @@ vimp_sum<-varimp_run %>%
   group_by(varName, taxon) %>% 
   summarize(meanRank = mean(rnk)) %>% 
   arrange(meanRank)
+
+
+# more variable importance stuff copied from another file, maybe useful
+varimp_run<-map_dfr(1:length(trees_leps[[2]][[2]]), function(x){
+  data.frame(data.frame(trees_leps[[2]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
+})
+
+varimp_run2<-map_dfr(1:length(trees_leps[[1]][[2]]), function(x){
+  data.frame(data.frame(trees_leps[[1]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
+})
+
+varimp_run2 %>% group_by(varName) %>% summarize(meanRank = mean(rnk)) %>% arrange(meanRank)
 
 head(vimp_sum, 20)
 

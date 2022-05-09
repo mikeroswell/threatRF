@@ -1,6 +1,6 @@
 beg<-Sys.time()
 # extract buffers for occurrence data and compute some summary stats
-library(raster) # raster data
+library(      raster) # raster data
 rasterOptions(maxmemory = 1e+09)
 library(tidyverse)
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
@@ -138,13 +138,17 @@ write.csv(drop_vars, "data/fromR/CHELSA_variables_dropped.csv", row.names =F)
 chelsa_complete <- chelsa_matrix[ 
   , intersect(which(apply(chelsa_matrix, 2, function(x){
     sum(complete.cases(x))
-    }) > 140000),
+    }) > 57000),
         which(apply(chelsa_matrix, 2, function(x){length(unique(x))}) > 3))
   ]
 
 
 
-chelsa_points<-bind_cols(localities[which(sfed_MD$in_MD ==1),], chelsa_complete, data.frame(apply(nlcd_points, 2, as.character)))
+chelsa_points <- bind_cols(
+  localities[which(sfed_MD$in_MD ==1),] # just coordinates?
+  , chelsa_complete # CHELSA extended
+  , data.frame(apply(nlcd_points, 2, as.character)) # LULC data
+  )
 
 
 # correlations not super low, deal with later
@@ -198,26 +202,6 @@ slope<-raster("data/GIS_downloads/slope.tif")
 pslope<-projectRaster(slope, crs = my_pr)
 
 slope_points<-raster::extract(pslope, sfed)
-varimp_run<-map_dfr(1:length(trees_leps[[2]][[2]]), function(x){
-  data.frame(data.frame(trees_leps[[2]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
-})
-
-varimp_run2<-map_dfr(1:length(trees_leps[[1]][[2]]), function(x){
-  data.frame(data.frame(trees_leps[[1]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
-})
-
-varimp_run2 %>% group_by(varName) %>% summarize(meanRank = mean(rnk)) %>% arrange(meanRank)
-# merge chelsa with occurrence
-# clim_stat <- left_join(good_coords, chelsa_points
-#                        , by = c("decimalLatitude" = "latitude"
-#                                 , "decimalLongitude" = "longitude"))
-# just_good<-sapply(min_vars, function(x){x[which(x$hc ==0)]})
-
-# putting all the data together
-# climUseStat<-left_join(clim_stat %>%
-#                          rename(latitude = decimalLatitude
-#                                 , longitude = decimalLongitude)
-#                        , bind_cols(localities, lulc2010))
 
 mysf<-function(x){st_as_sf(x
                            , coords = c('longitude', 'latitude')
@@ -243,7 +227,8 @@ obs<-st_as_sf(good_coords %>%
          , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr)) 
 
-
+# merge CHELSA, occurrence with status, and other GIS covariates like slope and
+# land use
 indi<-st_join(chel_sf, obs)
 
 # check conservation status of omitted observations
