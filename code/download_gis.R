@@ -97,6 +97,7 @@ file.rename(list.files("data/GIS_downloads/CHELSA/", full.names = T), gsub("f $"
 # this is something... maybe a statewide 1 m slope raster. If so, awesome.
 download.file("https://lidar.geodata.md.gov/imap/rest/directories/arcgisoutput/Statewide/MD_statewide_slope_m_ImageServer/_ags_ca41fc53_e3b8_4997_b25e_b114e9a3d5b9.tif", destfile = "data/GIS_downloads/slope.tif")
 
-
-
-https://os.zhdk.cloud.switch.ch/envicloud/chelsa/chelsa_V2/GLOBAL/climatologies/1981-2010/bio/
+# not exactly GIS but need it anyways: table of non-Native taxa from USGS
+#citation Simpson, A., Eyler, M.C., Sikes, D., Bowser, M., and Sellers, E., 2018, A comprehensive list of non-native species established in three major regions of the United States: Version 3.0, (ver. 3.0, 2020): U.S. Geological Survey data release, https://doi.org/10.5066/P9E5K160. 
+download.file("https://www.sciencebase.gov/catalog/file/get/5b911a5ce4b0702d0e808588?f=__disk__86%2F03%2Ffa%2F8603fa9066c48b0a0fb5326b70ad86421590134b"
+              , destfile = "data/fromR/lfs/nonNative.csv")

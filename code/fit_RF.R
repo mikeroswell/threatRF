@@ -236,6 +236,8 @@ pdf("figures/model_performance_historgrams.pdf")
 lep_auc_hist / plant_auc_hist
 dev.off()
 
+sum_success(lep_assess)
+
 # scan for relatioships between accuracy, AUC, and mtry
 plant_assess %>% 
   ggplot(aes(mtry, out_auc, color = accuracy)) + 
@@ -323,7 +325,7 @@ final_fits <- map(c("lep", "plant"), function(tax){
   })
 
 save(final_fits, file = "data/fromR/lfs/final_fits.RDA")
-
+load("data/fromR/lfs/final_fits.RDA")
 # get "optimal" thresholds
 threshlist<-map(1:2, function(tax){
   kk <- c(1,6)[tax]
@@ -346,8 +348,15 @@ threshlist<-map(1:2, function(tax){
 })
 
 save(threshlist, file = "data/fromR/threshlist.rda")
-
+load("data/fromR/threshlist.rda")
  
+
+# optimal thresholds
+ot<-map_dfr(1:2, function(tax){
+  threshlist[[tax]]$best_thresh
+})
+
+ot
 
 # make predictions on the new data
 predict_unclassified <- map_dfr(c(1, 2), function(tax){
@@ -444,3 +453,20 @@ w_preds %>%
   summarize(threat_pred = mean(threatened)) %>% 
   arrange(desc(threat_pred))
 
+# ordinal stuff
+
+w_preds %>% 
+  filter(roundedSRank %in% c("S1", "S2", "S3", "S4", "S5")) %>% 
+  ggplot(aes(as.numeric(as.factor(roundedSRank)), threatened))+
+  geom_point()+
+  geom_smooth()+
+  theme_classic()+
+  facet_wrap(~kingdomKey)
+
+# look at the threatened species
+View(predict_unclassified %>% 
+  arrange(desc(threatened)) %>% 
+    filter(taxon == "lepidoptera")
+  )
+
+  

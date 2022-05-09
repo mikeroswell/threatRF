@@ -53,7 +53,14 @@ plants_gs<-md_vasc_obs %>%
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
 
+unique(plants_gs$gs)
+
+unique(plants_gs$species)
+
+plants_gs %>% filter(species =="X")
+
 plants_gs<-plants_gs %>% filter(!grepl("\\.", .$species))
+
 
 # write gbif data to file (make these steps modular since they take a long time)
 write.csv(plants_gs, "data/fromR/lfs/plants_direct_from_gbif.csv", row.names = F)
@@ -74,6 +81,12 @@ plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plant
   unnest (cols = "subnations", names_repair ="unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 
+# drafted to deal with bad species names... will see if needed in the post-gis dataset
+# ps1<-plant_stats %>% separate(scientificName, sep =" "
+#          , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
+#   mutate(gs = paste(genus, species, sep = "_")
+#          , withspace = paste(genus, species, sep = " "))
+# ps2 <- ps1 %>% filter(species %ni% c("x", "var", " ", "")
 #write just the natureserve data to file
 write.csv(plant_stats[,-21], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
 

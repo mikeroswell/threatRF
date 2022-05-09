@@ -30,8 +30,15 @@ withstats2 <- bind_rows(pstats
 # get the coordinates (may require additional manipulation)
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
+  # grab only species not listed as introduced
+  filter(!exotic...175) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
+exotic_records <- withstats2 %>%
+  filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
+  # grab only species listed as introduced
+  filter(exotic...175) %>% 
+  mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 # drop non-MD points
 
 #df of lat and long
@@ -230,7 +237,7 @@ obs<-st_as_sf(good_coords %>%
                        , genus
                        , species
                        , kingdomKey
-                       # , exotic = starts_with("exotic")
+                       , exotic = starts_with("exotic")
                        , UID)
          , coords = c("lon",  "lat")
          , crs = "EPSG:4326") %>% 
@@ -249,7 +256,14 @@ indi<-st_join(chel_sf, obs)
 #   summarize(spp = n_distinct(species), obs = n(), spProp = spp/mean(nsp), obsProp = obs/mean(nobs))
 # looks like the dropped ones have S2, S4, S5 spp overrepresented, unranked under-represented
 # I think this will be fine overall. 
-head(good_coords)
+
+#############################################
+# remove non-native taxa
+
+# nonNative <- read.csv("data/fromR/lfs/nonNative.csv")
+# nn<- nonNative %>% filter(Region == "L48")
+# head(nn)
+
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
 took
