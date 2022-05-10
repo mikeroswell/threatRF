@@ -36,8 +36,8 @@ almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
   )
 
 tofit <-almost %>% 
-  filter(!exotic) %>%  # need to add this back in. 
-  sf::st_drop_geometry()
+  sf::st_drop_geometry() %>% 
+  select(-contains("exotic"))
 
 
 tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
@@ -47,7 +47,8 @@ tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
 
 # see what columns have issues of NA
 
-
+# sapply(tofit_summary, function(x){sum(is.na(x))}) 
+# looks good now
   
 
 
@@ -58,6 +59,8 @@ tofit_summary_complete<-tofit_summary %>% drop_na()
 classed<-tofit_summary_complete %>% 
   filter(simple_status_mu != 1) %>% 
   mutate(simple_status_mu = if_else(simple_status_mu ==3, "secure", "threatened"))# 1 corresponds to "NONE"
+
+
 
 classed.plant <- classed %>% filter(kingdomKey ==6) 
 classed.lep <- classed %>% filter(kingdomKey ==1) 
@@ -117,8 +120,8 @@ dropper<-function(dat){dat[ , !(grepl("simple_status_sig", names(dat))
 
 # set number of workers for cluster
 
-cores<-16
-co<-0
+cores<-7
+
 
 # fit models
 future::plan(strategy = "multiprocess", workers = cores)
@@ -132,7 +135,6 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   # fit models
   fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){ # 
     tic()
-    co<-co+1
 
     rf <- fit_rf(formu = my_mod
                 , data = classy[outer_folds[[fold]], ]
@@ -157,7 +159,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   return(list(tax, fold_fits, outer_folds))
 })
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20220422.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20220510.rda")
 
 load("data/fromR/lfs/100_100_fits_20220422.rda")
 # get performance
@@ -220,23 +222,7 @@ plant_auc_hist <- plant_assess %>%
   xlim(c(0,1))+
   theme_classic()
 
-lep_auc_hist <- lep_assess %>% 
-  ggplot(aes(out_auc))+ 
-  geom_histogram()+
-  geom_vline(xintercept = mean(lep_assess$out_auc), color = "red") +
-  geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
-  labs(x = ""
-       , y = "frequency") +
-  geom_text(x = 0.1, y = 46, label = "lepidoptera") +
-  xlim(c(0,1))+
-  theme_classic()
 
-
-pdf("figures/model_performance_historgrams.pdf")
-lep_auc_hist / plant_auc_hist
-dev.off()
-
-sum_success(lep_assess)
 
 # scan for relatioships between accuracy, AUC, and mtry
 plant_assess %>% 
@@ -247,7 +233,7 @@ plant_assess %>%
 
 summary(lm(out_auc~mtry, data = lep_assess))
 
-pdf("figures/accuracy_and_CV.pdf")
+pdf("figures/accuracy_and_CVP_subset_data.pdf")
 plant_assess %>% 
   ggplot(aes(in_auc, out_auc, color = accuracy)) + 
   geom_point()+
@@ -265,6 +251,23 @@ lep_assess<-assess_method(
   
 )
 
+lep_auc_hist <- lep_assess %>% 
+  ggplot(aes(out_auc))+ 
+  geom_histogram()+
+  geom_vline(xintercept = mean(lep_assess$out_auc), color = "red") +
+  geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
+  labs(x = ""
+       , y = "frequency") +
+  geom_text(x = 0.1, y = 46, label = "lepidoptera") +
+  xlim(c(0,1))+
+  theme_classic()
+
+
+pdf("figures/model_performance_historgrams_subdata.pdf")
+lep_auc_hist / plant_auc_hist
+dev.off()
+
+sum_success(lep_assess)
 # scan for relatioships between accuracy, AUC, and mtry
 lep_assess %>% 
   ggplot(aes(mtry, out_auc, color = accuracy)) + 

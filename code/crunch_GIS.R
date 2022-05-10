@@ -31,14 +31,16 @@ withstats2 <- bind_rows(pstats
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
   # grab only species not listed as introduced
-  filter(!exotic...175) %>% 
+  filter(!exotic...175| !exotic...167) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
 exotic_records <- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
   # grab only species listed as introduced
-  filter(exotic...175) %>% 
+  filter(exotic...175| exotic...167) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
+
+write.csv(exotic_records, file = "data/fromR/lfs/exotic_records_removed.csv")
 # drop non-MD points
 
 #df of lat and long
@@ -127,9 +129,9 @@ apply(chelsa_matrix, 2, function(x){length(unique(x))})
 apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))})
 
 
-drop_vars <- names(chelsa_matrix)[which(
-  apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))}) <= 140000) |
-    which(apply(chelsa_matrix, 2, function(x){length(unique(x))})<4)]
+drop_vars <- names(which(
+  apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))}) <= 76200) |
+    which(apply(chelsa_matrix, 2, function(x){length(unique(x))})<4))
 
 write.csv(drop_vars, "data/fromR/CHELSA_variables_dropped.csv", row.names =F)
 
@@ -138,7 +140,7 @@ write.csv(drop_vars, "data/fromR/CHELSA_variables_dropped.csv", row.names =F)
 chelsa_complete <- chelsa_matrix[ 
   , intersect(which(apply(chelsa_matrix, 2, function(x){
     sum(complete.cases(x))
-    }) > 57000),
+    }) > 76200),
         which(apply(chelsa_matrix, 2, function(x){length(unique(x))}) > 3))
   ]
 
@@ -251,7 +253,9 @@ indi<-st_join(chel_sf, obs)
 
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
-took
+took # 5:20
 
-# this is how to remove temp files if needed
+# cleanup recommended
+# rm(list = ls())
 # removeTmpFiles()
+# gc()
