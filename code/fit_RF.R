@@ -120,7 +120,7 @@ dropper<-function(dat){dat[ , !(grepl("simple_status_sig", names(dat))
 
 # set number of workers for cluster
 
-cores<-7
+cores<-16
 
 
 # fit models
@@ -159,7 +159,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   return(list(tax, fold_fits, outer_folds))
 })
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20220510.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20220530.rda")
 
 load("data/fromR/lfs/100_100_fits_20220422.rda")
 # get performance
@@ -321,7 +321,7 @@ varimp_run2 %>% group_by(varName) %>% summarize(meanRank = mean(rnk)) %>% arrang
 head(vimp_sum, 20)
 
 # fit final models
-n_cores <- 7 
+n_cores <- 16
 final_fits <- map(c("lep", "plant"), function(tax){
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
