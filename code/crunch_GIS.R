@@ -1,6 +1,6 @@
 beg<-Sys.time()
 # extract buffers for occurrence data and compute some summary stats
-library(      raster) # raster data
+library(raster) # raster data
 rasterOptions(maxmemory = 1e+09)
 library(tidyverse)
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
