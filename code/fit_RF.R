@@ -401,7 +401,7 @@ w_preds <- almost %>% ungroup() %>% left_join(bind_rows(predict_unclassified, pr
 
 
 # plot predictions at the observation level
-pdf("figures/probability_threatened.pdf")
+pdf("figures/probability_threatened_subdata.pdf")
 w_preds %>% 
   filter(!is.na(taxon)) %>% 
   mutate(existing = c("no prior status", "known threatened", "known relatively secure")[as.numeric(simple_status)]) %>% 
@@ -425,6 +425,37 @@ over_thresh<-function(x, ...){
   if_else(sum(na.omit(x))>0
           , sum(na.omit(x) > threat_thres)/sum(na.omit(x) > 0)
           , 0)}
+
+
+# pred_by_spp<-w_preds %>% 
+#   group_by(genus, species) %>% 
+#   mutate(is.threatened = c("over_80", "under_80")[2-as.numeric(threatened>threat_thres)]
+#          , gs=paste(genus, species, sep = "_")) %>% 
+#   pivot_wider(names_from = is.threatened, values_from = gs, id_cols = "" )
+# 
+# species_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
+#   pred_by_spp %>%
+#     filter(taxon == tax, simple_status =="NONE") %>% 
+#     raster::rasterize(
+#       y = base_rast
+#       , fun =function(x, ...){c(
+#         function(y){n_distinct(y)}
+#       , field = "over_80"
+#       , na.rm = FALSE)
+# })
+# 
+#   
+# species_okay_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
+#     pred_by_spp %>%
+#       filter(taxon == tax, simple_status =="NONE") %>% 
+#       raster::rasterize(
+#         y = base_rast
+#         , fun = function(x, ...){n_distinct(x)}
+#           , field = "under_80"
+#           , na.rm = FALSE)
+#         })
+
+n_over_thresh<-function(x, ...){sum(na.omit(x>threat_thres))}
 rast_pred <- map(c("lepidoptera", "plantae"), function(tax){
   w_preds %>%
   filter(taxon == tax, simple_status =="NONE") %>% 
@@ -432,16 +463,17 @@ rast_pred <- map(c("lepidoptera", "plantae"), function(tax){
     y = base_rast
     , fun =function(x, ...){c(
       mean(x)
+      , n_over_thresh(x)
       , over_thresh(x)    
       , sd(x))}
     , field = "threatened"
     , na.rm = FALSE)
 })
 
-pdf("figures/example_raster_with_proportion_probably_threatened.pdf")
+pdf("figures/example_raster_with_proportion_probably_threatened_subdata.pdf")
 
 map(1:2, function(tax){
-  map(1:3, function(x){
+  map(1:4, function(x){
     ggplot()+
     geom_tile(data = as.data.frame(as(rast_pred[[tax]][[x]], "SpatialPixelsDataFrame"))
               , aes(x = x, y = y, fill = .data[[paste0("layer.", x)]]
@@ -453,6 +485,7 @@ map(1:2, function(tax){
     labs(title = c("lepidoptera", "plantae")[tax]
          , fill = c(
       "mean of predicted threat \nprobability across all \noccurrences in cell"
+      , "number of points in cell with predicted proba"
       , "proportion observations \nwith predicted probability \nof being threatened \n>80% "
       , "standard deviation of \npredicted threat probability \nacross occurrences in cell" )[x]
     )
