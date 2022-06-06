@@ -161,7 +161,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
 
 save(trees_leps, file="data/fromR/lfs/100_100_fits_20220530.rda")
 
-load("data/fromR/lfs/100_100_fits_20220422.rda")
+load("data/fromR/lfs/100_100_fits_20220530.rda")
 # get performance
 assess_method <- function(fits = NULL
                           , subdat = NULL 
@@ -231,7 +231,6 @@ plant_assess %>%
   theme_classic()
 
 
-summary(lm(out_auc~mtry, data = lep_assess))
 
 pdf("figures/accuracy_and_CVP_subset_data.pdf")
 plant_assess %>% 
@@ -267,6 +266,7 @@ pdf("figures/model_performance_historgrams_subdata.pdf")
 lep_auc_hist / plant_auc_hist
 dev.off()
 
+summary(lm(out_auc~mtry, data = lep_assess))
 sum_success(lep_assess)
 # scan for relatioships between accuracy, AUC, and mtry
 lep_assess %>% 
@@ -303,17 +303,45 @@ varimp_run<-map_dfr(1:2, function(tax){
 
 vimp_sum<-varimp_run %>% 
   group_by(varName, taxon) %>% 
-  summarize(meanRank = mean(rnk)) %>% 
+  summarize(meanRank = mean(rnk)
+            , upprRank = quantile(rnk, 0.975)
+            , lowrRank = quantile(rnk, 0.025)) %>% 
   arrange(meanRank)
+
+
+pdf("figures/top_6_variables_by_importance.pdf")
+vimp_sum %>%
+  group_by(varName) %>% 
+  mutate(minMeanRank = min(meanRank)) %>% 
+  filter(minMeanRank<22.5) %>% 
+  ungroup() %>% 
+  arrange(minMeanRank) %>% 
+  mutate(varName = as.factor(varName) %>% fct_reorder(desc(minMeanRank))) %>% 
+  ggplot(aes(varName, meanRank, color = taxon)) +
+  geom_pointrange(aes(ymax = upprRank, ymin = lowrRank)
+                  , position = position_dodge2(width = 0.3) 
+                  ) +
+  coord_flip() + 
+  theme_classic()
+
 
 
 # more variable importance stuff copied from another file, maybe useful
 varimp_run<-map_dfr(1:length(trees_leps[[2]][[2]]), function(x){
-  data.frame(data.frame(trees_leps[[2]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
+  data.frame(data.frame(trees_leps[[2]][[2]][[x]]$finalModel$importance) %>%
+               arrange(desc(MeanDecreaseAccuracy)) %>% 
+               rownames_to_column() %>%  
+               mutate(rnk = row_number()) %>% 
+               select(rnk, MeanDecreaseAccuracy, varName = rowname)
+             , foldrep = x)
 })
 
 varimp_run2<-map_dfr(1:length(trees_leps[[1]][[2]]), function(x){
-  data.frame(data.frame(trees_leps[[1]][[2]][[x]]$finalModel$importance) %>%arrange(desc(MeanDecreaseAccuracy)) %>% rownames_to_column() %>%  mutate(rnk = row_number()) %>% select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
+  data.frame(data.frame(trees_leps[[1]][[2]][[x]]$finalModel$importance) %>%
+               arrange(desc(MeanDecreaseAccuracy)) %>% 
+               rownames_to_column() %>%  
+               mutate(rnk = row_number()) %>% 
+               select(rnk, MeanDecreaseAccuracy, varName = rowname), foldrep = x)
 })
 
 varimp_run2 %>% group_by(varName) %>% summarize(meanRank = mean(rnk)) %>% arrange(meanRank)
