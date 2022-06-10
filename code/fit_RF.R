@@ -458,36 +458,80 @@ dev.off()
 base_rast <- raster::raster(w_preds, resolution = 8000, crs = sf::st_crs(w_preds) ) # hopefully means 8 km
 
 
-threat_thres<-0.70 # threshold for saying something is probably threatened
-over_thresh<-function(x, ...){
-  if_else(sum(na.omit(x))>0
-          , sum(na.omit(x) > threat_thres)/sum(na.omit(x) > 0)
-          , 0)}
+ # threshold for saying something is probably threatened
+# over_thresh<-function(x, ...){
+#   if_else(sum(na.omit(x))>0
+#           , sum(na.omit(x) > threat_thres)/sum(na.omit(x) > 0)
+#           , 0)}
 
 
 pred_by_spp<-w_preds %>%
-  group_by(genus, species) %>%
-  mutate(is.threatened = c("over_70", "under_70")[2-as.numeric(threatened>threat_thres)]
-         , gs=paste(genus, species, sep = "_"))
+  group_by(genus, species, taxon) %>%
+  mutate(is.threatened = #c("pSecure", "pThreatened")[2-
+           as.numeric(threatened > ot$cut[as.numeric(as.factor(taxon))])
+         #]
+             , gs = paste(genus, species, sep = "_")) 
 # %>%
 #   pivot_wider(names_from = is.threatened, values_from = gs, id_cols = NULL )
-# 
+
+plusOne<-function(x){length(unique(x))}
+
 species_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
   pred_by_spp %>%
-    filter(taxon == tax, simple_status =="NONE", is.threatened == "over_70") %>%
+    filter(taxon == tax, simple_status =="NONE", is.threatened == 1) %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
         c(
-        n_distinct(x)
+        plusOne(x)
         )}
       , field = "gs"
-      , na.rm = TRUE)
+      , na.rm = FALSE)
 })
+
+existe<-function(x){as.numeric(length(x)>0)}
+backMap<-pred_by_spp %>% 
+  raster::rasterize(
+  y = base_rast
+  , fun = function(x, ...){
+    c(existe(x)
+    )}
+    , field = "gs"
+    , na.rm = TRUE)
+
+unadd<- function(x){
+  x<- x-1
+  x[x<0]<-NA
+  return(x)
+}
+
+pdf(file = "figures/n_spp_cell.pdf")
+ggplot()+
+  geom_tile(data = as.data.frame(as(raster::overlay(species_threatened_per_cell[[1]]
+                     , backMap
+                     , fun = function(x){sum(x, na.rm =TRUE)}),  "SpatialPixelsDataFrame"))
+            , aes(x = x, y = y, fill = factor(unadd(layer)))) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_d() +
+  labs(title = "Number of lepidopteran species predicted threatened per cell"
+       , fill = "species")
+
+ggplot()+
+  geom_tile(data = as.data.frame(as(raster::overlay(species_threatened_per_cell[[2]]
+                                                    , backMap
+                                                    , fun = function(x){sum(x, na.rm =TRUE)}),  "SpatialPixelsDataFrame"))
+            , aes(x = x, y = y, fill = unadd(layer))) +
+  coord_equal() +
+  theme_void() +
+  scale_fill_viridis_c(na.value = "white") +
+  labs(title = "Number of plant species predicted threatened per cell"
+       , fill = "species")
+dev.off()
 
 species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
   pred_by_spp %>%
-    filter(taxon == tax, simple_status =="NONE", is.threatened == "under_70") %>%
+    filter(taxon == tax, simple_status =="NONE", is.threatened == 0) %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -521,26 +565,43 @@ p_spp_threatened <-map(1:2, function(tax){
 
 
 n_over_thresh<-function(x, ...){sum(na.omit(x>threat_thres))}
-rast_pred <- map(c("lepidoptera", "plantae"), function(tax){
+mean_sd_pred <- map(c("lepidoptera", "plantae"), function(tax){
   w_preds %>%
   filter(taxon == tax, simple_status =="NONE") %>% 
   raster::rasterize(
     y = base_rast
     , fun =function(x, ...){c(
       mean(x)
-      , n_over_thresh(x)
-      , over_thresh(x)    
       , sd(x))}
     , field = "threatened"
     , na.rm = FALSE)
 })
 
-pdf("figures/example_raster_with_proportion_probably_threatened_subdata.pdf")
+pro<-function(x){sum(x)/length(x)}
+
+count_occ_threatened <- map(c("lepidoptera", "plantae"), function(tax){
+  w_preds %>%
+    filter(taxon == tax, simple_status =="NONE") %>% 
+    mutate(overThresh = as.numeric(threatened > ot$cut[2-as.numeric(tax == "lepidoptera")])) %>% 
+    raster::rasterize(
+      y = base_rast
+      , fun =function(x, ...){c(
+        sum(x)
+        , pro(x)
+        )}
+      , field = "overThresh"
+      , na.rm = TRUE)
+})
+
+count_occ_threatened[[1]]
+
+pdf("figures/threat_prob_predictions.pdf")
 
 map(1:2, function(tax){
-  map(1:4, function(x){
+  map(1:2, function(x){
     ggplot()+
-    geom_tile(data = as.data.frame(as(rast_pred[[tax]][[x]], "SpatialPixelsDataFrame"))
+    geom_tile(data = as.data.frame(as(mean_sd_pred[[tax]][[x]]
+                                      , "SpatialPixelsDataFrame"))
               , aes(x = x, y = y, fill = .data[[paste0("layer.", x)]]
                     )
               )+
@@ -550,10 +611,31 @@ map(1:2, function(tax){
     labs(title = c("lepidoptera", "plantae")[tax]
          , fill = c(
       "mean of predicted threat \nprobability across all \noccurrences in cell"
-      , "number of points in cell with predicted probability \nof being threatned >70%"
-      , "proportion observations \nwith predicted probability \nof being threatened \n>70% "
       , "standard deviation of \npredicted threat probability \nacross occurrences in cell" )[x]
     )
+  })
+})
+
+dev.off()
+
+pdf("figures/occurrence_predictions.pdf")
+
+map(1:2, function(tax){
+  map(1:2, function(x){
+    ggplot()+
+      geom_tile(data = as.data.frame(as(count_occ_threatened[[tax]][[x]]
+                                        , "SpatialPixelsDataFrame"))
+                , aes(x = x, y = y, fill = .data[[paste0("layer.", x)]]
+                )
+      )+
+      scale_fill_viridis_c() +
+      coord_equal() +
+      theme_void() +
+      labs(title = c("lepidoptera", "plantae")[tax]
+           , fill = c(
+             "occurrences of species predicted to be threatened"
+             , "proportion of occcurrences predicted to be threatened species")[x]
+      )
   })
 })
 
