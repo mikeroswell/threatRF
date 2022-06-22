@@ -307,7 +307,29 @@ vimp_sum<-varimp_run %>%
   summarize(meanRank = mean(rnk)
             , upprRank = quantile(rnk, 0.975)
             , lowrRank = quantile(rnk, 0.025)) %>% 
-  arrange(meanRank)
+  ungroup() %>% 
+  group_by(taxon) %>% 
+  mutate(taxMin = min_rank(meanRank)) %>% 
+  right_join(varimp_run) 
+
+
+#make variable importance plot
+vimp_sum %>% 
+  group_by(varName) %>% 
+  mutate(mincomTax = min(taxMin), minMeanRank = min(meanRank)) %>%
+  filter(mincomTax <6) %>% 
+  ungroup() %>%
+  arrange(minMeanRank) %>%
+  mutate(varName = as.factor(varName) %>% fct_reorder(desc(minMeanRank))) %>%
+  ggplot(aes(varName, rnk, fill = taxon, color= taxon))+
+  geom_violin(width = 3, position =position_dodge(width = 0.4), alpha = 0.8) +  
+  coord_flip() + 
+  guides(color = "none") +
+  labs(y = "variable importance rank (low is best)", x = "") +
+  scale_color_brewer(palette = "Dark2")+
+  scale_fill_brewer(palette = "Dark2")+
+  theme_classic() 
+  
 
 
 pdf("figures/top_6_variables_by_importance.pdf")

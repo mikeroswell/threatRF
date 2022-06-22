@@ -1,3 +1,8 @@
+# Wes Knapp private files
+data/Knapp*
+1_ignore_tidy_flora.R
+data/fromR/flat_flora.csv
+
 # History files
 .Rhistory
 .Rapp.history
