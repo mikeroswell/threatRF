@@ -21,11 +21,16 @@ str(knapp_raw)
 # grepl("^[[:blank:]]*-*[[:upper:]][[:lower:]]+ [[:lower:]]{3,}\\>", "Bluegrass, ‚Ä† (Kearny 70 US)")
 # 
 # str_extract(c("test", "your mom", "your mom is the best"), "^[a-z]*")
+# add a useful sorting column, fix some of the issues from the "f" in the checklist
 knapp_next <- knapp_raw %>% 
   mutate(sl = str_length(V1)
          , V1=str_replace(.data$V1, "Passi ora", "Passiflora")
-         , V1=str_replace(.data$V1, "tri dum", "trifidum")
-         , V1=str_replace(.data$V1, "tri orum", "triflorum")) %>% 
+         , V1=str_replace(.data$V1, "tri du", "trifidu")
+         , V1=str_replace(.data$V1, "tri orum", "triflorum")
+         , V1=str_replace(.data$V1, "tri da", "trifida")
+         , V1=str_replace(.data$V1, "uni or", "uniflor")
+         , V1=str_replace(.data$V1, " ava ", " flava ")
+         , V1=str_replace(.data$V1, "Carex ssa", "Carex fissa")) %>% 
   filter(sl > 2)
 
 # dat<-just_bluegrass
@@ -64,14 +69,17 @@ towards_useful <- knapp_rows %>%
   group_by(gs) %>% 
   mutate(has_nonNative_ssp = n_distinct(exclude)>1) %>% 
   separate(gs, into = c("genus", "species"), sep = " ", remove = FALSE) %>% 
-  filter(genus != "Flora")
+  filter(genus != "Flora") %>% 
+  filter(species != "var")
+
+n_distinct(towards_useful$gs)
 
 # this still has about 250 more records than I think Wes Knapp's file did
 # there should only be a few spp with 3-letter epithets
 
 towards_useful %>% filter(str_length(species)<4)
 
-# looks like those that exist are mostly character rendering problems
+# looks like those that exist are mostly character rendering problems.. now fixed 
 
 
 unique(towards_useful$genus)
@@ -79,6 +87,8 @@ unique(towards_useful$genus)
 unique(towards_useful$gs)
 
 n_distinct(towards_useful$gs)
+
+
 
 # Keep all sp with both native and non-native or excluded status as native,
 # looks like they have non-native subsp or invalid observations
