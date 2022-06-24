@@ -292,6 +292,8 @@ hist(lep_assess$out_auc)
 
 # check out variable importances
 
+str(trees_leps[[tax]][[2]][[x]]$finalModel$importance)
+
 varimp_run<-map_dfr(1:2, function(tax){
   map_dfr(1:length(trees_leps[[tax]][[2]]), function(x){
     data.frame(data.frame(trees_leps[[tax]][[2]][[x]]$finalModel$importance) %>%
@@ -314,6 +316,7 @@ vimp_sum<-varimp_run %>%
 
 
 #make variable importance plot
+pdf("figures/variable_importance_top.pdf")
 vimp_sum %>% 
   group_by(varName) %>% 
   mutate(mincomTax = min(taxMin), minMeanRank = min(meanRank)) %>%
@@ -321,33 +324,18 @@ vimp_sum %>%
   ungroup() %>%
   arrange(minMeanRank) %>%
   mutate(varName = as.factor(varName) %>% fct_reorder(desc(minMeanRank))) %>%
-  ggplot(aes(varName, rnk, fill = taxon, color= taxon))+
+  mutate(taxon = if_else(taxon == "plant", "plantae", "lepidoptera")) %>% 
+  ggplot(aes(varName, rnk, fill = taxon, color = taxon))+
   geom_violin(width = 3, position =position_dodge(width = 0.4), alpha = 0.8) +  
   coord_flip() + 
   guides(color = "none") +
   labs(y = "variable importance rank (low is best)", x = "") +
-  scale_color_brewer(palette = "Dark2")+
-  scale_fill_brewer(palette = "Dark2")+
+  scale_fill_manual(values = hcl.colors(4, palette = "Batlow")[c(3,2)]) +
+  scale_color_manual(values = hcl.colors(4, palette = "Batlow")[c(3,2)]) +
   theme_classic() 
-  
+dev.off()  
 
 
-pdf("figures/top_6_variables_by_importance.pdf")
-vimp_sum %>%
-  group_by(varName) %>% 
-  mutate(minMeanRank = min(meanRank)) %>% 
-  filter(minMeanRank<22.5) %>% 
-  ungroup() %>% 
-  arrange(minMeanRank) %>% 
-  mutate(varName = as.factor(varName) %>% fct_reorder(desc(minMeanRank))) %>% 
-  ggplot(aes(varName, meanRank, color = taxon)) +
-  geom_pointrange(aes(ymax = upprRank, ymin = lowrRank)
-                  , position = position_dodge2(width = 0.3) 
-                  ) +
-  coord_flip() + 
-  theme_classic()
-
-dev.off()
 
 # 
 # # more variable importance stuff copied from another file, maybe useful
