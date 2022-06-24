@@ -24,13 +24,17 @@ str(knapp_raw)
 # add a useful sorting column, fix some of the issues from the "f" in the checklist
 knapp_next <- knapp_raw %>% 
   mutate(sl = str_length(V1)
-         , V1=str_replace(.data$V1, "Passi ora", "Passiflora")
-         , V1=str_replace(.data$V1, "tri du", "trifidu")
-         , V1=str_replace(.data$V1, "tri orum", "triflorum")
-         , V1=str_replace(.data$V1, "tri da", "trifida")
-         , V1=str_replace(.data$V1, "uni or", "uniflor")
+         , V1=str_replace(.data$V1, "( d)([a-z]{1,2}) ", "fid\\2 ")
+         , V1=str_replace(.data$V1, "romanzof ", "romanzoffi")
+         , V1=str_replace(.data$V1, "( or)([a-z]{1,2}) ", "flor\\2 ")
+         , V1=str_replace(.data$V1, "ci ua", "ciflua")
+         , V1=str_replace(.data$V1, "Wolf ella", "Wolffiella")
          , V1=str_replace(.data$V1, " ava ", " flava ")
-         , V1=str_replace(.data$V1, "Carex ssa", "Carex fissa")) %>% 
+         , V1=str_replace(.data$V1, "( )(ex[a-z]{1,2}) ", "f\\2 ")
+         , V1=str_replace(.data$V1, "in rma ", "infirma ")
+         , V1=str_replace(.data$V1, "of cinalis ", "officinalis ")
+         , V1=str_replace(.data$V1, "proli cum", "prolificum")
+         , V1=str_replace(.data$V1, "Carex ssa", "Carex fissa"))%>% 
   filter(sl > 2)
 
 # dat<-just_bluegrass
@@ -54,23 +58,27 @@ pasted4 <- pasted3 %>% conc("paste3", "paste4")
 pasted5 <- pasted4 %>% conc("paste4", "paste5")
 pasted6 <- pasted5 %>% conc("paste5", "paste6")
 pasted7 <- pasted6 %>% conc("paste6", "paste7") 
-all(pasted7$paste6 == pasted7$paste7)
-sum(grepl("^[[:blank:]]*-*[[:upper:]]{1}[[:lower:]]+ [[:lower:]]+\\>",pasted7$paste7))
+# all(pasted7$paste6 == pasted7$paste7)
+# sum(grepl("^[[:blank:]]*-*[[:upper:]]{1}[[:lower:]]+ [[:lower:]]+\\>",pasted7$paste7))
 knapp_rows <- data.frame(obs_full = unique(pasted7$paste7))
                                        
 towards_useful <- knapp_rows %>% 
   mutate( gs = str_extract(obs_full, "^-*[[:upper:]][[:lower:]]+ [[:lower:]]{3,}\\-*[[:lower:]]*")
           , verbiage = str_remove(obs_full, "^-*[[:upper:]][[:lower:]]+ [[:lower:]]{3,}\\-*[[:lower:]]*")
           , long_key = str_extract(obs_full, ".{30}")
-          , exclude = grepl("†|waif | ‚Ä°|Excluded", verbiage) 
+          , exclude = grepl("†|waif | ‚Ä°|Excluded|‡", verbiage) & !grepl("Larix la", gs) 
           , verb_length = str_length(verbiage)) %>% 
   group_by(long_key) %>% 
   filter(verb_length == max(verb_length)) %>% 
   group_by(gs) %>% 
   mutate(has_nonNative_ssp = n_distinct(exclude)>1) %>% 
   separate(gs, into = c("genus", "species"), sep = " ", remove = FALSE) %>% 
-  filter(genus != "Flora") %>% 
-  filter(species != "var")
+  filter(genus != "Flora", genus != "Geographic") %>% 
+  filter(species != "var") %>% 
+  ungroup()
+
+# checking regex work
+# towards_useful %>% filter(grepl("fid", species))
 
 n_distinct(towards_useful$gs)
 
@@ -81,6 +89,15 @@ towards_useful %>% filter(str_length(species)<4)
 
 # looks like those that exist are mostly character rendering problems.. now fixed 
 
+# check out the duplicated spp
+# View(towards_useful %>% group_by(gs) %>% mutate(dups = n()) %>% filter(dups >1))
+# look fine now
+
+# might have cleaned up all the truncated species epithets
+towards_useful %>% filter(grepl("^[[:space:]]*[[:lower:]]{2,}", verbiage))
+
+# make sure I got the invasives
+towards_useful %>% filter(genus == "Cynodon")
 
 unique(towards_useful$genus)
 
@@ -90,103 +107,22 @@ n_distinct(towards_useful$gs)
 
 
 
+
+
 # Keep all sp with both native and non-native or excluded status as native,
 # looks like they have non-native subsp or invalid observations
 
+# Look at counts of native and excludes
+towards_useful %>% group_by(exclude) %>% summarize(n_distinct(gs))
 
-  arrange(desc(trouble))
-
-  group_by(trouble) %>% 
-  summarize(troubleSp = n())
-
-  
-towards_useful %>% filter(grepl("Poa pratensis", .data$obs_full))
-towards_useful %>% filter(grepl("Passi", .data$obs_full))
-
-towards_useful %>% filter(grepl("Galium tri", .data$obs_full))
-
-
-
-towards_useful %>% filter(grepl("Bluegrass", obs_full))
-
-knapp_raw %>% filter(grepl("Bluegrass", V1))
-towards_useful %>% filter(grepl("Kearny 70 US", obs_full))
-
-pasted3 %>% filter(grepl("Kearny 70 US", V1))
-
-just_bluegrass <- data.frame(bg = knapp_raw$V1[7401:7402])
-
-just_bluegrass
-just_bluegrass %>% conc( "bg", "fixed")
-
-paste(just_bluegrass$bg[1], just_bluegrass$bg[2])
-# Poa pratensis should be fixed, see if it is an isolated incident
-
-towards_useful %>% filter(grepl("Prunella vulgaris", .data$obs_full))
-# looks like there is a native ssp
-
-towards_useful %>% filter(grepl("Salsola kali", .data$obs_full))
-# should use the comma to append next
+# scan first thousand names of each group
+towards_useful %>% filter(exclude) %>% pull(gs) %>% unique()
+# look at conservation status of excluded flora
+towards_useful %>% 
+  filter(exclude, grepl(" S[0-9]", verbiage)) %>% 
+  pull(obs_full)
+# ok, Larix shouldn't be excluded. 
+# Looks like the other spp/sspp Knapp and Naczi think aren't here
 
 
-
-
-                         
-
-# I think 9th row is empty, what does it look like
-summary(knapp_raw[9,])
-
-
-# first drop empty rows
-knapp_tight <- knapp_raw %>% filter(!(V1 == "" & V2 == "" & V3 == ""))
-
-# loses >400 rows, good
-knapp_tight$V1
-
-
-
-names(knapp_raw) <- c("taxon", "common", "status", "note"  )
-
-# figure out how to filter data properly
-# grepl("ACEA", knapp_raw$taxon)
-# is.na(knapp_raw$common)
-# grepl("^$", knapp_raw$co
-
-
-
-# grepl("ACEA", knapp_raw$taxon) & grepl("^$", knapp_raw$common)
-# is_null(knapp_raw$common)
-
-# remove extra spaces
-knapp_ss <- mutate_all(knapp_raw, function(x){ gsub("  ", " ", x)})
-
-knapp_typed <- knapp_ss %>% mutate(varType = if_else(grepl("ACEA", .data$taxon) & grepl("^$",.data$common), "family" 
-                     , if_else(!grepl("ACEA", .data$taxon) & grepl("^$",.data$common) & !grepl(" ", .data$taxon) | grepl("FLOWERING PLANTS", .data$taxon), "phylum"
-                               , "species"))) %>% 
-  mutate(taxon_native = gsub("\\*", "exotic_", taxon))
-
-knapp_flat <- knapp_typed %>% 
-  pivot_wider(names_from = varType , values_from = taxon_native, values_fn = "first") %>% 
-  fill(phylum) %>% 
-  fill(family) %>% 
-  filter(!is.na(species)) %>% 
-  select(-taxon) %>% 
-  mutate(native = !grepl("exotic_", species)
-         , species = gsub("exotic_", "", species)
-         , family = str_to_sentence(family)) %>% 
-  separate(species, into = c("genus", "species", "subsp_or_var", "additional_tax", "additional_tax_2", "additional_tax_3", "additional_tax_4"), sep = " ")
-
-# check that all waifs are not native
-knapp_flat %>% group_by(status, native) %>% summarize(n()) %>% arrange(native)
-
-#looks like lots of spelling/capitalization errors likely
-
-# View(knapp_flat %>% filter(!native & status == "S2"))
-
-# these are both native, see if I can figure out what's up by looking back 
-# before I manipulated the data
-
-# looks like there is an error!
-
-write.csv(knapp_flat, file = "data/fromR/flat_flora.csv", row.names = FALSE)
-View(knapp_flat[seq(1, 3100, 150),])
+towards_useful %>% filter(!exclude) %>% pull(gs) %>% unique()
