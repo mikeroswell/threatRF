@@ -30,6 +30,8 @@ knapp_next <- knapp_raw %>%
   mutate(sl = str_length(V1)
          , V1=str_replace(.data$V1, "( d)([a-z]{1,2}) ", "fid\\2 ")
          , V1=str_replace(.data$V1, "avesce", "flavesce")
+         , V1=str_replace(.data$V1, " avus", " flavus")
+         , V1=str_replace(.data$V1, " exuo", " flexuo")
          , V1=str_replace(.data$V1, "avico", "flavico")
          , V1=str_replace(.data$V1, "uvia", "fluvia")
          , V1=str_replace(.data$V1, "licinus ", "filicinus ")
@@ -41,7 +43,9 @@ knapp_next <- knapp_raw %>%
          , V1=str_replace(.data$V1, "( or)([a-z]{1,2}) ", "flor\\2 ")
          , V1=str_replace(.data$V1, "ci ua", "ciflua")
          , V1=str_replace(.data$V1, "Wolf ella", "Wolffiella")
+         , V1=str_replace(.data$V1, "Najas exi", "Najas flexi")
          , V1=str_replace(.data$V1, " ava ", " flava ")
+         , V1=str_replace(.data$V1, " orib", " florib")
          , V1=str_replace(.data$V1, "( )(ex[a-z]{1,2}) ", "f\\2 ")
          , V1=str_replace(.data$V1, "in rma ", "infirma ")
          , V1=str_replace(.data$V1, "of cinalis ", "officinalis ")
@@ -151,3 +155,26 @@ towards_useful %>%
 towards_useful %>% filter(!exclude) %>% pull(gs) %>% unique()
 # View(towards_useful)
 write.csv(towards_useful, "data/fromR/knapp_to_check.csv", row.names = FALSE)
+
+
+# check names against GBIF, I guess
+namecheck<-towards_useful %>% mutate(gs = paste(genus, species)) %>% pull(gs) %>% sapply(function(x){
+  rgbif::name_backbone(name = x)
+}) %>% map_dfr(bind_rows, .id = "gs")
+     
+# namecheck <- namecheck %>% map_dfr(bind_rows, .id = "gs")
+
+namecheck %>%mutate(total_gs = n_distinct(gs)) %>%  group_by(status) %>% summarize(tibs = n(), spp = n_distinct(gs), gss =mean(total_gs)) 
+
+rgbif::name_backbone(name = "Sagittaria australis") # matchtype = NONE
+ 
+rgbif::name_backbone(name = "Salix alba") # Good
+rgbif::name_backbone(name = "Salix occidentalis") # Good
+namecheck %>% filter(is.na(status)) %>% pull(gs)
+ # still have a few f issues
+
+                                         
+                     
+                     
+rgbif::name_backbone(name= 
+towards_useful %>% rowwise()
