@@ -21,10 +21,22 @@ str(knapp_raw)
 # grepl("^[[:blank:]]*-*[[:upper:]][[:lower:]]+ [[:lower:]]{3,}\\>", "Bluegrass, ‚Ä† (Kearny 70 US)")
 # 
 # str_extract(c("test", "your mom", "your mom is the best"), "^[a-z]*")
-# add a useful sorting column, fix some of the issues from the "f" in the checklist
+# add a useful sorting column, fix some of the issues from the "f" in the
+# checklist
+# note that this stuff *fixes* the genus and species columns, but in many cases
+# introduces errors into the associated data (synonyms, etc) which were written
+# in the .pdf in a different typefaces.
 knapp_next <- knapp_raw %>% 
   mutate(sl = str_length(V1)
          , V1=str_replace(.data$V1, "( d)([a-z]{1,2}) ", "fid\\2 ")
+         , V1=str_replace(.data$V1, "avesce", "flavesce")
+         , V1=str_replace(.data$V1, "avico", "flavico")
+         , V1=str_replace(.data$V1, "uvia", "fluvia")
+         , V1=str_replace(.data$V1, "licinus ", "filicinus ")
+         , V1=str_replace(.data$V1, "liculm", "filiculm")
+         , V1=str_replace(.data$V1, "ru dulum", "rufidulum")
+         , V1=str_replace(.data$V1, "ra nesq", "rafinesq")
+         , V1=str_replace(.data$V1, " lifor", " filifor")
          , V1=str_replace(.data$V1, "romanzof ", "romanzoffi")
          , V1=str_replace(.data$V1, "( or)([a-z]{1,2}) ", "flor\\2 ")
          , V1=str_replace(.data$V1, "ci ua", "ciflua")
@@ -34,6 +46,7 @@ knapp_next <- knapp_raw %>%
          , V1=str_replace(.data$V1, "in rma ", "infirma ")
          , V1=str_replace(.data$V1, "of cinalis ", "officinalis ")
          , V1=str_replace(.data$V1, "proli cum", "prolificum")
+         , V1=str_replace(.data$V1, " stulo", " fistulo")
          , V1=str_replace(.data$V1, "Carex ssa", "Carex fissa"))%>% 
   filter(sl > 2)
 
@@ -75,6 +88,7 @@ towards_useful <- knapp_rows %>%
   separate(gs, into = c("genus", "species"), sep = " ", remove = FALSE) %>% 
   filter(genus != "Flora", genus != "Geographic") %>% 
   filter(species != "var") %>% 
+  filter(species != "from") %>% 
   ungroup()
 
 # checking regex work
@@ -88,6 +102,13 @@ n_distinct(towards_useful$gs)
 towards_useful %>% filter(str_length(species)<4)
 
 # looks like those that exist are mostly character rendering problems.. now fixed 
+
+towards_useful %>% filter(grepl("fluvia", obs_full))
+# check the fi and fl spp
+towards_useful[grepl("flave", towards_useful$species),]
+towards_useful %>% filter(grepl("fluvia", obs_full))
+towards_useful %>% filter(grepl("fidu", obs_full)) %>% select(species)
+towards_useful %>% filter(grepl("Viburnum", obs_full))
 
 # check out the duplicated spp
 # View(towards_useful %>% group_by(gs) %>% mutate(dups = n()) %>% filter(dups >1))
@@ -106,6 +127,8 @@ unique(towards_useful$gs)
 n_distinct(towards_useful$gs)
 
 
+
+# View(towards_useful %>% filter(genus == "Cyperus") %>% select(species))
 
 
 
@@ -126,3 +149,5 @@ towards_useful %>%
 
 
 towards_useful %>% filter(!exclude) %>% pull(gs) %>% unique()
+# View(towards_useful)
+write.csv(towards_useful, "data/fromR/knapp_to_check.csv", row.names = FALSE)
