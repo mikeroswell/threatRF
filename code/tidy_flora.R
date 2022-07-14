@@ -166,15 +166,79 @@ namecheck<-towards_useful %>% mutate(gs = paste(genus, species)) %>% pull(gs) %>
 
 namecheck %>%mutate(total_gs = n_distinct(gs)) %>%  group_by(status) %>% summarize(tibs = n(), spp = n_distinct(gs), gss =mean(total_gs)) 
 
-rgbif::name_backbone(name = "Sagittaria australis") # matchtype = NONE
+rgbif::name_backbone(name = "Sagittaria australis", verbose = TRUE) # matchtype = NONE
+rgbif::name_backbone(name = "Sagittarius australis", verbose = TRUE)
+
+nbRobust <- function(name){
+  naive <- rgbif::name_backbone(name = name)
+  if(naive$matchType == "NONE"){
+    tooMany <- rgbif::name_backbone(name = name, verbose = TRUE)
+    firstAccept<-tooMany[match("EXACT", tooMany$matchType), ]
+    if(is.null(firstAccept)){
+      return(data.frame(naive, matchNote = "matching problem"))}
+    else{
+      return(data.frame(firstAccept, matchNote = "First matching accepted taxon returned but other exact matches may exist"))
+    }
+  }
+  if(naive$matchType =="EXACT"){return(data.frame(naive, matchNote = "unambiguous"))}
+  else{return(data.frame(naive, matchNote = "possible synonymy or misspelling"))}
+}
  
-rgbif::name_backbone(name = "Salix alba") # Good
-rgbif::name_backbone(name = "Salix occidentalis") # Good
+nbRobust("Sagittaria australis")
+nbRobust("Sagittarius australis")
+nbRobust("Rudbeckia hirta")
+chcklst<-c("Athyrium angustum", "Sagittaria australis", "Sagittarius australis","Rudbeckia hirta", "Pyrola elliptica", "Rhus glabra", "Chamaecrista nictitans")
+test.df<-purrr::map_dfr(chcklst, function(taxName){
+  nbRobust(taxName)
+  
+})
+
+test.df %>% 
+  group_by(matchNote) %>% 
+  summarize(n())
+test.df %>% 
+  filter(matchNote=="unambiguous") %>% 
+  group_by(status) %>% 
+  summarize(n())
+
+
+
+namecheck<-towards_useful %>% 
+  mutate(gs = paste(genus, species)) %>% 
+  pull(gs) %>% 
+  sapply(function(x){
+    nbRobust(x)
+  }) %>% 
+  map_dfr(bind_rows, .id = "gs")
+
+rgbif::name_backbone(name = "Salix alba") # matchtype = NONE
+rgbif::name_backbone(name = "Salix occidentalis") # matchtype = NONE
 namecheck %>% filter(is.na(status)) %>% pull(gs)
  # still have a few f issues
 
+n_distinct(namecheck$gs)
+namecheck %>% group_by(status) %>% summarize(n())
+namecheck %>% filter(status == "SYNONYM")
                                          
                      
                      
-rgbif::name_backbone(name= 
-towards_useful %>% rowwise()
+Knapp_checked <- towards_useful %>% left_join(namecheck, by =c("gs"="species")) %>% 
+  select(gsKnapp = gs
+         , gsAccepted = canonicalName
+         , exclude
+         , has_nonNative_ssp
+         , family
+         , order
+         , phylum
+         , kingdom
+         , matchType
+         , nameStatus = status
+         , matchNote
+         , confidence)
+
+head(Knapp_checked)
+str(Knapp_checked)
+length(unique(Knapp_checked$gsKnapp)) 
+Knapp_checked %>% group_by(gsKnapp) %>% mutate(repeats = n()) %>% arrange(desc(repeats))
+
+Knapp_checked %>% group_by(gsKnapp) %>% mutate(repeats = n()) %>% arrange(desc(repeats)) %>% select(gsKnapp, gsAccepted, nameStatus, confidence, repeats)
