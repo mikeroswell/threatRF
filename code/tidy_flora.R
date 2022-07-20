@@ -260,7 +260,8 @@ namecheck %>% filter(is.na(status)) %>% pull(gs)
 # Heteranthera pauciflora is a good name not yet in backbone, it looks like
 namecheck %>% filter(status == "SYNONYM") %>% pull(gs)
 
-knapp_backboned<-towards_useful %>% left_join(namecheck, by = "gs")
+knapp_backboned<-towards_useful %>% left_join(namecheck, by = "gs") %>% 
+  rename(genus_knapp = genus.x, species_kanpp = species.x, accepted_genus = genus.y, accepted_gs = species.y)
 write.csv(knapp_backboned, "data/knapp_backboned.csv", row.names = FALSE)
 
 
