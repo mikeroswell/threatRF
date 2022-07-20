@@ -63,6 +63,7 @@ knapp_next <- knapp_raw %>%
          , V1=str_replace(.data$V1, " liramum", " filiramum")
          , V1=str_replace(.data$V1, " lifolia", " filifolia")
          , V1=str_replace(.data$V1, " uitans", " fluitans")
+         , V1=str_replace(.data$V1, "( a)([a-z]ellaris)", " fla\\2")
          , V1=str_replace(.data$V1, " exip", " flexip")
          , V1=str_replace(.data$V1, "Carex ssa", "Carex fissa"))%>% 
   filter(sl > 2)
@@ -209,6 +210,14 @@ namecheck %>%
   group_by(gs) %>% 
   summarize(sIDs = n_distinct(speciesKey)) %>% 
   arrange(desc(sIDs))
+
+
+# look at the confidence scores for name matching
+namecheck %>% 
+  ggplot(aes(confidence, color = matchType))+
+  geom_histogram() +
+  theme_classic()
+
 
 # OK, looks like we never have more than one species ID number per gs? 
 # This seesm good. 
