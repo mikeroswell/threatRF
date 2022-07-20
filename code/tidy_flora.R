@@ -188,7 +188,7 @@ namecheck <- towards_useful %>%
   pull(gs) %>% 
   unique() %>% 
   sapply(function(x){
-   nbRobust(x, kingdom = "plantae" )
+   nbRobust(x, kingdom = "Plantae" )
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
@@ -196,28 +196,28 @@ namecheck <- towards_useful %>%
 # per taxon
 
 # turns out that isn't the case. How about one species-level record?
-namecheck %>% 
-  filter(matchType == "EXACT") %>% 
-  group_by(gs, rank, status) %>% 
-  summarize(exactRanks =  n()) %>% 
-  arrange(desc(exactRanks))
+# namecheck %>% 
+#   filter(matchType == "EXACT") %>% 
+#   group_by(gs, rank, status) %>% 
+#   summarize(exactRanks =  n()) %>% 
+#   arrange(desc(exactRanks))
 
-namecheck %>% 
-  filter(gs == "Elymus virginicus")
+# namecheck %>% 
+#   filter(gs == "Elymus virginicus")
 # this looks messy
 
 
-namecheck %>% 
-  group_by(gs) %>% 
-  summarize(sIDs = n_distinct(speciesKey)) %>% 
-  arrange(desc(sIDs))
+# namecheck %>% 
+#   group_by(gs) %>% 
+#   summarize(sIDs = n_distinct(speciesKey)) %>% 
+#   arrange(desc(sIDs))
 
 
 # look at the confidence scores for name matching
-namecheck %>% 
-  ggplot(aes(confidence, color = matchType))+
-  geom_histogram() +
-  theme_classic()
+# namecheck %>% 
+#   ggplot(aes(confidence, color = matchType))+
+#   geom_histogram() +
+#   theme_classic()
 
 namecheck %>% filter(confidence >100)
 
@@ -228,14 +228,14 @@ namecheck %>% filter(confidence >100)
 # I think it's multiple matches per knapp row, actually, which seems fine. 
 namecheck %>% filter(matchType != "EXACT")
 # ok, it looks like a decnt number of matches were to higher taxa, that's what I ned to focus on here. 
-namecheck %>% filter(rank != "SPECIES") %>% select(gs, rank)
+# namecheck %>% filter(rank != "SPECIES") %>% select(gs, rank)
 # rgbif::name_backbone("Viburnum cassinoides", verbose = TRUE)
 
 # cannonical names match gs 1:1
-namecheck %>% 
-  group_by(gs) %>% 
-  summarize(canon = n_distinct(canonicalName)) %>% 
-  arrange(desc(canon))
+# namecheck %>% 
+#   group_by(gs) %>% 
+#   summarize(canon = n_distinct(canonicalName)) %>% 
+#   arrange(desc(canon))
 
 # namecheck <- namecheck %>% map_dfr(bind_rows, .id = "gs")
 
@@ -257,8 +257,11 @@ namecheck %>%
 namecheck %>% filter(matchType == "FUZZY")
 
 namecheck %>% filter(is.na(status)) %>% pull(gs)
+# Heteranthera pauciflora is a good name not yet in backbone, it looks like
 namecheck %>% filter(status == "SYNONYM") %>% pull(gs)
- # still have a few f issues
+
+knapp_backboned<-towards_useful %>% left_join(namecheck, by = "gs")
+write.csv(knapp_backboned, "data/knapp_backboned.csv", row.names = FALSE)
 
 
                                         
