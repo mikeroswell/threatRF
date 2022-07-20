@@ -1,5 +1,6 @@
 # code to tidy untidy flora data
 library(tidyverse)
+source("code/robust_gbif_namesearch.R")
 
 # to create this file, saved .pdf of only the useful pages to "accessible text" 
 # with acrobat
@@ -30,7 +31,7 @@ knapp_next <- knapp_raw %>%
   mutate(sl = str_length(V1)
          , V1=str_replace(.data$V1, "( d)([a-z]{1,2}) ", "fid\\2 ")
          , V1=str_replace(.data$V1, "avesce", "flavesce")
-         , V1=str_replace(.data$V1, " avus", " flavus")
+         , V1=str_replace(.data$V1, " avu", " flavu")
          , V1=str_replace(.data$V1, " exuo", " flexuo")
          , V1=str_replace(.data$V1, "avico", "flavico")
          , V1=str_replace(.data$V1, "uvia", "fluvia")
@@ -45,12 +46,22 @@ knapp_next <- knapp_raw %>%
          , V1=str_replace(.data$V1, "Wolf ella", "Wolffiella")
          , V1=str_replace(.data$V1, "Najas exi", "Najas flexi")
          , V1=str_replace(.data$V1, " ava ", " flava ")
+         , V1=str_replace(.data$V1, " lamentosa", " filamentosa")
+         , V1=str_replace(.data$V1, "rofex", "roflex")
+         , V1=str_replace(.data$V1, "accida", "flaccida")
+         , V1=str_replace(.data$V1, " exicaulis", " flexicaulis")
+         , V1=str_replace(.data$V1, " coidea", " ficoidea")
          , V1=str_replace(.data$V1, " orib", " florib")
-         , V1=str_replace(.data$V1, "( )(ex[a-z]{1,2}) ", "f\\2 ")
+         , V1=str_replace(.data$V1, " orid", " florid")
+         , V1=str_replace(.data$V1, "( )(ex[a-z]*) ", "fl\\2 ")
          , V1=str_replace(.data$V1, "in rma ", "infirma ")
          , V1=str_replace(.data$V1, "of cinalis ", "officinalis ")
          , V1=str_replace(.data$V1, "proli cum", "prolificum")
          , V1=str_replace(.data$V1, " stulo", " fistulo")
+         , V1=str_replace(.data$V1, " lipes", " filipes")
+         , V1=str_replace(.data$V1, " lifolia", " filifolia")
+         , V1=str_replace(.data$V1, " uitans", " fluitans")
+         , V1=str_replace(.data$V1, " exip", " flexip")
          , V1=str_replace(.data$V1, "Carex ssa", "Carex fissa"))%>% 
   filter(sl > 2)
 
@@ -110,6 +121,8 @@ towards_useful %>% filter(str_length(species)<4)
 towards_useful %>% filter(grepl("fluvia", obs_full))
 # check the fi and fl spp
 towards_useful[grepl("flave", towards_useful$species),]
+towards_useful[grepl("flex", towards_useful$species),]
+
 towards_useful %>% filter(grepl("fluvia", obs_full))
 towards_useful %>% filter(grepl("fidu", obs_full)) %>% select(species)
 towards_useful %>% filter(grepl("Viburnum", obs_full))
@@ -158,87 +171,79 @@ write.csv(towards_useful, "data/fromR/knapp_to_check.csv", row.names = FALSE)
 
 
 # check names against GBIF, I guess
-namecheck<-towards_useful %>% mutate(gs = paste(genus, species)) %>% pull(gs) %>% sapply(function(x){
-  rgbif::name_backbone(name = x)
-}) %>% map_dfr(bind_rows, .id = "gs")
-     
-# namecheck <- namecheck %>% map_dfr(bind_rows, .id = "gs")
-
-namecheck %>%mutate(total_gs = n_distinct(gs)) %>%  group_by(status) %>% summarize(tibs = n(), spp = n_distinct(gs), gss =mean(total_gs)) 
-
-rgbif::name_backbone(name = "Sagittaria australis", verbose = TRUE) # matchtype = NONE
-rgbif::name_backbone(name = "Sagittarius australis", verbose = TRUE)
-
-nbRobust <- function(name){
-  naive <- rgbif::name_backbone(name = name)
-  if(naive$matchType == "NONE"){
-    tooMany <- rgbif::name_backbone(name = name, verbose = TRUE)
-    firstAccept<-tooMany[match("EXACT", tooMany$matchType), ]
-    if(is.null(firstAccept)){
-      return(data.frame(naive, matchNote = "matching problem"))}
-    else{
-      return(data.frame(firstAccept, matchNote = "First matching accepted taxon returned but other exact matches may exist"))
-    }
-  }
-  if(naive$matchType =="EXACT"){return(data.frame(naive, matchNote = "unambiguous"))}
-  else{return(data.frame(naive, matchNote = "possible synonymy or misspelling"))}
-}
- 
-nbRobust("Sagittaria australis")
-nbRobust("Sagittarius australis")
-nbRobust("Rudbeckia hirta")
-chcklst<-c("Athyrium angustum", "Sagittaria australis", "Sagittarius australis","Rudbeckia hirta", "Pyrola elliptica", "Rhus glabra", "Chamaecrista nictitans")
-test.df<-purrr::map_dfr(chcklst, function(taxName){
-  nbRobust(taxName)
-  
-})
-
-test.df %>% 
-  group_by(matchNote) %>% 
-  summarize(n())
-test.df %>% 
-  filter(matchNote=="unambiguous") %>% 
-  group_by(status) %>% 
-  summarize(n())
+# namecheck2 <- towards_useful %>% 
+#   mutate(gs = paste(genus, species)) %>% 
+#   pull(gs) %>% 
+#   sapply(function(x){
+#     rgbif::name_backbone(name = x, verbose = TRUE)
+#   }) %>% 
+#   map_dfr(bind_rows, .id = "gs")
 
 
-
-namecheck<-towards_useful %>% 
+namecheck <- towards_useful %>% 
   mutate(gs = paste(genus, species)) %>% 
   pull(gs) %>% 
   sapply(function(x){
-    nbRobust(x)
+   nbRobust(x)
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
-rgbif::name_backbone(name = "Salix alba") # matchtype = NONE
-rgbif::name_backbone(name = "Salix occidentalis") # matchtype = NONE
+# so it seems ok if there are multiple records if there is only one exact match 
+# per taxon
+
+# turns out that isn't the case. How about one species-level record?
+namecheck %>% 
+  filter(matchType == "EXACT") %>% 
+  group_by(gs, rank, status) %>% 
+  summarize(exactRanks =  n()) %>% 
+  arrange(desc(exactRanks))
+
+namecheck %>% 
+  filter(gs == "Elymus virginicus")
+# this looks messy
+
+
+namecheck %>% 
+  group_by(gs) %>% 
+  summarize(sIDs = n_distinct(speciesKey)) %>% 
+  arrange(desc(sIDs))
+
+# OK, looks like we never have more than one species ID number per gs? 
+# This seesm good. 
+# So why are there so many gs values? 
+# I think it's multiple matches per knapp row, actually, which seems fine. 
+namecheck %>% filter(matchType != "EXACT")
+# ok, it looks like a decnt number of matches were to higher taxa, that's what I ned to focus on here. 
+namecheck %>% filter(rank != "SPECIES") %>% select(gs, rank)
+# rgbif::name_backbone("Viburnum cassinoides", verbose = TRUE)
+
+# cannonical names match gs 1:1
+namecheck %>% 
+  group_by(gs) %>% 
+  summarize(canon = n_distinct(canonicalName)) %>% 
+  arrange(desc(canon))
+
+# namecheck <- namecheck %>% map_dfr(bind_rows, .id = "gs")
+
+namecheck %>%
+  mutate(total_gs = n_distinct(gs)) %>%  
+  group_by(status) %>% 
+  summarize(tibs = n()
+            , spp = n_distinct(gs)
+            , gss =mean(total_gs)) 
+
+# whoa this is great, looks like most of the fuzzy matches are probably just gender things or misspellings and there isn't a ton to worry about here.
+namecheck %>%
+  mutate(total_gs = n_distinct(gs)) %>%  
+  group_by(status, matchType) %>% 
+  summarize(tibs = n()
+            , spp = n_distinct(gs)
+            , gss =mean(total_gs)) 
+
+namecheck %>% filter(matchType == "FUZZY")
+
 namecheck %>% filter(is.na(status)) %>% pull(gs)
+namecheck %>% filter(status == "SYNONYM") %>% pull(gs)
  # still have a few f issues
 
-n_distinct(namecheck$gs)
-namecheck %>% group_by(status) %>% summarize(n())
-namecheck %>% filter(status == "SYNONYM")
-                                         
-                     
-                     
-Knapp_checked <- towards_useful %>% left_join(namecheck, by =c("gs"="species")) %>% 
-  select(gsKnapp = gs
-         , gsAccepted = canonicalName
-         , exclude
-         , has_nonNative_ssp
-         , family
-         , order
-         , phylum
-         , kingdom
-         , matchType
-         , nameStatus = status
-         , matchNote
-         , confidence)
-
-head(Knapp_checked)
-str(Knapp_checked)
-length(unique(Knapp_checked$gsKnapp)) 
-Knapp_checked %>% group_by(gsKnapp) %>% mutate(repeats = n()) %>% arrange(desc(repeats))
-
-Knapp_checked %>% group_by(gsKnapp) %>% mutate(repeats = n()) %>% arrange(desc(repeats)) %>% select(gsKnapp, gsAccepted, nameStatus, confidence, repeats)
+                                        
