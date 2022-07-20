@@ -59,6 +59,8 @@ knapp_next <- knapp_raw %>%
          , V1=str_replace(.data$V1, "proli cum", "prolificum")
          , V1=str_replace(.data$V1, " stulo", " fistulo")
          , V1=str_replace(.data$V1, " lipes", " filipes")
+         , V1=str_replace(.data$V1, " mbriata", " fimbriata")
+         , V1=str_replace(.data$V1, " liramum", " filiramum")
          , V1=str_replace(.data$V1, " lifolia", " filifolia")
          , V1=str_replace(.data$V1, " uitans", " fluitans")
          , V1=str_replace(.data$V1, " exip", " flexip")
