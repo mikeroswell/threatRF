@@ -17,6 +17,7 @@
 #'   
 #'
 #' @param name String, a species name (typically a Latin binomial)
+#' @param ... Sadditional arguments passed to \code{name_backbone()}
 #'
 #' @return single-row data frame with results from GBIF API query and additional matchNotes 
 #' @export
@@ -36,10 +37,10 @@
 #' test.df
 
 
-nbRobust <- function(name){
+nbRobust <- function(name, ...){
   naive <- rgbif::name_backbone(name = name)
   if(naive$matchType != "EXACT"){
-    tooMany <- rgbif::name_backbone(name = name, verbose = TRUE)
+    tooMany <- rgbif::name_backbone(name = name, verbose = TRUE, ...)
     if(naive$matchType == "NONE"){
       firstAccept<-tooMany[match("EXACT", tooMany$matchType), ]
       if(is.null(firstAccept)){

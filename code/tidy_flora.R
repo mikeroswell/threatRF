@@ -186,8 +186,9 @@ write.csv(towards_useful, "data/fromR/knapp_to_check.csv", row.names = FALSE)
 namecheck <- towards_useful %>% 
   mutate(gs = paste(genus, species)) %>% 
   pull(gs) %>% 
+  unique() %>% 
   sapply(function(x){
-   nbRobust(x)
+   nbRobust(x, kingdom = "plantae" )
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
@@ -217,6 +218,8 @@ namecheck %>%
   ggplot(aes(confidence, color = matchType))+
   geom_histogram() +
   theme_classic()
+
+namecheck %>% filter(confidence >100)
 
 
 # OK, looks like we never have more than one species ID number per gs? 
@@ -256,5 +259,6 @@ namecheck %>% filter(matchType == "FUZZY")
 namecheck %>% filter(is.na(status)) %>% pull(gs)
 namecheck %>% filter(status == "SYNONYM") %>% pull(gs)
  # still have a few f issues
+
 
                                         
