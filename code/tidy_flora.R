@@ -140,10 +140,6 @@ towards_useful %>% filter(grepl("^[[:space:]]*[[:lower:]]{2,}", verbiage))
 # make sure I got the invasives
 towards_useful %>% filter(genus == "Cynodon")
 
-unique(towards_useful$genus)
-
-unique(towards_useful$gs)
-
 n_distinct(towards_useful$gs)
 
 
@@ -159,16 +155,16 @@ n_distinct(towards_useful$gs)
 towards_useful %>% group_by(exclude) %>% summarize(n_distinct(gs))
 
 # scan first thousand names of each group
-towards_useful %>% filter(exclude) %>% pull(gs) %>% unique()
+# towards_useful %>% filter(exclude) %>% pull(gs) %>% unique()
 # look at conservation status of excluded flora
-towards_useful %>% 
-  filter(exclude, grepl(" S[0-9]", verbiage)) %>% 
-  pull(obs_full)
+# towards_useful %>% 
+#   filter(exclude, grepl(" S[0-9]", verbiage)) %>% 
+#   pull(obs_full)
 # ok, Larix shouldn't be excluded. 
 # Looks like the other spp/sspp Knapp and Naczi think aren't here
 
 
-towards_useful %>% filter(!exclude) %>% pull(gs) %>% unique()
+# towards_useful %>% filter(!exclude) %>% pull(gs) %>% unique()
 # View(towards_useful)
 write.csv(towards_useful, "data/fromR/knapp_to_check.csv", row.names = FALSE)
 
@@ -214,10 +210,10 @@ namecheck <- towards_useful %>%
 
 
 # look at the confidence scores for name matching
-# namecheck %>% 
-#   ggplot(aes(confidence, color = matchType))+
-#   geom_histogram() +
-#   theme_classic()
+namecheck %>%
+  ggplot(aes(confidence, color = matchType))+
+  geom_histogram() +
+  theme_classic()
 
 namecheck %>% filter(confidence >100)
 
