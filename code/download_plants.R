@@ -48,7 +48,7 @@ md_vasc_obs <- bind_rows(bind.gbif(MD_vasc), bind.gbif(mdVascOld))
 # get plant names from state
 
 plants_gs<-md_vasc_obs %>%
-  separate(acceptedScientificName, sep =" "
+  separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
@@ -111,10 +111,28 @@ data.table::fwrite(withstats2, "data/fromR/lfs/plants_with_status.csv", row.name
 
 
 withstats2<-read.csv("data/fromR/lfs/plants_with_status.csv")
+knapp_backboned <- read.csv("data/knapp_backboned.csv")
 
-str(ns)
+ws2<-withstats2 %>% 
+  mutate(accepted_gs = paste(genus, species, sep = " ")) %>% 
+  left_join(knapp_backboned %>% 
+              select(-c("scientificName", "kingdom", "phylum", "order"
+                        , "family", "kingdomKey", "phylumKey", "classKey"
+                        , "orderKey", "familyKey", "genusKey", "speciesKey"
+                        , "class")), by ="accepted_gs")
 
-gbif %>% summarize(n_distinct(gs))
+native_plant_stats<-ws2 %>% filter(!exclude | has_nonNative_ssp)
+excluded_plant_stats <- ws2 %>% filter(exclude & !has_nonNative_ssp)
+length(native_plant_stats$decimalLatitude)
+length(excluded_plant_stats$decimalLatitude)
+
+
+
+write.csv(native_plant_stats, "data/fromR/kept_plants_with_stats.csv", row.names = FALSE)
+write.csv(excluded_plant_stats, "data/fromR/excluded_plants.csv", row.names = FALSE)
+
+# might not help but for now, overwrite withstats2
+withstats2 <- native_plant_stats
 
 ############################################
 # data exploration
@@ -124,6 +142,8 @@ plants_summary<-withstats2 %>%
   summarize(spp =n_distinct(speciesKey)
             , families =n_distinct(familyKey)
             , records= n() )
+
+
 
 #plot species occurrences per year
 sppy<-plants_summary %>%
@@ -147,7 +167,7 @@ opy<-plants_summary %>%
 
 
 #make a figure with these summaries
-pdf(file ="figures/GBIF_plant_observations.pdf")
+pdf(file ="figures/GBIF_MD_native_plant_observations.pdf")
 sppy/fpy/opy
 dev.off()
 
@@ -172,16 +192,25 @@ tenx<-specfreq %>%
   labs(y = "proportion spp obs > 10x")
 
 #save plot to .pdf
-pdf(file = "figures/GBIF_taxon_freq.pdf")
+pdf(file = "figures/GBIF_MD_native_taxon_freq.pdf")
 once/tenx
 dev.off()
 
 #get some overall stats
 specfreq_TOT<-withstats2 %>%
-  group_by( state_status = simple_status, species) %>%
+  group_by( state_status = simple_status, gs) %>%
   summarize(records =n()) %>%
   group_by( state_status) %>%
   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())
 
+specfreq_TOT
 
+# look at excluded spp
+native_plant_stats %>% 
+  group_by(state_status = simple_status) %>% 
+  summarize(records = n_distinct(gs))
+  
+excluded_plant_stats %>% 
+  group_by(state_status = simple_status) %>% 
+  summarize(records = n_distinct(gs))
 
