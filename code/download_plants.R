@@ -128,8 +128,8 @@ length(excluded_plant_stats$decimalLatitude)
 
 
 
-write.csv(native_plant_stats, "data/fromR/kept_plants_with_stats.csv", row.names = FALSE)
-write.csv(excluded_plant_stats, "data/fromR/excluded_plants.csv", row.names = FALSE)
+write.csv(native_plant_stats, "data/fromR/lfs/kept_plants_with_stats.csv", row.names = FALSE)
+write.csv(excluded_plant_stats, "data/fromR/lfs/excluded_plants.csv", row.names = FALSE)
 
 # might not help but for now, overwrite withstats2
 withstats2 <- native_plant_stats
