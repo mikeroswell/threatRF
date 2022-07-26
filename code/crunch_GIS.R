@@ -16,8 +16,8 @@ options(tigris_use_cache = TRUE) # guessing this allows for clever usage of the 
 my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
 
 
-# get the occcurence data
-pstats <- read.csv("data/fromR/lfs/plants_with_status.csv") %>%
+# get the occcurrence data
+pstats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv") %>%
   mutate(taxon = "plant") %>% 
   mutate(georeferencedDate = as.character(georeferencedDate)
          , datasetID = as.character(datasetID))
@@ -25,19 +25,21 @@ lstats <- read.csv("data/fromR/lfs/leps_with_status.csv") %>%
   mutate(taxon = "lep") %>% 
   mutate(georeferencedDate = as.character(georeferencedDate)
          , datasetID = as.character(datasetID))
+# I think it will be fine to have columns from Knapp that are dropped in 
+# analysis... may need to adjust. 
 withstats2 <- bind_rows(pstats 
                      , lstats)
 # get the coordinates (may require additional manipulation)
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
   # grab only species not listed as introduced
-  filter(!exotic...175| !exotic...173) %>% 
+  filter(!exotic...175| !exotic...173 |!exotic...165| !exotic...167 |is.na(starts_with(exotic))) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
 exotic_records <- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
   # grab only species listed as introduced
-  filter(exotic...175| exotic...173) %>% 
+  filter(exotic...175| exotic...173|exotic...165| exotic...167) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
 write.csv(exotic_records, file = "data/fromR/lfs/exotic_records_removed.csv")
@@ -112,7 +114,7 @@ colnames(nlcd_points)<-gsub("NLCD_", ""
 #make a raster stack
 # the "tcc" layers apparently came from a different resolution or something
 
-
+# omitting a handful of variables 
 bc <- raster::stack(list.files("data/GIS_downloads/CHELSA", full.names = T)[c(1:62, 67:70)])
          
 
@@ -253,7 +255,7 @@ indi<-st_join(chel_sf, obs)
 
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
-took # 5:20
+took # 13 minutes (up from 5)
 
 # cleanup recommended
 # rm(list = ls())
