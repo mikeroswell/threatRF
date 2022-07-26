@@ -55,8 +55,9 @@ leps_gs<-leps_gs %>% filter(!grepl("\\.", .$species))
 # write gbif data to file (make these steps modular since they take a long time)
 write.csv(leps_gs, "data/fromR/lfs/leps_direct_from_gbif.csv", row.names = F)
 
-lep_flat
-leps_of_MD<-unique(leps_gs$withspace) 
+# lep_flat
+# check number of spp in this dataset (or at least species names, should check)
+leps_of_MD <- unique(leps_gs$withspace) 
 length(leps_of_MD) #1763
 ###################################################
 
