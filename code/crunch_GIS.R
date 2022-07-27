@@ -21,7 +21,7 @@ pstats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv") %>%
   mutate(taxon = "plant") %>% 
   mutate(georeferencedDate = as.character(georeferencedDate)
          , datasetID = as.character(datasetID))
-lstats <- read.csv("data/fromR/lfs/leps_with_status.csv") %>%
+lstats <- read.csv("data/fromR/lfs/native_leps_with_status.csv") %>%
   mutate(taxon = "lep") %>% 
   mutate(georeferencedDate = as.character(georeferencedDate)
          , datasetID = as.character(datasetID))
@@ -37,13 +37,13 @@ good_coords<- withstats2 %>%
            (is.na(exotic...175) | is.na(exotic...173) |is.na(exotic...170) | is.na(exotic...172))) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
-exotic_records <- withstats2 %>%
-  filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
-  # grab only species listed as introduced
-  filter(exotic...175| exotic...173|exotic...170| exotic...172) %>% 
-  mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
-
-write.csv(exotic_records, file = "data/fromR/lfs/exotic_records_removed.csv")
+# exotic_records <- withstats2 %>%
+#   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
+#   # grab only species listed as introduced
+#   filter(exotic...175| exotic...173|exotic...170| exotic...172) %>% 
+#   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
+# 
+# write.csv(exotic_records, file = "data/fromR/lfs/exotic_records_removed.csv")
 # drop non-MD points
 
 #df of lat and long
