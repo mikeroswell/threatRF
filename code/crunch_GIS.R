@@ -116,7 +116,8 @@ colnames(nlcd_points)<-gsub("NLCD_", ""
 # the "tcc" layers apparently came from a different resolution or something
 
 # omitting a handful of variables 
-bc <- raster::stack(list.files("data/GIS_downloads/CHELSA", full.names = T)[c(1:62, 67:70)])
+bc <- raster::stack(list.files("data/GIS_downloads/CHELSA"
+                               , full.names = TRUE)[c(1:62, 67:70)])
          
 
 #shrink the rasters
