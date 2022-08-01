@@ -1,4 +1,3 @@
-library(tidyverse)
 library(furrr)
 
 # set number of workers for cluster
@@ -42,6 +41,10 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   return(list(tax, fold_fits, outer_folds))
 })
 
+<<<<<<< HEAD
 save(trees_leps, file="data/fromR/lfs/100_100_fits_20220801b.rda")
+=======
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20220801.rda")
+>>>>>>> b1dacfde7754d44506e4d5c83b9819027aeb6f4f
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
