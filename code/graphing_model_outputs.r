@@ -111,7 +111,7 @@ lep_auc_hist <- lep_assess %>%
   theme_classic()
 
 
-pdf("figures/model_performance_historgrams_subdata.pdf")
+pdf("figures/model_performance_histograms_subdata.pdf")
 lep_auc_hist / plant_auc_hist
 dev.off()
 
