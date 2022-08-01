@@ -48,8 +48,8 @@ tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
 # see what columns have issues of NA
 
 # sapply(tofit_summary, function(x){sum(is.na(x))}) 
-# looks good now
-  
+# looks good now... well, 155 not giving slope, maxlat, etc. 
+# guessing those are singletons (very droppable)
 
 
 # drop na preemptively
@@ -159,7 +159,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   return(list(tax, fold_fits, outer_folds))
 })
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20220530.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20220727.rda")
 
 load("data/fromR/lfs/100_100_fits_20220530.rda")
 # get performance
