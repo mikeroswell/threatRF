@@ -9,7 +9,7 @@ classed.test <- read.csv("data/fromR/training_data.csv")
 classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
 classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
 all.equal(str(classed.plant), str(classed.plant.test))
-
+all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
 # get performance
 
 assess_method <- function(fits = NULL
