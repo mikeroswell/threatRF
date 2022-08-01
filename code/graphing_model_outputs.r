@@ -5,7 +5,13 @@ library(patchwork)
 
 load("data/fromR/lfs/100_100_fits_20220727.rda")
 load("data/fromR/outerFolds.RDA")
+classed.test <- read.csv("data/fromR/training_data.csv")
+classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
+classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
+all.equal(str(classed.plant), str(classed.plant.test))
+
 # get performance
+
 assess_method <- function(fits = NULL
                           , subdat = NULL 
                           , fulldat = NULL
@@ -13,7 +19,7 @@ assess_method <- function(fits = NULL
                           , resp = "simple_status_mu"
                           , pos = "threatened"
                           , neg = "secure"){
-  map_dfr(1:length(fits), functixon(x){
+  map_dfr(1:length(fits), function(x){
     out.dat = subdat[-folds[[x]], ]
     mod = fits[[x]]
     remod = fix.mod(mod, out.dat, resp = resp)
