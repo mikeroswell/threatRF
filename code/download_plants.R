@@ -92,7 +92,15 @@ write.csv(plant_stats[,-21], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
 
 plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") #generates an error, weird.
 
+# summary data
+# plant_stats %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
+#                                                          , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))) %>%
+#   group_by(simple_status) %>% summarize(n())
+
+
 plants_gs<-read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
+
+
 #merge status and occcurrence
 withstats<-plants_gs %>%
   select(-gs) %>%
