@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="1357f50f-ae5c-4813-a8b2-5be49c604857"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/7p8bc7</alternateIdentifier>
+        <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=149</alternateIdentifier>
+    <title>Auburn University, John D. Freeman Herbarium</title>
+    <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+          <surName>Leslie R. Goertzen / Curtis J. Hansen</surName>
+    </individualName>
+<electronicMailAddress>goertzen@auburn.edu; hansecj@auburn.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-07-01
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The John D. Freeman Herbarium (AUA) at Auburn University houses the state&amp;#39;s largest collection of dried flowering plants, gymnosperms, ferns, bryophytes, fungi, and lichens. Concentrating on specimens collected in Alabama and the southeastern US over the past one hundred years, we are now diversifying our plant holdings from around the world through exchanges and gifts. This valuable botanical resource provides critical information to students and scientists across many disciplines as well as to the general public.</para>
+    </abstract>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>Auburn University, John D. Freeman Herbarium</organizationName><phone>334-844-1630</phone><electronicMailAddress>goertzen@auburn.edu; hansecj@auburn.edu</electronicMailAddress><onlineUrl>http://aumnh.org/research-collections/plants/</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
+      <citation>Auburn University Museum (2022). Auburn University, John D. Freeman Herbarium. Occurrence dataset https://doi.org/10.15468/7p8bc7 accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

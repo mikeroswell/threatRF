@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="d587c7e5-d442-437a-a6d7-d1a78ecf2300"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/3j3ueb</alternateIdentifier>
+        <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=ipams</alternateIdentifier>
+        <alternateIdentifier>d587c7e5-d442-437a-a6d7-d1a78ecf2300</alternateIdentifier>
+    <title>Invasive Plant Atlas of the MidSouth (IPAMS)</title>
+    <creator>
+    <individualName>
+<givenName>Clifton</givenName>          <surName>Abbott</surName>
+    </individualName>
+<organizationName>Mississippi State University, Geosystems Research Institute</organizationName><positionName>Web Database System, GIS, Webmaster</positionName>    <address>
+<deliveryPoint>High Performance Computing Building 230</deliveryPoint><city>Mississippi State</city><administrativeArea>Mississippi</administrativeArea><postalCode>39762-9652</postalCode><country>UNITED_STATES</country>    </address>
+<phone>662-325-9435</phone><electronicMailAddress>abbott@gri.msstate.edu</electronicMailAddress><onlineUrl>http://www.cavs.msstate.edu/bagley/userinformation.php?eid=1594</onlineUrl>    </creator>
+    <creator>
+    <individualName>
+<givenName>Annie</givenName>          <surName>Simpson</surName>
+    </individualName>
+<organizationName>United States Geological Survey</organizationName><positionName>Biologist</positionName>    <address>
+<deliveryPoint>12201 Sunrise Valley Drive, Mail Stop 302</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>    </address>
+<phone>+1 703.648.4281</phone><electronicMailAddress>asimpson@usgs.gov</electronicMailAddress>      <userId directory="http://orcid.org/">0000-0001-8338-5134</userId>
+    </creator>
+    <metadataProvider>
+    <individualName>
+<givenName>John D.</givenName>          <surName>Madsen, Ph.D.</surName>
+    </individualName>
+<organizationName>United States Department of Agriculture (USDA), Agricultural Research Service (ARS)</organizationName><positionName>Former Project Director, Extension and Outreach Coordinator</positionName>    <address>
+<deliveryPoint>Dept of Plant Sciences, UC Davis, 274 Robbins Hall, One Shields Avenue</deliveryPoint><city>Davis</city><administrativeArea>California</administrativeArea><postalCode>95616</postalCode><country>UNITED_STATES</country>    </address>
+<phone>(530) 752-7870</phone><electronicMailAddress>John.Madsen@ars.usda.gov</electronicMailAddress><onlineUrl>https://www.ars.usda.gov/people-locations/person/?person-id=49597</onlineUrl>    </metadataProvider>
+    <metadataProvider>
+    <individualName>
+<givenName>Elizabeth</givenName>          <surName>Sellers</surName>
+    </individualName>
+<organizationName>U.S. Geological Survey</organizationName><positionName>Technical Information Specialist - Biology</positionName>    <address>
+<deliveryPoint>12201 Sunrise Valley Drive</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>    </address>
+<phone>+1 703-648-4385</phone><electronicMailAddress>esellers@usgs.gov</electronicMailAddress>      <userId directory="http://orcid.org/">0000-0003-4676-2994</userId>
+    </metadataProvider>
+    <associatedParty>
+    <individualName>
+<givenName>John D.</givenName>          <surName>Madsen, Ph.D.</surName>
+    </individualName>
+<organizationName>United States Department of Agriculture (USDA), Agricultural Research Service (ARS)</organizationName><positionName>Former Project Director, Extension and Outreach Coordinator</positionName>    <address>
+<deliveryPoint>Dept of Plant Sciences, UC Davis, 274 Robbins Hall, One Shields Avenue</deliveryPoint><city>Davis</city><administrativeArea>California</administrativeArea><postalCode>95616</postalCode><country>UNITED_STATES</country>    </address>
+<phone>(530) 752-7870</phone><electronicMailAddress>John.Madsen@ars.usda.gov</electronicMailAddress><onlineUrl>https://www.ars.usda.gov/people-locations/person/?person-id=49597</onlineUrl>    <role>PRINCIPAL_INVESTIGATOR</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Victor</givenName>          <surName>Maddox, Ph.D.</surName>
+    </individualName>
+<organizationName>Mississippi State University, Department of Plant and Soil Sciences, Geosystems Research Institute</organizationName><positionName>Plant Identification and Verification</positionName>    <address>
+<city>Mississippi State</city><administrativeArea>Mississippi</administrativeArea><postalCode>39762-9555</postalCode><country>UNITED_STATES</country>    </address>
+<phone>662-325-2313</phone><electronicMailAddress>vmaddox@gri.msstate.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Gary</givenName>          <surName>Ervin, Ph.D.</surName>
+    </individualName>
+<organizationName>Mississippi State University, Department of Biological Sciences</organizationName><positionName>Research Program Director</positionName>    <address>
+<city>Mississippi State</city><administrativeArea>Mississippi</administrativeArea><postalCode>39762-9536</postalCode><country>UNITED_STATES</country>    </address>
+<phone>662-325-1203</phone><electronicMailAddress>gervin@biology.msstate.edu</electronicMailAddress>    <role>PRINCIPAL_INVESTIGATOR</role>
+    </associatedParty>
+      <pubDate>
+      2020-07-31
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The Invasive Plant Atlas of the MidSouth (IPAMS) is a project of the Geosystems Research Institute (GRI), Mississippi State University. 
+The Invasive Plant Atlas of the MidSouth (IPAMS) will provide information on the biology, distribution, and best management practices for forty weedy plant species. Outreach and extension activities include developing training programs for volunteers to identify and report invasive species using IPAMS, developing an efficient Early Detection and Rapid Response (EDRR) system for invasive plants, developing best management practices workshops, and developing an online mapping system. Research activities include conducting systematic regional vegetation surveys to assess the distribution of key invasive plants, developing models for predicting the occurrence of target species based on land use and cover, and evaluate the relative effectiveness of professional versus volunteer surveys. IPAMS is a unique tool for early detection and rapid response. Trained volunteers regularly check areas for invasive species. When they encounter an invasive species, they record the location by GPS, the plant and other information about the plant population. On the IPAMS Web site, they input this information and alert researchers and government officials of the new infestation. This gives those decision-makers more time in taking appropriate steps and treating an infestation early, before it spreads further.</para>
+    </abstract>
+        <keywordSet>
+              <keyword>Metadata</keyword>
+              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Observation</keyword>
+              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>invasive plants</keyword>
+              <keyword></keyword>
+              <keyword>introduced plants</keyword>
+              <keywordThesaurus>https://www1.usgs.gov/csas/biocomplexity_thesaurus/</keywordThesaurus>
+        </keywordSet>
+      <additionalInfo>
+          <para>Collaborators
+
+Randy Westbrooks, Ph.D., USGS NWRC
+Les Mehrhoff, Ph.D., University of Connecticut (Invasive Plant Atlas of New England)
+Thomas Stohlgren, USGS, Fort Collins Science Center
+Pam Fuller, USGS, Florida Integrated Science Center
+Charles Bryson (USDA Southern Weed Science Research Unit, Stoneville, MS)</para>
+      </additionalInfo>
+      <intellectualRights>
+        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+      </intellectualRights>
+      <distribution scope="document">
+          <online>
+              <url function="information">https://www.gri.msstate.edu/ipams/</url>
+          </online>
+      </distribution>
+      <coverage>
+            <geographicCoverage>
+                  <geographicDescription>United States, except Alaska.</geographicDescription>
+                  <boundingCoordinates>
+                      <westBoundingCoordinate>-158.055</westBoundingCoordinate>
+                      <eastBoundingCoordinate>-66.624</eastBoundingCoordinate>
+                      <northBoundingCoordinate>48.314</northBoundingCoordinate>
+                      <southBoundingCoordinate>17.948</southBoundingCoordinate>
+                  </boundingCoordinates>
+            </geographicCoverage>
+          <temporalCoverage>
+            <rangeOfDates>
+              <beginDate>
+                <calendarDate>      2004-08-04
+</calendarDate>
+              </beginDate>
+              <endDate>
+                <calendarDate>      2016-03-26
+</calendarDate>
+              </endDate>
+            </rangeOfDates>
+          </temporalCoverage>
+              <taxonomicCoverage>
+                    <generalTaxonomicCoverage>Non-native invasive plant species.</generalTaxonomicCoverage>
+                    <taxonomicClassification>
+                          <taxonRankName>Kingdom</taxonRankName>
+                        <taxonRankValue>Plantae</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Abutilon theophrasti</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Acanthospermum hispidum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Achillea millefolium</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ailanthus altissima</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Aira elegans</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Albizia julibrissin</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Albizia lebbeck</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Alliaria petiolata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Allium ampeloprasum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Alocasia macrorrhizos</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Alternanthera philoxeroides</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Anthemis cotula</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Arctium minus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Artemisia vulgaris</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Arthraxon hispidus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Arundo donax</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Asparagus densiflorus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Asparagus officinalis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Azolla pinnata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bassia scoparia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Berberis julianae</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Berberis thunbergii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bidens pilosa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bothriochloa ischaemum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bothriochloa pertusa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bougainvillea glabra</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Brassica rapa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Briza minor</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bromus ramosus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bromus secalinus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Bromus tectorum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Broussonetia papyrifera</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Butomus umbellatus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Carduus acanthoides</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Carduus nutans</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Caulerpa taxifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cayratia japonica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Celastrus orbiculatus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Centaurea biebersteinii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Centaurea solstitialis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cichorium intybus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cinnamomum camphora</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cirsium arvense</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cirsium vulgare</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Clematis terniflora</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Colocasia esculenta</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Commelina benghalensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Conium maculatum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Convolvulus arvensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Crepis pulchra</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Crotalaria lanceolata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Crotalaria spectabilis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cuphea carthagenensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cynodon dactylon</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cynoglossum officinale</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Cytisus scoparius</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dactylis glomerata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dactyloctenium aegyptium</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Deutzia scabra</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dianthus armeria</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Digitaria ciliaris</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Digitaria ischaemum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Digitaria sanquinalis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dioscorea alata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dioscorea bulbifera</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dioscorea oppositifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dipsacus fullonum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Dipsacus laciniatus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Duchesnea indica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Egeria densa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Eichhornia azurea</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Eichhornia crassipes</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Elaeagnus angustifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Elaeagnus pungens</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Elaeagnus umbellata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Eragrostis cilianensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Eragrostis curvula</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Euonymus alatus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Euonymus fortunei</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Euphorbia esula</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Euphorbia lactea</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Fatoua villosa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Firmiana simplex</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Foeniculum vulgare</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Galinsoga quadriradiata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Glechoma hederacea</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Hedera helix</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Heliotropium indicum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Hemerocallis fulva</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Hesperis matronalis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Hordeum jubatum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Hydrilla verticillata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Hypericum perforatum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Hypochaeris radicata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ilex cornuta</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Imperata brasiliensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Imperata cylindrica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Iris pseudacorus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Jaborosa integrifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Kummerowia striata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lactuca serriola</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lagenaria siceraria</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lagerstroemia indica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lantana camara</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lathyrus latifolius</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Leonurus cardiaca</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lepidium latifolium</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lespedeza bicolor</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lespedeza cuneata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lespedeza thunbergii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Leucanthemum vulgare</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ligustrum japonicum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ligustrum lucidum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ligustrum sinense</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ligustrum vulgare</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Liriope muscari</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Liriope spicata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lonicera fragrantissima</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lonicera japonica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lonicera maackii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lonicera morrowii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ludwigia peruviana</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ludwigia uruguayensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lygodium japonicum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lysimachia nummularia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Lythrum salicaria</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Macrothelypteris torresiana</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Mahonia bealei</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Manihot grahamii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Marrubium vulgare</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Marsilea mutica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Matricaria discoidea</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Mazus pumilus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Melia azedarach</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Melilotus officinalis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Melinis repens</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Microstegium vimineum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Mimosa pigra</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Miscanthus sinensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Morus alba</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Myriophyllum aquaticum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Myriophyllum spicatum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Najas minor</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Nandina domestica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Narcissus poeticus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Narcissus pseudonarcissus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Nasturtium officinale</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Nephrolepis cordifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Nicotiana glauca</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ophiopogon japonicus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Oxalis debilis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Oxalis rubra</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Oxycaryum cubense</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pachysandra terminalis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Panicum repens</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Parthenium hysterophorus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Paspalum urvillei</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Paulownia tomentosa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pennisetum ciliare</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pennisetum setaceum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Perilla frutescens</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Phalaris arundinacea</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Philadelphus coronarius</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Photinia serratifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Phragmites australis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Phyllanthus urinaria</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Phyllostachys aurea</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Phyllostachys nigra</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pistia stratiotes</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Plantago lanceolata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Poa pratensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Polygonum cespitosum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Polygonum cuspidatum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Polygonum sachalinense</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Poncirus trifoliata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Populus alba</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Potamogeton crispus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Potentilla recta</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Prunus persica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pseudosasa japonica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pteris multifida</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pteris vittata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pueraria montana</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pyracantha koidzumii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pyrus calleryana</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Pyrus communis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Quercus acutissima</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rhodotypos scandens</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ricinus communis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rorippa sylvestris</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rosa bracteata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rosa laevigata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rosa multiflora</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rosa wichuraiana</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rotala rotundifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rottboellia cochinchinensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rubus armeniacus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rubus fruticosus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rubus idaeus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Rumex crispus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Saccharum ravennae</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Sagittaria montevidensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Sagittaria sagittifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Salsola collina</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Salsola tragus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Salvinia minima</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Salvinia molesta</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Sansevieria trifasciata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Saponaria officinalis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Schedonorus phoenix</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Securigera varia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Sesbania punicea</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Setaria faberi</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Solanum dulcamara</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Solanum elaeagnifolium</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Solanum physalifolium</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Solanum sisymbriifolium</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Solanum viarum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Sorghum halepense</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Spathodea campanulata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Sphagneticola trilobata</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Spiraea cantoniensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Spiraea japonica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Spiraea thunbergii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Sporobolus indicus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Tamarix aphylla</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Tamarix chinensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Tamarix gallica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Tamarix parviflora</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Tamarix ramosissima</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Taraxacum officinale</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Thlaspi arvense</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Thymus vulgaris</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Torilis japonica</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Tragopogon dubius</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Triadica sebifera</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Trifolium pratense</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Trifolium repens</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Ulmus pumila</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Urochloa maxima</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Verbascum blattaria</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Verbascum thapsus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Verbena bonariensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Verbena brasiliensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Verbena litoralis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Verbena rigida</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vernicia fordii</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Veronica hederifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vicia grandiflora</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vicia hirsuta</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vicia sativa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vicia villosa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vinca major</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vinca minor</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vitex agnus-castus</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vitex rotundifolia</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Vulpia myuros</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Wisteria floribunda</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Wisteria formosa</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Wisteria sinensis</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Xanthium spinosum</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Species</taxonRankName>
+                        <taxonRankValue>Youngia japonica</taxonRankValue>
+                    </taxonomicClassification>
+              </taxonomicCoverage>
+      </coverage>
+      <purpose>
+          <para>Invasive weedy plants are a widespread problem throughout the United States. Their growth is often widely dispersed, with little scientific ability to predict why they occur in a given location. In addition, historical human activities such as urbanization, agriculture, and forestry have a marked effect on the distribution and spread of invasives. This integrated project will quantify relationships of weed distribution and spread with land use, then use that information directly in educating agriculture stakeholders, natural resources managers, and other interested parties on potential human-induced opportunities for invasive species spread.
+
+The Invasive Plant Atlas of the MidSouth (IPAMS) will provide information on the biology, distribution, and best management practices for forty weedy plant species. Outreach and extension activities include developing training programs for volunteers to identify and report invasive species using IPAMS, developing an efficient Early Detection and Rapid Response (EDRR) system for invasive plants, developing best management practices workshops, and developing an online mapping system. Research activities include conducting systematic regional vegetation surveys to assess the distribution of key invasive plants, developing models for predicting the occurrence of target species based on land use and cover, and evaluate the relative effectiveness of professional versus volunteer surveys.</para>
+      </purpose>
+      <maintenance>
+          <description>
+              <para>This resource is no longer being updated.</para>
+          </description>
+          <maintenanceUpdateFrequency>notPlanned</maintenanceUpdateFrequency>
+      </maintenance>
+      <contact>
+    <individualName>
+<givenName>John D.</givenName>          <surName>Madsen, Ph.D.</surName>
+    </individualName>
+<organizationName>United States Department of Agriculture (USDA), Agricultural Research Service (ARS)</organizationName><positionName>Former Project Director, Extension and Outreach Coordinator</positionName>    <address>
+<deliveryPoint>Dept of Plant Sciences, UC Davis, 274 Robbins Hall, One Shields Avenue</deliveryPoint><city>Davis</city><administrativeArea>California</administrativeArea><postalCode>95616</postalCode><country>UNITED_STATES</country>    </address>
+<phone>(530) 752-7870</phone><electronicMailAddress>John.Madsen@ars.usda.gov</electronicMailAddress><onlineUrl>https://www.ars.usda.gov/people-locations/person/?person-id=49597</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:24Z</dateStamp>
+      <citation>Abbott C, Simpson A, Madsen, Ph.D. J D, Sellers E (2020). Invasive Plant Atlas of the MidSouth (IPAMS). Version 1.4. United States Geological Survey. Occurrence dataset https://doi.org/10.15468/3j3ueb accessed via GBIF.org on 2022-08-02.</citation>
+              <physical>
+                  <objectName>IPAMS Volunteer Training Manual</objectName>
+                  <characterEncoding>ASCII</characterEncoding>
+                  <dataFormat>
+                      <externallyDefinedFormat>
+                          <formatName>PDF</formatName>
+                            <formatVersion>2007</formatVersion>
+                      </externallyDefinedFormat>
+                  </dataFormat>
+                  <distribution>
+                      <online>
+                          <url function="download">https://www.gri.msstate.edu/ipams/workshops/VolTrainingManual.pdf</url>
+                      </online>
+                  </distribution>
+              </physical>
+              <physical>
+                  <objectName>Invasive Plant Atlas of the MidSouth (IPAMS) in USGS BISON online species mapping application</objectName>
+                  <characterEncoding>UTF-8</characterEncoding>
+                  <dataFormat>
+                      <externallyDefinedFormat>
+                          <formatName>CSV, SHP</formatName>
+                      </externallyDefinedFormat>
+                  </dataFormat>
+                  <distribution>
+                      <online>
+                          <url function="download">https://bison.usgs.gov/?providerID=440&amp;resourceID=100067</url>
+                      </online>
+                  </distribution>
+              </physical>
+              <resourceLogoUrl>https://bison.usgs.gov/ipt/logo.do?r=ipams</resourceLogoUrl>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

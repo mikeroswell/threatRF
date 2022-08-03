@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="0108bdc9-3d7f-459a-a92e-a40c3ed07c93"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/1hrpha</alternateIdentifier>
+        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=69</alternateIdentifier>
+        <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=69</alternateIdentifier>
+        <alternateIdentifier>http://symbiota4.acis.ufl.edu/scan/portal/collections/misc/collprofiles.php?collid=69</alternateIdentifier>
+    <title>University of Delaware Insect Research Collection</title>
+    <creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+<organizationName>University of Delaware Insect Research Collection</organizationName><positionName>Collection Manager</positionName>    <address>
+<deliveryPoint>250 Townsend Hall</deliveryPoint><city>Newark</city><administrativeArea>DE</administrativeArea><postalCode>19716</postalCode><country>UNITED_STATES</country>    </address>
+<phone>3028312526</phone><electronicMailAddress>Bartlett@udel.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-06-10
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The University of Delaware Insect Research Collection was founded with the creation of the Agricultural Research Station at Delaware College (now University of Delaware) in the 1880’s, and became associated with the Department of Entomology when the Department was founded in 1925. It is a scientific research collection historically focused on the insects and other arthropods of Delaware (or more broadly, the Delmarva Peninsula, which comprise about 75% of the collection), especially those of agroeconomic importance. However, in recent years, the collection has sought to incorporated specimens from a much broader geographic spectrum. The collection consists of approximately 350,000 pinned specimens, plus several thousand specimens in alcohol and a few hundred on slides. Collection strengths from past researchers or students include biting flies, aquatic insects (esp. Bob Lake’s Trichoptera and Plecoptera, plus Hydrophilidae from Andrew Short), Formicidae, and bees. Recent years have resulted in a great expansion of the Hemiptera collection, in particular the Auchenorrhyncha, of which some 40,000 specimens have been digitized as part of the Tri-Trophic Hemiptera TCH supported by NSF. Further digitization projects are actively sought, particularly if they involve the active participation of UD undergraduate students.</para>
+    </abstract>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>University of Delaware Insect Research Collection</organizationName><phone>3028312526</phone><electronicMailAddress>Bartlett@udel.edu</electronicMailAddress><onlineUrl>http://ag.udel.edu/research/planthoppers/index.html</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:24Z</dateStamp>
+      <citation>University of Delaware, Department of Entomology and Wildlife Ecology (2022). University of Delaware Insect Research Collection. Occurrence dataset https://doi.org/10.15468/1hrpha accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

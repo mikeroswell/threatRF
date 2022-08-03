@@ -16,59 +16,106 @@ uscore_binomial<-function(x){gsub("+ + *", "+_+",x)}
 
 ###############################################
 # get plant occurrence data from gbif
-# get it so search returns <1e5 results
-MD_vasc <- occ_search(taxonKey = 7707728
-                      , stateProvince = "Maryland", year="2002, 2021"
-                      , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
-                      , hasCoordinate = T
-                      , limit = 1e5)
 
-mdVascOld <- occ_search(taxonKey = 7707728
-                        , stateProvince = "Maryland", year="1989, 2001"
-                        , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
-                        , hasCoordinate = T
-                        , limit = 1e5)
+# now refactoriing to use occ_downlaod which comes with a doi
+MD_vasc_and_lep_doi <- occ_download(
+  pred_in("taxonKey", c(7707728, 797))
+  , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
+  , pred_in("stateProvince", "Maryland")
+  , pred("hasCoordinate", TRUE)
+  , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
+  )
 
+# this reveals status of all gbif download requests
+# occ_download_list()
+occ_download(pred("gbifID", 1456777290))
+occ_download_get(MD_vasc_and_lep_doi, path = "data/fromR/lfs", overwrite = TRUE)
+# # see if this needs wrangling
+# GBIF_plant_lep <- occ_download_import(path ="data/fromR/lfs", key = MD_vasc_and_lep_doi)
 
+# 
+# # check out the file
+# GBIF_plant_lep
+# names(GBIF_plant_lep)
+# MD_vasc_lep <- bind.gbif(GBIF_plant_lep)
+# after a bit of exploration I feel good about not going with this process.
+# instead unzip and just grab the occurrence data themselves for now
+unzip("data/fromR/lfs/0413674-210914110416597.zip", exdir = "data/fromR/lfs/GBIF_downloads")
+MD_plant_lep_occ <- data.table::fread("data/fromR/lfs/GBIF_downloads/occurrence.txt")
+# # note this returns a warning about parsing th efile (is it weird it gets demonic after line 666?)
+head(MD_plant_lep_occ)
+MD_occ <- MD_plant_lep_occ %>% filter(taxonRank == "SPECIES")
+head(MD_occ)
 
-md_vasc_obs <- bind_rows(bind.gbif(MD_vasc), bind.gbif(mdVascOld))
-
-#histogram of species frequency by year
-# md_vasc_obs %>%
-#   group_by(acceptedTaxonKey, year) %>%
-#   summarize(obs =n()) %>%
-#   ggplot(aes(obs))+
-#   geom_histogram()+
-#   facet_wrap(~year)+
-#   theme_classic()+
-#   labs(y="species", x="occurrences")+
-#   scale_y_log10()
+# # get it so search returns <1e5 results
+# 
+# 
+# MD_vasc <- occ_search(taxonKey = 7707728
+#                       , stateProvince = "Maryland", year="2002, 2021"
+#                       , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
+#                       , hasCoordinate = T
+#                       , limit = 1e5)
+# 
+# mdVascOld <- occ_search(taxonKey = 7707728
+#                         , stateProvince = "Maryland", year="1989, 2001"
+#                         , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
+#                         , hasCoordinate = T
+#                         , limit = 1e5)
+# 
+# 
+# 
+# md_vasc_obs <- bind_rows(bind.gbif(MD_vasc), bind.gbif(mdVascOld))
+# 
+# #histogram of species frequency by year
+# # md_vasc_obs %>%
+# #   group_by(acceptedTaxonKey, year) %>%
+# #   summarize(obs =n()) %>%
+# #   ggplot(aes(obs))+
+# #   geom_histogram()+
+# #   facet_wrap(~year)+
+# #   theme_classic()+
+# #   labs(y="species", x="occurrences")+
+# #   scale_y_log10()
 
 
 # get plant names from state
 
-plants_gs<-md_vasc_obs %>%
+# plants_gs<-md_vasc_obs %>%
+#   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
+#            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
+#   mutate(gs = paste(genus, species, sep = "_")
+#          , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
+
+plants_gs_new<-MD_occ %>%
+  filter(kingdomKey == 6) %>% 
   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
 
-unique(plants_gs$gs)
+unique(plants_gs_new$gs)
 
 unique(plants_gs$species)
 
 plants_gs %>% filter(species =="X")
 
-plants_gs<-plants_gs %>% filter(!grepl("\\.", .$species))
+plants_gs_new<-plants_gs_new %>% filter(!grepl("\\.", .$species))
+
+
 
 
 # write gbif data to file (make these steps modular since they take a long time)
 write.csv(plants_gs, "data/fromR/lfs/plants_direct_from_gbif.csv", row.names = F)
 
-# plants_gs <- read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
-
+plants_gs <- read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
+plants_gs_new
+plants_gs_new %>% filter(gs %in% plants_gs$gs) %>% summarize(n())
+# wow. Ok. 60k more records
+plants_gs_new %>% filter(gs %ni% plants_gs$gs) %>% summarize(spp = n_distinct(gs), occ = n())
+plants_gs_new %>% filter(gs %ni% plants_gs$gs) %>% pull(gs)
+head(plants_gs)
 #get a list of all binomials in the GBIF dataset
-plants_of_MD<-unique(plants_gs$withspace) #2620 1999-2021
+plants_of_MD<-unique(plants_gs_new$withspace) #2620 1999-2021
 
 ###################################################
 
@@ -102,7 +149,7 @@ plants_gs<-read.csv("data/fromR/lfs/plants_direct_from_gbif.csv")
 
 
 #merge status and occcurrence
-withstats<-plants_gs %>%
+withstats<-plants_gs_new %>%
   select(-gs) %>%
   left_join(plant_stats[,-21], by=c("withspace"="scientificName"))
 
@@ -113,7 +160,7 @@ withstats2<-withstats %>%
                                         , "unranked")))
 
 
-data.table::fwrite(withstats2, "data/fromR/lfs/plants_with_status.csv", row.names = F)
+data.table::fwrite(withstats2, "data/fromR/lfs/plants_with_status_long.csv", row.names = F)
 
 
 
@@ -129,15 +176,19 @@ ws2<-withstats2 %>%
                         , "orderKey", "familyKey", "genusKey", "speciesKey"
                         , "class")), by ="accepted_gs")
 
-native_plant_stats<-ws2 %>% filter(!exclude | has_nonNative_ssp)
-excluded_plant_stats <- ws2 %>% filter(exclude & !has_nonNative_ssp)
+native_plant_stats<-ws2 %>%
+  group_by(genus, species, speciesKey) %>% 
+  filter(!exclude | has_nonNative_ssp)
+excluded_plant_stats <- ws2 %>% 
+  group_by(genus, species, speciesKey) %>% 
+  filter(exclude & !has_nonNative_ssp)
 length(native_plant_stats$decimalLatitude)
 length(excluded_plant_stats$decimalLatitude)
 
 
 
-write.csv(native_plant_stats, "data/fromR/lfs/kept_plants_with_stats.csv", row.names = FALSE)
-write.csv(excluded_plant_stats, "data/fromR/lfs/excluded_plants.csv", row.names = FALSE)
+write.csv(native_plant_stats, "data/fromR/lfs/kept_plants_with_stats_new.csv", row.names = FALSE)
+write.csv(excluded_plant_stats, "data/fromR/lfs/excluded_plants.csv_new", row.names = FALSE)
 
 # data summary
 native_plant_stats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv")
@@ -210,7 +261,7 @@ dev.off()
 
 #get some overall stats
 specfreq_TOT<-withstats2 %>%
-  group_by( state_status = simple_status, gs) %>%
+  group_by( state_status = simple_status, withspace) %>%
   summarize(records =n()) %>%
   group_by( state_status) %>%
   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="1804436b-6a12-4fcc-a372-531cc23a41c4"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/1n787c</alternateIdentifier>
+        <alternateIdentifier>https://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=316</alternateIdentifier>
+        <alternateIdentifier>http://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=316</alternateIdentifier>
+    <title>Rutgers University, Chrysler Herbarium</title>
+    <creator>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+<givenName>Lena</givenName>          <surName>Struwe</surName>
+    </individualName>
+<positionName>Herbarium Director</positionName><electronicMailAddress>lena.struwe@rutgers.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Megan R.</givenName>          <surName>King</surName>
+    </individualName>
+<positionName>Collections Manager</positionName><electronicMailAddress>megan.king@rutgers.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-04-04
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The Chrysler Herbarium (CHRB) at Rutgers University is the last internationally recognized herbarium still in existence in the state of New Jersey (USA). Over 150,000 vascular plant and algal collections, about 7,000 moss and liverwort specimens, and 2,600 lichen specimens form our collection and are arranged and catalogued systematically. The collection is worldwide in scope, with an emphasis on New Jersey and the Mid-Atlantic area, and contains specimens back to the early 1800s. The Rutgers Mycological Herbarium (RUTPP), which is housed together with CHRB, has been estimated to contain more than 40,000 fungal collections, and has a strong focus on microfungi and plant pathogens. Dr. James White is the curator of the mycological collections, and Dr. Lena Struwe is the Director of the Chrysler Herbarium.</para>
+    </abstract>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>Rutgers University, Chrysler Herbarium</organizationName><phone>848-932-4011</phone><electronicMailAddress>lena.struwe@rutgers.edu</electronicMailAddress><onlineUrl>http://herbarium.rutgers.edu</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
+      <citation>Rutger&apos;s University - Chrysler Herbarium (2022). Rutgers University, Chrysler Herbarium. Occurrence dataset https://doi.org/10.15468/1n787c accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

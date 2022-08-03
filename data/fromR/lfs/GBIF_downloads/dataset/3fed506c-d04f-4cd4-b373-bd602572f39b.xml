@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="3fed506c-d04f-4cd4-b373-bd602572f39b"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/bmmg36</alternateIdentifier>
+        <alternateIdentifier>https://biorepo.neonscience.org/portal/collections/misc/collprofiles.php?collid=54</alternateIdentifier>
+    <title>NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers)</title>
+    <creator>
+<organizationName>NEON Biorepository Data Portal</organizationName><electronicMailAddress>biorepo@asu.edu</electronicMailAddress><onlineUrl>https://biorepo.neonscience.org/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>NEON Biorepository Data Portal</organizationName><electronicMailAddress>biorepo@asu.edu</electronicMailAddress><onlineUrl>https://biorepo.neonscience.org/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+          <surName>NEON Biorepository</surName>
+    </individualName>
+<electronicMailAddress>biorepo@asu.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Laura</givenName>          <surName>Steger</surName>
+    </individualName>
+<positionName>Collection Manager</positionName><electronicMailAddress>lsteger@asu.edu</electronicMailAddress>      <userId directory="https://orcid.org/">0000-0002-0878-4132</userId>
+    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Laura</givenName>          <surName>Rocha Prado</surName>
+    </individualName>
+<positionName>Bioinformatician</positionName><electronicMailAddress>lauraprado@asu.edu</electronicMailAddress>      <userId directory="https://orcid.org/">0000-0003-1237-2824</userId>
+    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Christopher</givenName>          <surName>Livingston</surName>
+    </individualName>
+<positionName>Research Aide</positionName><electronicMailAddress>calivin3@asu.edu</electronicMailAddress>      <userId directory="https://orcid.org/">0000-0001-8676-0817</userId>
+    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Annessa</givenName>          <surName>Lyle</surName>
+    </individualName>
+<positionName>Research Aide</positionName><electronicMailAddress>amfoss1@asu.edu</electronicMailAddress>      <userId directory="https://orcid.org/">0000-0001-9632-9721</userId>
+    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-07-15
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>This collection contains terrestrial plant vouchers collected from select species during plant diversity sampling (NEON sample class: div_voucher_in.voucherSampleID.pla). Plant species diversity is measured once or twice annually in the field. The plot-based method yields plant species data at multiple scales that provide an understanding of changes in composition, distribution, and abundance of native and non-native plant species. The data is comparable within and across NEON sites and to other continental plant diversity efforts to allow for a comprehensive understanding of the impacts of the drivers of change on the diversity of plant species and the functional role they play in ecological systems. A subset of observed plant species is collected and archived. These vouchers are housed at NEON facilities for reference and archived in the NEON Biorepository&amp;#39;s herbarium. See related links below for protocols and NEON related data products.</para>
+    </abstract>
+      <intellectualRights>
+        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers)</organizationName><electronicMailAddress>biorepo@asu.edu</electronicMailAddress><onlineUrl>https://data.neonscience.org/data-products/DP1.10058.001</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:24Z</dateStamp>
+      <citation>National Ecological Observatory Network (2022). NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers). Occurrence dataset https://doi.org/10.15468/bmmg36 accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

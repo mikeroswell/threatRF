@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="f519367d-6b9d-411c-b319-99424741e7de"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/6autvb</alternateIdentifier>
+        <alternateIdentifier>f519367d-6b9d-411c-b319-99424741e7de</alternateIdentifier>
+        <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=usgs-pwrc-biml</alternateIdentifier>
+    <title>USGS PWRC - Native Bee Inventory and Monitoring Lab (BIML)</title>
+    <creator>
+    <individualName>
+<givenName>Sam</givenName>          <surName>Droege</surName>
+    </individualName>
+<organizationName>United States Geological Survey (USGS) Patuxent Wildlife Research Center (PWRC)</organizationName><positionName>Wildlife Biologist</positionName>    <address>
+<deliveryPoint>BARC - EAST, Building 308, Room 124, 10300 Baltimore Avenue</deliveryPoint><city>Beltsville</city><administrativeArea>Maryland</administrativeArea><postalCode>20705</postalCode><country>UNITED_STATES</country>    </address>
+<phone>+1 (301) 497-5840</phone><electronicMailAddress>sdroege@usgs.gov</electronicMailAddress><onlineUrl>http://www.pwrc.usgs.gov/staff/profiles/documents/droege.htm</onlineUrl>    </creator>
+    <metadataProvider>
+    <individualName>
+<givenName>Elizabeth</givenName>          <surName>Sellers</surName>
+    </individualName>
+<organizationName>United States Geological Survey (USGS)</organizationName><positionName>Technical Information Specialist - Biology</positionName>    <address>
+<deliveryPoint>12201 Sunrise Valley Drive, Mail Stop 302</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>    </address>
+<phone>+ (703) 648 4385</phone><electronicMailAddress>esellers@usgs.gov</electronicMailAddress><onlineUrl>https://profile.usgs.gov/esellers</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+<givenName>Elizabeth</givenName>          <surName>Sellers</surName>
+    </individualName>
+<electronicMailAddress>esellers@usgs.gov</electronicMailAddress>    <role>USER</role>
+    </associatedParty>
+      <pubDate>
+      2020-02-18
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>Species occurrence records for native and non-native bees, wasps and other insects collected using mainly pan, malaise, and vane trapping; and insect netting methods in Canada, Mexico, the non-contiguous United States, U.S. Territories (specifically U.S. Virgin Islands), U.S. Minor Outlying Islands and other global locations. Some records also contain notes regarding plants or substrates from which insects were collected or that were present and/or in flower at the time the insects were collected. Unless otherwise noted, taxonomic determinations (identifications) were completed by Sam Droege (USGS Patuxent Wildlife Research Center - PWRC).</para>
+    </abstract>
+        <keywordSet>
+              <keyword>Metadata</keyword>
+              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>solitary bees</keyword>
+              <keyword>social bees</keyword>
+              <keyword>insects</keyword>
+              <keyword>pollinators</keyword>
+              <keyword>bees</keyword>
+              <keywordThesaurus>https://www2.usgs.gov/core_science_systems/csas/biocomplexity_thesaurus/search_thesaurus.html</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Specimen</keyword>
+              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+      <additionalInfo>
+          <para>A similar dataset of bee species occurrence records for locations other than the United States, U.S. Territories and Minor Outlying Islands, Canada, and Mexico is also available.
+
+A README.txt file containing detailed descriptions of modifications made to this dataset by the BISON Data Team during the quality assurance/quality control process is available upon request.</para>
+      </additionalInfo>
+      <intellectualRights>
+        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+      </intellectualRights>
+      <coverage>
+            <geographicCoverage>
+                  <geographicDescription>Canada, Mexico, Non-contiguous United States, U.S. Territories (specifically U.S. Virgin Islands), U.S. Minor Outlying Islands, and other global locations.</geographicDescription>
+                  <boundingCoordinates>
+                      <westBoundingCoordinate>-163.481</westBoundingCoordinate>
+                      <eastBoundingCoordinate>121.415</eastBoundingCoordinate>
+                      <northBoundingCoordinate>67.112</northBoundingCoordinate>
+                      <southBoundingCoordinate>-46.79</southBoundingCoordinate>
+                  </boundingCoordinates>
+            </geographicCoverage>
+          <temporalCoverage>
+            <rangeOfDates>
+              <beginDate>
+                <calendarDate>      1990-06-04
+</calendarDate>
+              </beginDate>
+              <endDate>
+                <calendarDate>      2019-06-11
+</calendarDate>
+              </endDate>
+            </rangeOfDates>
+          </temporalCoverage>
+              <taxonomicCoverage>
+                    <generalTaxonomicCoverage>Specimen-based occurrence records for native and non-native bees (Apidae), wasps, and other insects. Records for other non-target insect species commonly captured during bee collection are also recorded in this dataset including but not limited to butterflies and moths (Lepidoptera), ants (Formicidae), wasps (Apocrita), beetles (Coleoptera), spiders (Arachnida), grasshoppers (Acrididae), other true bugs (Hymenoptera), and flies (Diptera).</generalTaxonomicCoverage>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Apidae</taxonRankValue>
+                          <commonName>bumble bees, euglossine, euglossines, honey bees, stingless bees</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Andrenidae</taxonRankValue>
+                          <commonName>andrenid bees, andrenids</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Colletidate</taxonRankValue>
+                          <commonName>colletid bees, plasterer bees, yellow-faced bees</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Crabronidae</taxonRankValue>
+                          <commonName>crabronid wasps, cicadakillers, sand wasps, mud daubers</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Halictidae</taxonRankValue>
+                          <commonName>halictid bees, sweat bees</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Megachilidae</taxonRankValue>
+                          <commonName>leafcutting bees</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Melittidae</taxonRankValue>
+                          <commonName>melittid bees, melittids</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Family</taxonRankName>
+                        <taxonRankValue>Sphecidae</taxonRankValue>
+                          <commonName>mud daubers, sphecid wasps, digger wasps, sand wasps</commonName>
+                    </taxonomicClassification>
+              </taxonomicCoverage>
+      </coverage>
+      <purpose>
+          <para>These specimen-based bee species occurrence records for insects trapped and collected in the non-contiguous United States, U.S. Territories and Minor Outlying Islands, Canada, and Mexico, represent baseline bee species occurrences. Absence of bee species from this dataset does not indicate absence of the species from the collecting location. Number of times a species is recorded in this dataset does not represent actual species abundance or common-ness but does offer an indication of fluctuations in population size.</para>
+      </purpose>
+      <maintenance>
+          <description>
+              <para></para>
+          </description>
+          <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+      </maintenance>
+      <contact>
+    <individualName>
+<givenName>Sam</givenName>          <surName>Droege</surName>
+    </individualName>
+<organizationName>United States Geological Survey (USGS) Patuxent Wildlife Research Center (PWRC)</organizationName><positionName>Wildlife Biologist</positionName>    <address>
+<deliveryPoint>BARC - EAST, Building 308, Room 124, 10300 Baltimore Avenue</deliveryPoint><city>Beltsville</city><administrativeArea>Maryland</administrativeArea><postalCode>20705</postalCode><country>UNITED_STATES</country>    </address>
+<phone>+1 (301) 497-5840</phone><electronicMailAddress>sdroege@usgs.gov</electronicMailAddress><onlineUrl>http://www.pwrc.usgs.gov/staff/profiles/documents/droege.htm</onlineUrl>      </contact>
+      <methods>
+            <methodStep>
+                <description>
+                    <para>Many of the methods used to collect these data are outlined or described in detail in The Very Handy Bee Manual available online at ftp://ftpext.usgs.gov/pub/er/md/laurel/Droege/Handy%20Bee%20Manual.pdf; and in numerous instructional guides and documents available online at ftp://ftpext.usgs.gov/pub/er/md/laurel/Droege/Standard%20Files/
+
+Updated copies of this living dataset are submitted by Sam Droege to the USGS BISON Data Team for processing and upload to BISON and to the Global Biodiversity Information Facility (GBIF) on a roughly quarterly basis.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>This dataset is an aggregation of numerous projects and collection efforts conducted across the United States, U.S. territories and Minor Outlying Islands, Canada, Mexico, and other global locations by employees and field personnel of the USGS, and other federal and state agencies; protected area managers, biologists, private researchers, citizen scientists and volunteers.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Collection methods include short-term (24 hours) and long-term (weeks, months, or continuous) operation of 12 oz or 3.25 oz pan, 64 oz vane, malaise, hand/insect net, or other traps arranged in transects or arrays of varying lengths. Some sampling methods target specific habitats, vegetation complexes, or plant or insect species. While other sampling methods aim to establish baseline data for bee species presence in protected areas such as national parks and wildlife refuges.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Bee species occurrence records are reviewed by project managers for accuracy and completeness. Unless otherwise noted, taxonomic determinations were completed by Sam Droege and other professional bee taxonomists where necessary (e.g. Dr. John Ascher, American Museum of Natural History; Dr. Jason Gibbs, Cornell University). If taxonomic determinations are completed by a Collector or someone other than Sam Droege, they are reviewed by Sam Droege or other professional bee taxonomists. These data are also subject to review by the USGS BISON Data Team for accuracy and completeness in BISON-required fields including but not limited to ScientificName (syntax, spelling), and temporal and geographic information.</para>
+                </description>
+            </qualityControl>
+      </methods>
+
+      <project >
+          <title>Bees of North America (United States, U.S. Territories and Minor Outlying Islands, Canada, and Mexico)</title>
+          <personnel>
+    <individualName>
+<givenName>Samuel (Sam)</givenName>          <surName>Droege</surName>
+    </individualName>
+    <role>PRINCIPAL_INVESTIGATOR</role>
+          </personnel>
+          <abstract>
+              <para></para>
+          </abstract>
+          <funding>
+              <para>Main funding is provided by United States Geological Survey (USGS), Patuxent Wildlife Research Center (PWRC); with in-kind support from Smithsonian National Museum of Natural History; American Museum of Natural History (AMNH), Discover Life (www.discoverlife.org) and other contributors.</para>
+          </funding>
+            <studyAreaDescription>
+                <descriptor name="generic" citableClassificationSystem="false">
+                    <descriptorValue>Sampling for this dataset focuses on any location within the non-contiguous United States, U.S territories and Minor Outlying Islands, Canada, and Mexico, mainly in terrestrial locations. In some cases, protected areas such as national parks and wildlife refuges or specific vegetation types are targeted during collecting.</descriptorValue>
+                </descriptor>
+            </studyAreaDescription>
+      </project>
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:23Z</dateStamp>
+      <citation>Droege S, Sellers E (2020). USGS PWRC - Native Bee Inventory and Monitoring Lab (BIML). Version 1.7. United States Geological Survey. Occurrence dataset https://doi.org/10.15468/6autvb accessed via GBIF.org on 2022-08-02.</citation>
+              <bibliography>
+      <citation identifier="http://dx.doi.org/10.15560/11.3.1665">Sellers, E. and D. McCarthy. 2015. Distribution and floral hosts of Anthophorula micheneri (Timberlake, 1947) and Hylaeus sparsus (Cresson, 1869), (Insecta: Hymenoptera: Apoidea: Anthophila), with new state records in Giles and Loudoun counties, Virginia, eastern USA. Check List 11(3):1665. doi:10.15560/11.3.1665</citation>
+      <citation identifier="http://dx.doi.org/10.1111/1365-2664.12273">Larson, D. L., Droege, S., Rabie, P. A., Larson, J. L., Devalez, J., Haar, M., McDermott-Kubeczko, M. 2014. Using a network modularity analysis to inform management of a rare endemic plant in the northern Great Plains, USA. Journal of Applied Ecology, 51: 1024–1032. doi: 10.1111/1365-2664.12273</citation>
+      <citation identifier="http://dx.doi.org/10.1016/j.biocon.2005.01.022">Russell, K. N., H. Ikerd, and S. Droege.  2005.  The potential conservation value of unmowed powerline strips for native bees.  Biological Conservation 124(1):133-148. doi:10.1016/j.biocon.2005.01.022</citation>
+      <citation identifier="http://biostor.org/reference/55432">Ascher, J. S., P. Ganibino, and S. Droege.  2006.  Adventive Hylaeus (Spatulariella Popov) in the New World (Hymenoptera : Apoidea : Colletidae).  Proceedings of the Entomological Society of Washington 108(1):237-239.  http://biostor.org/reference/55432</citation>
+      <citation identifier="http://www.nature.nps.gov/ParkScience/archive/PDF/Article_PDFs/ParkScience31(1)SpecialIssue2014_84-87_89-90_Rykken_et_al_3797.pdf">Rykken, J., A. Rodman, S. Droege, and R. Grundel.  2014.  Pollinators in peril? A multipark approach to evaluating bee communities in habitats vulnerable to effects from climate change.  Park Science 31(1):84-90.   
+http://www.nature.nps.gov/ParkScience/index.cfm?ArticleID=678;  http://www.nature.nps.gov/ParkScience/archive/PDF/Article_PDFs/ParkScience31(1)SpecialIssue2014_84-87_89-90_Rykken_et_al_3797.pdf</citation>
+      <citation identifier="http://www.bioone.org/doi/abs/10.2317/JKES110726.1 ">Colla, S. R., J. S. Ascher, M. Arduser, J. Cane, M. Deyrup, S. Droege, J. Gibbs, T. Griswold, H. G. Hall, C. Henne, J. Neff, R. P. Jean, M. G. Rightmyer, C. Sheffield, M. Veit, and A. Wolf.  2012.  Documenting persistence of most eastern North American bee species (Hymenoptera: Apoidea: Anthophila) to 1990-2009.  Journal of the Kansas Entomological Society 85(1):14-22. doi:10.2317/JKES110726.1</citation>
+      <citation identifier="http://www.mapress.com/zootaxa/list/2010/2661.html">Droege, S., M. G. Rightmyer, C. S. Sheffield, and S. G. Brady.  2010.  New synonymies in the bee genus Nomada from North America (Hymenoptera: Apidae).  Zootaxa No. 2661:1-32.</citation>
+      <citation identifier="http://dx.doi.org/10.1111/j.1752-4598.2009.00074.x  ">Droege, S., V. J. Tepedino, G. Lebuhn, W. A. Link, R. L. Minckley, Q. Chen, and C. Conrad.  2010.  Spatial patterns of bee captures in North American bowl trapping surveys.  Insect Conservation and Diversity 3(1):15-23. doi:10.1111/j.1752-4598.2009.00074.x</citation>
+      <citation identifier="http://www.bioone.org/doi/abs/10.4289/0013-8797-111.1.132">Droege, S., C. A. Davis, W. E. Steiner, Jr., and Mawdsley, J.  2009.  The lost micro-deserts of the Patuxent River using landscape history, insect and plant specimens, and field work to detect and define a unique community.  Proceedings of the Entomological Society of Washington 111(1):132-144. doi:10.4289/0013-8797-111.1.132</citation>
+              </bibliography>
+              <resourceLogoUrl>https://bison.usgs.gov/ipt/logo.do?r=usgs-pwrc-biml</resourceLogoUrl>
+              <collection>
+                <parentCollectionIdentifier>NA</parentCollectionIdentifier>
+                <collectionIdentifier>NA</collectionIdentifier>
+                <collectionName>USGS_DRO</collectionName>
+              </collection>
+                <specimenPreservationMethod>PINNED</specimenPreservationMethod>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

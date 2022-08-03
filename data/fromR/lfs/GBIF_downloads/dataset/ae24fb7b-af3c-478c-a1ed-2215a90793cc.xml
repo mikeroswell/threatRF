@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="ae24fb7b-af3c-478c-a1ed-2215a90793cc"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/gqf6no</alternateIdentifier>
+        <alternateIdentifier>https://biokic2.rc.asu.edu:443/portal/collections/misc/collprofiles.php?collid=18</alternateIdentifier>
+        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=18</alternateIdentifier>
+        <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=18</alternateIdentifier>
+    <title>Brigham Young University Arthropod Museum</title>
+    <creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+<organizationName>Brigham Young University Arthropod Museum</organizationName><positionName>Collection Manager</positionName>    <address>
+<deliveryPoint>Brigham Young University</deliveryPoint><city>Provo</city><administrativeArea>Utah</administrativeArea><postalCode>84602</postalCode><country>UNITED_STATES</country>    </address>
+<electronicMailAddress>shawn_clark@byu.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-06-10
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The BYU Arthropod Collection is housed in the Monte L. Bean Life Science Museum at Brigham Young University. It totals approximately 2,000,000 specimens, mostly insects. Although worldwide in coverage, an emphasis is on western North America. Although taxonomically diverse, strengths include Coleoptera, Plecoptera, and Siphonaptera. The insect tissue holdings are outstanding. The principal aim is systematic study, but the collection is available to a wide variety of researchers.</para>
+    </abstract>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>Brigham Young University Arthropod Museum</organizationName><electronicMailAddress>shawn_clark@byu.edu</electronicMailAddress><onlineUrl>http://mlbean.byu.edu/</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:20Z</dateStamp>
+      <citation>Brigham Young University, Arthropod Collection (2022). Brigham Young University Arthropod Museum. Occurrence dataset https://doi.org/10.15468/gqf6no accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

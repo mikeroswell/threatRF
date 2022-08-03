@@ -24,3 +24,9 @@ data/GIS_downloads/** filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/LC2013_unzipped/ filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/ filter=lfs diff=lfs merge=lfs -text
 /data/fromR/fold_fits.RDA filter=lfs diff=lfs merge=lfs -text
+/data/fromR/lfs/GBIF_downloads/multimedia.txt filter=lfs diff=lfs merge=lfs -text
+/data/fromR/lfs/GBIF_downloads/occurrence.txt filter=lfs diff=lfs merge=lfs -text
+/data/fromR/lfs/GBIF_downloads/verbatim.txt filter=lfs diff=lfs merge=lfs -text
+/multimedia.txt filter=lfs diff=lfs merge=lfs -text
+/occurrence.txt filter=lfs diff=lfs merge=lfs -text
+/verbatim.txt filter=lfs diff=lfs merge=lfs -text

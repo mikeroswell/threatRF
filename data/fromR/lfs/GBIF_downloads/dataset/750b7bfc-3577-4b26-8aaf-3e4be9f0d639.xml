@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="750b7bfc-3577-4b26-8aaf-3e4be9f0d639"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/vv6k58</alternateIdentifier>
+        <alternateIdentifier>https://serv.biokic.asu.edu/ecdysis/collections/misc/collprofiles.php?collid=1</alternateIdentifier>
+        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=1</alternateIdentifier>
+        <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=1</alternateIdentifier>
+        <alternateIdentifier>http://symbiota4.acis.ufl.edu/scan/portal/collections/misc/collprofiles.php?collid=1</alternateIdentifier>
+    <title>Arizona State University Hasbrouck Insect Collection</title>
+    <creator>
+<organizationName>Ecdysis Portal</organizationName><electronicMailAddress>ajohnston@asu.edu</electronicMailAddress><onlineUrl>https://serv.biokic.asu.edu/ecdysis/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>Ecdysis Portal</organizationName><electronicMailAddress>ajohnston@asu.edu</electronicMailAddress><onlineUrl>https://serv.biokic.asu.edu/ecdysis/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+<givenName>Sangmi</givenName>          <surName>Lee</surName>
+    </individualName>
+<positionName>Collection Manager</positionName><electronicMailAddress>slee281@asu.edu</electronicMailAddress>      <userId directory="https://orcid.org/">0000-0002-9636-8242</userId>
+    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Nico</givenName>          <surName>Franz</surName>
+    </individualName>
+<positionName>Curator</positionName><electronicMailAddress>nico.franz@asu.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-08-01
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The ASU Frank F. Hasbrouck Insect Collection contains approximately 1,000,000 insect specimens, representing at least 25 orders, 390 families, 4,000 genera, 12,000 species and 1,240 subspecies. Most specimens are from the southwestern United States; however considerable representative material is also available from other North American regions and Mexico. The collection was largely developed through the activities of past faculty - Drs. Frank Hasbrouck, Gordon Castle and Mont Cazier - and their students. An extensive reprint collection is available to visiting researchers. For further information and to arrange a visit or loan, please contact Curator Dr. Nico Franz (nico.franz&amp;#64;asu.edu) or Collection Manager Dr. Sangmi Lee (slee281&amp;#64;asu.edu).</para>
+    </abstract>
+      <intellectualRights>
+        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>Arizona State University Hasbrouck Insect Collection</organizationName><onlineUrl>https://biokic.asu.edu/collections/asuhic</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:23Z</dateStamp>
+      <citation>Arizona State University Biocollections (2022). Arizona State University Hasbrouck Insect Collection. Occurrence dataset https://doi.org/10.15468/vv6k58 accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

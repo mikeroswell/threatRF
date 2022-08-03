@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="0fd9d08c-63c4-4b9a-8d0f-15a6202d88e2"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/srjd22</alternateIdentifier>
+        <alternateIdentifier>https://www.sernecportal.org/portal/collections/misc/collprofiles.php?collid=155</alternateIdentifier>
+        <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=155</alternateIdentifier>
+    <title>Clemson University Herbarium</title>
+    <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+          <surName>Dixie Z. Damrel</surName>
+    </individualName>
+<electronicMailAddress>ddamrel@clemson.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Lorena</givenName>          <surName>Endara</surName>
+    </individualName>
+<positionName>curator</positionName><electronicMailAddress>cendara@clemson.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-07-01
+      </pubDate>
+    <language>ENGLISH</language>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>Clemson University Herbarium</organizationName><electronicMailAddress>ddamrel@clemson.edu</electronicMailAddress><onlineUrl>http://www.clemson.edu/cafls/herbarium/</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
+      <citation>Clemson University Herbarium (2022). Clemson University Herbarium. Occurrence dataset https://doi.org/10.15468/srjd22 accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

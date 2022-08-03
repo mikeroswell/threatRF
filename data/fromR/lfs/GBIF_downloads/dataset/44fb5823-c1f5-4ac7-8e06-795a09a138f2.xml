@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="44fb5823-c1f5-4ac7-8e06-795a09a138f2"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/epw1ws</alternateIdentifier>
+        <alternateIdentifier>https://biokic2.rc.asu.edu:443/portal/collections/misc/collprofiles.php?collid=126</alternateIdentifier>
+        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=126</alternateIdentifier>
+        <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=126</alternateIdentifier>
+    <title>Frost Entomological Museum</title>
+    <creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+<organizationName>Frost Entomological Museum</organizationName><positionName>Collection Manager</positionName><electronicMailAddress>adeans@psu.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-06-10
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The research collection comprises over 1,300,000 specimens of insects representing at least 15,000 species. Specimens are pinned, slide mounted, and liquid preserved in alcohol with dried artifacts. The important collection holdings include the George and Alice Beatty Odonata Collection, John Pepper Aphid Collection, K.C. Kim Anoplura. Collection, archival collections from major inventory and assessment projects including several national parks and a PA National Guard Training Center and others.</para>
+    </abstract>
+      <intellectualRights>
+        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>Frost Entomological Museum</organizationName><electronicMailAddress>adeans@psu.edu</electronicMailAddress><onlineUrl>http://www.ento.psu.edu/home/frost/</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:23Z</dateStamp>
+      <citation>Frost Entomological Museum (2022). Frost Entomological Museum. Occurrence dataset https://doi.org/10.15468/epw1ws accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

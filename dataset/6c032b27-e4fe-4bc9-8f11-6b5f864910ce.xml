@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="6c032b27-e4fe-4bc9-8f11-6b5f864910ce"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/bmfgag</alternateIdentifier>
+        <alternateIdentifier>https://hymfiles.asc.ohio-state.edu/ipt/resource?r=cmnh</alternateIdentifier>
+        <alternateIdentifier>http://xbiod.osu.edu/ipt/resource?r=cmnh</alternateIdentifier>
+        <alternateIdentifier>http://xbiod.osu.edu/ipt/resource.do?r=cmnh</alternateIdentifier>
+        <alternateIdentifier>6c032b27-e4fe-4bc9-8f11-6b5f864910ce</alternateIdentifier>
+    <title>Cleveland Museum of Natural History</title>
+    <creator>
+    <individualName>
+<givenName>Norman</givenName>          <surName>Johnson</surName>
+    </individualName>
+<organizationName>Ohio State University</organizationName><positionName>Director</positionName>    <address>
+<city>Columbus</city><administrativeArea>Ohio</administrativeArea><postalCode>43212</postalCode><country>UNITED_STATES</country>    </address>
+<electronicMailAddress>johnson.2@osu.edu</electronicMailAddress><onlineUrl>http://wasps.osu.edu</onlineUrl>    </creator>
+    <metadataProvider>
+    <individualName>
+<givenName>Norman</givenName>          <surName>Johnson</surName>
+    </individualName>
+<organizationName>Ohio State University</organizationName><positionName>Director</positionName>    <address>
+<city>Columbus</city><administrativeArea>Ohio</administrativeArea><postalCode>43212</postalCode><country>UNITED_STATES</country>    </address>
+<electronicMailAddress>johnson.2@osu.edu</electronicMailAddress><onlineUrl>http://wasps.osu.edu</onlineUrl>    </metadataProvider>
+      <pubDate>
+      2019-07-17
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>Occurrence records from the Cleveland Museum of Natural History.</para>
+    </abstract>
+        <keywordSet>
+              <keyword>Occurrence</keyword>
+              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Specimen</keyword>
+              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <coverage>
+            <geographicCoverage>
+                  <geographicDescription>Worldwide in scope.</geographicDescription>
+                  <boundingCoordinates>
+                      <westBoundingCoordinate>-180</westBoundingCoordinate>
+                      <eastBoundingCoordinate>-180</eastBoundingCoordinate>
+                      <northBoundingCoordinate>90</northBoundingCoordinate>
+                      <southBoundingCoordinate>-90</southBoundingCoordinate>
+                  </boundingCoordinates>
+            </geographicCoverage>
+              <taxonomicCoverage>
+                    <generalTaxonomicCoverage>Invertebrates in general.</generalTaxonomicCoverage>
+                    <taxonomicClassification>
+                          <taxonRankName>Phylum</taxonRankName>
+                        <taxonRankValue>Arthropoda</taxonRankValue>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Phylum</taxonRankName>
+                        <taxonRankValue>Mollusca</taxonRankValue>
+                    </taxonomicClassification>
+              </taxonomicCoverage>
+      </coverage>
+      <maintenance>
+          <description>
+              <para></para>
+          </description>
+          <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
+      </maintenance>
+      <contact>
+    <individualName>
+<givenName>Norman</givenName>          <surName>Johnson</surName>
+    </individualName>
+<organizationName>Ohio State University</organizationName><positionName>Director</positionName>    <address>
+<city>Columbus</city><administrativeArea>Ohio</administrativeArea><postalCode>43212</postalCode><country>UNITED_STATES</country>    </address>
+<electronicMailAddress>johnson.2@osu.edu</electronicMailAddress><onlineUrl>http://wasps.osu.edu</onlineUrl>      </contact>
+      <contact>
+    <individualName>
+<givenName>Nicole</givenName>          <surName>Gunter</surName>
+    </individualName>
+<organizationName>Cleveland Museum of Natural History</organizationName><positionName>Collections Manager of Invertebrate Zoology</positionName>    <address>
+<city>Cleveland</city><administrativeArea>Ohio</administrativeArea><country>UNITED_STATES</country>    </address>
+<electronicMailAddress>nicolegunter@gmail.com</electronicMailAddress>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:20Z</dateStamp>
+      <citation>Johnson N (2019). Cleveland Museum of Natural History. Museum of Biological Diversity, The Ohio State University. Occurrence dataset https://doi.org/10.15468/bmfgag accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

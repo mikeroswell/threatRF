@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="5d283bb6-64dd-4626-8b3b-a4e8db5415c3"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/0saucj</alternateIdentifier>
+        <alternateIdentifier>https://bnhmipt.berkeley.edu/resource?r=essig</alternateIdentifier>
+        <alternateIdentifier>http://bnhmipt.berkeley.edu/resource?r=essig</alternateIdentifier>
+        <alternateIdentifier>http://bnhmipt.berkeley.edu/ipt/resource?r=essig</alternateIdentifier>
+        <alternateIdentifier>http://bnhmipt.berkeley.edu/ipt/resource.do?r=essig</alternateIdentifier>
+        <alternateIdentifier>5d283bb6-64dd-4626-8b3b-a4e8db5415c3</alternateIdentifier>
+        <alternateIdentifier>15028</alternateIdentifier>
+    <title>Essig Museum of Entomology</title>
+    <creator>
+    <individualName>
+<givenName>Joyce</givenName>          <surName>Gross</surName>
+    </individualName>
+<organizationName>UC Berkeley</organizationName><positionName>Programmer</positionName>    <address>
+<deliveryPoint>1096 Valley Life Sciences Building</deliveryPoint><city>Berkeley</city><administrativeArea>California</administrativeArea><country>UNITED_STATES</country>    </address>
+<electronicMailAddress>joyceg@berkeley.edu</electronicMailAddress>    </creator>
+    <metadataProvider>
+    <individualName>
+<givenName>Peter</givenName>          <surName>Oboyski</surName>
+    </individualName>
+<organizationName>Essig Museum of Entomology</organizationName><positionName>Collections Manager</positionName>    <address>
+<deliveryPoint>1101 Valley Life Sciences Building #4780</deliveryPoint><city>Berkeley</city><administrativeArea>California</administrativeArea><postalCode>94720</postalCode><country>UNITED_STATES</country>    </address>
+<phone>(510) 643-0804</phone><electronicMailAddress>essig.museum@gmail.com</electronicMailAddress><onlineUrl>http://essig.berkeley.edu/</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+<givenName>Peter</givenName>          <surName>Oboyski</surName>
+    </individualName>
+<organizationName>Essig Museum of Entomology</organizationName><positionName>Collections Manager</positionName>    <address>
+<deliveryPoint>1101 Valley Life Sciences Building #4780</deliveryPoint><city>Berkeley</city><administrativeArea>California</administrativeArea><postalCode>94720</postalCode><country>UNITED_STATES</country>    </address>
+<phone>(510) 643-0804</phone><electronicMailAddress>essig.museum@berkeley.edu</electronicMailAddress><onlineUrl>http://essig.berkeley.edu/</onlineUrl>    <role>USER</role>
+    </associatedParty>
+      <pubDate>
+      2022-07-29
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>Essig Museum of Entomology</para>
+    </abstract>
+        <keywordSet>
+              <keyword>Specimen</keyword>
+              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Occurrence</keyword>
+              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Occurrence</keyword>
+              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+      <additionalInfo>
+          <para>Please see http://vertnet.org/resources/norms.html for additional usage information.</para>
+      </additionalInfo>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <distribution scope="document">
+          <online>
+              <url function="information">http://essig.berkeley.edu</url>
+          </online>
+      </distribution>
+      <coverage>
+            <geographicCoverage>
+                  <geographicDescription>Arthropods of North America, Mexico, Costa Rica, Pacific Islands</geographicDescription>
+                  <boundingCoordinates>
+                      <westBoundingCoordinate>-50.12</westBoundingCoordinate>
+                      <eastBoundingCoordinate>168.95</eastBoundingCoordinate>
+                      <northBoundingCoordinate>58.19</northBoundingCoordinate>
+                      <southBoundingCoordinate>-16.17</southBoundingCoordinate>
+                  </boundingCoordinates>
+            </geographicCoverage>
+              <taxonomicCoverage>
+                    <taxonomicClassification>
+                          <taxonRankName>Class</taxonRankName>
+                        <taxonRankValue>Arachnida</taxonRankValue>
+                          <commonName>spiders, scorpions</commonName>
+                    </taxonomicClassification>
+                    <taxonomicClassification>
+                          <taxonRankName>Class</taxonRankName>
+                        <taxonRankValue>Insecta</taxonRankValue>
+                          <commonName>insects</commonName>
+                    </taxonomicClassification>
+              </taxonomicCoverage>
+      </coverage>
+      <maintenance>
+          <description>
+              <para></para>
+          </description>
+          <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
+      </maintenance>
+      <contact>
+    <individualName>
+<givenName>Peter</givenName>          <surName>Oboyski</surName>
+    </individualName>
+<organizationName>Essig Museum of Entomology</organizationName><positionName>Collections Manager</positionName>    <address>
+<deliveryPoint>1101 Valley Life Sciences Building #4780</deliveryPoint><city>Berkeley</city><administrativeArea>California</administrativeArea><postalCode>94720</postalCode><country>UNITED_STATES</country>    </address>
+<phone>(510) 643-0804</phone><electronicMailAddress>essig.museum@gmail.com</electronicMailAddress><onlineUrl>http://essig.berkeley.edu/</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
+      <citation identifier="http://essigdb.berkeley.edu">Gross J, Oboyski P (2022). Essig Museum of Entomology. Version 121.246. Berkeley Natural History Museums. Occurrence dataset https://doi.org/10.15468/0saucj accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>
