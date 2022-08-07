@@ -20,6 +20,15 @@ source("code/fix_mod.R")
 load(file="data/fromR/lfs/to_predict.RDA")
 # unique(indi$roundedSRank)
 
+# just some summary data:
+# indi %>%
+#   mutate(gs = paste(genus, species)) %>%
+#   group_by(kingdomKey) %>%
+#   summarize(occ = n(), spp = n_distinct(gs))
+
+
+
+
 almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
                                  lon = sf::st_coordinates(.)[,2]) %>% 
   group_by(genus, species, kingdomKey) %>%
@@ -32,6 +41,12 @@ almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          )
          )
   )
+
+almost %>% 
+  ungroup() %>% 
+  mutate(gs = paste(genus, species)) %>%
+  group_by(kingdomKey, simple_status) %>%
+  summarize(occ = n(), spp = n_distinct(gs))
 
 tofit <-almost %>% 
   sf::st_drop_geometry() %>% 
