@@ -3,7 +3,7 @@ library(pROC)
 library(ROCR)
 library(patchwork)
 
-load("data/fromR/lfs/100_100_fits_20220727.rda")
+load("data/fromR/lfs/100_100_fits_20220801.rda")
 load("data/fromR/outerFolds.RDA")
 classed.test <- read.csv("data/fromR/training_data.csv")
 classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
@@ -165,6 +165,7 @@ vimp_sum<-varimp_run %>%
 
 
 #make variable importance plot
+# next step is to create better 
 pdf("figures/variable_importance_top.pdf")
 vimp_sum %>% 
   group_by(varName) %>% 
@@ -228,8 +229,8 @@ final_fits <- map(c("lep", "plant"), function(tax){
   
 })
 
-save(final_fits, file = "data/fromR/lfs/final_fits.RDA")
-load("data/fromR/lfs/final_fits.RDA")
+save(final_fits, file = "data/fromR/lfs/final_fits_20220807_graphicslab.RDA")
+load("data/fromR/lfs/final_fits_20220807_graphicslab.RDA")
 # get "optimal" thresholds
 # threshlist<-map(1:2, function(tax){
 #   kk <- c(1,6)[tax]
