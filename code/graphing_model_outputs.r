@@ -236,17 +236,14 @@ final_fits <- map(c("lep", "plant"), function(tax){
   
 })
 
-<<<<<<< HEAD
-save(final_fits, file = "data/fromR/lfs/final_fits.RDA")
-load("data/fromR/lfs/final_fits.RDA")
-=======
+
 save(final_fits, file = "data/fromR/lfs/final_fits_20220807_graphicslab.RDA")
 load("data/fromR/lfs/final_fits_20220807_graphicslab.RDA")
->>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
+
 # get "optimal" thresholds
 # threshlist<-map(1:2, function(tax){
 #   kk <- c(1,6)[tax]
-#   raw <- tofit_summary_complete %>% 
+#   raw <- tofit_summary_complete %>%
 #     filter(kingdomKey == kk, simple_status_mu != 1)
 #   dat <- dropper(raw)
 #   preds <- predict(object = fix.mod(final_fits[[tax]]
@@ -260,7 +257,7 @@ load("data/fromR/lfs/final_fits_20220807_graphicslab.RDA")
 #   thresh <- thresh.df[which.max(thresh.df$sens + thresh.df$spec), ]
 #   taxon <- c("lepidoptera", "plantae")[tax]
 # 
-#    return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh), 
+#    return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh),
 #                train.preds = data.frame(preds, taxon, genus = raw$genus, species = raw$species)))
 # })
 # 
