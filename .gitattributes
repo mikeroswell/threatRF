@@ -23,3 +23,4 @@ data/fromR/lfs/plants_with_status.csv filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/** filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/LC2013_unzipped/ filter=lfs diff=lfs merge=lfs -text
 data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/ filter=lfs diff=lfs merge=lfs -text
+figures filter=lfs diff=lfs merge=lfs -text
