@@ -1,0 +1,155 @@
+
+Dataset: Harvard University Herbaria: All Records
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: SD - SD Herbarium, San Diego Natural History Museum
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Lund Botanical Museum (LD)
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Brigham Young University Arthropod Museum
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Bernice P. Bishop Museum
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Royal Ontario Museum Green Plant Herbarium (TRT)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Eastern Kentucky University, Ronald L. Jones Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: UCR - University of California, Riverside Herbarium - Vascular Plants
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: University of British Columbia Herbarium (UBC) - Vascular Plant Collection
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Desert Botanical Garden Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: US herbarium - Smithsonian Institute - Amostras Brasileiras Repatriadas - Herbário Virtual REFLORA
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Cleveland Museum of Natural History
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Appalachian State University, I. W. Carpenter, Jr. Herbarium
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Mississippi Entomological Museum
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Higher Plant Collections of the Lagos University Herbarium (LUH): Families A - Z
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Aspilanta new genus (Heliozelidae) specimen data
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Deaver Herbarium (Northern Arizona University)
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Virginia Polytechnic Institute and State University Insect Collection
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Clemson University Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Western Washington University Insect Collection
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Fairchild Tropical Botanic Garden (FTG)
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: University of Alabama Herbarium
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Auburn University, John D. Freeman Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Rutgers University, Chrysler Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: University of Georgia Collection of Arthropods
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Essig Museum of Entomology
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: The Albert J. Cook Arthropod Research Collection
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Clemson University Arthropod Collection
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Bruce Bennett Herbarium (BABY)
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Intermountain Herbarium (Vascular plants & algae)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Field Museum of Natural History (Botany)  Seed Plant Collection
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: University of Vermont, Pringle Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Marie-Victorin Herbarium (MT) - Plantes vasculaires
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Naturalis Biodiversity Center (NL) - Botany
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Biodiversity4all Research-Grade Observations
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: CONN
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Digitalización y Sistematización de las Colecciones Biológicas Nacionales del Instituto de Biología, UNAM (Plantas vasculares)
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Arizona State University Hasbrouck Insect Collection
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Entomology Collection at the Natural History Museum of Utah
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Plant Resources Center
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Campbell University Herbarium
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: University of Minnesota Insect Collection
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: George Mason University, Ted R. Bradley Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: USGS PWRC - Native Bee Inventory and Monitoring Lab (BIML)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Lepidoptera World (Luomus) (LEPW)
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Frost Entomological Museum
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: USGS NRP - Submerged Aquatic Plants - 1966-2009
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: University of Florida Herbarium (FLAS)
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: CHSC - CSU Chico, Chico State Herbarium - Vascular Plants
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: CAS Botany (BOT)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Invasive Plant Atlas of the MidSouth (IPAMS)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: NEON Biorepository Terrestrial Plant Collection (Canopy Foliage)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: C.A. Triplehorn Insect Collection (OSUC), Ohio State University
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: R. L. McGregor Herbarium Vascular Plants Collection
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Academy of Natural Sciences Entomology Collection - LepNet
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Towson University - MidAtlantic - Ailanthus altissima - 2011
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Institut Botanic de Barcelona (IBB, CSIC-Ajuntament de Barcelona), BC-Plantae
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: University of Delaware Insect Research Collection
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: C.P. Gillette Museum of Arthropod Diversity
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: University of South Carolina, A. C. Moore Herbarium
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: San Diego Natural History Museum Entomology Department
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: MVSC; The James C. Parks Herbarium at Millersville University
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Mississippi Museum of Natural Science Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of Alberta E. H. Strickland Entomological Museum (UASM)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: University of Michigan Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Entomology Division, Yale Peabody Museum
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Academy of Natural Sciences of Drexel University
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of North Carolina at Chapel Hill Herbarium: Vascular Plants
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of South Florida Herbarium (USF)
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Carnegie Museum of Natural History Herbarium
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: The Lepidopterists' Society Season Summary
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Tropicos Specimen Data
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: NMNH Extant Specimen Records (USNM, US)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: The New York Botanical Garden Herbarium (NY)
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: eButterfly Surveys
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: iNaturalist Research-grade Observations
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode

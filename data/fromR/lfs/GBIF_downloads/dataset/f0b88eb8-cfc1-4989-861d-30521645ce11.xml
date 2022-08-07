@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="f0b88eb8-cfc1-4989-861d-30521645ce11"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/km9xvj</alternateIdentifier>
+        <alternateIdentifier>https://biorepo.neonscience.org/portal/collections/misc/collprofiles.php?collid=18</alternateIdentifier>
+    <title>NEON Biorepository Terrestrial Plant Collection (Canopy Foliage)</title>
+    <creator>
+<organizationName>NEON Biorepository Data Portal</organizationName><electronicMailAddress>biorepo@asu.edu</electronicMailAddress><onlineUrl>https://biorepo.neonscience.org/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>NEON Biorepository Data Portal</organizationName><electronicMailAddress>biorepo@asu.edu</electronicMailAddress><onlineUrl>https://biorepo.neonscience.org/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+          <surName>NEON Biorepository</surName>
+    </individualName>
+<electronicMailAddress>biorepo@asu.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Laura</givenName>          <surName>Steger</surName>
+    </individualName>
+<positionName>Collection Manager</positionName><electronicMailAddress>lsteger@asu.edu</electronicMailAddress>      <userId directory="https://orcid.org/">0000-0002-0878-4132</userId>
+    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Laura</givenName>          <surName>Rocha Prado</surName>
+    </individualName>
+<positionName>Bioinformatician</positionName><electronicMailAddress>lauraprado@asu.edu</electronicMailAddress>      <userId directory="https://orcid.org/">0000-0003-1237-2824</userId>
+    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-01-24
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>This collection contains oven-dried canopy foliage collected from NEON terrestrial sites (NEON sample class: cfc_chemistrySubsampling_in.archiveSampleID). Each NEON site conducts canopy foliage sampling once every 5 years and is scheduled to begin sampling close in time to the Aerial Observation Platform (AOP) airborne remote sensing collection at the site. Because of the links with AOP, strong emphasis is placed on collecting sunlit vegetation only. A subset of the Distributed and Tower Base Plots located across the study area are used for canopy foliage sampling. In sites dominated by woody cover (e.g., forests and shrubland), the goal is to sample at least one individual of each species found in the site-level, sunlit canopy. For more common species, replicates are taken spanning whatever gradients are relevant to a site (topography, aspect, stand age, etc.). In high-diversity sites, rare species are sampled only where feasible (e.g., target taxa with sunlit foliage present in a foliar sampling plot). Each site has a target sample number proportional to its canopy diversity. In systems dominated by herbaceous vegetation, bulk herbaceous plant biomass is harvested from a set of assigned plots using randomly positioned clip strips, and the material is analyzed or archived in bulk, meaning not sorted to species. Subsamples for archive are oven-dried at 65 degrees Celsius for at least 48 hours then ground in a Wiley mill to 20 mesh size (sieve opening size &amp;#61; 0.0331 in). Archived samples are stored at room temperature in 20 mL HDPE scintillation vials. See link below for the NEON data product that provides various physico-chemical measurements of these same foliar samples.</para>
+    </abstract>
+      <intellectualRights>
+        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>NEON Biorepository Terrestrial Plant Collection (Canopy Foliage)</organizationName><electronicMailAddress>biorepo@asu.edu</electronicMailAddress><onlineUrl>https://data.neonscience.org/data-products/DP1.10026.001</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:24Z</dateStamp>
+      <citation>National Ecological Observatory Network (2022). NEON Biorepository Terrestrial Plant Collection (Canopy Foliage). Occurrence dataset https://doi.org/10.15468/km9xvj accessed via GBIF.org on 2022-08-02.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

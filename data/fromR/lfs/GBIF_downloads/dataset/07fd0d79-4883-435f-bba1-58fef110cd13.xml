@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="07fd0d79-4883-435f-bba1-58fef110cd13"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.5886/rtt57cc9</alternateIdentifier>
+        <alternateIdentifier>https://data.canadensys.net/ipt/resource?r=ubc-vascular-specimens</alternateIdentifier>
+        <alternateIdentifier>http://data.canadensys.net/ipt/resource?r=ubc-vascular-specimens</alternateIdentifier>
+        <alternateIdentifier>http://data.canadensys.net/ipt/resource.do?r=ubc-vascular-specimens</alternateIdentifier>
+        <alternateIdentifier>07fd0d79-4883-435f-bba1-58fef110cd13</alternateIdentifier>
+        <alternateIdentifier>14036</alternateIdentifier>
+    <title>University of British Columbia Herbarium (UBC) - Vascular Plant Collection</title>
+    <creator>
+    <individualName>
+<givenName>Linda</givenName>          <surName>Jennings</surName>
+    </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>    <address>
+<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>    </creator>
+    <metadataProvider>
+    <individualName>
+<givenName>Linda</givenName>          <surName>Jennings</surName>
+    </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>    <address>
+<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+<givenName>Jeannette</givenName>          <surName>Whitton</surName>
+    </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Director &amp; Curator, Vascular Plants</positionName>    <address>
+<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+<electronicMailAddress>jeannette.whitton@botany.ubc.ca</electronicMailAddress><onlineUrl>http://www.botany.ubc.ca/people/jwhitton.html</onlineUrl>    <role>PRINCIPAL_INVESTIGATOR</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Linda</givenName>          <surName>Jennings</surName>
+    </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>    <address>
+<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>    <role>CUSTODIAN_STEWARD</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Sean</givenName>          <surName>Graham</surName>
+    </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Curator, Monocots and Basal Angiosperms</positionName>    <address>
+<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+<electronicMailAddress>sean.graham@ubc.ca</electronicMailAddress><onlineUrl>http://www.botany.ubc.ca/people/sgraham.html</onlineUrl>    <role>PRINCIPAL_INVESTIGATOR</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Quentin</givenName>          <surName>Cronk</surName>
+    </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Curator, Eudicots</positionName>    <address>
+<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+<electronicMailAddress>quentin.cronk@ubc.ca</electronicMailAddress><onlineUrl>http://cronklab.wikidot.com/</onlineUrl>    <role>PRINCIPAL_INVESTIGATOR</role>
+    </associatedParty>
+    <associatedParty>
+<organizationName>University of British Columbia</organizationName>    <address>
+<deliveryPoint>2329 West Mall</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+    <role>PUBLISHER</role>
+    </associatedParty>
+      <pubDate>
+      2021-12-03
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>This dataset includes all digitized vascular plants in the UBC collection, encompassing approximately 68% of the collection.
+
+The UBC Herbarium has one of the world&amp;#39;s largest collections of British Columbia vascular plants and is worldwide in scope. At present, the collection includes more than 235,000 accessioned specimens.</para>
+    </abstract>
+        <keywordSet>
+              <keyword>Canada</keyword>
+              <keyword>Beaty Biodiversity Museum</keyword>
+              <keyword>herbarium</keyword>
+              <keyword>vascular plants</keyword>
+              <keyword>University of British Columbia Herbarium</keyword>
+              <keyword>UBC</keyword>
+              <keyword>British Columbia</keyword>
+              <keyword>specimens</keyword>
+              <keyword>collection</keyword>
+              <keyword>Canadensys</keyword>
+              <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Occurrence</keyword>
+              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Specimen</keyword>
+              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+      <intellectualRights>
+        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+      </intellectualRights>
+      <distribution scope="document">
+          <online>
+              <url function="information">http://www.biodiversity.ubc.ca/museum/herbarium/</url>
+          </online>
+      </distribution>
+      <coverage>
+            <geographicCoverage>
+                  <geographicDescription>The UBC Herbarium has one of the world&apos;s largest collections of British Columbia vascular plants and is worldwide in scope. Of the 235,000 vascular plant specimens, about 52% are from British Columbia. About 18% are from the rest of Canada, with the Northwest Territories and Yukon especially well represented. Specimens from the United States make up about 15% of the collection, with 8% from the five Pacific Coast states (California, Hawaii, Oregon, Washington, and Alaska) and 7% from the rest of the United States. Hawaiian plants are especially well represented. About 15% of the collection is from the rest of the world, with the largest numbers from Great Britain, Finland, China, Australia, Denmark, Japan, South Africa, Taiwan, Russia, Greenland, and Sweden.</geographicDescription>
+                  <boundingCoordinates>
+                      <westBoundingCoordinate>-180</westBoundingCoordinate>
+                      <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                      <northBoundingCoordinate>90</northBoundingCoordinate>
+                      <southBoundingCoordinate>-90</southBoundingCoordinate>
+                  </boundingCoordinates>
+            </geographicCoverage>
+              <taxonomicCoverage>
+                    <taxonomicClassification>
+                          <taxonRankName>Kingdom</taxonRankName>
+                        <taxonRankValue>Plantae</taxonRankValue>
+                          <commonName>Plants</commonName>
+                    </taxonomicClassification>
+              </taxonomicCoverage>
+      </coverage>
+      <maintenance>
+          <description>
+              <para></para>
+          </description>
+          <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+      </maintenance>
+      <contact>
+    <individualName>
+<givenName>Linda</givenName>          <surName>Jennings</surName>
+    </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>    <address>
+<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>    </address>
+<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>      </contact>
+      <methods>
+            <methodStep>
+                <description>
+                    <para></para>
+                </description>
+            </methodStep>
+      </methods>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-08-02T21:55:20Z</dateStamp>
+      <citation identifier="doi:10.5886/rtt57cc9">Jennings L (2021). University of British Columbia Herbarium (UBC) - Vascular Plant Collection. Version 16.7. University of British Columbia. Occurrence dataset https://doi.org/10.5886/rtt57cc9 accessed via GBIF.org on 2022-08-02.</citation>
+              <bibliography>
+      <citation identifier="http://www.ingentaconnect.com/content/iapt/tax/2006/00000055/00000003/art00017">Smith, A.R., Pryer, K.M., Schuettpelz, E., Korall, P., Schneider, H., Wolf, P.G. 2006. A classification for extant ferns. Taxon 55(3): 705-731.</citation>
+      <citation identifier="http://www.nrcresearchpress.com/doi/abs/10.1139/B08-062">Rai, H.S., Reeves, P.A., Peakall, R., Olmstead, R.G., Graham, S.W. 2008. Inference of higher-order conifer relationships from a multi-locus plastid data set. Botany 86(7): 658-669.</citation>
+      <citation identifier="http://onlinelibrary.wiley.com/doi/10.1111/j.1095-8339.2009.00996.x/abstract">The Angiosperm Phylogeny Group. 2009. An update of the Angiosperm Phylogeny Group classification for the orders and families of flowering plants: APG III. Botanical Journal of the Linnaen Society 161(2): 105-121.</citation>
+      <citation identifier="http://onlinelibrary.wiley.com/doi/10.1111/j.1095-8339.2009.01000.x/abstract">Haston, E., Richardson, J.E., Stevens, P.F., Chase, M.W., Harris, D.J. 2009. The Linear Angiosperm Phylogeny Group (LAPG) III: a linear sequence of the families in APG III. Botanical Journal of the Linnaen Society 161(2): 128-131.</citation>
+              </bibliography>
+              <physical>
+                  <objectName>UBC Herbarium Databases</objectName>
+                  <characterEncoding>UTF-8</characterEncoding>
+                  <dataFormat>
+                      <externallyDefinedFormat>
+                          <formatName>HTML</formatName>
+                      </externallyDefinedFormat>
+                  </dataFormat>
+                  <distribution>
+                      <online>
+                          <url function="download">http://www.biodiversity.ubc.ca/museum/herbarium/database.html</url>
+                      </online>
+                  </distribution>
+              </physical>
+              <physical>
+                  <objectName>Canadensys explorer</objectName>
+                  <characterEncoding>UTF-8</characterEncoding>
+                  <dataFormat>
+                      <externallyDefinedFormat>
+                          <formatName>HTML</formatName>
+                      </externallyDefinedFormat>
+                  </dataFormat>
+                  <distribution>
+                      <online>
+                          <url function="download">http://data.canadensys.net/explorer/en/resources/ubc-vascular-specimens</url>
+                      </online>
+                  </distribution>
+              </physical>
+              <physical>
+                  <objectName>GBIF data portal</objectName>
+                  <characterEncoding>UTF-8</characterEncoding>
+                  <dataFormat>
+                      <externallyDefinedFormat>
+                          <formatName>HTML</formatName>
+                      </externallyDefinedFormat>
+                  </dataFormat>
+                  <distribution>
+                      <online>
+                          <url function="download">http://www.gbif.org/dataset/07fd0d79-4883-435f-bba1-58fef110cd13</url>
+                      </online>
+                  </distribution>
+              </physical>
+              <resourceLogoUrl>http://data.canadensys.net/ipt/logo.do?r=ubc-vascular-specimens</resourceLogoUrl>
+              <collection>
+                <parentCollectionIdentifier>UBC</parentCollectionIdentifier>
+                <collectionIdentifier>UBC</collectionIdentifier>
+                <collectionName>University of British Columbia Herbarium (UBC) - Vascular Plant Collection</collectionName>
+              </collection>
+              <formationPeriod>early 1800s-present</formationPeriod>
+                <specimenPreservationMethod>MOUNTED</specimenPreservationMethod>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>
