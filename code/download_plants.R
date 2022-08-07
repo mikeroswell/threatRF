@@ -80,6 +80,7 @@ head(MD_occ)
 
 # get plant names from state
 
+<<<<<<< HEAD
 # plants_gs<-md_vasc_obs %>%
 #   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
 #            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
@@ -88,6 +89,9 @@ head(MD_occ)
 
 plants_gs_new<-MD_occ %>%
   filter(kingdomKey == 6) %>% 
+=======
+plants_gs<-md_vasc_obs %>%
+>>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
@@ -176,19 +180,29 @@ ws2<-withstats2 %>%
                         , "orderKey", "familyKey", "genusKey", "speciesKey"
                         , "class")), by ="accepted_gs")
 
+<<<<<<< HEAD
 native_plant_stats<-ws2 %>%
   group_by(genus, species, speciesKey) %>% 
   filter(!exclude | has_nonNative_ssp)
 excluded_plant_stats <- ws2 %>% 
   group_by(genus, species, speciesKey) %>% 
   filter(exclude & !has_nonNative_ssp)
+=======
+native_plant_stats<-ws2 %>% filter(!exclude | has_nonNative_ssp)
+excluded_plant_stats <- ws2 %>% filter(exclude & !has_nonNative_ssp)
+>>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
 length(native_plant_stats$decimalLatitude)
 length(excluded_plant_stats$decimalLatitude)
 
 
 
+<<<<<<< HEAD
 write.csv(native_plant_stats, "data/fromR/lfs/kept_plants_with_stats_new.csv", row.names = FALSE)
 write.csv(excluded_plant_stats, "data/fromR/lfs/excluded_plants.csv_new", row.names = FALSE)
+=======
+write.csv(native_plant_stats, "data/fromR/lfs/kept_plants_with_stats.csv", row.names = FALSE)
+write.csv(excluded_plant_stats, "data/fromR/lfs/excluded_plants.csv", row.names = FALSE)
+>>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
 
 # data summary
 native_plant_stats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv")
@@ -261,7 +275,11 @@ dev.off()
 
 #get some overall stats
 specfreq_TOT<-withstats2 %>%
+<<<<<<< HEAD
   group_by( state_status = simple_status, withspace) %>%
+=======
+  group_by( state_status = simple_status, gs) %>%
+>>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
   summarize(records =n()) %>%
   group_by( state_status) %>%
   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())
