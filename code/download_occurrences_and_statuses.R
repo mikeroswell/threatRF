@@ -53,7 +53,7 @@ uscore_binomial<-function(x){gsub("+ + *", "+_+",x)}
 # MD_vasc_lep <- bind.gbif(GBIF_plant_lep)
 # after a bit of exploration I feel good about not going with this process.
 # instead unzip and just grab the occurrence data themselves for now
-# unzip("data/fromR/lfs/0413674-210914110416597.zip", exdir = "data/fromR/lfs/GBIF_downloads")
+ # unzip("data/fromR/lfs/0413674-210914110416597.zip", exdir = "data/fromR/lfs/GBIF_downloads")
 MD_plant_lep_occ <- data.table::fread("data/fromR/lfs/GBIF_downloads/occurrence.txt")
 # # note this returns a warning about parsing th efile (is it weird it gets demonic after line 666?)
 head(MD_plant_lep_occ)
@@ -135,7 +135,7 @@ ps1 <- plant_stats %>%
             , remove = FALSE) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) %>%
-  filter(species %ni% c("x", "var", " ", "") & !grepl("^x[^aeiouy]", species))
+  filter(species %ni% c("x", "var", " ", "") & !grepl("^[^[:alnum:]]", species))
 
 ls1 <- lep_stats %>% 
   separate(scientificName
@@ -144,44 +144,53 @@ ls1 <- lep_stats %>%
              , remove = FALSE) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) %>%
-  filter(species %ni% c("x", "var", " ", "") & !grepl("^x[^aeiouy]", species))
+  filter(species %ni% c("x", "var", " ", "") & !grepl("^[^[:alnum:]]", species))
 
 ##############################
 ##### write and read NS data 
-
+str(ls1)
+str(ps1)
 # write just the natureserve data to file
-write.csv(ps1[,-23], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
-write.csv(ls1[,-23], "data/fromR/lfs/lep_NS_data.csv", row.names = F)
+write.csv(ps1, "data/fromR/lfs/plant_NS_data.csv", row.names = F)
+write.csv(ls1, "data/fromR/lfs/lep_NS_data.csv", row.names = F)
 
 # read in archived data
 lep_stats<-read.csv("data/fromR/lfs/lep_NS_data.csv")
 plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") 
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
-knapp_backboned <- read.csv("data/knapp_backboned.csv")
+knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
+  separate(accepted_gs
+           , sep =" "
+           , into =c("acc_genus", "acc_species")
+           , remove = FALSE) %>%
+  filter(!grepl("^[^[:alnum:]]", acc_species))
 
+
+# grep("^[[:punct:]]", occ_gs$species, value = TRUE)
 
 lep_joined <- occ_gs %>% 
   filter(kingdomKey == 1) %>% 
-  left_join(lep_stats) %>% 
+  left_join(ls1) %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                         , "unranked"))) 
 plant_joined <- occ_gs %>% 
   filter(kingdomKey == 6) %>% 
-  left_join(plant_stats) %>% 
+  left_join(ps1) %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                         , "unranked"))) %>% 
   mutate(accepted_gs = paste(genus, species, sep = " ")) %>% 
-  left_join(knapp_backboned %>% 
+  left_join(knapp_backboned  %>% 
               select(-c("scientificName", "kingdom", "phylum", "order"
                         , "family", "kingdomKey", "phylumKey", "classKey"
                         , "orderKey", "familyKey", "genusKey", "speciesKey"
-                        , "class")), by ="accepted_gs")
+                        , "class")), by ="accepted_gs") 
 
 all_with_stat<- bind_rows(lep_joined, plant_joined)
+
 
 # summary data
 # plant_stats %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
@@ -190,21 +199,13 @@ all_with_stat<- bind_rows(lep_joined, plant_joined)
 
 
 # don't delete info, but here is where we can simplify status (also an e.g.)
-
-
+str(lep_joined)
+str(all_with_stat[,278])
 data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
 
+# all_with_stat %>% filter(grepl("^[^[:alnum:]]", species))
+# all_with_stat %>% filter(grepl("[^[:alnum:][:punct:]]", species)) %>% select (genus, species, gs)
 
-
-# -abstract
-# , - accessRights
-# , -starts_with("accrual")
-# , -alternative
-# , -
-#   , -dataGeneralizations
-# , -dynamicProperties, -starts_with("record")
-
-  
 natives <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
   filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
@@ -220,8 +221,13 @@ natives <- all_with_stat %>%
          , order)
 
 # look at plants since I have a feel for them
-natives %>% filter(kingdomKey == 6) %>% group_by(genus, species) %>% summarize(n()) %>% 
-  filter(!grepl("^[^[:alnum:]]", species))
+natives %>% 
+  filter(kingdomKey == 6) %>% 
+  group_by(genus, species) %>% 
+  summarize(n()) %>% 
+  filter(genus == "Acer")
+# %>% 
+#   filter(grepl("^[^[:alnum:]]", species))
 excludeds <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
   filter((exclude & !has_nonNative_ssp) | exotic...272 |exotic...274) %>%
@@ -236,93 +242,100 @@ excludeds <- all_with_stat %>%
          , order)
 
 
+excludeds %>%
+  filter(kingdomKey == 6) %>% 
+  group_by(genus, species) %>% 
+  summarize(n()) %>% 
+  filter(genus == "Acer")
+
+
 data.table::fwrite(natives, "data/fromR/lfs/native_records.csv", row.names = FALSE)
 
 
-# data summary
-native_plant_stats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv")
-
-
-# might not help but for now, overwrite withstats2
-withstats2 <- native_plant_stats
-
-############################################
-# data exploration
-#how many species, families, and records are their in each year by conservation status?
-plants_summary<-withstats2 %>%
-  group_by(year,state_status = simple_status) %>%
-  summarize(spp =n_distinct(speciesKey)
-            , families =n_distinct(familyKey)
-            , records= n() )
-
-
-
-#plot species occurrences per year
-sppy<-plants_summary %>%
-  ggplot(aes(year, spp, color = state_status))+
-  geom_line()+
-  theme_classic()+
-  scale_y_log10()
-
-#plot families per year
-fpy<-plants_summary %>%
-  ggplot(aes(year, families, color = state_status))+
-  geom_line()+theme_classic()+
-  scale_y_log10()
-
-#plot occurrences per year
-opy<-plants_summary %>%
-  ggplot(aes(year, records, color = state_status))+
-  geom_line()+
-  theme_classic()+
-  scale_y_log10()
-
-
-#make a figure with these summaries
-pdf(file ="figures/GBIF_MD_native_plant_observations.pdf")
-sppy/fpy/opy
-dev.off()
-
-#look at how many of the species are seen >1, >10x
-specfreq<-withstats2 %>%
-  group_by(year, state_status = simple_status, species) %>%
-  summarize(records =n()) %>%
-  group_by(year, state_status) %>%
-  summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n())
-
-#plot for >1x
-once<-specfreq %>%
-  ggplot(aes(year,gt1, color = state_status ))+
-  geom_line()+theme_classic()+
-  labs(y = "proportion spp obs > 1x")
-
-#plot for >10x
-tenx<-specfreq %>%
-  ggplot(aes(year,gt10, color = state_status ))+
-  geom_line()+
-  theme_classic()+
-  labs(y = "proportion spp obs > 10x")
-
-#save plot to .pdf
-pdf(file = "figures/GBIF_MD_native_taxon_freq.pdf")
-once/tenx
-dev.off()
-
-#get some overall stats
-specfreq_TOT<-withstats2 %>%
-  group_by( state_status = simple_status, withspace) %>%
-  summarize(records =n()) %>%
-  group_by( state_status) %>%
-  summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())
-
-specfreq_TOT
-
-# look at excluded spp
-native_plant_stats %>% 
-  group_by(state_status = simple_status) %>% 
-  summarize(records = n_distinct(gs))
-  
-excluded_plant_stats %>% 
-  group_by(state_status = simple_status) %>% 
-  summarize(records = n_distinct(gs))
-
+# # data summary
+# native_plant_stats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv")
+# 
+# 
+# # might not help but for now, overwrite withstats2
+# withstats2 <- native_plant_stats
+# 
+# ############################################
+# # data exploration
+# #how many species, families, and records are their in each year by conservation status?
+# plants_summary<-withstats2 %>%
+#   group_by(year,state_status = simple_status) %>%
+#   summarize(spp =n_distinct(speciesKey)
+#             , families =n_distinct(familyKey)
+#             , records= n() )
+# 
+# 
+# 
+# #plot species occurrences per year
+# sppy<-plants_summary %>%
+#   ggplot(aes(year, spp, color = state_status))+
+#   geom_line()+
+#   theme_classic()+
+#   scale_y_log10()
+# 
+# #plot families per year
+# fpy<-plants_summary %>%
+#   ggplot(aes(year, families, color = state_status))+
+#   geom_line()+theme_classic()+
+#   scale_y_log10()
+# 
+# #plot occurrences per year
+# opy<-plants_summary %>%
+#   ggplot(aes(year, records, color = state_status))+
+#   geom_line()+
+#   theme_classic()+
+#   scale_y_log10()
+# 
+# 
+# #make a figure with these summaries
+# pdf(file ="figures/GBIF_MD_native_plant_observations.pdf")
+# sppy/fpy/opy
+# dev.off()
+# 
+# #look at how many of the species are seen >1, >10x
+# specfreq<-withstats2 %>%
+#   group_by(year, state_status = simple_status, species) %>%
+#   summarize(records =n()) %>%
+#   group_by(year, state_status) %>%
+#   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n())
+# 
+# #plot for >1x
+# once<-specfreq %>%
+#   ggplot(aes(year,gt1, color = state_status ))+
+#   geom_line()+theme_classic()+
+#   labs(y = "proportion spp obs > 1x")
+# 
+# #plot for >10x
+# tenx<-specfreq %>%
+#   ggplot(aes(year,gt10, color = state_status ))+
+#   geom_line()+
+#   theme_classic()+
+#   labs(y = "proportion spp obs > 10x")
+# 
+# #save plot to .pdf
+# pdf(file = "figures/GBIF_MD_native_taxon_freq.pdf")
+# once/tenx
+# dev.off()
+# 
+# #get some overall stats
+# specfreq_TOT<-withstats2 %>%
+#   group_by( state_status = simple_status, withspace) %>%
+#   summarize(records =n()) %>%
+#   group_by( state_status) %>%
+#   summarize(gt1=sum(records>1)/n(), gt10=sum(records>10)/n(), spp=n())
+# 
+# specfreq_TOT
+# 
+# # look at excluded spp
+# native_plant_stats %>% 
+#   group_by(state_status = simple_status) %>% 
+#   summarize(records = n_distinct(gs))
+#   
+# excluded_plant_stats %>% 
+#   group_by(state_status = simple_status) %>% 
+#   summarize(records = n_distinct(gs))
+# 
