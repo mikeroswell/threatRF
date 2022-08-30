@@ -37,8 +37,7 @@ uscore_binomial<-function(x){gsub("+ + *", "+_+",x)}
 # # this reveals status of all gbif download requests
 # occ_download_list()
 
-# # just a test 
-# occ_download(pred("gbifID", 1456777290))
+
  
 # # this actually downloads the data (~135 MB)
 # occ_download_get(MD_vasc_and_lep_doi, path = "data/fromR/lfs", overwrite = TRUE)
@@ -61,24 +60,7 @@ head(MD_plant_lep_occ)
 MD_occ <- MD_plant_lep_occ %>% filter(taxonRank == "SPECIES")
 head(MD_occ)
 
-# # get it so search returns <1e5 results
-# 
-# 
-# MD_vasc <- occ_search(taxonKey = 7707728
-#                       , stateProvince = "Maryland", year="2002, 2021"
-#                       , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
-#                       , hasCoordinate = T
-#                       , limit = 1e5)
-# 
-# mdVascOld <- occ_search(taxonKey = 7707728
-#                         , stateProvince = "Maryland", year="1989, 2001"
-#                         , basisOfRecord = c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN")
-#                         , hasCoordinate = T
-#                         , limit = 1e5)
-# 
-# 
-# 
-# md_vasc_obs <- bind_rows(bind.gbif(MD_vasc), bind.gbif(mdVascOld))
+
 # 
 # #histogram of species frequency by year
 # # md_vasc_obs %>%
@@ -104,17 +86,12 @@ occ_gs <- MD_occ %>%
   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
-         , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
+         , withspace = paste(genus, species, sep = " ")) %>%  #convenient to keep track of binomials in several forms?
+  filter(!grepl("^[^[:alnum:]]", species)) # remove hybrids (can't deal with them responsibly)
 
 unique(occ_gs$gs)
 
 unique(occ_gs$species)
-
-# obsolete cleanup
-
-# occ_gs %>% filter(species =="X")
-# 
-# occ_g<-occ_gs %>% filter(!grepl("\\.", .$species))
 
 
 
@@ -123,6 +100,7 @@ unique(occ_gs$species)
 write.csv(occ_gs, "data/fromR/lfs/occ_from_gbif.csv", row.names = F)
 
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
+
 
 #get a list of all binomials in the GBIF dataset
 plants_of_MD<-unique(occ_gs %>%  filter(kingdomKey == 6) %>% pull(withspace)) #2695  with new data. 
@@ -134,7 +112,7 @@ plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plant
                              , location = list(nation ="US", subnation ="MD") #this filters to only include species that have a MD status, but retains status for all localities
                              , page = 0
                              , per_page = 5e3)[[1]] %>%
-  unnest(cols=nations) %>%
+  unnest(cols = nations) %>%
   unnest (cols = "subnations", names_repair ="unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 
@@ -149,42 +127,61 @@ lep_stats <-ns_search_spp(species_taxonomy = list(
   unnest (cols = "subnations", names_repair ="unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 
-# drafted to deal with bad species names... will see if needed in the post-gis dataset
-# ps1<-plant_stats %>% separate(scientificName, sep =" "
-#          , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
-#   mutate(gs = paste(genus, species, sep = "_")
-#          , withspace = paste(genus, species, sep = " "))
-# ps2 <- ps1 %>% filter(species %ni% c("x", "var", " ", "")
+# drafted to deal with bad species names
+ps1 <- plant_stats %>% 
+  separate(scientificName
+            , sep =" "
+            , into =c("genus", "species")
+            , remove = FALSE) %>% # separate just drops stuff after the first two!
+  mutate(gs = paste(genus, species, sep = "_")
+         , withspace = paste(genus, species, sep = " ")) %>%
+  filter(species %ni% c("x", "var", " ", "") & !grepl("^x[^aeiouy]", species))
+
+ls1 <- lep_stats %>% 
+  separate(scientificName
+             , sep =" "
+             , into =c("genus", "species")
+             , remove = FALSE) %>% # separate just drops stuff after the first two!
+  mutate(gs = paste(genus, species, sep = "_")
+         , withspace = paste(genus, species, sep = " ")) %>%
+  filter(species %ni% c("x", "var", " ", "") & !grepl("^x[^aeiouy]", species))
 
 ##############################
 ##### write and read NS data 
 
 # write just the natureserve data to file
-write.csv(plant_stats[,-21], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
-write.csv(lep_stats[,-21], "data/fromR/lfs/lep_NS_data.csv", row.names = F)
+write.csv(ps1[,-23], "data/fromR/lfs/plant_NS_data.csv", row.names = F)
+write.csv(ls1[,-23], "data/fromR/lfs/lep_NS_data.csv", row.names = F)
 
 # read in archived data
-lepstat<-read.csv("data/fromR/lfs/lep_NS_data.csv")
+lep_stats<-read.csv("data/fromR/lfs/lep_NS_data.csv")
 plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") 
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
-
-
-
+knapp_backboned <- read.csv("data/knapp_backboned.csv")
 
 
 lep_joined <- occ_gs %>% 
-  filter(kingdomKey == 1)
-  left_join(lepstat, by=c("withspace"="scientificName")) %>% 
+  filter(kingdomKey == 1) %>% 
+  left_join(lep_stats) %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                         , "unranked"))) 
+plant_joined <- occ_gs %>% 
+  filter(kingdomKey == 6) %>% 
+  left_join(plant_stats) %>% 
+  dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
+  mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
+                               , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
+                                        , "unranked"))) %>% 
+  mutate(accepted_gs = paste(genus, species, sep = " ")) %>% 
+  left_join(knapp_backboned %>% 
+              select(-c("scientificName", "kingdom", "phylum", "order"
+                        , "family", "kingdomKey", "phylumKey", "classKey"
+                        , "orderKey", "familyKey", "genusKey", "speciesKey"
+                        , "class")), by ="accepted_gs")
 
-withstats<-plants_gs_new %>%
-  select(-gs) %>%
-  left_join(plant_stats[,-21], by=c("withspace"="scientificName"))
-
-
+all_with_stat<- bind_rows(lep_joined, plant_joined)
 
 # summary data
 # plant_stats %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
@@ -193,41 +190,54 @@ withstats<-plants_gs_new %>%
 
 
 # don't delete info, but here is where we can simplify status (also an e.g.)
-withstats2<-withstats %>%
-  mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
-                               , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
-                                        , "unranked")))
 
 
-data.table::fwrite(withstats2, "data/fromR/lfs/plants_with_status_long.csv", row.names = F)
+data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
 
 
 
+# -abstract
+# , - accessRights
+# , -starts_with("accrual")
+# , -alternative
+# , -
+#   , -dataGeneralizations
+# , -dynamicProperties, -starts_with("record")
 
-withstats2<-read.csv("data/fromR/lfs/plants_with_status.csv")
-knapp_backboned <- read.csv("data/knapp_backboned.csv")
+  
+natives <- all_with_stat %>%
+  group_by(genus, species, speciesKey) %>%
+  filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
+  filter((!exotic...272| is.na(exotic...272)), (!exotic...274|is.na(exotic...274))) %>%
+  select(gbifID
+         , genus
+         , species
+         , speciesKey
+         , decimalLatitude
+         , decimalLongitude
+         , kingdomKey
+         , family
+         , order)
 
-ws2<-withstats2 %>% 
-  mutate(accepted_gs = paste(genus, species, sep = " ")) %>% 
-  left_join(knapp_backboned %>% 
-              select(-c("scientificName", "kingdom", "phylum", "order"
-                        , "family", "kingdomKey", "phylumKey", "classKey"
-                        , "orderKey", "familyKey", "genusKey", "speciesKey"
-                        , "class")), by ="accepted_gs")
-
-native_plant_stats<-ws2 %>%
-  group_by(genus, species, speciesKey) %>% 
-  filter(!exclude | has_nonNative_ssp)
-excluded_plant_stats <- ws2 %>% 
-  group_by(genus, species, speciesKey) %>% 
-  filter(exclude & !has_nonNative_ssp)
-length(native_plant_stats$decimalLatitude)
-length(excluded_plant_stats$decimalLatitude)
-
+# look at plants since I have a feel for them
+natives %>% filter(kingdomKey == 6) %>% group_by(genus, species) %>% summarize(n()) %>% 
+  filter(!grepl("^[^[:alnum:]]", species))
+excludeds <- all_with_stat %>%
+  group_by(genus, species, speciesKey) %>%
+  filter((exclude & !has_nonNative_ssp) | exotic...272 |exotic...274) %>%
+  select(gbifID
+         , genus
+         , species
+         , speciesKey
+         , decimalLatitude
+         , decimalLongitude
+         , kingdomKey
+         , family
+         , order)
 
 
-write.csv(native_plant_stats, "data/fromR/lfs/kept_plants_with_stats_new.csv", row.names = FALSE)
-write.csv(excluded_plant_stats, "data/fromR/lfs/excluded_plants.csv_new", row.names = FALSE)
+data.table::fwrite(natives, "data/fromR/lfs/native_records.csv", row.names = FALSE)
+
 
 # data summary
 native_plant_stats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv")
