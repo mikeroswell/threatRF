@@ -36,22 +36,33 @@ almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          , minlat = min(lat, na.rm = T)
          , maxlon = max(lon, na.rm = T)
          , minlon = min(lon, na.rm = T)
-         , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
-                                          , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")
-         )
-         )
+         # , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
+         #                                  , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")
+         # )
+         # )
   )
 
-almost %>% 
-  ungroup() %>% 
-  mutate(gs = paste(genus, species)) %>%
-  group_by(kingdomKey, simple_status) %>%
-  summarize(occ = n(), spp = n_distinct(gs))
 
 tofit <-almost %>% 
   sf::st_drop_geometry() %>% 
   select(-contains("exotic"))
 
+
+# tofit %>% 
+#   ungroup() %>% 
+#   mutate(gs = paste(genus, species)) %>%
+#   group_by(kingdomKey, simple_status, gs) %>% 
+#   summarize(occ=n()) %>% 
+#   filter(simple_status == "secure") %>% 
+#   View()
+# 
+# tofit %>% 
+#   ungroup() %>% 
+#   mutate(gs = paste(genus, species)) %>%
+#   group_by(kingdomKey, simple_status, gs) %>% 
+#   summarize(occ=n()) %>% 
+#   filter(simple_status == "threat") %>% 
+#   View()
 
 tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
   # mutate(ab = n()) %>% 
@@ -67,6 +78,14 @@ tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
 
 # drop na preemptively
 tofit_summary_complete<-tofit_summary %>% drop_na()
+
+# check what is dropped and if it hits somewhere hard 
+
+
+tofit_summary %>% group_by(simple_status_mu, kingdomKey) %>% summarize(n())
+tofit_summary_complete %>% group_by(simple_status_mu, kingdomKey) %>% summarize(n())
+
+# yes, need to be more careful. 
 
 # for the testing and training dataset, drop the ones with unknown status
 classed<-tofit_summary_complete %>% 
