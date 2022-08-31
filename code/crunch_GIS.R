@@ -17,26 +17,23 @@ my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +d
 
 
 # get the occcurrence data
-pstats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv") %>%
-  mutate(taxon = "plant") %>% 
-  mutate(georeferencedDate = as.character(georeferencedDate)
-         , datasetID = as.character(datasetID))
-lstats <- read.csv("data/fromR/lfs/native_leps_with_status.csv") %>%
-  mutate(taxon = "lep") %>% 
-  mutate(georeferencedDate = as.character(georeferencedDate)
-         , datasetID = as.character(datasetID))
-# I think it will be fine to have columns from Knapp that are dropped in 
-# analysis... may need to adjust. 
-withstats2 <- bind_rows(pstats 
-                     , lstats)
+# pstats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv") %>%
+#   mutate(taxon = "plant") %>% 
+#   mutate(georeferencedDate = as.character(georeferencedDate)
+#          , datasetID = as.character(datasetID))
+# lstats <- read.csv("data/fromR/lfs/native_leps_with_status.csv") %>%
+#   mutate(taxon = "lep") %>% 
+#   mutate(georeferencedDate = as.character(georeferencedDate)
+#          , datasetID = as.character(datasetID))
+# # I think it will be fine to have columns from Knapp that are dropped in 
+# # analysis... may need to adjust. 
+# withstats2 <- bind_rows(pstats 
+#                      , lstats)
+
+withstats2 <- read.csv("data/fromR/lfs/native_records.csv")
 # get the coordinates (may require additional manipulation)
 good_coords<- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
-  # grab only species not listed as introduced
-  filter((!exotic...175|is.na(exotic...175))  & 
-           (!exotic...173| is.na(exotic...173)) &
-           (!exotic...170 | is.na(exotic...170)) & 
-           (!exotic...172 | is.na(exotic...172))) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
 # exotic_records <- withstats2 %>%
