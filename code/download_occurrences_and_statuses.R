@@ -155,6 +155,8 @@ write.csv(ps1, "data/fromR/lfs/plant_NS_data.csv", row.names = F)
 write.csv(ls1, "data/fromR/lfs/lep_NS_data.csv", row.names = F)
 
 # read in archived data
+ps1 <- read.csv("data/fromR/lfs/plant_NS_data.csv")
+ls1 <- read.csv("data/fromR/lfs/lep_NS_data.csv")
 lep_stats<-read.csv("data/fromR/lfs/lep_NS_data.csv")
 plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") 
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
@@ -203,6 +205,7 @@ str(lep_joined)
 str(all_with_stat[,278])
 data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
 
+all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 # all_with_stat %>% filter(grepl("^[^[:alnum:]]", species))
 # all_with_stat %>% filter(grepl("[^[:alnum:][:punct:]]", species)) %>% select (genus, species, gs)
 
@@ -218,16 +221,18 @@ natives <- all_with_stat %>%
          , decimalLongitude
          , kingdomKey
          , family
-         , order)
+         , order
+         , roundedSRank
+         , simple_status)
 
-# look at plants since I have a feel for them
-natives %>% 
-  filter(kingdomKey == 6) %>% 
-  group_by(genus, species) %>% 
-  summarize(n()) %>% 
-  filter(genus == "Acer")
-# %>% 
-#   filter(grepl("^[^[:alnum:]]", species))
+# # look at plants since I have a feel for them
+# natives %>% 
+#   filter(kingdomKey == 6) %>% 
+#   group_by(genus, species) %>% 
+#   summarize(n()) %>% 
+#   filter(genus == "Acer")
+
+
 excludeds <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
   filter((exclude & !has_nonNative_ssp) | exotic...272 |exotic...274) %>%
@@ -239,18 +244,20 @@ excludeds <- all_with_stat %>%
          , decimalLongitude
          , kingdomKey
          , family
-         , order)
+         , order
+         , roundedSRank
+         , simple_status)
 
 
-excludeds %>%
-  filter(kingdomKey == 6) %>% 
-  group_by(genus, species) %>% 
-  summarize(n()) %>% 
-  filter(genus == "Acer")
+# excludeds %>%
+#   filter(kingdomKey == 6) %>% 
+#   group_by(genus, species) %>% 
+#   summarize(n()) %>% 
+#   filter(genus == "Acer")
 
 
 data.table::fwrite(natives, "data/fromR/lfs/native_records.csv", row.names = FALSE)
-
+data.table::fwrite(excludeds, "data/fromR/lfs/excluded_records.csv", row.names = FALSE)
 
 # # data summary
 # native_plant_stats <- read.csv("data/fromR/lfs/kept_plants_with_stats.csv")
