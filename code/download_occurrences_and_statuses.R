@@ -172,24 +172,25 @@ knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
 
 lep_joined <- occ_gs %>% 
   filter(kingdomKey == 1) %>% 
-  left_join(ls1) %>% 
+  left_join(ls1, by = c("gs", "genus", "species")) %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                         , "unranked"))) 
-plant_joined <- occ_gs %>% 
+
+  
+occ_stat_plants <- occ_gs %>% 
   filter(kingdomKey == 6) %>% 
-  left_join(ps1) %>% 
-  dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
+  left_join(ps1, by = c("gs", "genus", "species", "withspace")) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
-                                        , "unranked"))) %>% 
-  mutate(accepted_gs = paste(genus, species, sep = " ")) %>% 
+                                        , "unranked"))) 
+plant_joined <- occ_stat_plants %>% 
   left_join(knapp_backboned  %>% 
               select(-c("scientificName", "kingdom", "phylum", "order"
                         , "family", "kingdomKey", "phylumKey", "classKey"
                         , "orderKey", "familyKey", "genusKey", "speciesKey"
-                        , "class")), by ="accepted_gs") 
+                        , "class", "gs")), by = c("withspace" = "accepted_gs")) 
 
 all_with_stat<- bind_rows(lep_joined, plant_joined)
 
@@ -201,8 +202,6 @@ all_with_stat<- bind_rows(lep_joined, plant_joined)
 
 
 # don't delete info, but here is where we can simplify status (also an e.g.)
-str(lep_joined)
-str(all_with_stat[,278])
 data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
 
 all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
@@ -212,7 +211,7 @@ all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 natives <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
   filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
-  filter((!exotic...272| is.na(exotic...272)), (!exotic...274|is.na(exotic...274))) %>%
+  filter((!exotic...273| is.na(exotic...273)), (!exotic...275|is.na(exotic...275))) %>%
   select(gbifID
          , genus
          , species
@@ -226,16 +225,16 @@ natives <- all_with_stat %>%
          , simple_status)
 
 # # look at plants since I have a feel for them
-# natives %>% 
-#   filter(kingdomKey == 6) %>% 
-#   group_by(genus, species) %>% 
-#   summarize(n()) %>% 
+# natives %>%
+#   filter(kingdomKey == 6) %>%
+#   group_by(genus, species) %>%
+#   summarize(n()) %>%
 #   filter(genus == "Acer")
 
 
 excludeds <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
-  filter((exclude & !has_nonNative_ssp) | exotic...272 |exotic...274) %>%
+  filter((exclude & !has_nonNative_ssp) | exotic...273 |exotic...275) %>%
   select(gbifID
          , genus
          , species
@@ -249,12 +248,16 @@ excludeds <- all_with_stat %>%
          , simple_status)
 
 
-# excludeds %>%
-#   filter(kingdomKey == 6) %>% 
-#   group_by(genus, species) %>% 
-#   summarize(n()) %>% 
-#   filter(genus == "Acer")
+# all_with_stat %>% group_by(genus, species) %>% summarize(n()) %>% filter(genus == "Acer")
+# 
+# occ_gs %>% filter(genus == "Acer") %>% group_by(genus, species) %>% summarize(n())
 
+# excludeds %>%
+#   filter(kingdomKey == 6) %>%
+#   group_by(genus, species) %>%
+#   summarize(n()) %>%
+#   filter(genus == "Acer")
+# # 
 
 data.table::fwrite(natives, "data/fromR/lfs/native_records.csv", row.names = FALSE)
 data.table::fwrite(excludeds, "data/fromR/lfs/excluded_records.csv", row.names = FALSE)
