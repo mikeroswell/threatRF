@@ -256,7 +256,7 @@ save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
 took # 13 minutes (up from 5)
 
-# cleanup recommended
+# # cleanup recommended
 # rm(list = ls())
 # removeTmpFiles()
 # gc()
