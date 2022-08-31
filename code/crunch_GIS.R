@@ -221,12 +221,10 @@ obs<-st_as_sf(good_coords %>%
                 dplyr::select(lon = decimalLongitude
                        , lat = decimalLatitude
                        , roundedSRank
-                       , roundedNRank
-                       , roundedGRank
+                       , simple_status
                        , genus
                        , species
                        , kingdomKey
-                       , exotic = starts_with("exotic")
                        , UID)
          , coords = c("lon",  "lat")
          , crs = "EPSG:4326") %>% 
