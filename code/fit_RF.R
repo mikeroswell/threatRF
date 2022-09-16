@@ -1,7 +1,7 @@
 library(furrr)
 
 # set number of workers for cluster
-
+source("code/RF_setup.R")
 cores<-5
 
 
@@ -27,6 +27,7 @@ trees_leps<-map(c("lep", "plant"), function(tax){
 
 
     print(toc())
+    save(rf, file = past0("data/fromR/fold_fits_", tax, ".RDA")
    
     return(rf)
     

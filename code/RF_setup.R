@@ -10,8 +10,8 @@ library(tictoc)
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # custom summary functions
-mu <- function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x, na.rm =T))}
-sig <- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), length(unique(x)))}
+mu <- function(x){ifelse(is.numeric(x) & length(unique(x))>length(x)/8, mean(x, na.rm =T), raster::modal(x, na.rm =T))}
+sig <- function(x){ifelse(is.numeric(x)& length(unique(x))>length(x)/8, sd(x, na.rm =T), length(unique(x)))}
 # fitting function
 source("code/RF_tuner.R")
 # deal with categories
@@ -48,6 +48,14 @@ tofit <-almost %>%
   select(-contains("exotic"))
 
 
+# drop singleton spp now
+
+no_sing<-tofit %>% 
+  group_by(genus, species) %>% 
+  mutate(nrec = n()) %>% 
+  filter(nrec >1) %>% 
+  select(-c("nrec", "fcf")) # remove fcf because it creates NA
+
 # tofit %>% 
 #   ungroup() %>% 
 #   mutate(gs = paste(genus, species)) %>%
@@ -64,33 +72,44 @@ tofit <-almost %>%
 #   filter(simple_status == "threat") %>% 
 #   View()
 
-tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
+tofit_summary <- no_sing %>% 
+  group_by(genus, species, kingdomKey) %>%
   # mutate(ab = n()) %>% 
   summarize_all(.funs = c("mu", "sig")) %>% 
   mutate(Random_Pred = runif(1))
 
-# see what columns have issues of NA
-
-# sapply(tofit_summary, function(x){sum(is.na(x))}) 
-# looks good now... well, 155 not giving slope, maxlat, etc. 
-# guessing those are singletons (very droppable)
-
-
-# drop na preemptively
-tofit_summary_complete<-tofit_summary %>% drop_na()
+# # see what columns have issues of NA
+# 
+# # sapply(tofit_summary, function(x){sum(is.na(x))}) >0
+# # looks good now... well, 155 not giving slope, maxlat, etc. 
+# # guessing those are singletons (very droppable)
+# 
+# hasNA<-tofit_summary[which(!apply(sapply(tofit_summary, complete.cases),1, all)),]
+# sapply(ro, function(x){sum(is.na(x))}) 
+# 
+# sapply(hasNA, function(x){sum(is.na(x))}) 
+# sapply(hasNA, function(x){sum(missing(x))}) 
+# sapply(hasNA, function(x){sum(complete.cases(x))})
+# sapply(tofit_summary, function(x){sum(complete.cases(x))})
+# View(hasNA)
+# 
+# tofit_summary 
+# hasNA %>% left_join(tofit, by = c("genus", "species")) 
+# 
+# [,sapply(hasNA, function(x){any(is.na(x))})]
+# # drop na preemptively
+# tofit_summary_complete<-tofit_summary %>% drop_na()
 
 # check what is dropped and if it hits somewhere hard 
 
 
-tofit_summary %>% group_by(simple_status_mu, kingdomKey) %>% summarize(n())
-tofit_summary_complete %>% group_by(simple_status_mu, kingdomKey) %>% summarize(n())
+# tofit_summary %>% group_by(simple_status_mu, kingdomKey) %>% summarize(n())
+# tofit_summary_complete %>% group_by(simple_status_mu, kingdomKey) %>% summarize(n())
 
-# yes, need to be more careful. 
 
 # for the testing and training dataset, drop the ones with unknown status
-classed<-tofit_summary_complete %>% 
-  filter(simple_status_mu != 1) %>% 
-  mutate(simple_status_mu = if_else(simple_status_mu ==3, "secure", "threatened"))# 1 corresponds to "NONE"
+classed<-tofit_summary %>% 
+  filter(simple_status_mu != "unranked")# 1 corresponds to "NONE"
 
 
 
