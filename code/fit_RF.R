@@ -27,12 +27,12 @@ trees_leps<-map(c("plant", "lep"), function(tax){
 
 
     print(toc())
-    save(rf, file = past0("data/fromR/fold_fits_", tax, ".RDA"))
+    
    
     return(rf)
     
   })
-  save(fold_fits, file = "data/fromR/fold_fits.RDA")
+  save(rf, file = past0("data/fromR/fold_fits_", tax, ".RDA"))
   print("did the fits")
   # m_assess <- assess_method()
   # print("assess method ran")
@@ -43,7 +43,7 @@ trees_leps<-map(c("plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20220916_espind.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20220917_espindolab.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
