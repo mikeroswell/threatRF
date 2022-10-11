@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-# #get bug occurrences and statuses
-# # update natserv from time to tim
-# install.packages("/System/Volumes/Data/Rstudio_Git/natserv_1.0.0.92.tar.gz", repos = NULL)
-# library(natserv) #this is how we get naturserve status
-# library(rgbif) #how we get gbif observations
-# library(tidyverse)
-# library(patchwork)
-=======
+
 #get bug occurrences and statuses
 # update natserv from time to tim
 install.packages("/System/Volumes/Data/Rstudio_Git/natserv_1.0.0.92.tar.gz", repos = NULL)
