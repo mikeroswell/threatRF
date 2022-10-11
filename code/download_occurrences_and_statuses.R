@@ -146,6 +146,78 @@ ls1 <- lep_stats %>%
          , withspace = paste(genus, species, sep = " ")) %>%
   filter(species %ni% c("x", "var", " ", "") & !grepl("^[^[:alnum:]]", species))
 
+
+# need to do some name cleanup on the NS data, unfortunately
+source("code/robust_gbif_namesearch.R")
+
+nslnames <- ls1 %>% 
+  mutate(gs = paste(genus, species)) %>% 
+  pull(gs) %>% 
+  unique() %>% 
+  sapply(function(x){
+    nbRobust(x, kingdom = "Animalia" )
+  }) %>% 
+  map_dfr(bind_rows, .id = "gs")
+
+problem_names_lep <- nslnames %>% filter(is.na(matchType)) %>% pull(gs)
+
+dat <- ls1 %>% 
+  filter(withspace %in% problem_names_lep)
+
+alt_gs <- map_dfr(1:nrow(dat)[[1]]
+    , function(lrow){
+      itis.name <- stringr::str_replace(natserv::ns_altid(as.character(dat[lrow, "uniqueId"]))$relatedItisNames
+                           , "(.*\\<i\\>)(.*)(\\<\\/i\\>.*)"
+                           , "\\2")
+                        
+      
+      itis.name <- if_else(length(itis.name==0), "NA", itis.name)
+      
+      natserv.name <- dat[lrow, "withspace"]
+      return(data.frame(natserv.name, itis.name))
+    })
+
+
+alt_gs
+
+alt_gs.exists <- cbind(purrr::compact(alt_gs))
+  
+
+
+alt_gs.exists
+
+in.gbif <- map(alt_gs.exists, function(gs){
+  name_backbone(gs)
+})
+
+
+better_guesses_lep <- map_dfr(problem_names_lep, function(nombre){
+  tdat<-name_backbone_verbose(nombre)
+  bind_rows(tdat$data, tdat$alternatives)
+})
+name_suggest(problem_names_lep[[1]])
+
+lepNames <- name_backbone_checklist(problem_names_lep, verbose = TRUE)
+
+lepNames
+
+better_guesses_lep
+
+nspnames <- ps1 %>% 
+  mutate(gs = paste(genus, species)) %>% 
+  pull(gs) %>% 
+  unique() %>% 
+  sapply(function(x){
+    name_backbone(x, kingdom = "Plantae" )
+  }) %>% 
+  map_dfr(bind_rows, .id = "gs")
+
+
+
+
+ls2<-ls1 %>% left_join(nslnames, by = c('gs'))
+
+
 ##############################
 ##### write and read NS data 
 str(ls1)
