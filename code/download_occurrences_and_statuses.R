@@ -17,6 +17,11 @@ library(patchwork) # cute pkg for assembling
 uscore_binomial<-function(x){gsub("+ + *", "+_+",x)}
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
+# return NA instead of character(0) or NULL
+null_to_NA <- function(x){
+  c(x, NA)[1]
+}
+
 
 ###############################################
 # get occurrence data from gbif
@@ -159,63 +164,67 @@ nslnames <- ls1 %>%
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
-problem_names_lep <- nslnames %>% filter(is.na(matchType)) %>% pull(gs)
+problem_names_lep <- nslnames %>% filter(is.na(matchType) | matchType == "HIGHERRANK") %>% pull(gs)
 
 dat <- ls1 %>% 
-  filter(withspace %in% problem_names_lep)
+  filter(withspace %in% problem_names_lep) %>% 
+  as.data.frame()
 
-alt_gs <- map_dfr(1:nrow(dat)[[1]]
-    , function(lrow){
-      itis.name <- stringr::str_replace(natserv::ns_altid(as.character(dat[lrow, "uniqueId"]))$relatedItisNames
-                           , "(.*\\<i\\>)(.*)(\\<\\/i\\>.*)"
-                           , "\\2")
-                        
-      
-      itis.name <- if_else(length(itis.name==0), "NA", itis.name)
-      
-      natserv.name <- dat[lrow, "withspace"]
-      return(data.frame(natserv.name, itis.name))
-    })
+alt_gs <- function(dat){
+  map_dfr(1:nrow(dat)[[1]]
+          , function(lrow){
+            # get the ns taxon concept info
+            ns_deets <- natserv::ns_altid(as.character(dat[lrow, "uniqueId"]))
+            # start with itis
+            itis.name <- null_to_NA(
+              stringr::str_replace(ns_deets$relatedItisNames
+                                   , "(.*\\<i\\>)(.*)(\\<\\/i\\>.*)"
+                                   , "\\2"))
+            
+            # if itis doesn't work, try conceptName
+            better.name <- if_else(is.na(itis.name)
+                                   , null_to_NA(
+                                     stringr::str_replace(ns_deets$conceptName
+                                                          , "(.*\\<i\\>)(.*)(\\<\\/i\\>.*)"
+                                                          , "\\2"))
+                                   , itis.name)
+            
+            # goal is to line up with gbif backbone 
+            gbif.name <- rgbif::name_backbone(better.name)
+            
+            natserv.name <- dat[lrow, "withspace"]
+            
+            return(data.frame(natserv.name, gbif.name))
+          })
+}
 
 
-alt_gs
+better_leps <- alt_gs(ls1 %>% 
+                        filter(withspace %in% problem_names_lep) %>% 
+                        as.data.frame()) %>% 
+  select(gs = species, ns.gs = natserv.name)
 
-alt_gs.exists <- cbind(purrr::compact(alt_gs))
-  
-
-
-alt_gs.exists
-
-in.gbif <- map(alt_gs.exists, function(gs){
-  name_backbone(gs)
-})
-
-
-better_guesses_lep <- map_dfr(problem_names_lep, function(nombre){
-  tdat<-name_backbone_verbose(nombre)
-  bind_rows(tdat$data, tdat$alternatives)
-})
-name_suggest(problem_names_lep[[1]])
-
-lepNames <- name_backbone_checklist(problem_names_lep, verbose = TRUE)
-
-lepNames
-
-better_guesses_lep
 
 nspnames <- ps1 %>% 
   mutate(gs = paste(genus, species)) %>% 
   pull(gs) %>% 
   unique() %>% 
   sapply(function(x){
-    name_backbone(x, kingdom = "Plantae" )
+    nbRobust(x, kingdom = "Plantae" )
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
+problem_names_plant <- nspnames %>% filter(matchType != "EXACT") %>% pull(gs)
+
+dat <- ps1 %>% 
+  filter(withspace %in% problem_names_plant) %>% 
+  as.data.frame()
 
 
-
-ls2<-ls1 %>% left_join(nslnames, by = c('gs'))
+better_plants <- alt_gs(ps1 %>% 
+                        filter(withspace %in% problem_names_plant) %>% 
+                        as.data.frame()) %>% 
+  select(gs = species, ns.gs = natserv.name)
 
 
 ##############################
