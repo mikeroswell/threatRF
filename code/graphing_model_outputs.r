@@ -3,11 +3,9 @@ library(pROC)
 library(ROCR)
 library(patchwork)
 
-<<<<<<< HEAD
-load("data/fromR/lfs/100_100_fits_20220727.rda")
-=======
+
 load("data/fromR/lfs/100_100_fits_20220801.rda")
->>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
+
 load("data/fromR/outerFolds.RDA")
 classed.test <- read.csv("data/fromR/training_data.csv")
 classed.lep.test <-classed.test %>% filter(kingdomKey == 1)

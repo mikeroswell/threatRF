@@ -204,6 +204,15 @@ better_leps <- alt_gs(ls1 %>%
                         as.data.frame()) %>% 
   select(gs = species, ns.gs = natserv.name)
 
+# notes: Looks like almost all are 1:1 synonymies (good!)
+# exceptions:
+# - Polites/Wallengrenia egeremet looks like a valid species, but GBIF is
+# lumping with W. otho (filed an issue on GBIF GH
+# https://github.com/gbif/portal-feedback/issues/4340 )
+# - Peridea bordeloni is a new species not yet recognized by ITIS/ GBIF. The
+# parent species (P. ferruginea) is not ranked in MD, so won't affect results
+# here.
+
 
 nspnames <- ps1 %>% 
   mutate(gs = paste(genus, species)) %>% 
