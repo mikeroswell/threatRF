@@ -202,7 +202,7 @@ alt_gs <- function(dat){
 better_leps <- alt_gs(ls1 %>% 
                         filter(withspace %in% problem_names_lep) %>% 
                         as.data.frame()) %>% 
-  select(gs = species, ns.gs = natserv.name)
+  select(gbif.gs = species, ns.gs = natserv.name)
 
 # notes: Looks like almost all are 1:1 synonymies (good!)
 # exceptions:
@@ -233,22 +233,35 @@ dat <- ps1 %>%
 better_plants <- alt_gs(ps1 %>% 
                         filter(withspace %in% problem_names_plant) %>% 
                         as.data.frame()) %>% 
-  select(gs = species, ns.gs = natserv.name)
+  select(gbif.gs = species, ns.gs = natserv.name)
+
+better_plants
+
+ps2 <- ps1 %>% 
+  left_join(better_plants, by = c("withspace" = "ns.gs" )) %>% 
+  mutate(withspace = if_else(is.na(gbif.gs), withspace, gbif.gs))
 
 
+ls2 <- ls1 %>% 
+  left_join(better_leps, by = c("withspace" = "ns.gs" )) %>% 
+  mutate(withspace = if_else(is.na(gbif.gs), withspace, gbif.gs))
+# notes
+# I think these are basically all 1:1
+# the Solanum might not be exactly, but it s not native. Ditto Tripleurospermum. 
+# both those spp. are listed as not native by Knapp and Naczi, so should be 
+# filtered.
 ##############################
 ##### write and read NS data 
-str(ls1)
-str(ps1)
+
 # write just the natureserve data to file
-write.csv(ps1, "data/fromR/lfs/plant_NS_data.csv", row.names = F)
-write.csv(ls1, "data/fromR/lfs/lep_NS_data.csv", row.names = F)
+write.csv(ps2, "data/fromR/lfs/plant_NS_data.csv", row.names = F)
+write.csv(ls2, "data/fromR/lfs/lep_NS_data.csv", row.names = F)
 
 # read in archived data
-ps1 <- read.csv("data/fromR/lfs/plant_NS_data.csv")
-ls1 <- read.csv("data/fromR/lfs/lep_NS_data.csv")
-lep_stats<-read.csv("data/fromR/lfs/lep_NS_data.csv")
-plant_stats<-read.csv("data/fromR/lfs/plant_NS_data.csv") 
+ps2 <- read.csv("data/fromR/lfs/plant_NS_data.csv")
+ls2 <- read.csv("data/fromR/lfs/lep_NS_data.csv")
+lep_stats <- read.csv("data/fromR/lfs/lep_NS_data.csv")
+plant_stats <- read.csv("data/fromR/lfs/plant_NS_data.csv") 
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
 knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
   separate(accepted_gs
@@ -262,7 +275,7 @@ knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
 
 lep_joined <- occ_gs %>% 
   filter(kingdomKey == 1) %>% 
-  left_join(ls1, by = c("gs", "genus", "species")) %>% 
+  left_join(ls2, by = c("gs", "genus", "species")) %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
@@ -271,7 +284,7 @@ lep_joined <- occ_gs %>%
   
 occ_stat_plants <- occ_gs %>% 
   filter(kingdomKey == 6) %>% 
-  left_join(ps1, by = c("gs", "genus", "species", "withspace")) %>% 
+  left_join(ps2, by = c("gs", "genus", "species", "withspace")) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                         , "unranked"))) 
