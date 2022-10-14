@@ -2,11 +2,12 @@
 
 # this script depends on code/tidy_flora.R
 # source("code/tidy_flora.R)
-
-library(natserv) #this is how we get naturserve status
+# use own copy of natureserve (will not necessarily work for others)
+install.packages("/System/Volumes/Data/Rstudio_Git/natserv_1.0.0.92.tar.gz", repos = NULL)
+library(natserv) #this is how we get natureserve status
 library(rgbif) #how we get gbif observations
 library(tidyverse)
-library(patchwork) # cute pkg for assembling 
+library(patchwork) # cute pkg for assembling plots
 
 
 # # when downloading data from gbif with `occ_search`
@@ -140,7 +141,8 @@ ps1 <- plant_stats %>%
             , remove = FALSE) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) %>%
-  filter(species %ni% c("x", "var", " ", "") & !grepl("^[^[:alnum:]]", species))
+  filter(species %ni% c("x", "var", " ", "") & !grepl("^[^[:alnum:]]", species)) %>% 
+  select(-speciesGlobal)
 
 ls1 <- lep_stats %>% 
   separate(scientificName
@@ -149,7 +151,8 @@ ls1 <- lep_stats %>%
              , remove = FALSE) %>% # separate just drops stuff after the first two!
   mutate(gs = paste(genus, species, sep = "_")
          , withspace = paste(genus, species, sep = " ")) %>%
-  filter(species %ni% c("x", "var", " ", "") & !grepl("^[^[:alnum:]]", species))
+  filter(species %ni% c("x", "var", " ", "") & !grepl("^[^[:alnum:]]", species))%>% 
+  select(-speciesGlobal)
 
 
 # need to do some name cleanup on the NS data, unfortunately
