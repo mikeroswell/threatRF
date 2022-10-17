@@ -17,22 +17,22 @@ trees_leps<-map(c("lep", "plant"), function(tax){
   # fit models
   fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){ # 
     tic()
-
+    
     rf <- fit_rf(formu = my_mod
-                , data = classy[outer_folds[[fold]], ]
-                , sampling = NULL
-                , tuneMethod = "repeatedcv"
-                , repeats = 10
+                 , data = classy[outer_folds[[fold]], ]
+                 , sampling = NULL
+                 , tuneMethod = "repeatedcv"
+                 , repeats = 10
     )
-
-
+    
+    
     print(toc())
-    save(rf, file = paste0("data/fromR/fold_fits_", tax, ".RDA"))
-   
+    
+    
     return(rf)
     
   })
-  save(fold_fits, file = "data/fromR/fold_fits.RDA")
+  save(rf, file = past0("data/fromR/fold_fits_", tax, ".RDA"))
   print("did the fits")
   # m_assess <- assess_method()
   # print("assess method ran")
@@ -43,7 +43,6 @@ trees_leps<-map(c("lep", "plant"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20220801b.rda")
-
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20220917_glab.rda")
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
