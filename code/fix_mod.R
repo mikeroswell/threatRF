@@ -56,7 +56,8 @@ is_categorical <- function(x) {
 #' predict(fix.mod(my_mod, test), test)
 #' 
 fix.mod <- function(mod, test.dat, resp){
-  v.names = is_categorical(test.dat)
+  v.names <- is_categorical(test.dat)
+  v.names <- v.names[which(v.names != resp)]
   mod$xlevels = Map(union, mod$xlevels,  lapply(test.dat[v.names], unique))
   return(mod)
 }
@@ -64,7 +65,7 @@ fix.mod <- function(mod, test.dat, resp){
 
 # drop problematic variables
 # compare factor levels from two dataframes with identical variables
-nomatch<-function(x, y){
+nomatch <- function(x, y){
   colnames(x)[!sapply(1:length(colnames(x)), function(x.name){
     all(y[ ,x.name] %in% x[ ,x.name])
   })]
