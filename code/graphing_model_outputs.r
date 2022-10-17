@@ -3,11 +3,11 @@ library(pROC)
 library(ROCR)
 library(patchwork)
 
-<<<<<<< HEAD
-load("data/fromR/lfs/100_100_fits_20220727.rda")
-=======
-load("data/fromR/lfs/100_100_fits_20220801.rda")
->>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
+# set bigger font for poster
+theme_set(theme_classic(base_size = 24))
+
+load("data/fromR/lfs/100_100_fits_20220917.rda")
+
 load("data/fromR/outerFolds.RDA")
 classed.test <- read.csv("data/fromR/training_data.csv")
 classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
@@ -69,19 +69,18 @@ plant_auc_hist <- plant_assess %>%
   geom_histogram()+
   geom_vline(xintercept = mean(plant_assess$out_auc), color = "red") +
   geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
-  labs(x = "AUROC on unseen data in 10x repeated 10-fold cross validation"
+  labs(x = "AUROC on unseen data in 10x repeated \n10-fold cross validation"
        , y = "frequency") +
-  annotate("text", x = 0.1, y = 12, label = "plantae") +
-  xlim(c(0,1))+
-  theme_classic()
+  annotate("text", x = 0.2, y = 12, label = "plantae", size = 9) +
+  xlim(c(0,1))
 
 
 
-# scan for relatioships between accuracy, AUC, and mtry
+  # scan for relatioships between accuracy, AUC, and mtry
 plant_assess %>% 
   ggplot(aes(mtry, out_auc, color = accuracy)) + 
-  geom_point()+
-  theme_classic()
+  geom_point()
+  # theme_classic()
 
 
 # great for looking at some stuff but I don't think this one is necessary to keep around
@@ -110,9 +109,8 @@ lep_auc_hist <- lep_assess %>%
   geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
   labs(x = ""
        , y = "frequency") +
-  annotate("text", x = 0.1, y = 46, label = "lepidoptera") +
-  xlim(c(0,1))+
-  theme_classic()
+  annotate("text", x = 0.2, y = 46, label = "lepidoptera", size = 9) +
+  xlim(c(0,1))
 
 
 pdf("figures/model_performance_histograms_subdata.pdf")
@@ -169,10 +167,7 @@ vimp_sum<-varimp_run %>%
 
 
 #make variable importance plot
-<<<<<<< HEAD
-=======
 # next step is to create better 
->>>>>>> 669539bbdf5d935d63048d0e87c73be5a0f14476
 pdf("figures/variable_importance_top.pdf")
 vimp_sum %>% 
   group_by(varName) %>% 
@@ -237,35 +232,36 @@ final_fits <- map(c("lep", "plant"), function(tax){
 })
 
 
-save(final_fits, file = "data/fromR/lfs/final_fits_20220807_graphicslab.RDA")
-load("data/fromR/lfs/final_fits_20220807_graphicslab.RDA")
+save(final_fits, file = "data/fromR/lfs/final_fits_20220919_graphicslab.RDA")
+load("data/fromR/lfs/final_fits_20220919_graphicslab.RDA")
 
 # get "optimal" thresholds
-# threshlist<-map(1:2, function(tax){
-#   kk <- c(1,6)[tax]
-#   raw <- tofit_summary_complete %>%
-#     filter(kingdomKey == kk, simple_status_mu != 1)
-#   dat <- dropper(raw)
-#   preds <- predict(object = fix.mod(final_fits[[tax]]
-#                                       , dat
-#                                       , simple_status_mu)
-#                      , newdata = dat
-#                      , type = "prob")
-#   perf = performance(prediction(preds[1], dat$simple_status_mu-2), "sens", "spec")
-# 
-#   thresh.df <- data.frame(cut = perf@alpha.values[[1]], sens = perf@x.values[[1]], spec = perf@y.values[[1]])
-#   thresh <- thresh.df[which.max(thresh.df$sens + thresh.df$spec), ]
-#   taxon <- c("lepidoptera", "plantae")[tax]
-# 
-#    return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh),
-#                train.preds = data.frame(preds, taxon, genus = raw$genus, species = raw$species)))
-# })
-# 
-# save(threshlist, file = "data/fromR/threshlist.rda")
+threshlist<-map(1:2, function(tax){
+  kk <- c(1,6)[tax]
+  raw <- classed %>%
+    filter(kingdomKey == kk)
+    
+  dat <- dropper(raw)
+  preds <- predict(object = fix.mod(final_fits[[tax]]
+                                      , dat
+                                      , "simple_status_mu")
+                     , newdata = dat
+                     , type = "prob")
+  perf = performance(prediction(preds[2], as.numeric(as.factor(dat$simple_status_mu))), "sens", "spec")
+
+  thresh.df <- data.frame(cut = perf@alpha.values[[1]], sens = perf@x.values[[1]], spec = perf@y.values[[1]])
+  thresh <- thresh.df[which.max(thresh.df$sens + thresh.df$spec), ]
+  taxon <- c("lepidoptera", "plantae")[tax]
+
+   return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh),
+               train.preds = data.frame(preds, taxon, genus = raw$genus, species = raw$species)))
+})
+
+save(threshlist, file = "data/fromR/threshlist.rda")
 load("data/fromR/threshlist.rda")
-
-
-# optimal thresholds
+# 
+# 
+# # optimal thresholds
 ot<-map_dfr(1:2, function(tax){
   threshlist[[tax]]$best_thresh
 })
@@ -276,12 +272,16 @@ ot
 # make predictions on the new data
 predict_unclassified <- map_dfr(c(1, 2), function(tax){
   kk <- c(1,6)[tax]
-  raw <- tofit_summary_complete %>% 
-    filter(kingdomKey == kk, simple_status_mu == 1)
+  raw <- tofit_summary %>% 
+    filter(kingdomKey == kk & simple_status_mu == "unranked" ) %>% 
+    drop_na()
   dat <- dropper(raw)
+  og <- fix.mod(final_fits[[tax]]
+                , dat
+                , "simple_status_mu")
   preds <- predict(object = fix.mod(final_fits[[tax]]
                                     , dat
-                                    , simple_status_mu)
+                                    , "simple_status_mu")
                    , newdata = dat
                    , type="prob")
   
@@ -295,11 +295,14 @@ predict_preclassified<-map_dfr(1:2, function(tax){
 })
 
 # combine predictions with original data
-w_preds <- almost %>% ungroup() %>% left_join(bind_rows(predict_unclassified, predict_preclassified), by = c("genus", "species")) 
+w_preds <- almost %>% 
+  ungroup() %>% 
+  left_join(bind_rows(predict_unclassified, predict_preclassified)
+            , by = c("genus", "species")) 
 
 w_preds %>% 
   group_by(taxon, genus, species) %>% 
-  summarize(threat_prob = mean(threatened)) %>% 
+  summarize(threat_prob = mean(threat)) %>% 
   ggplot(aes(threat_prob, fill = taxon, color = taxon)) +
   geom_histogram() +
   theme_classic()
@@ -308,17 +311,21 @@ w_preds %>%
 
 
 # plot predictions at the observation level
-pdf("figures/probability_threatened_subdata.pdf")
+pdf("figures/probability_threatened_subdata.pdf", width = 10, height = 10)
 w_preds %>% 
   filter(!is.na(taxon)) %>% 
-  mutate(existing = c("no prior status", "known threatened", "known relatively secure")[as.numeric(simple_status)]) %>% 
-  ggplot(aes(color = threatened))+
+  mutate(existing = c("no prior status", "known threatened", "known rel. secure")[as.numeric(as.factor(simple_status))]) %>% 
+  ggplot(aes(color = threat))+
   geom_sf(size = 0.1) +
   scale_color_viridis_c() +
-  theme_classic() +
-  theme(legend.position = "bottom") +
+  theme_classic(base_size = 20) +
+  theme(legend.position = "bottom"
+        , panel.spacing = unit(1.5, "lines")
+        , legend.text = element_text(angle = 90, hjust = 1)
+        ) +
   facet_grid(existing ~ taxon) + 
-  labs(color = "predicted probability \nspecies is threatened")
+  guides(guide_legend(title.hjust = 1, title.vjust = 0)) +
+  labs(color = "predicted probability   \nspecies is threatened   ")
 dev.off()
 
 # rasterize predictions
@@ -334,10 +341,10 @@ base_rast <- raster::raster(w_preds, resolution = 8000, crs = sf::st_crs(w_preds
 #           , 0)}
 
 
-pred_by_spp<-w_preds %>%
+pred_by_spp <- w_preds %>%
   group_by(genus, species, taxon) %>%
   mutate(is.threatened = #c("pSecure", "pThreatened")[2-
-           as.numeric(threatened > ot$cut[as.numeric(as.factor(taxon))])
+           as.numeric(threat > 0.7)# ot$cut[as.numeric(as.factor(taxon))])
          #]
          , gs = paste(genus, species, sep = "_")) 
 # %>%
@@ -347,7 +354,7 @@ plusOne<-function(x){length(unique(x))}
 
 species_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
   pred_by_spp %>%
-    filter(taxon == tax, simple_status =="NONE", is.threatened == 1) %>%
+    filter(taxon == tax, simple_status =="unranked", is.threatened == 1) %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -400,7 +407,7 @@ dev.off()
 
 species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
   pred_by_spp %>%
-    filter(taxon == tax, simple_status =="NONE", is.threatened == 0) %>%
+    filter(taxon == tax, simple_status =="unranked", is.threatened == 0) %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -414,7 +421,7 @@ species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax
 
 species_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
   pred_by_spp %>%
-    filter(taxon == tax, simple_status =="NONE") %>%
+    filter(taxon == tax, simple_status =="unranked") %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -434,15 +441,16 @@ p_spp_threatened <-map(1:2, function(tax){
 
 
 n_over_thresh<-function(x, ...){sum(na.omit(x>threat_thres))}
+
 mean_sd_pred <- map(c("lepidoptera", "plantae"), function(tax){
   w_preds %>%
-    filter(taxon == tax, simple_status =="NONE") %>% 
+    filter(taxon == tax, simple_status =="unranked") %>% 
     raster::rasterize(
       y = base_rast
       , fun =function(x, ...){c(
         mean(x)
         , sd(x))}
-      , field = "threatened"
+      , field = "threat"
       , na.rm = FALSE)
 })
 
@@ -450,8 +458,8 @@ pro<-function(x){sum(x)/length(x)}
 
 count_occ_threatened <- map(c("lepidoptera", "plantae"), function(tax){
   w_preds %>%
-    filter(taxon == tax, simple_status =="NONE") %>% 
-    mutate(overThresh = as.numeric(threatened > ot$cut[2-as.numeric(tax == "lepidoptera")])) %>% 
+    filter(taxon == tax, simple_status =="unranked") %>% 
+    mutate(overThresh = as.numeric(threat > ot$cut[2-as.numeric(tax == "lepidoptera")])) %>% 
     raster::rasterize(
       y = base_rast
       , fun =function(x, ...){c(
@@ -537,7 +545,7 @@ map(1:2, function(tax){
     )+
     scale_fill_viridis_c() +
     coord_equal() +
-    theme_void() +
+    theme_void(base_size = 20) +
     labs(title = c("lepidoptera", "plantae")[tax]
          , fill = c(
            
@@ -575,7 +583,7 @@ w_preds %>%
 
 w_preds %>% 
   filter(roundedSRank %in% c("S1", "S2", "S3", "S4", "S5")) %>% 
-  ggplot(aes(as.numeric(as.factor(roundedSRank)), threatened))+
+  ggplot(aes(as.numeric(as.factor(roundedSRank)), threat))+
   geom_point()+
   geom_smooth()+
   theme_classic()+
@@ -583,12 +591,12 @@ w_preds %>%
 
 # look at the threatened species
 View(predict_unclassified %>% 
-       arrange(desc(threatened)) %>% 
+       arrange(desc(threat)) %>% 
        filter(taxon == "lepidoptera")
 )
 
 View(predict_unclassified %>% 
-       arrange(desc(threatened)) %>% 
+       arrange(desc(threat)) %>% 
        filter(taxon == "plantae")
 )
 
