@@ -48,18 +48,17 @@ null_to_NA <- function(x){
 # # this actually downloads the data (~135 MB)
 # occ_download_get(MD_vasc_and_lep_doi, path = "data/fromR/lfs", overwrite = TRUE)
 
-# another function to read into R's brain
+# # another function to read into R's brain
 # GBIF_plant_lep <- occ_download_import(path ="data/fromR/lfs"
-#                                        , key = MD_vasc_and_lep_doi)
+                                       , key = MD_vasc_and_lep_doi)
 
-# 
 # # check out the file
 # GBIF_plant_lep
 # names(GBIF_plant_lep)
 # MD_vasc_lep <- bind.gbif(GBIF_plant_lep)
 # after a bit of exploration I feel good about not going with this process.
 # instead unzip and just grab the occurrence data themselves for now
- # unzip("data/fromR/lfs/0413674-210914110416597.zip", exdir = "data/fromR/lfs/GBIF_downloads")
+# unzip("data/fromR/lfs/0101566-220831081235567.zip", exdir = "data/fromR/lfs/GBIF_downloads")
 MD_plant_lep_occ <- data.table::fread("data/fromR/lfs/GBIF_downloads/occurrence.txt")
 # # note this returns a warning about parsing th efile (is it weird it gets demonic after line 666?)
 head(MD_plant_lep_occ)

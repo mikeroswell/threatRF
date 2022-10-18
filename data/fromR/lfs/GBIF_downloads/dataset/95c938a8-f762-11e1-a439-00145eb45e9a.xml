@@ -6,6 +6,7 @@
 
 <dataset>
       <alternateIdentifier>10.15468/htptzr</alternateIdentifier>
+        <alternateIdentifier>http://ipt.nhm.ku.edu/resource?r=kubi_vascularplants</alternateIdentifier>
         <alternateIdentifier>http://ipt.nhm.ku.edu:8080/ipt/resource?r=kubi_vascularplants</alternateIdentifier>
         <alternateIdentifier>http://ipt.nhm.ku.edu/ipt/resource?r=kubi_vascularplants</alternateIdentifier>
         <alternateIdentifier>http://ipt.nhm.ku.edu/ipt/resource.do?r=kubi_vascularplants</alternateIdentifier>
@@ -35,7 +36,7 @@
 <phone>+1 (785) 864-3453</phone><electronicMailAddress>ccfree@ku.edu</electronicMailAddress><onlineUrl>https://biodiversity.ku.edu/botany</onlineUrl>    <role>CURATOR</role>
     </associatedParty>
       <pubDate>
-      2022-07-05
+      2022-10-10
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -106,8 +107,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:24Z</dateStamp>
-      <citation>Bentley A, Morse C (2022). R. L. McGregor Herbarium Vascular Plants Collection. University of Kansas Biodiversity Institute. Occurrence dataset https://doi.org/10.15468/htptzr accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:03Z</dateStamp>
+      <citation>Bentley A, Morse C (2022). R. L. McGregor Herbarium Vascular Plants Collection. University of Kansas Biodiversity Institute. Occurrence dataset https://doi.org/10.15468/htptzr accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

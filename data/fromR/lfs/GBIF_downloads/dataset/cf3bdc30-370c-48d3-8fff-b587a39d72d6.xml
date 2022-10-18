@@ -69,7 +69,7 @@
 <electronicMailAddress>kmcfarland@vtecostudies.org</electronicMailAddress>      <userId directory="http://orcid.org/">0000-0001-7809-5503</userId>
     </metadataProvider>
       <pubDate>
-      2022-08-02
+      2022-10-18
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -161,8 +161,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:25Z</dateStamp>
-      <citation>Larrivée M, McFarland K, Zhang X, Prudic K, Solis R, Bunsen M, Kerr J (2022). eButterfly Surveys. Version 1.186. Vermont Center for Ecostudies. Sampling event dataset https://doi.org/10.15468/ykxm8x accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:05Z</dateStamp>
+      <citation>Larrivée M, McFarland K, Zhang X, Prudic K, Solis R, Bunsen M, Kerr J (2022). eButterfly Surveys. Version 1.253. Vermont Center for Ecostudies. Sampling event dataset https://doi.org/10.15468/ykxm8x accessed via GBIF.org on 2022-10-18.</citation>
               <bibliography>
       <citation identifier="https://doi.org/10.3390/insects8020053">Prudic, K.L.; McFarland, K.P.; Oliver, J.C.; Hutchinson, R.A.; Long, E.C.; Kerr, J.T.; Larrivée, M. (2017) eButterfly: Leveraging Massive Online Citizen Science for Butterfly Conservation. Insects 8 (2), 53.</citation>
       <citation identifier="http://www.e-butterfly.org">Larrivee M, Prudic KL, McFarland KP, Zhang, X. and J Kerr 2020. eButterfly: a citizen-based butterfly database in the biological sciences. http://www.e-butterfly.org</citation>

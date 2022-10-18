@@ -1,6 +1,8 @@
 
 Dataset: Harvard University Herbaria: All Records
 Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of Mississippi, Thomas M. Pullen Herbarium
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
 Dataset: SD - SD Herbarium, San Diego Natural History Museum
 Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
 Dataset: Lund Botanical Museum (LD)
@@ -119,7 +121,7 @@ Dataset: University of Delaware Insect Research Collection
 Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
 Dataset: C.P. Gillette Museum of Arthropod Diversity
 Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
-Dataset: University of South Carolina, A. C. Moore Herbarium
+Dataset: University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection
 Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
 Dataset: San Diego Natural History Museum Entomology Department
 Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
@@ -131,16 +133,14 @@ Dataset: University of Alberta E. H. Strickland Entomological Museum (UASM)
 Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
 Dataset: University of Michigan Herbarium
 Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
-Dataset: Entomology Division, Yale Peabody Museum
-Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
 Dataset: Academy of Natural Sciences of Drexel University
 Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
-Dataset: University of North Carolina at Chapel Hill Herbarium: Vascular Plants
-Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
-Dataset: University of South Florida Herbarium (USF)
-Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Entomology Division, Yale Peabody Museum
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
 Dataset: Carnegie Museum of Natural History Herbarium
 Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: University of South Florida Herbarium (USF)
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
 Dataset: The Lepidopterists' Society Season Summary
 Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
 Dataset: Tropicos Specimen Data

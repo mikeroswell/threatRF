@@ -25,7 +25,7 @@
 <positionName>Deaver Herbarium Curator</positionName><electronicMailAddress>tina.ayers [at] nau [period] edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-01
+      2022-09-01
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -42,8 +42,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
-      <citation>Northern Arizona University (2022). Deaver Herbarium (Northern Arizona University). Occurrence dataset https://doi.org/10.15468/b7tfpa accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:54Z</dateStamp>
+      <citation>Northern Arizona University (2022). Deaver Herbarium (Northern Arizona University). Occurrence dataset https://doi.org/10.15468/b7tfpa accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

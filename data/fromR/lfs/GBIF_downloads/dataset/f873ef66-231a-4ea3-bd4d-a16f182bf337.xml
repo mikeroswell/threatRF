@@ -14,12 +14,18 @@
 <organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>    </metadataProvider>
     <associatedParty>
     <individualName>
-          <surName>Tatyana Livshultz</surName>
+<givenName>Tatyana</givenName>          <surName>Livshultz</surName>
     </individualName>
-<electronicMailAddress>ans_ph_herbarium@drexel.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+<positionName>Curator</positionName><electronicMailAddress>tl534@drexel.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+    <associatedParty>
+    <individualName>
+<givenName>Chelsea</givenName>          <surName>Smith</surName>
+    </individualName>
+<positionName>Collection Manager</positionName><electronicMailAddress>ans_ph_herbarium@drexel.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-01
+      2022-09-02
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -29,15 +35,15 @@
         <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
       </intellectualRights>
       <contact>
-<organizationName>Academy of Natural Sciences of Drexel University</organizationName><electronicMailAddress>ans_ph_herbarium@drexel.edu</electronicMailAddress><onlineUrl>http://www.ansp.org/research/systematics-evolution/collections/botany/</onlineUrl>      </contact>
+<organizationName>Academy of Natural Sciences of Drexel University</organizationName><electronicMailAddress>tl534@drexel.edu</electronicMailAddress><onlineUrl>http://www.ansp.org/research/systematics-evolution/collections/botany/</onlineUrl>      </contact>
 
 </dataset>
 
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:25Z</dateStamp>
-      <citation>Academy of Natural Sciences (2022). Academy of Natural Sciences of Drexel University. Occurrence dataset https://doi.org/10.15468/s55f2k accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
+      <citation>Academy of Natural Sciences (2022). Academy of Natural Sciences of Drexel University. Occurrence dataset https://doi.org/10.15468/s55f2k accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

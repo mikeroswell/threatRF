@@ -47,7 +47,7 @@
 <electronicMailAddress>kwatson@nybg.org</electronicMailAddress>    <role>USER</role>
     </associatedParty>
       <pubDate>
-      2022-07-29
+      2022-09-06
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -99,8 +99,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:25Z</dateStamp>
-      <citation>Ramirez J, Watson K, McMillin L, Gjieli E (2022). The New York Botanical Garden Herbarium (NY). Version 1.49. The New York Botanical Garden. Occurrence dataset https://doi.org/10.15468/6e8nje accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
+      <citation>Ramirez J, Watson K, McMillin L, Gjieli E (2022). The New York Botanical Garden Herbarium (NY). Version 1.51. The New York Botanical Garden. Occurrence dataset https://doi.org/10.15468/6e8nje accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>https://www.nybg.org/content/themes/nybg/build/images/logo.png</resourceLogoUrl>
       </gbif>
     </metadata>

@@ -32,7 +32,7 @@
 <positionName>Collections Manager</positionName><electronicMailAddress>shunkins@dbg.org</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-01
+      2022-09-01
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -49,8 +49,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:20Z</dateStamp>
-      <citation>Desert Botanical Garden Herbarium (2022). Desert Botanical Garden Herbarium. Occurrence dataset https://doi.org/10.15468/abe1lg accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:53Z</dateStamp>
+      <citation>Desert Botanical Garden Herbarium (2022). Desert Botanical Garden Herbarium. Occurrence dataset https://doi.org/10.15468/abe1lg accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

@@ -237,8 +237,8 @@ Georeferences provided on labels are validated using online maps and GIS tools a
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:22Z</dateStamp>
-      <citation identifier="http://doi.org/10.5886/rzav8bu2">Brouillet L, Sinou C (2022). Marie-Victorin Herbarium (MT) - Plantes vasculaires. Version 14.11. Université de Montréal Biodiversity Centre. Occurrence dataset https://doi.org/10.5886/rzav8bu2 accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:55Z</dateStamp>
+      <citation identifier="http://doi.org/10.5886/rzav8bu2">Brouillet L, Sinou C (2022). Marie-Victorin Herbarium (MT) - Plantes vasculaires. Version 14.11. Université de Montréal Biodiversity Centre. Occurrence dataset https://doi.org/10.5886/rzav8bu2 accessed via GBIF.org on 2022-10-18.</citation>
               <physical>
                   <objectName>GBIF data portal</objectName>
                   <characterEncoding>UTF-8</characterEncoding>

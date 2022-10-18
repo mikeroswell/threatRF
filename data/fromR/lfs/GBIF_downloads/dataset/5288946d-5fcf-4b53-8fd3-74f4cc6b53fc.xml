@@ -91,8 +91,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:22Z</dateStamp>
-      <citation identifier="http://bgbaseserver.eeb.uconn.edu/">Capers R (2014). CONN. University of Connecticut. Occurrence dataset https://doi.org/10.15468/w35jmd accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:55Z</dateStamp>
+      <citation identifier="http://bgbaseserver.eeb.uconn.edu/">Capers R (2014). CONN. University of Connecticut. Occurrence dataset https://doi.org/10.15468/w35jmd accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>http://137.99.46.32:7001/ipt/logo.do?r=conn</resourceLogoUrl>
               <collection>
                 <parentCollectionIdentifier>UConn</parentCollectionIdentifier>

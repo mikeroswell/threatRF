@@ -263,27 +263,6 @@
     <field index="255" term="http://rs.gbif.org/terms/gadm/3.0/level3Name"/>
     <field index="256" term="http://iucn.org/terms/iucnRedListCategory"/>
   </core>
-  <extension encoding="UTF-8" fieldsTerminatedBy="\t" linesTerminatedBy="\n" fieldsEnclosedBy="" ignoreHeaderLines="1" rowType="http://rs.gbif.org/terms/1.0/Multimedia">
-    <files>
-      <location>multimedia.txt</location>
-    </files>
-    <coreid index="0" />
-    <field index="0" term="http://rs.gbif.org/terms/1.0/gbifID"/>
-    <field index="1" term="http://purl.org/dc/terms/type"/>
-    <field index="2" term="http://purl.org/dc/terms/format"/>
-    <field index="3" term="http://purl.org/dc/terms/identifier"/>
-    <field index="4" term="http://purl.org/dc/terms/references"/>
-    <field index="5" term="http://purl.org/dc/terms/title"/>
-    <field index="6" term="http://purl.org/dc/terms/description"/>
-    <field index="7" term="http://purl.org/dc/terms/source"/>
-    <field index="8" term="http://purl.org/dc/terms/audience"/>
-    <field index="9" term="http://purl.org/dc/terms/created"/>
-    <field index="10" term="http://purl.org/dc/terms/creator"/>
-    <field index="11" term="http://purl.org/dc/terms/contributor"/>
-    <field index="12" term="http://purl.org/dc/terms/publisher"/>
-    <field index="13" term="http://purl.org/dc/terms/license"/>
-    <field index="14" term="http://purl.org/dc/terms/rightsHolder"/>
-  </extension>
   <extension encoding="UTF-8" fieldsTerminatedBy="\t" linesTerminatedBy="\n" fieldsEnclosedBy="" ignoreHeaderLines="1" rowType="http://rs.tdwg.org/dwc/terms/Occurrence">
     <files>
       <location>verbatim.txt</location>
@@ -516,5 +495,26 @@
     <field index="224" term="http://rs.tdwg.org/dwc/terms/taxonomicStatus"/>
     <field index="225" term="http://rs.tdwg.org/dwc/terms/nomenclaturalStatus"/>
     <field index="226" term="http://rs.tdwg.org/dwc/terms/taxonRemarks"/>
+  </extension>
+  <extension encoding="UTF-8" fieldsTerminatedBy="\t" linesTerminatedBy="\n" fieldsEnclosedBy="" ignoreHeaderLines="1" rowType="http://rs.gbif.org/terms/1.0/Multimedia">
+    <files>
+      <location>multimedia.txt</location>
+    </files>
+    <coreid index="0" />
+    <field index="0" term="http://rs.gbif.org/terms/1.0/gbifID"/>
+    <field index="1" term="http://purl.org/dc/terms/type"/>
+    <field index="2" term="http://purl.org/dc/terms/format"/>
+    <field index="3" term="http://purl.org/dc/terms/identifier"/>
+    <field index="4" term="http://purl.org/dc/terms/references"/>
+    <field index="5" term="http://purl.org/dc/terms/title"/>
+    <field index="6" term="http://purl.org/dc/terms/description"/>
+    <field index="7" term="http://purl.org/dc/terms/source"/>
+    <field index="8" term="http://purl.org/dc/terms/audience"/>
+    <field index="9" term="http://purl.org/dc/terms/created"/>
+    <field index="10" term="http://purl.org/dc/terms/creator"/>
+    <field index="11" term="http://purl.org/dc/terms/contributor"/>
+    <field index="12" term="http://purl.org/dc/terms/publisher"/>
+    <field index="13" term="http://purl.org/dc/terms/license"/>
+    <field index="14" term="http://purl.org/dc/terms/rightsHolder"/>
   </extension>
 </archive>

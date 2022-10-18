@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+        packageId="93ec984b-d117-4092-814c-1202a8532b7f"  system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+      <alternateIdentifier>10.15468/txxhcj</alternateIdentifier>
+        <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=220</alternateIdentifier>
+    <title>University of Mississippi, Thomas M. Pullen Herbarium</title>
+    <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </creator>
+    <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </metadataProvider>
+    <associatedParty>
+    <individualName>
+          <surName>Lucile McCook, Curator</surName>
+    </individualName>
+<electronicMailAddress>bymccook@olemiss.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+    </associatedParty>
+      <pubDate>
+      2022-07-01
+      </pubDate>
+    <language>ENGLISH</language>
+    <abstract>
+        <para>The Pullen Herbarium (MISS) collection is located on the campus of the University of Mississippi in Oxford, MS, and consists of over 80,000 vascular plant specimens, as well as non vascular plants, slime molds and macrofungi.  With funding from the National Science Foundation, the collection is housed in a compactor system and the specimen data and images have been digitized.  Vascular plant specimens can be searched on SERNEC and macrofungi are displayed in MycoPortal.</para>
+    </abstract>
+      <intellectualRights>
+        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+      </intellectualRights>
+      <contact>
+<organizationName>University of Mississippi, Thomas M. Pullen Herbarium</organizationName><phone>(662) 915-5488</phone><electronicMailAddress>bymccook@olemiss.edu</electronicMailAddress><onlineUrl>http://www.herbarium.olemiss.edu/</onlineUrl>      </contact>
+
+</dataset>
+
+<additionalMetadata>
+    <metadata>
+      <gbif>
+        <dateStamp>2022-10-18T16:43:53Z</dateStamp>
+      <citation>University of Mississippi (2022). University of Mississippi, Thomas M. Pullen Herbarium. Occurrence dataset https://doi.org/10.15468/txxhcj accessed via GBIF.org on 2022-10-18.</citation>
+      </gbif>
+    </metadata>
+</additionalMetadata>
+
+</eml:eml>

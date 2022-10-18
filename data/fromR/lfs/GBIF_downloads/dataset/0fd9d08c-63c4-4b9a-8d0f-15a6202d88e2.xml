@@ -26,7 +26,7 @@
 <positionName>curator</positionName><electronicMailAddress>cendara@clemson.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-01
+      2022-09-02
       </pubDate>
     <language>ENGLISH</language>
       <intellectualRights>
@@ -40,8 +40,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
-      <citation>Clemson University Herbarium (2022). Clemson University Herbarium. Occurrence dataset https://doi.org/10.15468/srjd22 accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:54Z</dateStamp>
+      <citation>Clemson University Herbarium (2022). Clemson University Herbarium. Occurrence dataset https://doi.org/10.15468/srjd22 accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

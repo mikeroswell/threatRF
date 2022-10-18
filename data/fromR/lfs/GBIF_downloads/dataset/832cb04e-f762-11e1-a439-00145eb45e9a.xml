@@ -32,7 +32,7 @@
 <deliveryPoint>10901 Old Cutler Road</deliveryPoint><city>Coral Gables</city><administrativeArea>Florida</administrativeArea><postalCode>33156</postalCode><country>UNITED_STATES</country>    </address>
 <electronicMailAddress>BJestrow@fairchildgarden.org</electronicMailAddress><onlineUrl>https://fairchildgarden.org/</onlineUrl>    </metadataProvider>
       <pubDate>
-      2022-07-26
+      2022-10-11
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -88,8 +88,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
-      <citation>Jestrow B, Bornhorst K (2022). Fairchild Tropical Botanic Garden (FTG). Fairchild Tropical Botanic Garden. Occurrence dataset https://doi.org/10.15468/hdpruf accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:54Z</dateStamp>
+      <citation>Jestrow B, Bornhorst K (2022). Fairchild Tropical Botanic Garden (FTG). Fairchild Tropical Botanic Garden. Occurrence dataset https://doi.org/10.15468/hdpruf accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>https://cdn.plantatlas.org/img/logos/ftg-logo-472x108.png</resourceLogoUrl>
               <collection>
                 <parentCollectionIdentifier>Not applicable</parentCollectionIdentifier>

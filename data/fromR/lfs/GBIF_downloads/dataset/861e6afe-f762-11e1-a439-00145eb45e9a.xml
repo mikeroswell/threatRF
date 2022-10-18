@@ -67,7 +67,7 @@
 <electronicMailAddress>ekramer@oeb.harvard.edu</electronicMailAddress>    <role>POINT_OF_CONTACT</role>
     </associatedParty>
       <pubDate>
-      2022-07-30
+      2022-10-15
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -129,8 +129,8 @@ DarwinCore data follows the AppleCore guidance https://code.google.com/p/appleco
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:19Z</dateStamp>
-      <citation>Kennedy J (2022). Harvard University Herbaria: All Records. Harvard University Herbaria. Occurrence dataset https://doi.org/10.15468/o3pvnh accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:53Z</dateStamp>
+      <citation>Kennedy J (2022). Harvard University Herbaria: All Records. Harvard University Herbaria. Occurrence dataset https://doi.org/10.15468/o3pvnh accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

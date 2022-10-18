@@ -16,12 +16,12 @@
 <organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </metadataProvider>
     <associatedParty>
     <individualName>
-<givenName>Robert</givenName>          <surName>Pace</surName>
+<givenName>Sally</givenName>          <surName>Chambers</surName>
     </individualName>
-<positionName>Facilities Admin &amp; Coordinator</positionName><electronicMailAddress>Melanie.Link-Perez@eku.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
+<positionName>Curator</positionName><electronicMailAddress>sally.chambers@eku.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-01
+      2022-09-02
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -31,15 +31,15 @@
         <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
       </intellectualRights>
       <contact>
-<organizationName>Eastern Kentucky University, Ronald L. Jones Herbarium</organizationName><electronicMailAddress>Melanie.Link-Perez@eku.edu</electronicMailAddress><onlineUrl>https://herbarium.eku.edu/</onlineUrl>      </contact>
+<organizationName>Eastern Kentucky University, Ronald L. Jones Herbarium</organizationName><electronicMailAddress>sally.chambers@eku.edu</electronicMailAddress><onlineUrl>https://herbarium.eku.edu/</onlineUrl>      </contact>
 
 </dataset>
 
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:20Z</dateStamp>
-      <citation>Eastern Kentucky University, Ronald L. Jones Herbarium (EKY) (2022). Eastern Kentucky University, Ronald L. Jones Herbarium. Occurrence dataset https://doi.org/10.15468/fy8dsi accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:53Z</dateStamp>
+      <citation>Eastern Kentucky University, Ronald L. Jones Herbarium (EKY) (2022). Eastern Kentucky University, Ronald L. Jones Herbarium. Occurrence dataset https://doi.org/10.15468/fy8dsi accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

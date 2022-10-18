@@ -44,7 +44,7 @@
 <deliveryPoint>PO Box 9517</deliveryPoint><city>Leiden</city><administrativeArea>Zuid Holland</administrativeArea><postalCode>NL-2300 RA</postalCode><country>NETHERLANDS</country>    </address>
 <phone>+31.71.7519600</phone><electronicMailAddress>frontofficecollectie@naturalis.nl</electronicMailAddress><onlineUrl>https://naturalis.nl/en/collection</onlineUrl>    </metadataProvider>
       <pubDate>
-      2022-07-13
+      2022-09-21
       </pubDate>
     <language>en</language>
     <abstract>
@@ -99,8 +99,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:22Z</dateStamp>
-      <citation>Bijmoer R, Scherrenberg M, Creuwels J (2022). Naturalis Biodiversity Center (NL) - Botany. Naturalis Biodiversity Center. Occurrence dataset https://doi.org/10.15468/ib5ypt accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:55Z</dateStamp>
+      <citation>Bijmoer R, Scherrenberg M, Creuwels J (2022). Naturalis Biodiversity Center (NL) - Botany. Naturalis Biodiversity Center. Occurrence dataset https://doi.org/10.15468/ib5ypt accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>http://ipt.nlbif.nl/resources/logo_Naturalis_rood.png</resourceLogoUrl>
       </gbif>
     </metadata>

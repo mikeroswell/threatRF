@@ -24,7 +24,7 @@
 <deliveryPoint>Rua Pacheco Leão 915</deliveryPoint><city>Rio de Janeiro</city><administrativeArea>RJ</administrativeArea><postalCode>22460-030</postalCode><country>BRAZIL</country>    </address>
 <phone>+552132042082</phone><electronicMailAddress>reflora@jbrj.gov.br</electronicMailAddress>    </metadataProvider>
       <pubDate>
-      2022-06-09
+      2022-09-23
       </pubDate>
     <language>PORTUGUESE</language>
     <abstract>
@@ -37,6 +37,10 @@
         <keywordSet>
               <keyword>Specimen</keyword>
               <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+              <keyword>Occurrence</keyword>
+              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
         </keywordSet>
       <intellectualRights>
         <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
@@ -60,8 +64,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:20Z</dateStamp>
-      <citation>Forzza R (2022). US herbarium - Smithsonian Institute - Amostras Brasileiras Repatriadas - Herbário Virtual REFLORA. Version 1.204. Instituto de Pesquisas Jardim Botanico do Rio de Janeiro. Occurrence dataset https://doi.org/10.15468/9dbxh8 accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:53Z</dateStamp>
+      <citation>Forzza R (2022). US herbarium - Smithsonian Institute - Amostras Brasileiras Repatriadas - Herbário Virtual REFLORA. Version 1.205. Instituto de Pesquisas Jardim Botanico do Rio de Janeiro. Occurrence dataset https://doi.org/10.15468/9dbxh8 accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>http://ipt.jbrj.gov.br/reflora/logo.do?r=us_reflora</resourceLogoUrl>
       </gbif>
     </metadata>

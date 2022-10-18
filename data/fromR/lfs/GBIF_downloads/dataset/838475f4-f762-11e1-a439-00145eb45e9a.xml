@@ -142,8 +142,8 @@ Este dataset incluye 4198 tipos, de los que 85 son holotipos. Se pueden consulta
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:24Z</dateStamp>
-      <citation identifier="https://www.ibb.csic.es/es/colecciones/herbario/colecciones-herbario/herbario-general/ ">Nualart N, Montes N (2021). Institut Botanic de Barcelona (IBB, CSIC-Ajuntament de Barcelona), BC-Plantae. Institut Botànic de Barcelona (CSIC-Ajuntament de Barcelona). Occurrence dataset https://doi.org/10.15468/pff0t6 accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:03Z</dateStamp>
+      <citation identifier="https://www.ibb.csic.es/es/colecciones/herbario/colecciones-herbario/herbario-general/ ">Nualart N, Montes N (2021). Institut Botanic de Barcelona (IBB, CSIC-Ajuntament de Barcelona), BC-Plantae. Institut Botànic de Barcelona (CSIC-Ajuntament de Barcelona). Occurrence dataset https://doi.org/10.15468/pff0t6 accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>http://www.gbif.es/ipt/logo.do?r=herbariobc</resourceLogoUrl>
               <collection>
                 <parentCollectionIdentifier>NA</parentCollectionIdentifier>

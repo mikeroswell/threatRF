@@ -29,7 +29,7 @@
 <positionName>Curator</positionName><electronicMailAddress>nico.franz@asu.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-08-01
+      2022-10-13
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -46,8 +46,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:23Z</dateStamp>
-      <citation>Arizona State University Biocollections (2022). Arizona State University Hasbrouck Insect Collection. Occurrence dataset https://doi.org/10.15468/vv6k58 accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:56Z</dateStamp>
+      <citation>Arizona State University Biocollections (2022). Arizona State University Hasbrouck Insect Collection. Occurrence dataset https://doi.org/10.15468/vv6k58 accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

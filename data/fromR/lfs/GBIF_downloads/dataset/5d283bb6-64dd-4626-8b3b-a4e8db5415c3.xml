@@ -36,7 +36,7 @@
 <phone>(510) 643-0804</phone><electronicMailAddress>essig.museum@berkeley.edu</electronicMailAddress><onlineUrl>http://essig.berkeley.edu/</onlineUrl>    <role>USER</role>
     </associatedParty>
       <pubDate>
-      2022-07-29
+      2022-10-14
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -107,8 +107,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:21Z</dateStamp>
-      <citation identifier="http://essigdb.berkeley.edu">Gross J, Oboyski P (2022). Essig Museum of Entomology. Version 121.246. Berkeley Natural History Museums. Occurrence dataset https://doi.org/10.15468/0saucj accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:54Z</dateStamp>
+      <citation identifier="http://essigdb.berkeley.edu">Gross J, Oboyski P (2022). Essig Museum of Entomology. Version 121.257. Berkeley Natural History Museums. Occurrence dataset https://doi.org/10.15468/0saucj accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

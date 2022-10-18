@@ -41,7 +41,7 @@
 <phone>+01-813-974-6238</phone><electronicMailAddress>hansen@usf.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-28
+      2022-10-13
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -102,8 +102,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:25Z</dateStamp>
-      <citation identifier="https://doi.org/10.15468/mdnmzb">Franck A R, Bornhorst K (2022). University of South Florida Herbarium (USF). Version 7.351. USF Water Institute. Occurrence dataset https://doi.org/10.15468/mdnmzb accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
+      <citation identifier="https://doi.org/10.15468/mdnmzb">Franck A R, Bornhorst K (2022). University of South Florida Herbarium (USF). Version 7.362. USF Water Institute. Occurrence dataset https://doi.org/10.15468/mdnmzb accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>https://cdn.plantatlas.org/img/logos/usf-v-black.jpg</resourceLogoUrl>
               <collection>
                 <parentCollectionIdentifier>Not applicable</parentCollectionIdentifier>

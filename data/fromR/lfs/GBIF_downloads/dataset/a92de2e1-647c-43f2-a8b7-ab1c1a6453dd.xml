@@ -9,7 +9,7 @@
         <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
         <alternateIdentifier>http://www.sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
         <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
-    <title>University of South Carolina, A. C. Moore Herbarium</title>
+    <title>University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection</title>
     <creator>
 <organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </creator>
     <metadataProvider>
@@ -33,7 +33,7 @@
 <positionName>Herbarium Collection Manager</positionName><electronicMailAddress>harmona3@mailbox.sc.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-01
+      2022-08-26
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -43,15 +43,15 @@
         <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
       </intellectualRights>
       <contact>
-<organizationName>University of South Carolina, A. C. Moore Herbarium</organizationName><phone>803-777-8175</phone><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>http://www.herbarium.org</onlineUrl>      </contact>
+<organizationName>University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection</organizationName><phone>+1-803-777-8175</phone><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>http://www.herbarium.org</onlineUrl>      </contact>
 
 </dataset>
 
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:24Z</dateStamp>
-      <citation>University of South Carolina (2022). University of South Carolina, A. C. Moore Herbarium. Occurrence dataset https://doi.org/10.15468/fmj4at accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
+      <citation>University of South Carolina (2022). University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection. Occurrence dataset https://doi.org/10.15468/fmj4at accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

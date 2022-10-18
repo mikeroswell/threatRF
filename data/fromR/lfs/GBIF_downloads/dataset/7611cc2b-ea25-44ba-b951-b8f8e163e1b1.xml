@@ -19,7 +19,7 @@
 <electronicMailAddress>havran@campbell.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
     </associatedParty>
       <pubDate>
-      2022-07-01
+      2022-09-02
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -36,8 +36,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:23Z</dateStamp>
-      <citation>Campbell University (2022). Campbell University Herbarium. Occurrence dataset https://doi.org/10.15468/vx3csq accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:43:56Z</dateStamp>
+      <citation>Campbell University (2022). Campbell University Herbarium. Occurrence dataset https://doi.org/10.15468/vx3csq accessed via GBIF.org on 2022-10-18.</citation>
       </gbif>
     </metadata>
 </additionalMetadata>

@@ -6,6 +6,14 @@
 
 <dataset>
       <alternateIdentifier>10.15468/ab3s5x</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-10-11+15%3A00%3A14+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-10-04+15%3A00%3A15+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-09-27+15%3A00%3A15+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-09-20+15%3A00%3A14+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-09-13+15%3A00%3A15+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-08-16+15%3A00%3A15+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-08-09+15%3A00%3A16+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
+        <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-08-02+15%3A00%3A14+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
         <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-07-26+15%3A00%3A18+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
         <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-07-06+17%3A59%3A10+-0700&amp;d1=1600-01-00&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
         <alternateIdentifier>https://www.inaturalist.org/observations?created_d2=2022-05-26+18%3A00%3A30+-0700&amp;d1=1600-01-01&amp;license=CC0%2CCC-BY%2CCC-BY-NC&amp;quality_grade=research</alternateIdentifier>
@@ -141,7 +149,7 @@
 <deliveryPoint>55 Music Concourse Dr., Golden Gate Park</deliveryPoint><city>San Francsico</city><administrativeArea>CA</administrativeArea><postalCode>94118</postalCode><country>UNITED_STATES</country>    </address>
 <electronicMailAddress>admin@inaturalist.org</electronicMailAddress>    </metadataProvider>
       <pubDate>
-      2022-07-26
+      2022-10-11
       </pubDate>
     <language>ENGLISH</language>
     <abstract>
@@ -150,8 +158,8 @@
         <para>* Published under one of the following licenses or waivers:
         1) http://creativecommons.org/publicdomain/zero/1.0/, 2) http://creativecommons.org/licenses/by/4.0/, 3) http://creativecommons.org/licenses/by-nc/4.0/</para>
         <para>* Achieved one of following iNaturalist quality grades: Research</para>
-        <para>* Created on or before 2022-07-26 15:00:18 -0700</para>
-        <para>You can view observations meeting these requirements at https://www.inaturalist.org/observations?created_d2&amp;#61;2022-07-26&amp;#43;15%3A00%3A18&amp;#43;-0700&amp;amp;d1&amp;#61;1600-01-01&amp;amp;license&amp;#61;CC0%2CCC-BY%2CCC-BY-NC&amp;amp;quality_grade&amp;#61;research</para>
+        <para>* Created on or before 2022-10-11 15:00:14 -0700</para>
+        <para>You can view observations meeting these requirements at https://www.inaturalist.org/observations?created_d2&amp;#61;2022-10-11&amp;#43;15%3A00%3A14&amp;#43;-0700&amp;amp;d1&amp;#61;1600-01-01&amp;amp;license&amp;#61;CC0%2CCC-BY%2CCC-BY-NC&amp;amp;quality_grade&amp;#61;research</para>
     </abstract>
       <intellectualRights>
         <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
@@ -178,7 +186,7 @@
 </calendarDate>
               </beginDate>
               <endDate>
-                <calendarDate>      2022-07-26
+                <calendarDate>      2022-10-11
 </calendarDate>
               </endDate>
             </rangeOfDates>
@@ -218,8 +226,8 @@
 <additionalMetadata>
     <metadata>
       <gbif>
-        <dateStamp>2022-08-02T21:55:25Z</dateStamp>
-      <citation>iNaturalist contributors, iNaturalist (2022). iNaturalist Research-grade Observations. iNaturalist.org. Occurrence dataset https://doi.org/10.15468/ab3s5x accessed via GBIF.org on 2022-08-02.</citation>
+        <dateStamp>2022-10-18T16:44:05Z</dateStamp>
+      <citation>iNaturalist contributors, iNaturalist (2022). iNaturalist Research-grade Observations. iNaturalist.org. Occurrence dataset https://doi.org/10.15468/ab3s5x accessed via GBIF.org on 2022-10-18.</citation>
               <resourceLogoUrl>https://static.inaturalist.org/sites/1-logo.svg?1573071870</resourceLogoUrl>
       </gbif>
     </metadata>
