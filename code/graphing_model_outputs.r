@@ -232,8 +232,8 @@ final_fits <- map(c("lep", "plant"), function(tax){
 })
 
 
-save(final_fits, file = "data/fromR/lfs/final_fits_20220919_graphicslab.RDA")
-load("data/fromR/lfs/final_fits_20220919_graphicslab.RDA")
+save(final_fits, file = "data/fromR/lfs/final_fits_20221017_espindolab.RDA")
+load("data/fromR/lfs/final_fits_20221017_espindolab.RDA")
 
 # get "optimal" thresholds
 threshlist<-map(1:2, function(tax){
@@ -273,7 +273,7 @@ ot
 predict_unclassified <- map_dfr(c(1, 2), function(tax){
   kk <- c(1,6)[tax]
   raw <- tofit_summary %>% 
-    filter(kingdomKey == kk & simple_status_mu == "unranked" ) %>% 
+    filter(kingdomKey == kk & simple_status_mu == 1 ) %>% 
     drop_na()
   dat <- dropper(raw)
   og <- fix.mod(final_fits[[tax]]
@@ -287,7 +287,7 @@ predict_unclassified <- map_dfr(c(1, 2), function(tax){
   
   bind_cols(raw %>% select(genus, species)
             , preds
-            , taxon = c("lepidoptera", "plantae")[tax])
+            , taxon = c("plantae", "lepidoptera")[tax])
 })
 
 predict_preclassified<-map_dfr(1:2, function(tax){
@@ -302,7 +302,7 @@ w_preds <- almost %>%
 
 w_preds %>% 
   group_by(taxon, genus, species) %>% 
-  summarize(threat_prob = mean(threat)) %>% 
+  summarize(threat_prob = mean(threatened)) %>% 
   ggplot(aes(threat_prob, fill = taxon, color = taxon)) +
   geom_histogram() +
   theme_classic()
@@ -315,13 +315,14 @@ pdf("figures/probability_threatened_subdata.pdf", width = 10, height = 10)
 w_preds %>% 
   filter(!is.na(taxon)) %>% 
   mutate(existing = c("no prior status", "known threatened", "known rel. secure")[as.numeric(as.factor(simple_status))]) %>% 
-  ggplot(aes(color = threat))+
+  ggplot(aes(color = threatened))+
   geom_sf(size = 0.1) +
   scale_color_viridis_c() +
   theme_classic(base_size = 20) +
   theme(legend.position = "bottom"
         , panel.spacing = unit(1.5, "lines")
         , legend.text = element_text(angle = 90, hjust = 1)
+        , axis.text.x = element_text(angle = 90)
         ) +
   facet_grid(existing ~ taxon) + 
   guides(guide_legend(title.hjust = 1, title.vjust = 0)) +
