@@ -202,22 +202,22 @@ chelsa_points <- bind_cols(
 # # do I have slope data?
 
 
-slope<-raster("data/GIS_downloads/slope.tif")
+slope <- raster("data/GIS_downloads/slope.tif")
 
-pslope<-projectRaster(slope, crs = my_pr)
+pslope <- projectRaster(slope, crs = my_pr)
 
-slope_points<-raster::extract(pslope, sfed)
+slope_points <- raster::extract(pslope, sfed)
 
-mysf<-function(x){st_as_sf(x
+mysf <- function(x){st_as_sf(x
                            , coords = c('longitude', 'latitude')
                            , crs = "EPSG:4326") %>% 
     st_transform(crs = st_crs(my_pr)) }
 
-chel_sf<-mysf(chelsa_points) %>% 
+chel_sf <- mysf(chelsa_points) %>% 
   mutate(slope = slope_points) 
 
 
-obs<-st_as_sf(good_coords %>% 
+obs <- st_as_sf(good_coords %>% 
                 dplyr::select(lon = decimalLongitude
                        , lat = decimalLatitude
                        , roundedSRank
@@ -232,7 +232,7 @@ obs<-st_as_sf(good_coords %>%
 
 # merge CHELSA, occurrence with status, and other GIS covariates like slope and
 # land use
-indi<-st_join(chel_sf, obs)
+indi <- st_join(chel_sf, obs)
 
 # check conservation status of omitted observations
 # good_coords %>% anti_join(indi) %>% mutate(nsp= n_distinct(species), nobs = n()) %>% 
@@ -254,7 +254,7 @@ indi<-st_join(chel_sf, obs)
 
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
-took # 13 minutes (up from 5)
+took # close to 5 I think. 
 
 # # cleanup recommended
 # rm(list = ls())

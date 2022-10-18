@@ -57,10 +57,7 @@ tofit <-almost %>%
   select(-contains("exotic"))
 
 
-tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
-  # mutate(ab = n()) %>% 
-  summarize_all(.funs = c("mu", "sig")) %>% 
-  mutate(Random_Pred = runif(1))
+
 
 # see what columns have issues of NA
 
@@ -69,11 +66,23 @@ tofit_summary <- tofit%>% group_by(genus, species, kingdomKey) %>%
 # guessing those are singletons (very droppable)
 
 
+
+no_sing<-tofit %>% 
+  group_by(genus, species) %>% 
+  mutate(nrec = n()) %>% 
+  filter(nrec >1) %>% 
+  select(-c("nrec", "fcf")) # remove fcf because it creates NA
+
+tofit_summary <- tofit_summary <- no_sing %>% 
+  group_by(genus, species, kingdomKey) %>%
+  summarize_all(.funs = c("mu", "sig")) %>% 
+  mutate(Random_Pred = runif(1))
+
 # drop na preemptively
-tofit_summary_complete<-tofit_summary %>% drop_na()
+tofit_summary_complete <- tofit_summary %>% drop_na()
 
 # for the testing and training dataset, drop the ones with unknown status
-classed<-tofit_summary_complete %>% 
+classed <- tofit_summary_complete %>% 
   filter(simple_status_mu != 1) %>% 
   mutate(simple_status_mu = if_else(simple_status_mu ==3, "secure", "threatened"))# 1 corresponds to "NONE"
 
