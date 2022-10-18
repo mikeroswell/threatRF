@@ -10,8 +10,12 @@ library(tictoc)
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # custom summary functions
-mu <- function(x){ifelse(is.numeric(x), mean(x, na.rm =T), raster::modal(x, na.rm =T))}
-sig <- function(x){ifelse(is.numeric(x), sd(x, na.rm =T), length(unique(x)))}
+mu <- function(x){ifelse(is.numeric(x) & length(unique(x))>length(x)/8
+                         , mean(x, na.rm =T)
+                         , raster::modal(x, na.rm =T))}
+sig <- function(x){ifelse(is.numeric(x) & length(unique(x))>length(x)/8
+                          , sd(x, na.rm =T)
+                          , length(unique(x)))}
 # fitting function
 source("code/RF_tuner.R")
 # deal with categories
