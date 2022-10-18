@@ -342,20 +342,28 @@ base_rast <- raster::raster(w_preds, resolution = 8000, crs = sf::st_crs(w_preds
 #           , 0)}
 
 
-pred_by_spp <- w_preds %>%
+pred_by_spp_70 <- w_preds %>%
   group_by(genus, species, taxon) %>%
   mutate(is.threatened = #c("pSecure", "pThreatened")[2-
-           as.numeric(threat > 0.7)# ot$cut[as.numeric(as.factor(taxon))])
+           as.numeric(threatened > 0.7)# ot$cut[as.numeric(as.factor(taxon))])
+         #]
+         , gs = paste(genus, species, sep = "_"))
+
+pred_by_spp_thresh <- w_preds %>%
+  group_by(genus, species, taxon) %>%
+  mutate(is.threatened = #c("pSecure", "pThreatened")[2-
+           as.numeric(threatened > ot$cut[as.numeric(as.factor(taxon))])
          #]
          , gs = paste(genus, species, sep = "_")) 
 # %>%
+# %>%
 #   pivot_wider(names_from = is.threatened, values_from = gs, id_cols = NULL )
 
-plusOne<-function(x){length(unique(x))}
+plusOne <- function(x){length(unique(x))}
 
 species_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
-  pred_by_spp %>%
-    filter(taxon == tax, simple_status =="unranked", is.threatened == 1) %>%
+  pred_by_spp_thresh %>%
+    filter(taxon == tax, simple_status =="NONE", is.threatened == 1) %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -366,8 +374,9 @@ species_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
       , na.rm = FALSE)
 })
 
-existe<-function(x){as.numeric(length(x)>0)}
-backMap<-pred_by_spp %>% 
+existe <- function(x){as.numeric(length(x)>0)}
+
+backMap <- pred_by_spp_thresh %>% 
   raster::rasterize(
     y = base_rast
     , fun = function(x, ...){
