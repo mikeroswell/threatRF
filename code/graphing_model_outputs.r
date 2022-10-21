@@ -6,7 +6,7 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20221018_espindolab.RDA")
+load("data/fromR/lfs/100_100_fits_20221021_espindolab.rda")
 
 load("data/fromR/outerFolds.RDA")
 classed.test <- read.csv("data/fromR/training_data.csv")
