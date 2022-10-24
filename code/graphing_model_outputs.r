@@ -6,7 +6,7 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20221013_espindolab.rda")
+load("data/fromR/lfs/100_100_fits_20221018_espindolab.RDA")
 
 load("data/fromR/outerFolds.RDA")
 classed.test <- read.csv("data/fromR/training_data.csv")
@@ -58,9 +58,9 @@ sum_success <- function(m_assess){
 }
 
 plant_assess<-assess_method(
-  fits = trees_leps[[2]][[2]]
+  fits = trees_leps[[1]][[2]]
   , subdat = dropper(classed.plant)
-  , folds = trees_leps[[2]][[3]]
+  , folds = trees_leps[[1]][[3]]
   
 )
 
@@ -232,8 +232,8 @@ final_fits <- map(c("lep", "plant"), function(tax){
 })
 
 
-save(final_fits, file = "data/fromR/lfs/final_fits_20221017_espindolab.RDA")
-load("data/fromR/lfs/final_fits_20221017_espindolab.RDA")
+save(final_fits, file = "data/fromR/lfs/final_fits_20221018_espindolab.RDA")
+load("data/fromR/lfs/final_fits_20221018_espindolab.RDA")
 
 # get "optimal" thresholds
 threshlist<-map(1:2, function(tax){
