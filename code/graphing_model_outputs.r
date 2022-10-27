@@ -1,6 +1,7 @@
-source("code/RF_setup.R")
+# source("code/RF_setup.R")
 library(pROC)
 library(ROCR)
+library(tidyverse)
 library(patchwork)
 
 # set bigger font for poster
@@ -14,6 +15,21 @@ classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
 classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
 all.equal(str(classed.plant), str(classed.plant.test))
 all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
+
+
+# need to get the type of certain variables straight
+str(classed.lep.test)
+
+classed.lep <- sapply(classed.lep.test, function(x){
+  if(is.integer(x)){as.factor(x)}
+  else{x}
+})%>% data.frame()
+
+
+classed.plant <- sapply(classed.plant.test, function(x){
+  if(is.integer(x)){as.factor(x)}
+  else{x}
+}) %>% data.frame()
 # get performance
 
 assess_method <- function(fits = NULL
@@ -26,7 +42,7 @@ assess_method <- function(fits = NULL
   map_dfr(1:length(fits), function(x){
     out.dat = subdat[-folds[[x]], ]
     mod = fits[[x]]
-    remod = fix.mod(mod, out.dat, resp = resp)
+    remod = fix.mod(mod = mod, test.dat = out.dat, resp = resp)
     pre = predict(remod
                   , out.dat 
                   , type = "prob")
@@ -96,9 +112,9 @@ plant_assess %>%
 # hist(plant_assess$out_auc)
 
 lep_assess<-assess_method(
-  fits = trees_leps[[1]][[2]]
-  , subdat = dropper(classed.plant)
-  , folds = trees_leps[[1]][[3]]
+  fits = trees_leps[[2]][[2]]
+  , subdat = dropper(classed.lep)
+  , folds = trees_leps[[2]][[3]]
   
 )
 

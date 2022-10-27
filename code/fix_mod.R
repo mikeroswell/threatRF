@@ -36,15 +36,15 @@ is_categorical <- function(x) {
 #' # make data
 #' set.seed(123)
 #' dat <- data.frame( 
-#' y = sample(0:1, 5, replace =T)
-#' , x1 = 1:5
-#' , x2 = letters[1:5]
-#' , x3 = LETTERS[1:5]
+#' y = sample(0:1, 7, replace =T)
+#' , x1 = 1:7
+#' , x2 = letters[1:7]
+#' , x3 = LETTERS[1:7]
 #'   )
 #'   
 #' # split into test and train
 #' test <- dat[1, ]
-#' train <- dat[2:5, ]
+#' train <- dat[2:7, ]
 #' 
 #' # fit model on test data
 #' my_mod <- glm(y ~ ., data = train, family = "binomial")
@@ -53,7 +53,7 @@ is_categorical <- function(x) {
 #' # predict(my_mod, test)
 #' 
 #' # after fix, predict does not throw error
-#' predict(fix.mod(my_mod, test), test)
+#' predict(fix.mod(my_mod, test, resp = "y"), test)
 #' 
 fix.mod <- function(mod, test.dat, resp){
   v.names <- is_categorical(test.dat)
