@@ -1,5 +1,6 @@
 beg<-Sys.time()
 # extract buffers for occurrence data and compute some summary stats
+# did raster used to import data differently?
 library(raster) # raster data
 rasterOptions(maxmemory = 1e+09)
 library(tidyverse)
@@ -85,7 +86,7 @@ sfed_all<-st_as_sf(localities
                , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr))
 
-sfed_MD<-sfed_all %>% mutate(in_MD = lengths(st_within(sfed_all, MD_boundary)))
+sfed_MD <- sfed_all %>% mutate(in_MD = lengths(st_within(sfed_all, MD_boundary)))
 
 sfed <- sfed_MD %>% filter(in_MD ==1) %>% select(-in_MD)
 
@@ -100,7 +101,7 @@ nlcd_stack<-raster::stack(nlcd)
 
 # extract
 tic()
-nlcd_points<-raster::extract(nlcd_stack, sfed)
+nlcd_points <- raster::extract(nlcd_stack, sfed)
 toc()
 
 colnames(nlcd_points)<-gsub("NLCD_", ""
