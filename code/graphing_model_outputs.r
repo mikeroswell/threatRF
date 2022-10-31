@@ -15,21 +15,31 @@ classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
 classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
 all.equal(str(classed.plant), str(classed.plant.test))
 all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
-
+is.wholenumber <-
+  function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
 
 # need to get the type of certain variables straight
 str(classed.lep.test)
 
-classed.lep <- sapply(classed.lep.test, function(x){
-  if(is.integer(x)){as.factor(x)}
+classed.lep <- classed.lep.test %>% 
+  mutate_all(.funs =function(x){
+  if(is.integer(x)){
+    if(all(is.wholenumber(x))){as.factor(x)}
+  }
   else{x}
-})%>% data.frame()
+})
 
 
-classed.plant <- sapply(classed.plant.test, function(x){
-  if(is.integer(x)){as.factor(x)}
+classed.plant <-  classed.plant.test %>% 
+  mutate_all(.funs = function(x){
+  if(is.integer(x)){
+    if(all(is.wholenumber(x))){as.factor(x)}
+  }
   else{x}
-}) %>% data.frame()
+}) 
+
+
+
 # get performance
 
 assess_method <- function(fits = NULL
@@ -43,6 +53,7 @@ assess_method <- function(fits = NULL
     out.dat = subdat[-folds[[x]], ]
     mod = fits[[x]]
     remod = fix.mod(mod = mod, test.dat = out.dat, resp = resp)
+    
     pre = predict(remod
                   , out.dat 
                   , type = "prob")
@@ -88,8 +99,7 @@ plant_auc_hist <- plant_assess %>%
   labs(x = "AUROC on unseen data in 10x repeated \n10-fold cross validation"
        , y = "frequency") +
   annotate("text", x = 0.2, y = 12, label = "plantae", size = 9) +
-  xlim(c(0,1))
-
+  scale_x_continuous(limits = c(0, 1.05), breaks = seq(0, 1, 0.25))
 
 
   # scan for relatioships between accuracy, AUC, and mtry
@@ -248,8 +258,8 @@ final_fits <- map(c("lep", "plant"), function(tax){
 })
 
 
-save(final_fits, file = "data/fromR/lfs/final_fits_20221018_espindolab.RDA")
-load("data/fromR/lfs/final_fits_20221018_espindolab.RDA")
+save(final_fits, file = "data/fromR/lfs/final_fits_20221031_espindolab.RDA")
+load("data/fromR/lfs/final_fits_20221031_espindolab.RDA")
 
 # get "optimal" thresholds
 threshlist<-map(1:2, function(tax){

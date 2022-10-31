@@ -58,10 +58,23 @@ is_categorical <- function(x) {
 fix.mod <- function(mod, test.dat, resp){
   v.names <- is_categorical(test.dat)
   v.names <- v.names[which(v.names != resp)]
-  mod$xlevels = Map(union, mod$xlevels,  lapply(test.dat[v.names], unique))
+  mod$xlevels = Map(union
+                    , mod$xlevels
+                    ,  lapply(test.dat[v.names], unique)
+                    , USE.NAMES = TRUE)
   return(mod)
 }
 
+# fix the input variable types
+fix.types <- function(mod, test.dat, resp){
+  v.names <- is_categorical(test.dat)
+  v.names <- v.names[which(v.names != resp)]
+  mod$xlevels = Map(union
+                    , mod$xlevels
+                    ,  lapply(test.dat[v.names], unique)
+                    , USE.NAMES = TRUE)
+  return(mod)
+}
 
 # drop problematic variables
 # compare factor levels from two dataframes with identical variables
