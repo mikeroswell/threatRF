@@ -67,6 +67,7 @@ data/GIS_downloads/LU2013_unzipped/Maryland_1m_LU.tif
 data/GIS_downloads/LC2013_unzipped/MD_STATEWIDE.tif
 *_combined.tif
 data/fromR/fold_fits*
+data/fromR/lfs/final_fits_20221018*
 
 # .pdfs (probably figures, might consider not ignoring)
 *.pdf
