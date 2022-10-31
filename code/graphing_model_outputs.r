@@ -313,7 +313,7 @@ predict_unclassified <- map_dfr(c(1, 2), function(tax){
   
   bind_cols(raw %>% select(genus, species)
             , preds
-            , taxon = c("plantae", "lepidoptera")[tax])
+            , taxon = c( "lepidoptera", "plantae" )[tax])
 })
 
 predict_preclassified<-map_dfr(1:2, function(tax){
