@@ -442,8 +442,8 @@ ggplot()+
 dev.off()
 
 species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
-  pred_by_spp %>%
-    filter(taxon == tax, simple_status =="unranked", is.threatened == 0) %>%
+  pred_by_spp_thresh %>%
+    filter(taxon == tax, simple_status =="NONE", is.threatened == 0) %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -456,8 +456,8 @@ species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax
 
 
 species_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
-  pred_by_spp %>%
-    filter(taxon == tax, simple_status =="unranked") %>%
+  pred_by_spp_thresh %>%
+    filter(taxon == tax, simple_status =="NONE") %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -470,7 +470,7 @@ species_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
 
 p_spp_threatened <-map(1:2, function(tax){
   raster::overlay(species_threatened_per_cell[[tax]], species_per_cell[[tax]]
-                  , fun = function(x,y){x+0.0001/y})
+                  , fun = function(x,y){(x+0.0001)/y})
 })
 
 
@@ -480,7 +480,7 @@ n_over_thresh<-function(x, ...){sum(na.omit(x>threat_thres))}
 
 mean_sd_pred <- map(c("lepidoptera", "plantae"), function(tax){
   w_preds %>%
-    filter(taxon == tax, simple_status =="unranked") %>% 
+    filter(taxon == tax, simple_status =="NONE") %>% 
     raster::rasterize(
       y = base_rast
       , fun =function(x, ...){c(
@@ -494,8 +494,8 @@ pro<-function(x){sum(x)/length(x)}
 
 count_occ_threatened <- map(c("lepidoptera", "plantae"), function(tax){
   w_preds %>%
-    filter(taxon == tax, simple_status =="unranked") %>% 
-    mutate(overThresh = as.numeric(threat > ot$cut[2-as.numeric(tax == "lepidoptera")])) %>% 
+    filter(taxon == tax, simple_status =="NONE") %>% 
+    mutate(overThresh = as.numeric(threatened > ot$cut[2-as.numeric(tax == "lepidoptera")])) %>% 
     raster::rasterize(
       y = base_rast
       , fun =function(x, ...){c(
@@ -618,21 +618,21 @@ w_preds %>%
 # ordinal stuff
 
 w_preds %>% 
+  sf::st_drop_geometry() %>% 
   filter(roundedSRank %in% c("S1", "S2", "S3", "S4", "S5")) %>% 
-  ggplot(aes(as.numeric(as.factor(roundedSRank)), threat))+
-  geom_point()+
-  geom_smooth()+
+  ggplot(aes(as.numeric(as.factor(roundedSRank)), threatened))+
+  ggbeeswarm::geom_beeswarm()+
   theme_classic()+
   facet_wrap(~kingdomKey)
 
 # look at the threatened species
 View(predict_unclassified %>% 
-       arrange(desc(threat)) %>% 
+       arrange(desc(threatened)) %>% 
        filter(taxon == "lepidoptera")
 )
 
 View(predict_unclassified %>% 
-       arrange(desc(threat)) %>% 
+       arrange(desc(threatened)) %>% 
        filter(taxon == "plantae")
 )
 
