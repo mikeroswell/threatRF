@@ -66,7 +66,6 @@ data/GIS_downloads/LC2013/DOR*
 data/GIS_downloads/LU2013_unzipped/Maryland_1m_LU.tif
 data/GIS_downloads/LC2013_unzipped/MD_STATEWIDE.tif
 *_combined.tif
-
 data/fromR/fold_fits*
 
 # .pdfs (probably figures, might consider not ignoring)
