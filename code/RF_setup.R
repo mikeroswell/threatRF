@@ -99,7 +99,7 @@ folder <- function(dat, resp, k = 10, times = 10){
   createMultiFolds(dat[,resp][[1]], k = k, times = times)
 }
 
-make_status_mod<-function(dat = classed){
+make_status_mod <- function(dat = classed){
   as.formula(paste0("simple_status_mu ~ "
                     , paste(names(dat)[
                       !(grepl("status", names(dat))
