@@ -1,9 +1,9 @@
-
+source("code/RF_setup.R")
 library(pROC)
 library(ROCR)
 library(tidyverse)
 library(patchwork)
-source("code/RF_setup.R")
+
 
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
@@ -58,7 +58,7 @@ assess_method <- function(fits = NULL
     pre = predict(remod
                   , out.dat 
                   , type = "prob")
-    predictions = prediction(pre[,2], subdat[-folds[[x]], resp])
+    predictions = ROCR::prediction(pre[,2], subdat[-folds[[x]], resp])
     preval = predict(remod, out.dat)
     in_auc = remod$results %>% 
       filter(mtry == remod$finalModel$mtry) %>% 
@@ -74,7 +74,7 @@ assess_method <- function(fits = NULL
       , in_auc 
       , out_auc  # = as.numeric(my_auc$auc)
       , mod = x
-      , mtry =fits[[x]]$finalModel$mtry
+      , mtry = fits[[x]]$finalModel$mtry
     )
   })    
 }
