@@ -67,10 +67,10 @@ tofit <-almost %>%
 
 
 
-no_sing<-tofit %>% 
+no_sing <- tofit %>% 
   group_by(genus, species) %>% 
   mutate(nrec = n()) %>% 
-  filter(nrec >1) %>% 
+  filter(nrec > 1) %>% 
   select(-c("nrec", "fcf")) # remove fcf because it creates NA
 
 tofit_summary <- tofit_summary <- no_sing %>% 
@@ -131,7 +131,7 @@ my_mod <- make_status_mod()
 
 
 # maybe make life easier by dropping some info
-dropper<-function(dat){dat[ , !(grepl("simple_status_sig", names(dat))
+dropper <- function(dat){dat[ , !(grepl("simple_status_sig", names(dat))
                                 | grepl("Rank", names(dat))
                                 | grepl("genus", names(dat))
                                 | grepl("species", names(dat))
