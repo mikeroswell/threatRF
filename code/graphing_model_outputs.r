@@ -11,36 +11,51 @@ theme_set(theme_classic(base_size = 24))
 load("data/fromR/lfs/100_100_fits_20221021_espindolab.rda")
 
 load("data/fromR/outerFolds.RDA")
-# classed.test <- read.csv("data/fromR/training_data.csv")
-# classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
-# classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
-# all.equal(str(classed.plant), str(classed.plant.test))
-# all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
-# is.wholenumber <-
-#   function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+classed.test <- read.csv("data/fromR/training_data.csv")
+classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
+classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
+all.equal(str(classed.plant), str(classed.plant.test))
+all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
+is.wholenumber <-
+  function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+
+names(classed)==names(classed.test)
+reclassed <- map2_df(classed.test, classed, function(x, y){
+  class(x) <- class(y)
+  return(x)
+})
+
+names(reclassed)
 # 
+# sapply(classed.test, function(x){
+#   class(x)<- class(classed[[, names(x)]])
+# })
+# 
+# all.equal(str(classed.test), str()
 # # need to get the type of certain variables straight
 # str(classed.lep.test)
 # 
-# classed.lep <- classed.lep.test %>% 
-#   mutate_all(.funs =function(x){
+# classed.lep <- classed.lep.test %>%
+#   mutate(across(.cols = contains("mu"), .funs = function(x){
 #   if(is.integer(x)){
 #     if(all(is.wholenumber(x))){as.factor(x)}
 #   }
 #   else{x}
-# })
+# }))
 # 
 # 
-# classed.plant <-  classed.plant.test %>% 
-#   mutate_all(.funs = function(x){
-#   if(is.integer(x)){
-#     if(all(is.wholenumber(x))){as.factor(x)}
-#   }
-#   else{x}
-# }) 
+# classed.plant <-  classed.plant.test %>%
+#   mutate(across(.cols = contains("mu"), .funs = function(x){
+#     if(is.integer(x)){
+#       if(all(is.wholenumber(x))){as.factor(x)}
+#     }
+#     else{x}
+# }))
+# # 
 # 
 
-
+reclassed.plant <- reclassed %>% filter(kingdomKey == 6)
+reclassed.lep <- reclassed %>% filter(kingdomKey == 1)
 # get performance
 
 assess_method <- function(fits = NULL
@@ -87,7 +102,7 @@ sum_success <- function(m_assess){
 
 plant_assess <- assess_method(
   fits = trees_leps[[1]][[2]]
-  , subdat = dropper(classed.plant)
+  , subdat = dropper(reclassed.plant)
   , folds = trees_leps[[1]][[3]]
   
 )
@@ -124,7 +139,7 @@ plant_auc_hist <- plant_assess %>%
 
 lep_assess <- assess_method(
   fits = trees_leps[[2]][[2]]
-  , subdat = dropper(classed.lep)
+  , subdat = dropper(reclassed.lep)
   , folds = trees_leps[[2]][[3]]
   
 )
@@ -239,33 +254,33 @@ dev.off()
 # 
 # head(vimp_sum, 20)
 
-# fit final models
-# n_cores <- 16
-# final_fits <- map(c("lep", "plant"), function(tax){
-#   main <- get(paste0("classed.", tax ))
-#   classy <- dropper(main)
-#   cl <- makePSOCKcluster(n_cores)
-#   registerDoParallel(cl)
-#   # fit models
-#   rf <- fit_rf(formu = my_mod
-#                , data = classy
-#                , sampling = NULL
-#                , tuneMethod = "repeatedcv"
-#                , repeats = 10
-#   )
-#   stopCluster(cl)
-#   return(rf)
-#   
-# })
-# 
-# 
-# save(final_fits, file = "data/fromR/lfs/final_fits_20221031_espindolab.RDA")
-load("data/fromR/lfs/final_fits_20221031_espindolab.RDA")
+fit final models
+n_cores <- 7
+final_fits <- map(c("lep", "plant"), function(tax){
+  main <- get(paste0("reclassed.", tax ))
+  classy <- dropper(main)
+  cl <- makePSOCKcluster(n_cores)
+  registerDoParallel(cl)
+  # fit models
+  rf <- fit_rf(formu = my_mod
+               , data = classy
+               , sampling = NULL
+               , tuneMethod = "repeatedcv"
+               , repeats = 10
+  )
+  stopCluster(cl)
+  return(rf)
+
+})
+
+
+# save(final_fits, file = "data/fromR/lfs/final_fits_20221108.RDA")
+load("data/fromR/lfs/final_fits_20221108.RDA")
 
 # get "optimal" thresholds
 threshlist <- map(1:2, function(tax){
   kk <- c(1,6)[tax]
-  raw <- classed %>%
+  raw <- reclassed %>%
     filter(kingdomKey == kk)
     
   dat <- dropper(raw)
