@@ -2,7 +2,7 @@ library(furrr)
 
 # set number of workers for cluster
 source("code/RF_setup.R")
-cores<-16
+cores <- 8
 
 
 # fit models
