@@ -1,4 +1,7 @@
-# subset a data.frame for categorical variables
+# Functions to deal with novel factor levels in RF predictions
+# Note that this blunt tool may be worse than available imputation methods, c.f.
+# https://www.randomforestsrc.org/index.html
+
 #' Indices for categorical data
 #'
 #' @param x `data.frame`
@@ -71,7 +74,7 @@ fix.types <- function(mod, test.dat, resp){
   v.names <- v.names[which(v.names != resp)]
   mod$xlevels = Map(union
                     , mod$xlevels
-                    ,  lapply(test.dat[v.names], unique)
+                    , lapply(test.dat[v.names], unique)
                     , USE.NAMES = TRUE)
   return(mod)
 }
