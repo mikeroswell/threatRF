@@ -422,11 +422,11 @@ ggplot()+
   geom_tile(data = as.data.frame(as(raster::overlay(species_threatened_per_cell[[1]]
                                                     , backMap
                                                     , fun = function(x){sum(x, na.rm =TRUE)}),  "SpatialPixelsDataFrame"))
-            , aes(x = x, y = y, fill = factor(unadd(layer)))) +
+            , aes(x = x, y = y, fill = unadd(layer))) +
   coord_equal() +
   theme_void() +
-  scale_fill_viridis_d() +
-  labs(title = "Number of lepidopteran species predicted threatened per cell"
+  scale_fill_viridis_c(na.value = "white") +
+  labs(title = "Number of lepidopteran species predicted \nto be threatened at optimal \ncutoff (>59.6% of votes) per cell"
        , fill = "species")
 
 ggplot()+
@@ -437,7 +437,7 @@ ggplot()+
   coord_equal() +
   theme_void() +
   scale_fill_viridis_c(na.value = "white") +
-  labs(title = "Number of plant species predicted threatened per cell"
+  labs(title = "Number of plant species predicted \nto be threatened at optimal \ncutoff (>64.2% of votes) per cell"
        , fill = "species")
 dev.off()
 
