@@ -2,7 +2,7 @@ library(furrr)
 
 # set number of workers for cluster
 source("code/RF_setup.R")
-cores<-16
+cores <- 16
 
 
 # fit models
@@ -46,7 +46,8 @@ trees_leps<-map(c("plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20221021_espindolab.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20221129_EL.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
+write.csv(no_sing, "data/fromR/all_model_data.csv", row.names = FALSE)

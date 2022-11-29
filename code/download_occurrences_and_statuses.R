@@ -45,12 +45,12 @@ null_to_NA <- function(x){
 
 
  
-# # this actually downloads the data (~135 MB)
+# # this actually downloads the data (~142 MB)
 # occ_download_get(MD_vasc_and_lep_doi, path = "data/fromR/lfs", overwrite = TRUE)
 
 # # another function to read into R's brain
 # GBIF_plant_lep <- occ_download_import(path ="data/fromR/lfs"
-                                       , key = MD_vasc_and_lep_doi)
+#                                       , key = MD_vasc_and_lep_doi)
 
 # # check out the file
 # GBIF_plant_lep
@@ -108,7 +108,7 @@ occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
 
 
 #get a list of all binomials in the GBIF dataset
-plants_of_MD<-unique(occ_gs %>%  filter(kingdomKey == 6) %>% pull(withspace)) #2695  with new data. 
+plants_of_MD<-unique(occ_gs %>%  filter(kingdomKey == 6) %>% pull(withspace)) #3253  with new data. 
 
 ###################################################
 
@@ -246,7 +246,10 @@ ps2 <- ps1 %>%
 
 ls2 <- ls1 %>% 
   left_join(better_leps, by = c("withspace" = "ns.gs" )) %>% 
-  mutate(withspace = if_else(is.na(gbif.gs), withspace, gbif.gs))
+  mutate(withspace = if_else(is.na(gbif.gs), withspace, gbif.gs)
+         , gs = gsub(" ", "_", withspace)
+         , genus = gsub("(.*)( )(.*)", "\\1", withspace)
+         , species = gsub("(.*)( )(.*)", "\\3", withspace))
 # notes
 # I think these are basically all 1:1
 # the Solanum might not be exactly, but it s not native. Ditto Tripleurospermum. 

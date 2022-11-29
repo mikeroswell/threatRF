@@ -1,8 +1,9 @@
-# source("code/RF_setup.R")
+source("code/RF_setup.R")
 library(pROC)
 library(ROCR)
 library(tidyverse)
 library(patchwork)
+
 
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
@@ -18,28 +19,43 @@ all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
 is.wholenumber <-
   function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
 
-# need to get the type of certain variables straight
-str(classed.lep.test)
-
-classed.lep <- classed.lep.test %>% 
-  mutate_all(.funs =function(x){
-  if(is.integer(x)){
-    if(all(is.wholenumber(x))){as.factor(x)}
-  }
-  else{x}
+names(classed)==names(classed.test)
+reclassed <- map2_df(classed.test, classed, function(x, y){
+  class(x) <- class(y)
+  return(x)
 })
 
+names(reclassed)
+# 
+# sapply(classed.test, function(x){
+#   class(x)<- class(classed[[, names(x)]])
+# })
+# 
+# all.equal(str(classed.test), str()
+# # need to get the type of certain variables straight
+# str(classed.lep.test)
+# 
+# classed.lep <- classed.lep.test %>%
+#   mutate(across(.cols = contains("mu"), .funs = function(x){
+#   if(is.integer(x)){
+#     if(all(is.wholenumber(x))){as.factor(x)}
+#   }
+#   else{x}
+# }))
+# 
+# 
+# classed.plant <-  classed.plant.test %>%
+#   mutate(across(.cols = contains("mu"), .funs = function(x){
+#     if(is.integer(x)){
+#       if(all(is.wholenumber(x))){as.factor(x)}
+#     }
+#     else{x}
+# }))
+# # 
+# 
 
-classed.plant <-  classed.plant.test %>% 
-  mutate_all(.funs = function(x){
-  if(is.integer(x)){
-    if(all(is.wholenumber(x))){as.factor(x)}
-  }
-  else{x}
-}) 
-
-
-
+reclassed.plant <- reclassed %>% filter(kingdomKey == 6)
+reclassed.lep <- reclassed %>% filter(kingdomKey == 1)
 # get performance
 
 assess_method <- function(fits = NULL
@@ -57,7 +73,7 @@ assess_method <- function(fits = NULL
     pre = predict(remod
                   , out.dat 
                   , type = "prob")
-    predictions = prediction(pre[,2], subdat[-folds[[x]], resp])
+    predictions = ROCR::prediction(pre[,2], subdat[-folds[[x]], resp])
     preval = predict(remod, out.dat)
     in_auc = remod$results %>% 
       filter(mtry == remod$finalModel$mtry) %>% 
@@ -73,7 +89,7 @@ assess_method <- function(fits = NULL
       , in_auc 
       , out_auc  # = as.numeric(my_auc$auc)
       , mod = x
-      , mtry =fits[[x]]$finalModel$mtry
+      , mtry = fits[[x]]$finalModel$mtry
     )
   })    
 }
@@ -84,9 +100,9 @@ sum_success <- function(m_assess){
   m_assess %>% summarize(across(.fns =list(mean = mean, sd = sd)))
 }
 
-plant_assess<-assess_method(
+plant_assess <- assess_method(
   fits = trees_leps[[1]][[2]]
-  , subdat = dropper(classed.plant)
+  , subdat = dropper(reclassed.plant)
   , folds = trees_leps[[1]][[3]]
   
 )
@@ -103,10 +119,10 @@ plant_auc_hist <- plant_assess %>%
 
 
   # scan for relatioships between accuracy, AUC, and mtry
-plant_assess %>% 
-  ggplot(aes(mtry, out_auc, color = accuracy)) + 
-  geom_point()
-  # theme_classic()
+# plant_assess %>% 
+#   ggplot(aes(mtry, out_auc, color = accuracy)) + 
+#   geom_point()
+#   # theme_classic()
 
 
 # great for looking at some stuff but I don't think this one is necessary to keep around
@@ -121,9 +137,9 @@ plant_assess %>%
 # look at distribution of auc
 # hist(plant_assess$out_auc)
 
-lep_assess<-assess_method(
+lep_assess <- assess_method(
   fits = trees_leps[[2]][[2]]
-  , subdat = dropper(classed.lep)
+  , subdat = dropper(reclassed.lep)
   , folds = trees_leps[[2]][[3]]
   
 )
@@ -143,7 +159,7 @@ pdf("figures/model_performance_histograms_subdata.pdf")
 lep_auc_hist / plant_auc_hist
 dev.off()
 
-summary(lm(out_auc~mtry, data = lep_assess))
+# summary(lm(out_auc~mtry, data = lep_assess))
 sum_success(lep_assess)
 sum_success(plant_assess)
 # # scan for relatioships between accuracy, AUC, and mtry
@@ -238,33 +254,34 @@ dev.off()
 # 
 # head(vimp_sum, 20)
 
+
 # fit final models
-n_cores <- 16
-final_fits <- map(c("lep", "plant"), function(tax){
-  main <- get(paste0("classed.", tax ))
-  classy <- dropper(main)
-  cl <- makePSOCKcluster(n_cores)
-  registerDoParallel(cl)
-  # fit models
-  rf <- fit_rf(formu = my_mod
-               , data = classy
-               , sampling = NULL
-               , tuneMethod = "repeatedcv"
-               , repeats = 10
-  )
-  stopCluster(cl)
-  return(rf)
-  
-})
 
+# n_cores <- 7
+# final_fits <- map(c("lep", "plant"), function(tax){
+#   main <- get(paste0("reclassed.", tax ))
+#   classy <- dropper(main)
+#   cl <- makePSOCKcluster(n_cores)
+#   registerDoParallel(cl)
+#   # fit models
+#   rf <- fit_rf(formu = my_mod
+#                , data = classy
+#                , sampling = NULL
+#                , tuneMethod = "repeatedcv"
+#                , repeats = 10
+#   )
+#   stopCluster(cl)
+#   return(rf)
+# 
+# })
 
-save(final_fits, file = "data/fromR/lfs/final_fits_20221031_espindolab.RDA")
-load("data/fromR/lfs/final_fits_20221031_espindolab.RDA")
+# save(final_fits, file = "data/fromR/lfs/final_fits_20221108.RDA")
+load("data/fromR/lfs/final_fits_20221108.RDA")
 
 # get "optimal" thresholds
-threshlist<-map(1:2, function(tax){
+threshlist <- map(1:2, function(tax){
   kk <- c(1,6)[tax]
-  raw <- classed %>%
+  raw <- reclassed %>%
     filter(kingdomKey == kk)
     
   dat <- dropper(raw)
@@ -288,7 +305,7 @@ load("data/fromR/threshlist.rda")
 # 
 # 
 # # optimal thresholds
-ot<-map_dfr(1:2, function(tax){
+ot <- map_dfr(1:2, function(tax){
   threshlist[[tax]]$best_thresh
 })
 
@@ -298,7 +315,7 @@ ot
 # make predictions on the new data
 predict_unclassified <- map_dfr(c(1, 2), function(tax){
   kk <- c(1,6)[tax]
-  raw <- tofit_summary %>% 
+  raw <- tofit_summary_complete %>% 
     filter(kingdomKey == kk & simple_status_mu == 1 ) %>% 
     drop_na()
   dat <- dropper(raw)
@@ -327,9 +344,11 @@ w_preds <- almost %>%
             , by = c("genus", "species")) 
 
 w_preds %>% 
-  group_by(taxon, genus, species) %>% 
+  sf::st_drop_geometry() %>% 
+  group_by(taxon, genus, species, simple_status) %>% 
   summarize(threat_prob = mean(threatened)) %>% 
-  ggplot(aes(threat_prob, fill = taxon, color = taxon)) +
+  ggplot(aes(threat_prob, fill = taxon, color = simple_status, group = interaction(taxon, simple_status))) +
+  scale_fill_viridis_d()+
   geom_histogram() +
   theme_classic()
 
@@ -352,7 +371,7 @@ w_preds %>%
         ) +
   facet_grid(existing ~ taxon) + 
   guides(guide_legend(title.hjust = 1, title.vjust = 0)) +
-  labs(color = "predicted probability   \nspecies is threatened   ")
+  labs(color = "random forest votes (~probability)   \nspecies is threatened   ")
 dev.off()
 
 # rasterize predictions
@@ -425,8 +444,10 @@ ggplot()+
             , aes(x = x, y = y, fill = unadd(layer))) +
   coord_equal() +
   theme_void() +
+
   scale_fill_viridis_c(na.value = "white") +
   labs(title = "Number of lepidopteran species predicted \nto be threatened at optimal \ncutoff (>59.6% of votes) per cell"
+
        , fill = "species")
 
 ggplot()+
@@ -437,7 +458,9 @@ ggplot()+
   coord_equal() +
   theme_void() +
   scale_fill_viridis_c(na.value = "white") +
+
   labs(title = "Number of plant species predicted \nto be threatened at optimal \ncutoff (>64.2% of votes) per cell"
+
        , fill = "species")
 dev.off()
 
@@ -486,7 +509,7 @@ mean_sd_pred <- map(c("lepidoptera", "plantae"), function(tax){
       , fun =function(x, ...){c(
         mean(x)
         , sd(x))}
-      , field = "threat"
+      , field = "threatened"
       , na.rm = FALSE)
 })
 
@@ -567,7 +590,7 @@ map(1:2, function(tax){
     labs(title = c("lepidoptera", "plantae")[tax]
          , fill = c(
            
-           "proportion observations \nwith predicted probability \nof being threatened \n>70% " )
+           "proportion observations \n predicted to be threatened at \noptimal threshold per cell")
     )
 })
 dev.off()
@@ -585,7 +608,7 @@ map(1:2, function(tax){
     labs(title = c("lepidoptera", "plantae")[tax]
          , fill = c(
            
-           "species \nwith predicted probability \nof being threatened \n>70% " )
+           "species predicted \nto be threatened at \noptimal threshold per cell" )
     )
 })
 dev.off()
@@ -603,7 +626,7 @@ map(1:2, function(tax){
     labs(title = c("lepidoptera", "plantae")[tax]
          , fill = c(
            
-           "species \nwith predicted probability \nof being threatened \n>70% " )
+           "species observed per cell" )
     )
 })
 dev.off()
@@ -617,13 +640,19 @@ w_preds %>%
 
 # ordinal stuff
 
+pdf("figures/for_fun_are_higher_S_ranks_getting_more_votes.pdf")
 w_preds %>% 
   sf::st_drop_geometry() %>% 
+  group_by(genus, species, roundedSRank, threatened, taxon) %>% 
+  filter(!is.na(taxon)) %>% 
+  summarize(n()) %>% 
   filter(roundedSRank %in% c("S1", "S2", "S3", "S4", "S5")) %>% 
   ggplot(aes(as.numeric(as.factor(roundedSRank)), threatened))+
   ggbeeswarm::geom_beeswarm()+
   theme_classic()+
-  facet_wrap(~kingdomKey)
+  facet_wrap(~taxon) +
+  labs(x = "rounded S rank", y = "fraction of random forest votes (threatened)")
+dev.off()
 
 # look at the threatened species
 View(predict_unclassified %>% 

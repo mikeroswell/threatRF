@@ -33,7 +33,7 @@ my_pr<- "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +d
 
 withstats2 <- read.csv("data/fromR/lfs/native_records.csv")
 # get the coordinates (may require additional manipulation)
-good_coords<- withstats2 %>%
+good_coords <- withstats2 %>%
   filter(decimalLatitude<44 & decimalLatitude> 34 &decimalLongitude>-82 & decimalLongitude < -73) %>% 
   mutate(UID = rownames(.)) # some errors, check workflow that they weren't introduced here.
 
@@ -54,7 +54,7 @@ localities <- good_coords %>%
 
 # localities
 #crop the rasters based on extent
-bounds<-raster::extent(matrix(c(min(localities$longitude)
+bounds <- raster::extent(matrix(c(min(localities$longitude)
                                 , min(localities$latitude)
                                 , max(localities$longitude)
                                 , max(localities$latitude)), nrow = 2))
@@ -72,7 +72,7 @@ rm(withstats2)
 # })) 
 
 # get MD state boundary
-MD_boundary<- counties("MD", resolution = "5m") %>% 
+MD_boundary <- counties("MD", resolution = "5m") %>% 
   st_union() %>% 
   st_transform(crs = st_crs(my_pr))
 # check work
@@ -81,7 +81,7 @@ MD_boundary<- counties("MD", resolution = "5m") %>%
 #                    , fill = "white"
 #                    , size=0.25)
 
-sfed_all<-st_as_sf(localities
+sfed_all <- st_as_sf(localities
                , coords = c('longitude', 'latitude')
                , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr))
@@ -255,7 +255,7 @@ indi <- st_join(chel_sf, obs)
 
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
-took # close to 5 I think. 
+took # close to 6 minutes on old MBP. 
 
 # # cleanup recommended
 # rm(list = ls())
