@@ -46,7 +46,8 @@ trees_leps<-map(c("plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20221021_espindolab.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20221129.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
+write.csv(nosing, "data/fromR/all_model_data.csv", row.names = FALSE)

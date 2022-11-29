@@ -73,7 +73,7 @@ no_sing <- tofit %>%
   filter(nrec > 1) %>% 
   select(-c("nrec", "fcf")) # remove fcf because it creates NA
 
-tofit_summary <- tofit_summary <- no_sing %>% 
+tofit_summary <- no_sing %>% 
   group_by(genus, species, kingdomKey) %>%
   summarize_all(.funs = c("mu", "sig")) %>% 
   mutate(Random_Pred = runif(1))
