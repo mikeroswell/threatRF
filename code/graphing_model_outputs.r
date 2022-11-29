@@ -254,24 +254,25 @@ dev.off()
 # 
 # head(vimp_sum, 20)
 
-fit final models
-n_cores <- 7
-final_fits <- map(c("lep", "plant"), function(tax){
-  main <- get(paste0("reclassed.", tax ))
-  classy <- dropper(main)
-  cl <- makePSOCKcluster(n_cores)
-  registerDoParallel(cl)
-  # fit models
-  rf <- fit_rf(formu = my_mod
-               , data = classy
-               , sampling = NULL
-               , tuneMethod = "repeatedcv"
-               , repeats = 10
-  )
-  stopCluster(cl)
-  return(rf)
+# fit final models
 
-})
+# n_cores <- 7
+# final_fits <- map(c("lep", "plant"), function(tax){
+#   main <- get(paste0("reclassed.", tax ))
+#   classy <- dropper(main)
+#   cl <- makePSOCKcluster(n_cores)
+#   registerDoParallel(cl)
+#   # fit models
+#   rf <- fit_rf(formu = my_mod
+#                , data = classy
+#                , sampling = NULL
+#                , tuneMethod = "repeatedcv"
+#                , repeats = 10
+#   )
+#   stopCluster(cl)
+#   return(rf)
+# 
+# })
 
 
 # save(final_fits, file = "data/fromR/lfs/final_fits_20221108.RDA")
