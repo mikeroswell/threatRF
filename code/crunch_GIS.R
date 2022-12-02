@@ -255,7 +255,7 @@ indi <- st_join(chel_sf, obs)
 
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
-took # close to 6 minutes on old MBP. 
+took # under 4 on new MBP. 
 
 # # cleanup recommended
 # rm(list = ls())
