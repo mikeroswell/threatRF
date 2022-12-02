@@ -8,7 +8,7 @@ cores <- 16
 # fit models
 future::plan(strategy = "multiprocess", workers = cores)
 
-trees_leps<-map(c("plant", "lep"), function(tax){
+trees_leps <- map(c( "plant",  "lep"), function(tax){
  
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
