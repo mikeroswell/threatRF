@@ -138,7 +138,8 @@ dropper <- function(dat){dat[ , !(grepl("simple_status_sig", names(dat))
                                 | grepl("kingdom", names(dat))
                                 | grepl("UID", names(dat))
                                 | grepl("X2001_2019_change_index", names(dat))
-)
-] 
-}
+                                | grepl("Red.1_mu", names(dat))
+                                )
+                              ] 
+  }
 

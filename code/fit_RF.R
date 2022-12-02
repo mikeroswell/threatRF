@@ -2,13 +2,13 @@ library(furrr)
 
 # set number of workers for cluster
 source("code/RF_setup.R")
-cores <- 8
+cores <- 16
 
 
 # fit models
 future::plan(strategy = "multiprocess", workers = cores)
 
-trees_leps<-map(c("plant", "lep"), function(tax){
+trees_leps <- map(c( "plant",  "lep"), function(tax){
  
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
@@ -46,8 +46,8 @@ trees_leps<-map(c("plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20221129.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20221129_EL.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
-write.csv(nosing, "data/fromR/all_model_data.csv", row.names = FALSE)
+write.csv(no_sing, "data/fromR/all_model_data.csv", row.names = FALSE)
