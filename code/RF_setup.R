@@ -111,6 +111,7 @@ make_status_mod <- function(dat = classed){
                         | grepl("lon_sig", names(dat))
                         | grepl("UID", names(dat))
                         | grepl("X2001_2019_change_index", names(dat))
+                        | grepl("Red.1_mu", names(dat))
                       )
                       
                       # these variables will cause problems if they have
