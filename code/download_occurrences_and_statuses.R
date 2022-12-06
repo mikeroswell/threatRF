@@ -166,7 +166,7 @@ nslnames <- ls1 %>%
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
-problem_names_lep <- nslnames %>% filter(is.na(matchType) | matchType == "HIGHERRANK") %>% pull(gs)
+problem_names_lep <- nslnames %>% filter(is.na(matchType) | matchType == "HIGHERRANK" | status == "SYNONYM") %>% pull(gs)
 
 dat <- ls1 %>% 
   filter(withspace %in% problem_names_lep) %>% 
@@ -225,7 +225,9 @@ nspnames <- ps1 %>%
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
-problem_names_plant <- nspnames %>% filter(matchType != "EXACT") %>% pull(gs)
+problem_names_plant <- nspnames %>% filter(matchType != "EXACT" | status == "SYNONYM") %>% pull(gs)
+
+problem_names_plant
 
 dat <- ps1 %>% 
   filter(withspace %in% problem_names_plant) %>% 
@@ -265,8 +267,8 @@ write.csv(ls2, "data/fromR/lfs/lep_NS_data.csv", row.names = F)
 # read in archived data
 ps2 <- read.csv("data/fromR/lfs/plant_NS_data.csv")
 ls2 <- read.csv("data/fromR/lfs/lep_NS_data.csv")
-lep_stats <- read.csv("data/fromR/lfs/lep_NS_data.csv")
-plant_stats <- read.csv("data/fromR/lfs/plant_NS_data.csv") 
+# lep_stats <- read.csv("data/fromR/lfs/lep_NS_data.csv")
+# plant_stats <- read.csv("data/fromR/lfs/plant_NS_data.csv") 
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
 knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
   separate(accepted_gs
@@ -280,7 +282,7 @@ knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
 
 lep_joined <- occ_gs %>% 
   filter(kingdomKey == 1) %>% 
-  left_join(ls2, by = c("gs", "genus", "species")) %>% 
+  left_join(ls2, by = c("gs", "genus", "species")) %>% filter(species =="atlantis") %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
