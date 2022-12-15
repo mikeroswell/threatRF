@@ -282,7 +282,7 @@ knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
 
 lep_joined <- occ_gs %>% 
   filter(kingdomKey == 1) %>% 
-  left_join(ls2, by = c("gs", "genus", "species")) %>% filter(species =="atlantis") %>% 
+  left_join(ls2, by = c("gs", "genus", "species")) %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
@@ -333,6 +333,12 @@ natives <- all_with_stat %>%
          , order
          , roundedSRank
          , simple_status)
+
+natives %>%
+  ungroup() %>% 
+  mutate(gs = paste(genus, species)) %>%
+  group_by(kingdomKey, simple_status) %>% 
+  summarize(occ = n(), spp = n_distinct(gs))
 
 # # look at plants since I have a feel for them
 # natives %>%
