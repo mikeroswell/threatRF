@@ -13,7 +13,7 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
   outer_folds <- folder(classy, "simple_status_mu")
-  save(outer_folds, file = "data/fromR/outerFolds.RDA")
+  save(outer_folds, file = paste0("data/fromR/", tax, "_outerFolds.RDA"))
   # fit models
   fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){ # 
     tic()
@@ -46,8 +46,9 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20221209.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20221210.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
-write.csv(no_sing, "data/fromR/all_model_data.csv", row.names = FALSE)
+write.csv(no_sing, "data/fromR/lfs/all_model_data.csv", row.names = FALSE)
+
