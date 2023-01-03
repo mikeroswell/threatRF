@@ -251,7 +251,7 @@ ps2 <- ps1 %>%
 
 ls2 <- ls1 %>% 
   left_join(better_leps, by = c("withspace" = "ns.gs" )) %>% 
-  mutate(withspace = if_else(is.na(gbif.gs), withspace, gbif.gs)
+  mutate(withspace = ifelse(any(!is.na(gbif.gs)), gbif.gs,  withspace)
          , gs = gsub(" ", "_", withspace)
          , genus = gsub("(.*)( )(.*)", "\\1", withspace)
          , species = gsub("(.*)( )(.*)", "\\3", withspace))
