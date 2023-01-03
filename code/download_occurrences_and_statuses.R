@@ -242,9 +242,12 @@ better_plants <- alt_gs(ps1 %>%
 better_plants
 
 ps2 <- ps1 %>% 
-  left_join(better_plants, by = c("withspace" = "ns.gs" )) %>% 
-  mutate(withspace = if_else(is.na(gbif.gs), withspace, gbif.gs))
-
+  left_join(better_plants, by = c("withspace" = "ns.gs" )) %>%
+  group_by(withspace) %>% 
+  mutate(withspace = ifelse(any(!is.na(gbif.gs)), gbif.gs,  withspace)
+         , gs = gsub(" ", "_", withspace)
+         , genus = gsub("(.*)( )(.*)", "\\1", withspace)
+         , species = gsub("(.*)( )(.*)", "\\3", withspace)) 
 
 ls2 <- ls1 %>% 
   left_join(better_leps, by = c("withspace" = "ns.gs" )) %>% 
@@ -465,3 +468,4 @@ data.table::fwrite(excludeds, "data/fromR/lfs/excluded_records.csv", row.names =
 #   group_by(state_status = simple_status) %>% 
 #   summarize(records = n_distinct(gs))
 # 
+

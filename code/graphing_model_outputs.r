@@ -8,54 +8,61 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20221021_espindolab.rda")
+load("data/fromR/lfs/100_100_fits_20230103.rda")
 
 load("data/fromR/outerFolds.RDA")
-classed.test <- read.csv("data/fromR/training_data.csv")
-classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
-classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
-all.equal(str(classed.plant), str(classed.plant.test))
-all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
-is.wholenumber <-
-  function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
 
-names(classed)==names(classed.test)
-reclassed <- map2_df(classed.test, classed, function(x, y){
-  class(x) <- class(y)
-  return(x)
-})
-
-names(reclassed)
+# read in saved data, will overwrite objects from first line
+classed <- read.csv("data/fromR/training_data.csv")
+no_sing <- read.csv( "data/fromR/lfs/all_model_data.csv")
+tofit <- read.csv("data/fromR/lfs/tofit.csv")
+tofit_summary <- read.csv("data/fromR/lfs/tofit_summary.csv")
+tofit_summary_complete <- read.csv("data/fromR/lfs/tofit_summary_complete.csv")
+# classed.test <- read.csv("data/fromR/training_data.csv")
+# classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
+# classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
+# all.equal(str(classed.plant), str(classed.plant.test))
+# all.equal(classed.plant$lat_sig, classed.plant.test$lat_sig)
+# is.wholenumber <-
+#   function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
 # 
-# sapply(classed.test, function(x){
-#   class(x)<- class(classed[[, names(x)]])
+# names(classed)==names(classed.test)
+# reclassed <- map2_df(classed.test, classed, function(x, y){
+#   class(x) <- class(y)
+#   return(x)
 # })
 # 
-# all.equal(str(classed.test), str()
-# # need to get the type of certain variables straight
-# str(classed.lep.test)
-# 
-# classed.lep <- classed.lep.test %>%
-#   mutate(across(.cols = contains("mu"), .funs = function(x){
-#   if(is.integer(x)){
-#     if(all(is.wholenumber(x))){as.factor(x)}
-#   }
-#   else{x}
-# }))
-# 
-# 
-# classed.plant <-  classed.plant.test %>%
-#   mutate(across(.cols = contains("mu"), .funs = function(x){
-#     if(is.integer(x)){
-#       if(all(is.wholenumber(x))){as.factor(x)}
-#     }
-#     else{x}
-# }))
+# names(reclassed)
 # # 
-# 
+# # sapply(classed.test, function(x){
+# #   class(x)<- class(classed[[, names(x)]])
+# # })
+# # 
+# # all.equal(str(classed.test), str()
+# # # need to get the type of certain variables straight
+# # str(classed.lep.test)
+# # 
+# # classed.lep <- classed.lep.test %>%
+# #   mutate(across(.cols = contains("mu"), .funs = function(x){
+# #   if(is.integer(x)){
+# #     if(all(is.wholenumber(x))){as.factor(x)}
+# #   }
+# #   else{x}
+# # }))
+# # 
+# # 
+# # classed.plant <-  classed.plant.test %>%
+# #   mutate(across(.cols = contains("mu"), .funs = function(x){
+# #     if(is.integer(x)){
+# #       if(all(is.wholenumber(x))){as.factor(x)}
+# #     }
+# #     else{x}
+# # }))
+# # # 
+# # 
 
-reclassed.plant <- reclassed %>% filter(kingdomKey == 6)
-reclassed.lep <- reclassed %>% filter(kingdomKey == 1)
+reclassed.plant <- classed %>% filter(kingdomKey == 6)
+reclassed.lep <- classed %>% filter(kingdomKey == 1)
 # get performance
 
 assess_method <- function(fits = NULL
@@ -275,8 +282,8 @@ dev.off()
 # 
 # })
 
-# save(final_fits, file = "data/fromR/lfs/final_fits_20221108.RDA")
-load("data/fromR/lfs/final_fits_20221108.RDA")
+# save(final_fits, file = "data/fromR/lfs/final_fits_20221219.RDA")
+load("data/fromR/lfs/final_fits_20221219.RDA")
 
 # get "optimal" thresholds
 threshlist <- map(1:2, function(tax){
@@ -337,11 +344,52 @@ predict_preclassified<-map_dfr(1:2, function(tax){
   threshlist[[tax]]$train.preds
 })
 
+
 # combine predictions with original data
 w_preds <- almost %>% 
   ungroup() %>% 
   left_join(bind_rows(predict_unclassified, predict_preclassified)
             , by = c("genus", "species")) 
+
+w_preds %>% 
+  sf::st_drop_geometry() %>% 
+  filter(simple_status != "NONE" ) %>% 
+  select(taxon, genus, species, simple_status,  secure, threatened, roundedSRank) %>% 
+  left_join(ot) %>% 
+  mutate(class_pred = if_else(threatened > cut, "threatened", "secure")) %>%
+  group_by(taxon, genus, species) %>% 
+  summarize_all(.funs = first) %>% 
+  group_by(taxon) %>% 
+  summarize(secure_correct = sum(simple_status == "secure" &
+                                   class_pred == "secure")/ sum(simple_status == "secure")
+            , threat_correct = sum(simple_status == "threatened" &
+                                     class_pred == "threatened")/ sum(simple_status == "threatened") )
+
+
+w_preds %>% 
+  sf::st_drop_geometry() %>% 
+  filter(simple_status != "NONE" ) %>% 
+  select(taxon, genus, species, simple_status,  secure, threatened, roundedSRank) %>% 
+  group_by(taxon, genus, species) %>% 
+  summarize_all(.funs = first) %>% 
+  left_join(ot) %>% 
+  mutate(class_pred = if_else(threatened > cut, "threatened", "secure")) %>% 
+  filter(simple_status == "threatened" & class_pred == "secure") %>% 
+  group_by(taxon, roundedSRank) %>%
+  summarize(n())
+
+w_preds %>% 
+  sf::st_drop_geometry() %>% 
+  filter(simple_status != "NONE" ) %>% 
+  select(taxon, genus, species, simple_status,  secure, threatened, roundedSRank) %>% 
+  group_by(taxon, genus, species) %>% 
+  summarize_all(.funs = first) %>% 
+  left_join(ot) %>% 
+  mutate(class_pred = if_else(threatened > cut, "threatened", "secure")) %>% 
+  filter(simple_status == "secure" & class_pred == "threatened") %>% 
+  group_by(taxon, roundedSRank) %>%
+  summarize(n())
+    
 
 w_preds %>% 
   sf::st_drop_geometry() %>% 
@@ -352,8 +400,17 @@ w_preds %>%
   geom_histogram() +
   theme_classic()
 
-
-
+# Fractions of predictions at optimal threshold
+w_preds %>% 
+  sf::st_drop_geometry() %>% 
+  group_by(taxon, genus, species, simple_status) %>% 
+  summarize(threat_prob = mean(threatened)) %>% 
+  left_join(ot) %>% 
+  group_by(taxon) %>% 
+  summarize(nthreat = sum(threat_prob > cut)
+            , nsec = sum(threat_prob <= cut)
+            , frac = nthreat/n()
+            , n = n())
 
 # plot predictions at the observation level
 pdf("figures/probability_threatened_subdata.pdf", width = 10, height = 10)
@@ -648,6 +705,7 @@ w_preds %>%
   summarize(n()) %>% 
   filter(roundedSRank %in% c("S1", "S2", "S3", "S4", "S5")) %>% 
   ggplot(aes(as.numeric(as.factor(roundedSRank)), threatened))+
+  geom_boxplot(aes(group = roundedSRank))+
   ggbeeswarm::geom_beeswarm()+
   theme_classic()+
   facet_wrap(~taxon) +
@@ -666,4 +724,13 @@ View(predict_unclassified %>%
 )
 
 
+top_ten <- predict_unclassified %>%
+  group_by(taxon) %>% 
+  mutate(threat_rank = min_rank(secure)) %>% 
+  filter(threat_rank <11) %>% 
+  arrange(taxon, threat_rank) %>% 
+  select(taxon, genus, species, votes_threatened =threatened)
+  
+write.csv(w_preds, "data/fromR/lfs/predictions.csv")
+write.csv(top_ten, "data/fromR/top_ten_threatened.csv")
 

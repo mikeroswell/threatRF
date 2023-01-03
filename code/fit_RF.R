@@ -2,11 +2,11 @@ library(furrr)
 
 # set number of workers for cluster
 source("code/RF_setup.R")
-cores <- 17
+cores <- 9
 
 
 # fit models
-future::plan(strategy = "multiprocess", workers = cores)
+future::plan(strategy = "multisession", workers = cores)
 
 trees_leps <- map(c( "plant", "lep"), function(tax){
  
@@ -46,9 +46,12 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20221210.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20230103.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
 write.csv(no_sing, "data/fromR/lfs/all_model_data.csv", row.names = FALSE)
+write.csv(tofit, "data/fromR/lfs/tofit.csv", row.names = FALSE)
+write.csv(tofit_summary, "data/fromR/lfs/tofit_summary.csv", row.names = FALSE)
+write.csv(tofit_summary_complete, "data/fromR/lfs/tofit_summary_complete.csv", row.names = FALSE)
 
