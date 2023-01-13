@@ -32,17 +32,17 @@ null_to_NA <- function(x){
 # likely takes several minutes.
 # does not need to be redone each time code is run
 
-MD_vasc_and_lep_doi <- occ_download(
-  user = gbif_user
-  , pwd = gbif_pwd
-  , email = gbif_email
-  , pred_in("taxonKey", c(7707728, 797))
-  , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
-  , pred_in("stateProvince", "Maryland")
-  , pred("hasCoordinate", TRUE)
-  , pred("sendNotification", TRUE)
-  , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
-  )
+# MD_vasc_and_lep_doi <- occ_download(
+#   user = gbif_user
+#   , pwd = gbif_pwd
+#   , email = gbif_email
+#   , pred_in("taxonKey", c(7707728, 797))
+#   , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
+#   , pred_in("stateProvince", "Maryland")
+#   , pred("hasCoordinate", TRUE)
+#   , pred("sendNotification", TRUE)
+#   , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
+#   )
 
 # # this reveals status of all gbif download requests
 # occ_download_list()
@@ -251,14 +251,17 @@ ps2 <- ps1 %>%
   mutate(withspace = ifelse(any(!is.na(gbif.gs)), gbif.gs,  withspace)
          , gs = gsub(" ", "_", withspace)
          , genus = gsub("(.*)( )(.*)", "\\1", withspace)
-         , species = gsub("(.*)( )(.*)", "\\3", withspace)) 
+         , species = gsub("(.*)( )(.*)", "\\3", withspace)) %>% 
+  filter(!grepl("ssp.", scientificName))
 
 ls2 <- ls1 %>% 
   left_join(better_leps, by = c("withspace" = "ns.gs" )) %>% 
+  group_by(withspace) %>% 
   mutate(withspace = ifelse(any(!is.na(gbif.gs)), gbif.gs,  withspace)
          , gs = gsub(" ", "_", withspace)
          , genus = gsub("(.*)( )(.*)", "\\1", withspace)
-         , species = gsub("(.*)( )(.*)", "\\3", withspace))
+         , species = gsub("(.*)( )(.*)", "\\3", withspace)) %>% 
+  filter(!grepl("ssp.", scientificName))
 # notes
 # I think these are basically all 1:1
 # the Solanum might not be exactly, but it s not native. Ditto Tripleurospermum. 
@@ -301,13 +304,13 @@ occ_stat_plants <- occ_gs %>%
   left_join(ps2, by = c("gs", "genus", "species", "withspace")) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
-                                        , "unranked"))) 
+                                        , "unranked")))
 plant_joined <- occ_stat_plants %>% 
   left_join(knapp_backboned  %>% 
               select(-c("scientificName", "kingdom", "phylum", "order"
                         , "family", "kingdomKey", "phylumKey", "classKey"
                         , "orderKey", "familyKey", "genusKey", "speciesKey"
-                        , "class", "gs")), by = c("withspace" = "accepted_gs")) 
+                        , "class", "gs")), by = c("withspace" = "accepted_gs"))  
 
 all_with_stat<- bind_rows(lep_joined, plant_joined)
 
@@ -339,13 +342,19 @@ natives <- all_with_stat %>%
          , family
          , order
          , roundedSRank
-         , simple_status)
+         , simple_status) %>% 
+  ungroup() %>%
+  group_by(genus, species, roundedSRank, decimalLongitude, decimalLatitude) %>% 
+  slice_head(n = 1) %>% 
+  group_by(genus, species) %>% 
+  mutate(simple_status = if_else("threat" %in% simple_status, "threat"
+        , if_else("secure" %in% simple_status, "secure", "unranked")))
 
 natives %>%
   ungroup() %>% 
   mutate(gs = paste(genus, species)) %>%
   group_by(kingdomKey, simple_status) %>% 
-  summarize(occ = n(), spp = n_distinct(gs))
+  summarize(occ = n(), spp = n_distinct(gs)) 
 
 # # look at plants since I have a feel for them
 # natives %>%
@@ -368,7 +377,13 @@ excludeds <- all_with_stat %>%
          , family
          , order
          , roundedSRank
-         , simple_status)
+         , simple_status) %>% 
+  ungroup() %>% 
+  group_by(genus, species, roundedSRank, decimalLongitude, decimalLatitude) %>% 
+  slice_head(n = 1) %>% 
+  mutate(simple_status = if_else("threat" %in% simple_status, "threat"
+                                 , if_else("secure" %in% simple_status, "secure", "unranked")))
+  
 
 
 # all_with_stat %>% group_by(genus, species) %>% summarize(n()) %>% filter(genus == "Acer")
