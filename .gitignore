@@ -12,6 +12,7 @@ data/fromR/flat_flora.csv
 
 # User-specific files
 .Ruserdata
+.Rprofile
 
 # Example code in package build process
 *-Ex.R
