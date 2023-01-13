@@ -69,7 +69,7 @@ tofit <-almost %>%
 
 no_sing <- tofit %>% 
   group_by(genus, species) %>% 
-  mutate(nrec = n()) %>% 
+  mutate(nrec = n_distinct(lat)) %>% 
   filter(nrec > 1) %>% 
   select(-c("nrec", "fcf")) # remove fcf because it creates NA
 
