@@ -8,17 +8,18 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20230103.rda")
+load("data/fromR/lfs/100_100_fits_20230105.rda")
 
 load("data/fromR/outerFolds.RDA")
 
 # read in saved data, will overwrite objects from first line
-classed <- read.csv("data/fromR/training_data.csv")
-no_sing <- read.csv( "data/fromR/lfs/all_model_data.csv")
-tofit <- read.csv("data/fromR/lfs/tofit.csv")
-tofit_summary <- read.csv("data/fromR/lfs/tofit_summary.csv")
-tofit_summary_complete <- read.csv("data/fromR/lfs/tofit_summary_complete.csv")
-# classed.test <- read.csv("data/fromR/training_data.csv")
+# classed <- read.csv("data/fromR/training_data.csv")
+# no_sing <- read.csv( "data/fromR/lfs/all_model_data.csv"
+#                      , stringsAsFactors = FALSE)
+# # tofit <- read.csv("data/fromR/lfs/tofit.csv")
+# # tofit_summary <- read.csv("data/fromR/lfs/tofit_summary.csv")
+# tofit_summary_complete <- read.csv("data/fromR/lfs/tofit_summary_complete.csv")
+# # classed.test <- read.csv("data/fromR/training_data.csv")
 # classed.lep.test <-classed.test %>% filter(kingdomKey == 1)
 # classed.plant.test <- classed.test %>% filter(kingdomKey == 6)
 # all.equal(str(classed.plant), str(classed.plant.test))
@@ -60,6 +61,7 @@ tofit_summary_complete <- read.csv("data/fromR/lfs/tofit_summary_complete.csv")
 # # }))
 # # # 
 # # 
+reclassed <- classed
 
 reclassed.plant <- classed %>% filter(kingdomKey == 6)
 reclassed.lep <- classed %>% filter(kingdomKey == 1)
@@ -80,12 +82,14 @@ assess_method <- function(fits = NULL
     pre = predict(remod
                   , out.dat 
                   , type = "prob")
-    predictions = ROCR::prediction(pre[,2], subdat[-folds[[x]], resp])
+    predictions = tryCatch(ROCR::prediction(pre[,2], subdat[-folds[[x]], resp])
+                           , error = function(e){NA}) 
     preval = predict(remod, out.dat)
     in_auc = remod$results %>% 
       filter(mtry == remod$finalModel$mtry) %>% 
       pull(ROC)
-    out_auc = performance(predictions, measure = "auc")@y.values[[1]] 
+    out_auc = tryCatch(performance(predictions, measure = "auc")@y.values[[1]]
+                       , error = function(e){NA})
     data.frame(
       accuracy = sum(preval == subdat[-folds[[x]],] %>% pull(resp))/length(preval)
       , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
@@ -102,9 +106,10 @@ assess_method <- function(fits = NULL
 }
 
 
-
+naMean <- function(x){mean(x, na.rm = TRUE)}
+naSD <- function(x){sd(x, na.rm = TRUE)}
 sum_success <- function(m_assess){
-  m_assess %>% summarize(across(.fns =list(mean = mean, sd = sd)))
+  m_assess %>% summarize(across(.fns =list(mean = naMean, sd = naSD)))
 }
 
 plant_assess <- assess_method(
@@ -116,7 +121,7 @@ plant_assess <- assess_method(
 
 plant_auc_hist <- plant_assess %>% 
   ggplot(aes(out_auc))+ 
-  geom_histogram()+
+  geom_histogram(bins = 25)+
   geom_vline(xintercept = mean(plant_assess$out_auc), color = "red") +
   geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
   labs(x = "AUROC on unseen data in 10x repeated \n10-fold cross validation"
@@ -153,13 +158,13 @@ lep_assess <- assess_method(
 
 lep_auc_hist <- lep_assess %>% 
   ggplot(aes(out_auc))+ 
-  geom_histogram()+
-  geom_vline(xintercept = mean(lep_assess$out_auc), color = "red") +
+  geom_histogram(bins = 25)+
+  geom_vline(xintercept = mean(lep_assess$out_auc, na.rm = TRUE), color = "red") +
   geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
   labs(x = ""
        , y = "frequency") +
-  annotate("text", x = 0.2, y = 46, label = "lepidoptera", size = 9) +
-  xlim(c(0,1))
+  annotate("text", x = 0.2, y = 12, label = "lepidoptera", size = 9) +
+  xlim(c(0,1.05))
 
 
 pdf("figures/model_performance_histograms_subdata.pdf")
@@ -281,9 +286,9 @@ dev.off()
 #   return(rf)
 # 
 # })
-
-# save(final_fits, file = "data/fromR/lfs/final_fits_20221219.RDA")
-load("data/fromR/lfs/final_fits_20221219.RDA")
+# 
+# save(final_fits, file = "data/fromR/lfs/final_fits_20230112.RDA")
+load("data/fromR/lfs/final_fits_20230112.RDA")
 
 # get "optimal" thresholds
 threshlist <- map(1:2, function(tax){
@@ -403,6 +408,7 @@ w_preds %>%
 # Fractions of predictions at optimal threshold
 w_preds %>% 
   sf::st_drop_geometry() %>% 
+  filter(simple_status == "NONE") %>% 
   group_by(taxon, genus, species, simple_status) %>% 
   summarize(threat_prob = mean(threatened)) %>% 
   left_join(ot) %>% 
@@ -693,9 +699,7 @@ w_preds %>%
   filter(simple_status == "NONE") %>% 
   group_by(genus, species, taxon) %>% 
   summarize(threat_pred = mean(threatened)) %>% 
-  arrange(desc(threat_pred))
-
-# ordinal stuff
+  arrange(desc(threat_pred))# ordinal stuff
 
 pdf("figures/for_fun_are_higher_S_ranks_getting_more_votes.pdf")
 w_preds %>% 
