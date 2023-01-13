@@ -32,19 +32,23 @@ null_to_NA <- function(x){
 # likely takes several minutes.
 # does not need to be redone each time code is run
 
-# MD_vasc_and_lep_doi <- occ_download(
-#   pred_in("taxonKey", c(7707728, 797))
-#   , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
-#   , pred_in("stateProvince", "Maryland")
-#   , pred("hasCoordinate", TRUE)
-#   , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
-#   )
+MD_vasc_and_lep_doi <- occ_download(
+  user = gbif_user
+  , pwd = gbif_pwd
+  , email = gbif_email
+  , pred_in("taxonKey", c(7707728, 797))
+  , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
+  , pred_in("stateProvince", "Maryland")
+  , pred("hasCoordinate", TRUE)
+  , pred("sendNotification", TRUE)
+  , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
+  )
 
 # # this reveals status of all gbif download requests
 # occ_download_list()
 
 
- 
+
 # # this actually downloads the data (~142 MB)
 # occ_download_get(MD_vasc_and_lep_doi, path = "data/fromR/lfs", overwrite = TRUE)
 
