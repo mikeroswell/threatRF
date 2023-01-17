@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="e5d9d04e-ffd1-4395-9b10-76034f0c619c"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="e5d9d04e-ffd1-4395-9b10-76034f0c619c"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/b7tfpa</alternateIdentifier>
-        <alternateIdentifier>https://swbiodiversity.org/seinet/collections/misc/collprofiles.php?collid=3</alternateIdentifier>
-    <title>Deaver Herbarium (Northern Arizona University)</title>
-    <creator>
-<organizationName>SEINet Portal Network</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://swbiodiversity.org/seinet/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>SEINet Portal Network</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://swbiodiversity.org/seinet/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-          <surName>General Contact</surName>
-    </individualName>
-<electronicMailAddress>deaver.herbarium [at] nau [period] edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-    <associatedParty>
-    <individualName>
-<givenName>Tina</givenName>          <surName>Ayers</surName>
-    </individualName>
-<positionName>Deaver Herbarium Curator</positionName><electronicMailAddress>tina.ayers [at] nau [period] edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-09-01
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>Number of Specimens: 120,000 Specialty: Colorado Plateau, especially northern Arizona; northeastern Mojave Desert; northern Arizona National Parks and Monuments; vascular plants of the San Francisco Peaks and Coconino National Forest. Important Collections: M. Baker; R. E. Collom; C. F. Deaver; D. Demaree; R. K. Gierisch; L. N. Goodding; G. Goodwin; H. D. Hammond; R. H. Hevly; M. E. Jones; T. H. Kearney; Max Licher; E. L. Little, Jr.; V. O. Mayes; A. M. Phillips; G. R. Rink; C. G. Schaack; J. J. Thornber; A. F. Whiting. Incorporated Herbaria: FSLF (1000 specimens) in 1989. Notes: Name for Arizona State College changed to Northern Arizona University in 1966. ASC fungi transferred to MICH in 1998. ASC is temporarily housing NAVA. Date Founded: 1930.</para>
-    </abstract>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>Deaver Herbarium (Northern Arizona University)</organizationName><phone>928/523-7242</phone><electronicMailAddress>deaver.herbarium [at] nau [period] edu</electronicMailAddress><onlineUrl>https://nau.edu/biological-sciences/deaver-herbarium/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/b7tfpa</alternateIdentifier>
+                <alternateIdentifier>https://swbiodiversity.org/seinet/collections/misc/collprofiles.php?collid=3</alternateIdentifier>
+        <title>Deaver Herbarium (Northern Arizona University)</title>
+            <creator>
+<organizationName>SEINet Portal Network</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://swbiodiversity.org/seinet/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SEINet Portal Network</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://swbiodiversity.org/seinet/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+                    <surName>General Contact</surName>
+            </individualName>
+<electronicMailAddress>deaver.herbarium [at] nau [period] edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Tina</givenName>                    <surName>Ayers</surName>
+            </individualName>
+<positionName>Deaver Herbarium Curator</positionName><electronicMailAddress>tina.ayers [at] nau [period] edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-03
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Number of Specimens: 120,000 Specialty: Colorado Plateau, especially northern Arizona; northeastern Mojave Desert; northern Arizona National Parks and Monuments; vascular plants of the San Francisco Peaks and Coconino National Forest. Important Collections: M. Baker; R. E. Collom; C. F. Deaver; D. Demaree; R. K. Gierisch; L. N. Goodding; G. Goodwin; H. D. Hammond; R. H. Hevly; M. E. Jones; T. H. Kearney; Max Licher; E. L. Little, Jr.; V. O. Mayes; A. M. Phillips; G. R. Rink; C. G. Schaack; J. J. Thornber; A. F. Whiting. Incorporated Herbaria: FSLF (1000 specimens) in 1989. Notes: Name for Arizona State College changed to Northern Arizona University in 1966. ASC fungi transferred to MICH in 1998. ASC is temporarily housing NAVA. Date Founded: 1930.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Deaver Herbarium (Northern Arizona University)</organizationName><phone>928/523-7242</phone><electronicMailAddress>deaver.herbarium [at] nau [period] edu</electronicMailAddress><onlineUrl>https://nau.edu/biological-sciences/deaver-herbarium/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:54Z</dateStamp>
-      <citation>Northern Arizona University (2022). Deaver Herbarium (Northern Arizona University). Occurrence dataset https://doi.org/10.15468/b7tfpa accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
+                <citation>Northern Arizona University (2023). Deaver Herbarium (Northern Arizona University). Occurrence dataset https://doi.org/10.15468/b7tfpa accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

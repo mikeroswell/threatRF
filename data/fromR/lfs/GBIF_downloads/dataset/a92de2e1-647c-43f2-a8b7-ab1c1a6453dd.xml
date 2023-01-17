@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="a92de2e1-647c-43f2-a8b7-ab1c1a6453dd"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="a92de2e1-647c-43f2-a8b7-ab1c1a6453dd"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/fmj4at</alternateIdentifier>
-        <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
-        <alternateIdentifier>http://www.sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
-        <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
-    <title>University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection</title>
-    <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Herrick</givenName>          <surName>Brown</surName>
-    </individualName>
-<positionName>Herbarium Curator</positionName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-    <associatedParty>
-    <individualName>
-<givenName>Csilla</givenName>          <surName>Czako</surName>
-    </individualName>
-<positionName>GIS Guru</positionName><electronicMailAddress>czakoc@dnr.sc.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-    <associatedParty>
-    <individualName>
-<givenName>Amy</givenName>          <surName>Harmon</surName>
-    </individualName>
-<positionName>Herbarium Collection Manager</positionName><electronicMailAddress>harmona3@mailbox.sc.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-08-26
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The A. C. Moore Herbarium is an important part of the Department of Biological Sciences at the University of South Carolina (Columbia Campus). Founded in 1907 by Dr. Andrew Charles Moore, the original collection of dried plant specimens is now part of an ever-growing collection. Total holdings are just over 120,000 specimens, making the A. C. Moore Herbarium the largest in the state of South Carolina. Researchers and visitors will find a diverse collection of vascular and nonvascular plant material primarily from the Southeastern United States and more specifically from South Carolina. Now over 100 years old, the A. C. Moore Herbarium continues to be an indispensable resource for botanical knowledge. Note to users: Some data fields contain HTML formatting. Please contact us for assistance if this presents an issue with its use.</para>
-    </abstract>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection</organizationName><phone>+1-803-777-8175</phone><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>http://www.herbarium.org</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/fmj4at</alternateIdentifier>
+                <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
+                <alternateIdentifier>http://www.sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
+                <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
+        <title>University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection</title>
+            <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Herrick</givenName>                    <surName>Brown</surName>
+            </individualName>
+<positionName>Herbarium Curator</positionName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Csilla</givenName>                    <surName>Czako</surName>
+            </individualName>
+<positionName>GIS Guru</positionName><electronicMailAddress>czakoc@dnr.sc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Amy</givenName>                    <surName>Harmon</surName>
+            </individualName>
+<positionName>Herbarium Collection Manager</positionName><electronicMailAddress>harmona3@mailbox.sc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-04
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The A. C. Moore Herbarium is an important part of the Department of Biological Sciences at the University of South Carolina (Columbia Campus). Founded in 1907 by Dr. Andrew Charles Moore, the original collection of dried plant specimens is now part of an ever-growing collection. Total holdings are just over 120,000 specimens, making the A. C. Moore Herbarium the largest in the state of South Carolina. Researchers and visitors will find a diverse collection of vascular and nonvascular plant material primarily from the Southeastern United States and more specifically from South Carolina. Now over 100 years old, the A. C. Moore Herbarium continues to be an indispensable resource for botanical knowledge. Note to users: Some data fields contain HTML formatting. Please contact us for assistance if this presents an issue with its use.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection</organizationName><phone>+1-803-777-8175</phone><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>http://www.herbarium.org</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
-      <citation>University of South Carolina (2022). University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection. Occurrence dataset https://doi.org/10.15468/fmj4at accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:36Z</dateStamp>
+                <citation>University of South Carolina (2023). University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection. Occurrence dataset https://doi.org/10.15468/fmj4at accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

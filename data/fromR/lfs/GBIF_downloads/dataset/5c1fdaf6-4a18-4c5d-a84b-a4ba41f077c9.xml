@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="5c1fdaf6-4a18-4c5d-a84b-a4ba41f077c9"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/iawody</alternateIdentifier>
+                <alternateIdentifier>http://ipt.vertnet.org:8080/ipt/resource?r=uam_herb_vascular</alternateIdentifier>
+                <alternateIdentifier>http://ipt.vertnet.org:8080/ipt/resource.do?r=uam_herb_vascular</alternateIdentifier>
+                <alternateIdentifier>5c1fdaf6-4a18-4c5d-a84b-a4ba41f077c9</alternateIdentifier>
+                <alternateIdentifier>14889</alternateIdentifier>
+        <title>UAM Herbarium (ALA), Vascular Plant Collection (Arctos)</title>
+            <creator>
+            <individualName>
+<givenName>Steffi</givenName>                    <surName>Ickert-Bond</surName>
+            </individualName>
+<organizationName>University of Alaska Museum</organizationName><positionName>Curator of the Herbarium (ALA)</positionName>            <address>
+<deliveryPoint>907 Yukon Drive</deliveryPoint><city>Fairbanks</city><administrativeArea>AK</administrativeArea><postalCode>99775-6960</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(907) 474-6277</phone><electronicMailAddress>smickertbond@alaska.edu</electronicMailAddress><onlineUrl>http://www.frontierbotany.info</onlineUrl>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Steffi</givenName>                    <surName>Ickert-Bond</surName>
+            </individualName>
+<organizationName>University of Alaska Museum</organizationName><positionName>Curator of the Herbarium (ALA)</positionName>            <address>
+<deliveryPoint>907 Yukon Drive</deliveryPoint><city>Fairbanks</city><administrativeArea>AK</administrativeArea><postalCode>99775-6960</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(907) 474-6277</phone><electronicMailAddress>smickertbond@alaska.edu</electronicMailAddress><onlineUrl>http://www.frontierbotany.info</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Laura</givenName>                    <surName>Russell</surName>
+            </individualName>
+<organizationName>VertNet</organizationName><positionName>VertNet Programmer</positionName><electronicMailAddress>larussell@vertnet.org</electronicMailAddress>            <role>PROGRAMMER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>David</givenName>                    <surName>Bloom</surName>
+            </individualName>
+<positionName>VertNet Coordinator</positionName><electronicMailAddress>dbloom@vertnet.org</electronicMailAddress>            <role>PROGRAMMER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>John</givenName>                    <surName>Wieczorek</surName>
+            </individualName>
+<organizationName>Museum of Vertebrate Zoology at UC Berkeley</organizationName><positionName>Information Architect</positionName><electronicMailAddress>tuco@berkeley.edu</electronicMailAddress>            <role>PROGRAMMER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Dusty</givenName>                    <surName>McDonald</surName>
+            </individualName>
+<organizationName>University of Alaska Museum</organizationName><positionName>Arctos Database Programmer</positionName><electronicMailAddress>dlmcdonald@alaska.edu</electronicMailAddress><onlineUrl>http://arctos.database.museum</onlineUrl>            <role>POINT_OF_CONTACT</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Jordan</givenName>                    <surName>Metzgar</surName>
+            </individualName>
+<organizationName>University of Alaska Museum</organizationName><positionName>Collection Manager, Herbarium</positionName>            <address>
+<deliveryPoint>907 Yukon Drive</deliveryPoint><city>Fairbanks</city><administrativeArea>AK</administrativeArea><postalCode>99775-6960</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(907) 474-7109</phone><electronicMailAddress>jsmetzgar@alaska.edu</electronicMailAddress><onlineUrl>http://www.uaf.edu/museum/collections/herb/staff/</onlineUrl>            <role>POINT_OF_CONTACT</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Alan</givenName>                    <surName>Batten</surName>
+            </individualName>
+<organizationName>University of Alaska Museum</organizationName><positionName>Research Associate, Herbarium</positionName>            <address>
+<deliveryPoint>907 Yukon Drive</deliveryPoint><city>Fairbanks</city><administrativeArea>AK</administrativeArea><postalCode>99775-6960</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(907) 474-7109</phone><electronicMailAddress>fnarb@uaf.edu</electronicMailAddress><onlineUrl>http://www.uaf.edu/museum/collections/herb/staff/</onlineUrl>            <role>POINT_OF_CONTACT</role>
+            </associatedParty>
+            <pubDate>
+                2022-12-27
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Herbarium (ALA) at the University of Alaska Museum is the major regional herbarium in Alaska and part of a network of similar collections with an interest in the origin and evolution of the circumpolar flora. ALA contains more than 260,000 specimens of vascular and non-vascular plants. Data for the Vascular Plant and Cryptogam collections are managed separately in Arctos. Much of our understanding of Ice Age Beringia is based on botanical specimens, the largest collection of which is housed at ALA. Our recent acquisition from Iowa State University of the J. P. Anderson Collection (32,000 specimens on permanent loan) forms a significant part of this story. This collection of arctic and boreal plants, which contains 67 nomenclatural type specimens, formed the basis for much of Andersonâ€™s seminal work, The Flora of Alaska. The botanical collection also includes plants from other states, Canada, Greenland, Fennoscandia, Japan, and Russia and provides a basis for teaching and research. Our botanical collection can be viewed and searched through the Arctos database and includes high resolution images of 163,000 herbarium sheets, online representation of 190,000 holdings, and inclusion of all holdings in an object-tracking system (barcode labeling).</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://www.uaf.edu/museum/collections/herb/</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>The UAM Herbarium (ALA) Vascular Plant Collection is global, with strongest holdings from Alaska.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-180</westBoundingCoordinate>
+                                <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                                <northBoundingCoordinate>90</northBoundingCoordinate>
+                                <southBoundingCoordinate>-90</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                        <taxonomicCoverage>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Magnoliopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Liliopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Filicopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Lycopodiopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Equisetopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Pinopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Lecanoromycetes</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Ascomycetes</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Bryopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Sphagnopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Polypodiopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Hepatopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Gnetopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Marchantiopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Charophyceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Monogenea</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                    <taxonRankValue>Ginkgoopsida</taxonRankValue>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Steffi</givenName>                    <surName>Ickert-Bond</surName>
+            </individualName>
+<organizationName>University of Alaska Museum</organizationName><positionName>Curator of the Herbarium (ALA)</positionName>            <address>
+<deliveryPoint>907 Yukon Drive</deliveryPoint><city>Fairbanks</city><administrativeArea>AK</administrativeArea><postalCode>99775-6960</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(907) 474-6277</phone><electronicMailAddress>smickertbond@alaska.edu</electronicMailAddress><onlineUrl>http://www.frontierbotany.info</onlineUrl>            </contact>
+            <methods>
+                    <methodStep>
+                        <description>
+                            <para></para>
+                        </description>
+                    </methodStep>
+            </methods>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:31Z</dateStamp>
+                <citation>Ickert-Bond S (2022). UAM Herbarium (ALA), Vascular Plant Collection (Arctos). Version 38.71. University of Alaska Museum of the North. Occurrence dataset https://doi.org/10.15468/iawody accessed via GBIF.org on 2023-01-16.</citation>
+                    <livingTimePeriod>1860 to present</livingTimePeriod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

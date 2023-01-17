@@ -1,92 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="b89d52a2-861d-4388-adad-c0da3d55fc78"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="b89d52a2-861d-4388-adad-c0da3d55fc78"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/v5wjn7</alternateIdentifier>
-        <alternateIdentifier>b89d52a2-861d-4388-adad-c0da3d55fc78</alternateIdentifier>
-        <alternateIdentifier>http://ipt.flmnh.ufl.edu:8080/ipt/resource?r=herbarium</alternateIdentifier>
-    <title>University of Florida Herbarium (FLAS)</title>
-    <creator>
-    <individualName>
-<givenName>Alan R.</givenName>          <surName>Franck</surName>
-    </individualName>
-<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>    <address>
-<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>    </address>
-<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Alan R.</givenName>          <surName>Franck</surName>
-    </individualName>
-<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>    <address>
-<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>    </address>
-<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Alan R.</givenName>          <surName>Franck</surName>
-    </individualName>
-<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>    <address>
-<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>    </address>
-<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>    <role>USER</role>
-    </associatedParty>
-      <pubDate>
-      2022-10-17
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The University of Florida Herbarium (FLAS) in the Florida Museum of Natural History was established in 1891 by Peter H. Rolfs.  Current holdings comprise approximately 460,000 botanical specimens including many historical specimens dating from the 1800&amp;#39;s and early 1900&amp;#39;s.  The vascular plant collection (ca. 267,000 specimens) has an excellent representation of the flora of Florida and the southeastern United States, large holdings from the West Indies (esp. Haiti) and other Neotropical areas.  The bryophyte and lichen collections (ca. 120,000 specimens) are worldwide in scope with an excellent representation of species from Florida and tropical areas such as Costa Rica, Venezuela and Brazil. The wood collection (16,000 samples) is worldwide in scope with a excellent representation of tropical woods.  The algal collection includes ca. 2,000 specimens, mainly from Florida.  The Fungal Herbarium contains ca. 55,000 specimens.  The herbarium&amp;#39;s collection catalog includes ca. 70,000 specimens, mainly vascular plants, including ca. 1,000 type specimens.  Digital images are available for approximately 40,000 specimens.  Support for the UF herbarium&amp;#39;s computerization effort is provided by the Florida Museum of Natural History, UF / Institute of Food and Agricultural Sciences, United States Department of Agriculture (Hatch Project FLAS-HRB-04170), UF Libraries Digital Library Center, Florida Center for Library Automation, the Florida Museum Associates and the Andrew W. Mellon Foundation.</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>North America, Central America and South America with an emphasis on Florida and the southeastern United States.  Few collections from Europe, Asia, Africa and Australia.</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-126.72</westBoundingCoordinate>
-                      <eastBoundingCoordinate>-36.05</eastBoundingCoordinate>
-                      <northBoundingCoordinate>53.83</northBoundingCoordinate>
-                      <southBoundingCoordinate>-56.25</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-      </coverage>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Alan R.</givenName>          <surName>Franck</surName>
-    </individualName>
-<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>    <address>
-<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>    </address>
-<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/v5wjn7</alternateIdentifier>
+                <alternateIdentifier>b89d52a2-861d-4388-adad-c0da3d55fc78</alternateIdentifier>
+                <alternateIdentifier>http://ipt.flmnh.ufl.edu:8080/ipt/resource?r=herbarium</alternateIdentifier>
+        <title>University of Florida Herbarium (FLAS)</title>
+            <creator>
+            <individualName>
+<givenName>Alan R.</givenName>                    <surName>Franck</surName>
+            </individualName>
+<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>            <address>
+<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>            </address>
+<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Alan R.</givenName>                    <surName>Franck</surName>
+            </individualName>
+<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>            <address>
+<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>            </address>
+<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Alan R.</givenName>                    <surName>Franck</surName>
+            </individualName>
+<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>            <address>
+<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>            </address>
+<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>            <role>USER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-16
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The University of Florida Herbarium (FLAS) in the Florida Museum of Natural History was established in 1891 by Peter H. Rolfs.  Current holdings comprise approximately 460,000 botanical specimens including many historical specimens dating from the 1800&amp;#39;s and early 1900&amp;#39;s.  The vascular plant collection (ca. 267,000 specimens) has an excellent representation of the flora of Florida and the southeastern United States, large holdings from the West Indies (esp. Haiti) and other Neotropical areas.  The bryophyte and lichen collections (ca. 120,000 specimens) are worldwide in scope with an excellent representation of species from Florida and tropical areas such as Costa Rica, Venezuela and Brazil. The wood collection (16,000 samples) is worldwide in scope with a excellent representation of tropical woods.  The algal collection includes ca. 2,000 specimens, mainly from Florida.  The Fungal Herbarium contains ca. 55,000 specimens.  The herbarium&amp;#39;s collection catalog includes ca. 70,000 specimens, mainly vascular plants, including ca. 1,000 type specimens.  Digital images are available for approximately 40,000 specimens.  Support for the UF herbarium&amp;#39;s computerization effort is provided by the Florida Museum of Natural History, UF / Institute of Food and Agricultural Sciences, United States Department of Agriculture (Hatch Project FLAS-HRB-04170), UF Libraries Digital Library Center, Florida Center for Library Automation, the Florida Museum Associates and the Andrew W. Mellon Foundation.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>North America, Central America and South America with an emphasis on Florida and the southeastern United States.  Few collections from Europe, Asia, Africa and Australia.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-126.72</westBoundingCoordinate>
+                                <eastBoundingCoordinate>-36.05</eastBoundingCoordinate>
+                                <northBoundingCoordinate>53.83</northBoundingCoordinate>
+                                <southBoundingCoordinate>-56.25</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+            </coverage>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Alan R.</givenName>                    <surName>Franck</surName>
+            </individualName>
+<organizationName>Florida Museum of Natural History</organizationName><positionName>Herbarium Collection Manager</positionName>            <address>
+<deliveryPoint>PO Box 110575</deliveryPoint><city>Gainesville</city><administrativeArea>FL</administrativeArea><postalCode>32611-0575</postalCode><country>UNITED_STATES</country>            </address>
+<phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:57Z</dateStamp>
-      <citation>Franck A R (2022). University of Florida Herbarium (FLAS). Version 11.1843. Florida Museum of Natural History. Occurrence dataset https://doi.org/10.15468/v5wjn7 accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:37Z</dateStamp>
+                <citation>Franck A R (2023). University of Florida Herbarium (FLAS). Version 11.1934. Florida Museum of Natural History. Occurrence dataset https://doi.org/10.15468/v5wjn7 accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

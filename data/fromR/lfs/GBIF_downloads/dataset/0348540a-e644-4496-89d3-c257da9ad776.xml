@@ -1,287 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="0348540a-e644-4496-89d3-c257da9ad776"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="0348540a-e644-4496-89d3-c257da9ad776"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.5886/rzav8bu2</alternateIdentifier>
-        <alternateIdentifier>https://data.canadensys.net/ipt/resource?r=mt-specimens</alternateIdentifier>
-        <alternateIdentifier>http://data.canadensys.net/ipt/resource?r=mt-specimens</alternateIdentifier>
-        <alternateIdentifier>10.15468/wrvxig</alternateIdentifier>
-        <alternateIdentifier>http://data.canadensys.net/ipt/resource.do?r=mt-specimens</alternateIdentifier>
-        <alternateIdentifier>0348540a-e644-4496-89d3-c257da9ad776</alternateIdentifier>
-        <alternateIdentifier>13734</alternateIdentifier>
-    <title>Marie-Victorin Herbarium (MT) - Plantes vasculaires</title>
-    <creator>
-    <individualName>
-<givenName>Luc</givenName>          <surName>Brouillet</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<phone>514-343-2142</phone><electronicMailAddress>luc.brouillet@umontreal.ca</electronicMailAddress><onlineUrl>http://www.irbv.umontreal.ca/luc-brouillet</onlineUrl>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Carole</givenName>          <surName>Sinou</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Biodiversity Informatics Manager</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<electronicMailAddress>carole.sinou@umontreal.ca</electronicMailAddress>    </metadataProvider>
-    <metadataProvider>
-    <individualName>
-<givenName>Carole</givenName>          <surName>Sinou</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Biodiversity Informatics Manager</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<electronicMailAddress>carole.sinou@umontreal.ca</electronicMailAddress>      <userId directory="http://orcid.org/">0000-0002-6718-6669</userId>
-    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Luc</givenName>          <surName>Brouillet</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<electronicMailAddress>luc.brouillet@umontreal.ca</electronicMailAddress><onlineUrl>http://www.irbv.umontreal.ca/luc-brouillet</onlineUrl>    <role>CUSTODIAN_STEWARD</role>
-    </associatedParty>
-    <associatedParty>
-    <individualName>
-<givenName>Geoffrey</givenName>          <surName>Hall</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Collection manager</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<electronicMailAddress>geoffrey.hall@umontreal.ca</electronicMailAddress>    <role>CUSTODIAN_STEWARD</role>
-    </associatedParty>
-    <associatedParty>
-    <individualName>
-<givenName>Étienne</givenName>          <surName>Léveillé-Bourret</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<electronicMailAddress>etienne.leveille-bourret@umontreal.ca</electronicMailAddress><onlineUrl>https://www.irbv.umontreal.ca/personnel/chercheurs/etienne-leveille-bourret</onlineUrl>      <userId directory="http://orcid.org/">0000-0002-0069-0430</userId>
-    <role>CURATOR</role>
-    </associatedParty>
-      <pubDate>
-      2022-06-17
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The Marie-Victorin Herbarium (MT) is the second largest university herbarium in Quebec, and ranks fourth among all Canadian herbaria. It includes about 680,000&amp;#43; vascular plants. Half of the material is Canadian, but representation is global. Recently, the WAT herbarium was acquired and is now incorporated within MT, though specimens are still to be cited with the WAT acronym. The MT and WAT datasets are individually shown in the dataset, though they all belong to MT. The current dataset includes the 164,000&amp;#43; digitized specimens from the collection.</para>
-    </abstract>
-        <keywordSet>
-              <keyword>MT</keyword>
-              <keyword>Quebec</keyword>
-              <keyword>specimens</keyword>
-              <keyword>WAT</keyword>
-              <keyword>collection</keyword>
-              <keyword>Vascular plants</keyword>
-              <keyword>Herbier Marie-Victorin</keyword>
-              <keyword>Marie-Victorin Herbarium</keyword>
-              <keyword>Canada</keyword>
-              <keyword>herbarium</keyword>
-              <keyword>Université de Montréal</keyword>
-              <keyword>SBL</keyword>
-              <keyword>Canadensys</keyword>
-              <keywordThesaurus>n/a</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keyword>observation</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <distribution scope="document">
-          <online>
-              <url function="information">http://www.irbv.umontreal.ca/herbier-marie-victorin?lang=en</url>
-          </online>
-      </distribution>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>Global terrestrial coverage (except Antartica). Over 88% of the specimens in this dataset are collected in Canada, of which 70% in the province Quebec and 19.5% in Newfoundland. 5% of the specimens are from the United States and 3.5% from Cuba. For more detailed information about the whole collection, see our inventory at http://dataset.canadensys.net/mt-inventory.</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-180</westBoundingCoordinate>
-                      <eastBoundingCoordinate>180</eastBoundingCoordinate>
-                      <northBoundingCoordinate>90</northBoundingCoordinate>
-                      <southBoundingCoordinate>-90</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-              <taxonomicCoverage>
-                    <generalTaxonomicCoverage>This dataset includes all digitized vascular plants and bryophytes in the collection. The top 3 families are Cyperaceae (15%), Asteraceae (9%) and Poaceae (5%). For more detailed information about the whole collection, see our inventory at https://data.canadensys.net/ipt/resource?r=mt-inventory</generalTaxonomicCoverage>
-                    <taxonomicClassification>
-                          <taxonRankName>Kingdom</taxonRankName>
-                        <taxonRankValue>Plantae</taxonRankValue>
-                          <commonName>Plants</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Class</taxonRankName>
-                        <taxonRankValue>Equisetopsida</taxonRankValue>
-                          <commonName>Terrestrial plants</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Lycopodiidae</taxonRankValue>
-                          <commonName>Lycopods</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Psilotidae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Ophioglossidae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Marattiidae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Polypodiidae</taxonRankValue>
-                          <commonName>Ferns</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Equisetidae</taxonRankValue>
-                          <commonName>Horsetails</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Cycadidae</taxonRankValue>
-                          <commonName>Cycads</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Ginkgoideae</taxonRankValue>
-                          <commonName>Ginkgo</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Gnetidae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Pinidae</taxonRankValue>
-                          <commonName>Conifers</commonName>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Subclass</taxonRankName>
-                        <taxonRankValue>Magnoliidae</taxonRankValue>
-                          <commonName>Angiosperms</commonName>
-                    </taxonomicClassification>
-              </taxonomicCoverage>
-      </coverage>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Luc</givenName>          <surName>Brouillet</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Former curator</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<electronicMailAddress>luc.brouillet@umontreal.ca</electronicMailAddress><onlineUrl>http://www.irbv.umontreal.ca/luc-brouillet</onlineUrl>      </contact>
-      <contact>
-    <individualName>
-<givenName>Étienne</givenName>          <surName>Léveillé-Bourret</surName>
-    </individualName>
-<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>    </address>
-<electronicMailAddress>etienne.leveille-bourret@umontreal.ca</electronicMailAddress><onlineUrl>https://www.irbv.umontreal.ca/personnel/chercheurs/etienne-leveille-bourret</onlineUrl>      <userId directory="http://orcid.org/">0000-0002-0069-0430</userId>
-      </contact>
-      <methods>
-            <methodStep>
+    <dataset>
+            <alternateIdentifier>10.5886/rzav8bu2</alternateIdentifier>
+                <alternateIdentifier>https://data.canadensys.net/ipt/resource?r=mt-specimens</alternateIdentifier>
+                <alternateIdentifier>http://data.canadensys.net/ipt/resource?r=mt-specimens</alternateIdentifier>
+                <alternateIdentifier>10.15468/wrvxig</alternateIdentifier>
+                <alternateIdentifier>http://data.canadensys.net/ipt/resource.do?r=mt-specimens</alternateIdentifier>
+                <alternateIdentifier>0348540a-e644-4496-89d3-c257da9ad776</alternateIdentifier>
+                <alternateIdentifier>13734</alternateIdentifier>
+        <title>Marie-Victorin Herbarium (MT) - Plantes vasculaires</title>
+            <creator>
+            <individualName>
+<givenName>Luc</givenName>                    <surName>Brouillet</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<phone>514-343-2142</phone><electronicMailAddress>luc.brouillet@umontreal.ca</electronicMailAddress><onlineUrl>http://www.irbv.umontreal.ca/luc-brouillet</onlineUrl>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Carole</givenName>                    <surName>Sinou</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Biodiversity Informatics Manager</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>carole.sinou@umontreal.ca</electronicMailAddress>            </metadataProvider>
+            <metadataProvider>
+            <individualName>
+<givenName>Carole</givenName>                    <surName>Sinou</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Biodiversity Informatics Manager</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>carole.sinou@umontreal.ca</electronicMailAddress>            <userId directory="http://orcid.org/">0000-0002-6718-6669</userId>
+            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Luc</givenName>                    <surName>Brouillet</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>luc.brouillet@umontreal.ca</electronicMailAddress><onlineUrl>http://www.irbv.umontreal.ca/luc-brouillet</onlineUrl>            <role>CUSTODIAN_STEWARD</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Geoffrey</givenName>                    <surName>Hall</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Collection manager</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>geoffrey.hall@umontreal.ca</electronicMailAddress>            <role>CUSTODIAN_STEWARD</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Étienne</givenName>                    <surName>Léveillé-Bourret</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>etienne.leveille-bourret@umontreal.ca</electronicMailAddress><onlineUrl>https://www.irbv.umontreal.ca/personnel/chercheurs/etienne-leveille-bourret</onlineUrl>            <userId directory="http://orcid.org/">0000-0002-0069-0430</userId>
+            <role>CURATOR</role>
+            </associatedParty>
+            <pubDate>
+                2022-06-17
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Marie-Victorin Herbarium (MT) is the second largest university herbarium in Quebec, and ranks fourth among all Canadian herbaria. It includes about 680,000&amp;#43; vascular plants. Half of the material is Canadian, but representation is global. Recently, the WAT herbarium was acquired and is now incorporated within MT, though specimens are still to be cited with the WAT acronym. The MT and WAT datasets are individually shown in the dataset, though they all belong to MT. The current dataset includes the 164,000&amp;#43; digitized specimens from the collection.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>MT</keyword>
+                        <keyword>Quebec</keyword>
+                        <keyword>specimens</keyword>
+                        <keyword>WAT</keyword>
+                        <keyword>collection</keyword>
+                        <keyword>Vascular plants</keyword>
+                        <keyword>Herbier Marie-Victorin</keyword>
+                        <keyword>Marie-Victorin Herbarium</keyword>
+                        <keyword>Canada</keyword>
+                        <keyword>herbarium</keyword>
+                        <keyword>Université de Montréal</keyword>
+                        <keyword>SBL</keyword>
+                        <keyword>Canadensys</keyword>
+                        <keywordThesaurus>n/a</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keyword>observation</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://www.irbv.umontreal.ca/herbier-marie-victorin?lang=en</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>Global terrestrial coverage (except Antartica). Over 88% of the specimens in this dataset are collected in Canada, of which 70% in the province Quebec and 19.5% in Newfoundland. 5% of the specimens are from the United States and 3.5% from Cuba. For more detailed information about the whole collection, see our inventory at http://dataset.canadensys.net/mt-inventory.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-180</westBoundingCoordinate>
+                                <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                                <northBoundingCoordinate>90</northBoundingCoordinate>
+                                <southBoundingCoordinate>-90</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>This dataset includes all digitized vascular plants and bryophytes in the collection. The top 3 families are Cyperaceae (15%), Asteraceae (9%) and Poaceae (5%). For more detailed information about the whole collection, see our inventory at https://data.canadensys.net/ipt/resource?r=mt-inventory</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Kingdom</taxonRankName>
+                                    <taxonRankValue>Plantae</taxonRankValue>
+                                        <commonName>Plants</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Equisetopsida</taxonRankValue>
+                                        <commonName>Terrestrial plants</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Lycopodiidae</taxonRankValue>
+                                        <commonName>Lycopods</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Psilotidae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Ophioglossidae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Marattiidae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Polypodiidae</taxonRankValue>
+                                        <commonName>Ferns</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Equisetidae</taxonRankValue>
+                                        <commonName>Horsetails</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Cycadidae</taxonRankValue>
+                                        <commonName>Cycads</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Ginkgoideae</taxonRankValue>
+                                        <commonName>Ginkgo</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Gnetidae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Pinidae</taxonRankValue>
+                                        <commonName>Conifers</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Subclass</taxonRankName>
+                                    <taxonRankValue>Magnoliidae</taxonRankValue>
+                                        <commonName>Angiosperms</commonName>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
                 <description>
-                    <para>Examine specimen and annotations labels. Verify and update determination if qualified.
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Luc</givenName>                    <surName>Brouillet</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Former curator</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>luc.brouillet@umontreal.ca</electronicMailAddress><onlineUrl>http://www.irbv.umontreal.ca/luc-brouillet</onlineUrl>            </contact>
+            <contact>
+            <individualName>
+<givenName>Étienne</givenName>                    <surName>Léveillé-Bourret</surName>
+            </individualName>
+<organizationName>Université de Montréal Biodiversity Centre</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>4101 rue Sherbrooke est</deliveryPoint><city>Montreal</city><administrativeArea>Quebec</administrativeArea><postalCode>H1X2B2</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>etienne.leveille-bourret@umontreal.ca</electronicMailAddress><onlineUrl>https://www.irbv.umontreal.ca/personnel/chercheurs/etienne-leveille-bourret</onlineUrl>            <userId directory="http://orcid.org/">0000-0002-0069-0430</userId>
+            </contact>
+            <methods>
+                    <methodStep>
+                        <description>
+                            <para>Examine specimen and annotations labels. Verify and update determination if qualified.
 Search specimen record in collection database and update where necessary, or create new record and populate fields with the information on the specimen label. Use controlled vocabularies where relevant. 
 Determinations are recorded in a related table (included in this dataset as http://rs.gbif.org/extension/dwc/identification.xml), as are related projects and specimen exchange history.</para>
-                </description>
-            </methodStep>
-            <methodStep>
-                <description>
-                    <para>Verify locality provided on specimen labels with online databases to ensure quality of geographic data.
+                        </description>
+                    </methodStep>
+                    <methodStep>
+                        <description>
+                            <para>Verify locality provided on specimen labels with online databases to ensure quality of geographic data.
 Georeferences provided on labels are validated using online maps and GIS tools and corrected at need, with the addition of a measure of inaccuracy.</para>
-                </description>
-            </methodStep>
-            <methodStep>
-                <description>
-                    <para>Print the newly generated specimen number onto the physical specimen, to be used as reference to the datase and as accession number in the collection.</para>
-                </description>
-            </methodStep>
-            <sampling>
-                <studyExtent>
-                    <description>
-                        <para>Digitization and photography of vascular plant specimens from the Marie-Victorin Herbarium (MT, including WAT)</para>
-                    </description>
-                </studyExtent>
-                <samplingDescription>
-                    <para>Originally, data were manually digitized as text from specimen labels, without photography. Currently, digitization still occurs as before for specific projects, but a new process based on specimen photography has been initiated, with the aim of increasing the pace of data capture. The process is: minimal digitization of specimen, photography (photos stored on photo server accessible via URL address), publication of minimally digitized data with photo. This will be followed eventually by full digitization either of targeted collections or via crowd sourcing (in development). All specimens newly acquired by MT and returned loans are digitized (when data are not provided by donor; MT encourages donors to provide digital data used to generate labels) and photographed.</para>
-                </samplingDescription>
-            </sampling>
-            <qualityControl>
-                <description>
-                    <para>Initially, legacy data had been formatted to fit the new database structure and cleaned as well as possible, though they still contain inconsistencies. They are being  corrected both opportunistically and in a systematic manner for determinations and geography data. Inaccurate georeferenced data are currently being corrected. New records are entered using controlled vocabularies where relevant and should contain fewer errors. Data from donations are processed via a workbench and compared with the controlled vocabularies to ensure consistency. Specimens are validated by a taxonomist before databasing to ensure identification accuracy.</para>
-                </description>
-            </qualityControl>
-      </methods>
+                        </description>
+                    </methodStep>
+                    <methodStep>
+                        <description>
+                            <para>Print the newly generated specimen number onto the physical specimen, to be used as reference to the datase and as accession number in the collection.</para>
+                        </description>
+                    </methodStep>
+                    <sampling>
+                        <studyExtent>
+                            <description>
+                                <para>Digitization and photography of vascular plant specimens from the Marie-Victorin Herbarium (MT, including WAT)</para>
+                            </description>
+                        </studyExtent>
+                        <samplingDescription>
+                            <para>Originally, data were manually digitized as text from specimen labels, without photography. Currently, digitization still occurs as before for specific projects, but a new process based on specimen photography has been initiated, with the aim of increasing the pace of data capture. The process is: minimal digitization of specimen, photography (photos stored on photo server accessible via URL address), publication of minimally digitized data with photo. This will be followed eventually by full digitization either of targeted collections or via crowd sourcing (in development). All specimens newly acquired by MT and returned loans are digitized (when data are not provided by donor; MT encourages donors to provide digital data used to generate labels) and photographed.</para>
+                        </samplingDescription>
+                    </sampling>
+                    <qualityControl>
+                        <description>
+                            <para>Initially, legacy data had been formatted to fit the new database structure and cleaned as well as possible, though they still contain inconsistencies. They are being  corrected both opportunistically and in a systematic manner for determinations and geography data. Inaccurate georeferenced data are currently being corrected. New records are entered using controlled vocabularies where relevant and should contain fewer errors. Data from donations are processed via a workbench and compared with the controlled vocabularies to ensure consistency. Specimens are validated by a taxonomist before databasing to ensure identification accuracy.</para>
+                        </description>
+                    </qualityControl>
+            </methods>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:55Z</dateStamp>
-      <citation identifier="http://doi.org/10.5886/rzav8bu2">Brouillet L, Sinou C (2022). Marie-Victorin Herbarium (MT) - Plantes vasculaires. Version 14.11. Université de Montréal Biodiversity Centre. Occurrence dataset https://doi.org/10.5886/rzav8bu2 accessed via GBIF.org on 2022-10-18.</citation>
-              <physical>
-                  <objectName>GBIF data portal</objectName>
-                  <characterEncoding>UTF-8</characterEncoding>
-                  <dataFormat>
-                      <externallyDefinedFormat>
-                          <formatName>HTML</formatName>
-                      </externallyDefinedFormat>
-                  </dataFormat>
-                  <distribution>
-                      <online>
-                          <url function="download">https://www.gbif.org/dataset/0348540a-e644-4496-89d3-c257da9ad776</url>
-                      </online>
-                  </distribution>
-              </physical>
-              <physical>
-                  <objectName>Canadensys Explorer</objectName>
-                  <characterEncoding>UTF-8</characterEncoding>
-                  <dataFormat>
-                      <externallyDefinedFormat>
-                          <formatName>HTML</formatName>
-                      </externallyDefinedFormat>
-                  </dataFormat>
-                  <distribution>
-                      <online>
-                          <url function="download">https://data.canadensys.net/explorer/occurrences/search?q=data_resource_uid:dr25#tab_mapView</url>
-                      </online>
-                  </distribution>
-              </physical>
-              <resourceLogoUrl>http://data.canadensys.net/ipt/logo.do?r=mt-specimens</resourceLogoUrl>
-              <collection>
-                <parentCollectionIdentifier>MT</parentCollectionIdentifier>
-                <collectionIdentifier>MT</collectionIdentifier>
-                <collectionName>Marie-Victorin Herbarium</collectionName>
-              </collection>
-              <collection>
-                <parentCollectionIdentifier></parentCollectionIdentifier>
-                <collectionIdentifier>WAT</collectionIdentifier>
-                <collectionName>University of Waterloo Herbarium</collectionName>
-              </collection>
-              <formationPeriod>1920-present</formationPeriod>
-                <specimenPreservationMethod>MOUNTED</specimenPreservationMethod>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:22Z</dateStamp>
+                <citation identifier="http://doi.org/10.5886/rzav8bu2">Brouillet L, Sinou C (2022). Marie-Victorin Herbarium (MT) - Plantes vasculaires. Version 14.11. Université de Montréal Biodiversity Centre. Occurrence dataset https://doi.org/10.5886/rzav8bu2 accessed via GBIF.org on 2023-01-16.</citation>
+                    <physical>
+                        <objectName>GBIF data portal</objectName>
+                        <characterEncoding>UTF-8</characterEncoding>
+                        <dataFormat>
+                            <externallyDefinedFormat>
+                                <formatName>HTML</formatName>
+                            </externallyDefinedFormat>
+                        </dataFormat>
+                        <distribution>
+                            <online>
+                                <url function="download">https://www.gbif.org/dataset/0348540a-e644-4496-89d3-c257da9ad776</url>
+                            </online>
+                        </distribution>
+                    </physical>
+                    <physical>
+                        <objectName>Canadensys Explorer</objectName>
+                        <characterEncoding>UTF-8</characterEncoding>
+                        <dataFormat>
+                            <externallyDefinedFormat>
+                                <formatName>HTML</formatName>
+                            </externallyDefinedFormat>
+                        </dataFormat>
+                        <distribution>
+                            <online>
+                                <url function="download">https://data.canadensys.net/explorer/occurrences/search?q=data_resource_uid:dr25#tab_mapView</url>
+                            </online>
+                        </distribution>
+                    </physical>
+                    <resourceLogoUrl>http://data.canadensys.net/ipt/logo.do?r=mt-specimens</resourceLogoUrl>
+                        <collection>
+                            <parentCollectionIdentifier>MT</parentCollectionIdentifier>
+                            <collectionIdentifier>MT</collectionIdentifier>
+                            <collectionName>Marie-Victorin Herbarium</collectionName>
+                        </collection>
+                        <collection>
+                            <parentCollectionIdentifier></parentCollectionIdentifier>
+                            <collectionIdentifier>WAT</collectionIdentifier>
+                            <collectionName>University of Waterloo Herbarium</collectionName>
+                        </collection>
+                    <formationPeriod>1920-present</formationPeriod>
+                        <specimenPreservationMethod>MOUNTED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

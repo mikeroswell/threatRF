@@ -1,157 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="d433c1e8-c5d7-4c0a-90f8-a0cb3c4faa8b"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="d433c1e8-c5d7-4c0a-90f8-a0cb3c4faa8b"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/podgza</alternateIdentifier>
-        <alternateIdentifier>d433c1e8-c5d7-4c0a-90f8-a0cb3c4faa8b</alternateIdentifier>
-        <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=towson_ailanthus</alternateIdentifier>
-    <title>Towson University - MidAtlantic - Ailanthus altissima - 2011</title>
-    <creator>
-    <individualName>
-<givenName>Matthew</givenName>          <surName>Hansen</surName>
-    </individualName>
-<organizationName>Towson University</organizationName><positionName>Graduate Research Assistant</positionName>    <address>
-<deliveryPoint>8000 York Road, Smith 200</deliveryPoint><city>Towson</city><administrativeArea>MD</administrativeArea><postalCode>21252-0001</postalCode><country>UNITED_STATES</country>    </address>
-<electronicMailAddress>mhanse1@students.towson.edu</electronicMailAddress>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Annie</givenName>          <surName>Simpson</surName>
-    </individualName>
-<organizationName>Core Science Analytics and Synthesis Program</organizationName><positionName>Biologist and Information Scientist</positionName>    <address>
-<deliveryPoint>U.S. Geological Survey, 12201 Sunrise Valley Dr, MS 302</deliveryPoint><city>Reston</city><administrativeArea>VA</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>    </address>
-<phone>+1-703-648-4281</phone><electronicMailAddress>asimpson@usgs.gov</electronicMailAddress>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Roland</givenName>          <surName>Roberts</surName>
-    </individualName>
-<organizationName>Towson University Herbarium (BALT)</organizationName><positionName>Director</positionName>    <address>
-<deliveryPoint>8000 York Road, Smith 200</deliveryPoint><city>Towson</city><administrativeArea>MD</administrativeArea><postalCode>21252-0001</postalCode><country>UNITED_STATES</country>    </address>
-<phone>410-704-3034</phone><electronicMailAddress>rroberts@towson.edu</electronicMailAddress>    <role>PRINCIPAL_INVESTIGATOR</role>
-    </associatedParty>
-      <pubDate>
-      2019-12-11
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>Collection of locations of Ailanthus altissima in the mid-Atlantic region, with DNA samples and photographs. Notice that there are several records that are observations because DNA sampling was unsuccessful.</para>
-    </abstract>
-        <keywordSet>
-              <keyword>invasive plants</keyword>
-              <keyword>introduced plants</keyword>
-              <keyword>DNA</keyword>
-              <keyword>invasive trees</keyword>
-              <keyword>invasive species</keyword>
-              <keyword>introduced species</keyword>
-              <keyword>photography</keyword>
-              <keywordThesaurus>Biocomplexity Thesaurus</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-      <additionalInfo>
-          <para>This work is licensed under a Creative Commons CCBy 2.0 License https://creativecommons.org/licenses/by/2.0/</para>
-      </additionalInfo>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <distribution scope="document">
-          <online>
-              <url function="information">http://www.towson.edu/biodiversity/History/herbarium.asp</url>
-          </online>
-      </distribution>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>includes records in the states of Maryland, Virginia, North Carolina, Pennsylvania, Delaware, New Jersey, and Massachusetts.</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-81.19</westBoundingCoordinate>
-                      <eastBoundingCoordinate>-70.33</eastBoundingCoordinate>
-                      <northBoundingCoordinate>41.95</northBoundingCoordinate>
-                      <southBoundingCoordinate>35.34</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-          <temporalCoverage>
-            <rangeOfDates>
-              <beginDate>
-                <calendarDate>      2011-01-01
+    <dataset>
+            <alternateIdentifier>10.15468/podgza</alternateIdentifier>
+                <alternateIdentifier>d433c1e8-c5d7-4c0a-90f8-a0cb3c4faa8b</alternateIdentifier>
+                <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=towson_ailanthus</alternateIdentifier>
+        <title>Towson University - MidAtlantic - Ailanthus altissima - 2011</title>
+            <creator>
+            <individualName>
+<givenName>Matthew</givenName>                    <surName>Hansen</surName>
+            </individualName>
+<organizationName>Towson University</organizationName><positionName>Graduate Research Assistant</positionName>            <address>
+<deliveryPoint>8000 York Road, Smith 200</deliveryPoint><city>Towson</city><administrativeArea>MD</administrativeArea><postalCode>21252-0001</postalCode><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>mhanse1@students.towson.edu</electronicMailAddress>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Annie</givenName>                    <surName>Simpson</surName>
+            </individualName>
+<organizationName>Core Science Analytics and Synthesis Program</organizationName><positionName>Biologist and Information Scientist</positionName>            <address>
+<deliveryPoint>U.S. Geological Survey, 12201 Sunrise Valley Dr, MS 302</deliveryPoint><city>Reston</city><administrativeArea>VA</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+1-703-648-4281</phone><electronicMailAddress>asimpson@usgs.gov</electronicMailAddress>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Roland</givenName>                    <surName>Roberts</surName>
+            </individualName>
+<organizationName>Towson University Herbarium (BALT)</organizationName><positionName>Director</positionName>            <address>
+<deliveryPoint>8000 York Road, Smith 200</deliveryPoint><city>Towson</city><administrativeArea>MD</administrativeArea><postalCode>21252-0001</postalCode><country>UNITED_STATES</country>            </address>
+<phone>410-704-3034</phone><electronicMailAddress>rroberts@towson.edu</electronicMailAddress>            <role>PRINCIPAL_INVESTIGATOR</role>
+            </associatedParty>
+            <pubDate>
+                2019-12-11
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Collection of locations of Ailanthus altissima in the mid-Atlantic region, with DNA samples and photographs. Notice that there are several records that are observations because DNA sampling was unsuccessful.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>invasive plants</keyword>
+                        <keyword>introduced plants</keyword>
+                        <keyword>DNA</keyword>
+                        <keyword>invasive trees</keyword>
+                        <keyword>invasive species</keyword>
+                        <keyword>introduced species</keyword>
+                        <keyword>photography</keyword>
+                        <keywordThesaurus>Biocomplexity Thesaurus</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <additionalInfo>
+                <para>This work is licensed under a Creative Commons CCBy 2.0 License https://creativecommons.org/licenses/by/2.0/</para>
+            </additionalInfo>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://www.towson.edu/biodiversity/History/herbarium.asp</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>includes records in the states of Maryland, Virginia, North Carolina, Pennsylvania, Delaware, New Jersey, and Massachusetts.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-81.19</westBoundingCoordinate>
+                                <eastBoundingCoordinate>-70.33</eastBoundingCoordinate>
+                                <northBoundingCoordinate>41.95</northBoundingCoordinate>
+                                <southBoundingCoordinate>35.34</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                    <temporalCoverage>
+                            <rangeOfDates>
+                                <beginDate>
+                                    <calendarDate>                2011-01-01
 </calendarDate>
-              </beginDate>
-              <endDate>
-                <calendarDate>      2011-12-31
+                                </beginDate>
+                                <endDate>
+                                    <calendarDate>                2011-12-31
 </calendarDate>
-              </endDate>
-            </rangeOfDates>
-          </temporalCoverage>
-              <taxonomicCoverage>
-                    <generalTaxonomicCoverage>Ailanthus altissima  (Mill.) Swingle</generalTaxonomicCoverage>
-                    <taxonomicClassification>
-                          <taxonRankName>Species</taxonRankName>
-                        <taxonRankValue>Ailanthus altissima  (Mill.) Swingle</taxonRankValue>
-                          <commonName>Tree of heaven</commonName>
-                    </taxonomicClassification>
-              </taxonomicCoverage>
-      </coverage>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Roland</givenName>          <surName>Roberts</surName>
-    </individualName>
-<organizationName>Towson University Herbarium (BALT)</organizationName><positionName>Director</positionName>    <address>
-<deliveryPoint>8000 York Road, Smith 200</deliveryPoint><city>Towson</city><administrativeArea>MD</administrativeArea><postalCode>21252-0001</postalCode><country>UNITED_STATES</country>    </address>
-<phone>410-704-3034</phone><electronicMailAddress>rroberts@towson.edu</electronicMailAddress>      </contact>
-
-      <project >
-          <title>DNA samples and photographic vouchers for Ailanthus altissima from Massachusetts to North Carolina in 2011</title>
-          <personnel>
-    <individualName>
-<givenName>Matthew</givenName>          <surName>Hansen</surName>
-    </individualName>
-    <role>PRINCIPAL_INVESTIGATOR</role>
-          </personnel>
-          <abstract>
-              <para></para>
-          </abstract>
-          <funding>
-              <para>Towson University</para>
-          </funding>
-            <studyAreaDescription>
-                <descriptor name="generic" citableClassificationSystem="false">
-                    <descriptorValue>Along roadsides from North Carolina to Massacusetts.</descriptorValue>
-                </descriptor>
-            </studyAreaDescription>
-            <designDescription>
+                                </endDate>
+                            </rangeOfDates>
+                    </temporalCoverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>Ailanthus altissima  (Mill.) Swingle</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Species</taxonRankName>
+                                    <taxonRankValue>Ailanthus altissima  (Mill.) Swingle</taxonRankValue>
+                                        <commonName>Tree of heaven</commonName>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
                 <description>
-                    <para>Collection of tissues for DNA analysis and photographic vouchers.</para>
+                    <para></para>
                 </description>
-            </designDescription>
-      </project>
-</dataset>
+                <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Roland</givenName>                    <surName>Roberts</surName>
+            </individualName>
+<organizationName>Towson University Herbarium (BALT)</organizationName><positionName>Director</positionName>            <address>
+<deliveryPoint>8000 York Road, Smith 200</deliveryPoint><city>Towson</city><administrativeArea>MD</administrativeArea><postalCode>21252-0001</postalCode><country>UNITED_STATES</country>            </address>
+<phone>410-704-3034</phone><electronicMailAddress>rroberts@towson.edu</electronicMailAddress>            </contact>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:44:03Z</dateStamp>
-      <citation>Hansen M, Simpson A (2019). Towson University - MidAtlantic - Ailanthus altissima - 2011. Version 4.2. United States Geological Survey. Occurrence dataset https://doi.org/10.15468/podgza accessed via GBIF.org on 2022-10-18.</citation>
-              <resourceLogoUrl>https://bison.usgs.gov/ipt/logo.do?r=towson_ailanthus</resourceLogoUrl>
-              <collection>
-                <parentCollectionIdentifier>Towson University</parentCollectionIdentifier>
-                <collectionIdentifier>BALT</collectionIdentifier>
-                <collectionName>Towson University Herbarium</collectionName>
-              </collection>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+            <project >
+                <title>DNA samples and photographic vouchers for Ailanthus altissima from Massachusetts to North Carolina in 2011</title>
+                    <personnel>
+            <individualName>
+<givenName>Matthew</givenName>                    <surName>Hansen</surName>
+            </individualName>
+            <role>PRINCIPAL_INVESTIGATOR</role>
+                    </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para>Towson University</para>
+                </funding>
+                    <studyAreaDescription>
+                        <descriptor name="generic" citableClassificationSystem="false">
+                            <descriptorValue>Along roadsides from North Carolina to Massacusetts.</descriptorValue>
+                        </descriptor>
+                    </studyAreaDescription>
+                    <designDescription>
+                        <description>
+                            <para>Collection of tissues for DNA analysis and photographic vouchers.</para>
+                        </description>
+                    </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:38Z</dateStamp>
+                <citation>Hansen M, Simpson A (2019). Towson University - MidAtlantic - Ailanthus altissima - 2011. Version 4.2. United States Geological Survey. Occurrence dataset https://doi.org/10.15468/podgza accessed via GBIF.org on 2023-01-16.</citation>
+                    <resourceLogoUrl>https://bison.usgs.gov/ipt/logo.do?r=towson_ailanthus</resourceLogoUrl>
+                        <collection>
+                            <parentCollectionIdentifier>Towson University</parentCollectionIdentifier>
+                            <collectionIdentifier>BALT</collectionIdentifier>
+                            <collectionName>Towson University Herbarium</collectionName>
+                        </collection>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

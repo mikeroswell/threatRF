@@ -1,159 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="838475f4-f762-11e1-a439-00145eb45e9a"  system="http://gbif.org" scope="system"
-  xml:lang="es">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="838475f4-f762-11e1-a439-00145eb45e9a"  system="http://gbif.org" scope="system"
+xml:lang="es">
 
-<dataset>
-      <alternateIdentifier>10.15468/pff0t6</alternateIdentifier>
-        <alternateIdentifier>https://ipt.gbif.es/resource?r=herbariobc</alternateIdentifier>
-        <alternateIdentifier>http://ipt.gbif.es/resource?r=herbariobc</alternateIdentifier>
-        <alternateIdentifier>838475f4-f762-11e1-a439-00145eb45e9a</alternateIdentifier>
-        <alternateIdentifier>299</alternateIdentifier>
-    <title>Institut Botanic de Barcelona (IBB, CSIC-Ajuntament de Barcelona), BC-Plantae</title>
-    <creator>
-    <individualName>
-<givenName>Neus</givenName>          <surName>Nualart</surName>
-    </individualName>
-<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Conservadora</positionName>    <address>
-<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>    </address>
-<phone>+34 932890611</phone><electronicMailAddress>nnualart@ibb.csic.es</electronicMailAddress>    </creator>
-    <creator>
-    <individualName>
-<givenName>Noemi</givenName>          <surName>Montes</surName>
-    </individualName>
-<organizationName>Instituto Botánico de Barcelona (Nubilum)</organizationName><positionName>Documentalista</positionName>    <address>
-<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>    </address>
-<phone>+34 932890611</phone><electronicMailAddress>nmontes@ibb.csic.es</electronicMailAddress>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Neus</givenName>          <surName>Nualart</surName>
-    </individualName>
-<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Conservadora</positionName>    <address>
-<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>    </address>
-<phone>+34 932890611</phone><electronicMailAddress>nnualart@ibb.csic.es</electronicMailAddress>    </metadataProvider>
-    <metadataProvider>
-    <individualName>
-<givenName>Noemi</givenName>          <surName>Montes</surName>
-    </individualName>
-<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Documentalista</positionName>    <address>
-<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>    </address>
-<phone>+34932890611</phone><electronicMailAddress>nmontes@ibb.csic.es</electronicMailAddress>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Neus</givenName>          <surName>Ibáñez</surName>
-    </individualName>
-<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Directora y Conservadora</positionName>    <address>
-<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>    </address>
-<phone>+34 932890611</phone><electronicMailAddress>nibanez@ibb.csic.es</electronicMailAddress>    <role>CURATOR</role>
-    </associatedParty>
-      <pubDate>
-      2021-07-23
-      </pubDate>
-    <language>SPANISH</language>
-    <abstract>
-        <para>El herbario Instituto Botánico de Barcelona, centro mixto Consejo Superior de Investigaciones Científicas (CSIC) y Ayuntamiento de Barcelona, conserva la tercera colección botánica más grande de la península Ibérica. Incluye diferentes colecciones históricas creadas desde el siglo XVIII hasta inicios del XX y la colección general (BC), de continuo crecimiento (gracias a las recolecciones llevadas a cabo por el personal investigador del Instituto, pero también por la actividad de intercambio y donaciones con otros herbarios del resto del mundo). 
+    <dataset>
+            <alternateIdentifier>10.15468/pff0t6</alternateIdentifier>
+                <alternateIdentifier>https://ipt.gbif.es/resource?r=herbariobc</alternateIdentifier>
+                <alternateIdentifier>http://ipt.gbif.es/resource?r=herbariobc</alternateIdentifier>
+                <alternateIdentifier>838475f4-f762-11e1-a439-00145eb45e9a</alternateIdentifier>
+                <alternateIdentifier>299</alternateIdentifier>
+        <title>Institut Botanic de Barcelona (IBB, CSIC-Ajuntament de Barcelona), BC-Plantae</title>
+            <creator>
+            <individualName>
+<givenName>Neus</givenName>                    <surName>Nualart</surName>
+            </individualName>
+<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Conservadora</positionName>            <address>
+<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>            </address>
+<phone>+34 932890611</phone><electronicMailAddress>nnualart@ibb.csic.es</electronicMailAddress>            </creator>
+            <creator>
+            <individualName>
+<givenName>Noemi</givenName>                    <surName>Montes</surName>
+            </individualName>
+<organizationName>Instituto Botánico de Barcelona (Nubilum)</organizationName><positionName>Documentalista</positionName>            <address>
+<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>            </address>
+<phone>+34 932890611</phone><electronicMailAddress>nmontes@ibb.csic.es</electronicMailAddress>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Neus</givenName>                    <surName>Nualart</surName>
+            </individualName>
+<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Conservadora</positionName>            <address>
+<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>            </address>
+<phone>+34 932890611</phone><electronicMailAddress>nnualart@ibb.csic.es</electronicMailAddress>            </metadataProvider>
+            <metadataProvider>
+            <individualName>
+<givenName>Noemi</givenName>                    <surName>Montes</surName>
+            </individualName>
+<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Documentalista</positionName>            <address>
+<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>            </address>
+<phone>+34932890611</phone><electronicMailAddress>nmontes@ibb.csic.es</electronicMailAddress>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Neus</givenName>                    <surName>Ibáñez</surName>
+            </individualName>
+<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Directora y Conservadora</positionName>            <address>
+<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>            </address>
+<phone>+34 932890611</phone><electronicMailAddress>nibanez@ibb.csic.es</electronicMailAddress>            <role>CURATOR</role>
+            </associatedParty>
+            <pubDate>
+                2021-07-23
+            </pubDate>
+        <language>SPANISH</language>
+            <abstract>
+                    <para>El herbario Instituto Botánico de Barcelona, centro mixto Consejo Superior de Investigaciones Científicas (CSIC) y Ayuntamiento de Barcelona, conserva la tercera colección botánica más grande de la península Ibérica. Incluye diferentes colecciones históricas creadas desde el siglo XVIII hasta inicios del XX y la colección general (BC), de continuo crecimiento (gracias a las recolecciones llevadas a cabo por el personal investigador del Instituto, pero también por la actividad de intercambio y donaciones con otros herbarios del resto del mundo). 
 Actualmente, a través de la red de GBIF son consultables 127 162 pliegos del herbario general (incluidos 36991 de la subcolección del Norte de África),  algunas colecciones históricas en su totalidad [el herbario de la Institució Catalana d’Història Natural (1202 pliegos), el de la Societat Botánica Barcelonesa (1203), el de Cadevall (8240), el de Trèmols (12 871), el de Bernades (800), la Hieraciotheca (2108) y el de Ruiz y Pavón (695)], así como parte del herbario Sennen (2175), Cuatrecasas (416), Costa (11) Vayreda (163) y Munuera (1). Del mismo modo destacamos la incorporación de dos colecciones de material vegetal como son la Xylotheca (145) y la Espermoteca (535).  
 Principalmente se incluye material de la flora del noreste peninsular. Un volumen importante fue reunido gracias al mismo Font Quer y sus colaboradores a lo largo de campañas de recolección desarrolladas en la Península Ibérica y en Marruecos. En el herbario se conservan también plantas de J.M.C. Arvet-Touvet, M. Bernades, A. de Bolòs, O. de Bolòs, R. Bolòs, C. Pau, R. Maire, E. Jahandiez, R. Margalef, P. Montserrat, F. Masclans, E. Batalla y J. Vigo, entre muchos otros.
 Este dataset incluye 4198 tipos, de los que 85 son holotipos. Se pueden consultar también 12 538 imágenes, principalmente de tipos, pero también de otros especímenes de interés</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <distribution scope="document">
-          <online>
-              <url function="information">http://www.ibb.csic.es/</url>
-          </online>
-      </distribution>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>Los especímenes del dataset corresponden principalmente a la región Mediterránea occidental, y los países más representados corresponden a España y Marruecos</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-180</westBoundingCoordinate>
-                      <eastBoundingCoordinate>180</eastBoundingCoordinate>
-                      <northBoundingCoordinate>90</northBoundingCoordinate>
-                      <southBoundingCoordinate>-90</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-              <taxonomicCoverage>
-                    <generalTaxonomicCoverage>Se trata de un dataset de plantas donde las famílias más representadas son Asteraceae (26644 especímenes), Poaceae (23646) y Fabaceae (12594).</generalTaxonomicCoverage>
-                    <taxonomicClassification>
-                          <taxonRankName>Kingdom</taxonRankName>
-                        <taxonRankValue>Plantae</taxonRankValue>
-                    </taxonomicClassification>
-              </taxonomicCoverage>
-      </coverage>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>daily</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Neus</givenName>          <surName>Ibáñez</surName>
-    </individualName>
-<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Directora y Conservadora</positionName>    <address>
-<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>    </address>
-<phone>+34 932890611</phone><electronicMailAddress>nibanez@ibb.csic.es</electronicMailAddress>      </contact>
-      <methods>
-            <methodStep>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://www.ibb.csic.es/</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>Los especímenes del dataset corresponden principalmente a la región Mediterránea occidental, y los países más representados corresponden a España y Marruecos</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-180</westBoundingCoordinate>
+                                <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                                <northBoundingCoordinate>90</northBoundingCoordinate>
+                                <southBoundingCoordinate>-90</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>Se trata de un dataset de plantas donde las famílias más representadas son Asteraceae (26644 especímenes), Poaceae (23646) y Fabaceae (12594).</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Kingdom</taxonRankName>
+                                    <taxonRankValue>Plantae</taxonRankValue>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
                 <description>
-                    <para>NA</para>
+                    <para></para>
                 </description>
-            </methodStep>
-            <sampling>
-                <studyExtent>
-                    <description>
-                        <para>NA</para>
-                    </description>
-                </studyExtent>
-                <samplingDescription>
-                    <para>NA</para>
-                </samplingDescription>
-            </sampling>
-      </methods>
+                <maintenanceUpdateFrequency>daily</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Neus</givenName>                    <surName>Ibáñez</surName>
+            </individualName>
+<organizationName>Instituto Botánico de Barcelona</organizationName><positionName>Directora y Conservadora</positionName>            <address>
+<deliveryPoint>Pg. Migdia s/n</deliveryPoint><city>Barcelona</city><administrativeArea>Barcelona</administrativeArea><postalCode>08038</postalCode><country>SPAIN</country>            </address>
+<phone>+34 932890611</phone><electronicMailAddress>nibanez@ibb.csic.es</electronicMailAddress>            </contact>
+            <methods>
+                    <methodStep>
+                        <description>
+                            <para>NA</para>
+                        </description>
+                    </methodStep>
+                    <sampling>
+                        <studyExtent>
+                            <description>
+                                <para>NA</para>
+                            </description>
+                        </studyExtent>
+                        <samplingDescription>
+                            <para>NA</para>
+                        </samplingDescription>
+                    </sampling>
+            </methods>
 
-      <project >
-          <title>NA</title>
-          <personnel>
-    <individualName>
-          <surName>NA</surName>
-    </individualName>
-    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
-          </personnel>
-          <abstract>
-              <para></para>
-          </abstract>
-          <funding>
-              <para></para>
-          </funding>
-      </project>
-</dataset>
+            <project >
+                <title>NA</title>
+                    <personnel>
+            <individualName>
+                    <surName>NA</surName>
+            </individualName>
+            <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                    </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+            </project>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:44:03Z</dateStamp>
-      <citation identifier="https://www.ibb.csic.es/es/colecciones/herbario/colecciones-herbario/herbario-general/ ">Nualart N, Montes N (2021). Institut Botanic de Barcelona (IBB, CSIC-Ajuntament de Barcelona), BC-Plantae. Institut Botànic de Barcelona (CSIC-Ajuntament de Barcelona). Occurrence dataset https://doi.org/10.15468/pff0t6 accessed via GBIF.org on 2022-10-18.</citation>
-              <resourceLogoUrl>http://www.gbif.es/ipt/logo.do?r=herbariobc</resourceLogoUrl>
-              <collection>
-                <parentCollectionIdentifier>NA</parentCollectionIdentifier>
-                <collectionIdentifier>BC</collectionIdentifier>
-                <collectionName>Colección de plantas vasculares del Instituto Botánico de Barcelona</collectionName>
-              </collection>
-              <formationPeriod>1740-actualidad</formationPeriod>
-                <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:34Z</dateStamp>
+                <citation identifier="https://www.ibb.csic.es/es/colecciones/herbario/colecciones-herbario/herbario-general/ ">Nualart N, Montes N (2021). Institut Botanic de Barcelona (IBB, CSIC-Ajuntament de Barcelona), BC-Plantae. Institut Botànic de Barcelona (CSIC-Ajuntament de Barcelona). Occurrence dataset https://doi.org/10.15468/pff0t6 accessed via GBIF.org on 2023-01-16.</citation>
+                    <resourceLogoUrl>http://www.gbif.es/ipt/logo.do?r=herbariobc</resourceLogoUrl>
+                        <collection>
+                            <parentCollectionIdentifier>NA</parentCollectionIdentifier>
+                            <collectionIdentifier>BC</collectionIdentifier>
+                            <collectionName>Colección de plantas vasculares del Instituto Botánico de Barcelona</collectionName>
+                        </collection>
+                    <formationPeriod>1740-actualidad</formationPeriod>
+                        <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

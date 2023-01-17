@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="cca05dd0-9f88-4d0a-b90a-d3f8f3a3f367"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/w6f6aa</alternateIdentifier>
+                <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=299</alternateIdentifier>
+        <title>University of Arkansas at Monticello</title>
+            <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Richard</givenName>                    <surName>Abbott</surName>
+            </individualName>
+<positionName>Curator</positionName><electronicMailAddress>abbottjr@uamont.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Diana</givenName>                    <surName>Soteropoulos</surName>
+            </individualName>
+<positionName>Arkansas Herbarium Digitization Coordinator</positionName><electronicMailAddress>Diana.Soteropoulos@arkansas.gov</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0002-4247-1375</userId>
+            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-04
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>UAM is a small, regional herbarium in Southeast Arkansas, with over half of the specimens collected from Arkansas. The majority of the 28,000 specimens was collected by founding curator Dr. Eric Sundell. Research is currently focused primarily on teaching.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>University of Arkansas at Monticello</organizationName><electronicMailAddress>abbottjr@uamont.edu</electronicMailAddress>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:37Z</dateStamp>
+                <citation>University of Arkansas at Monticello (2023). University of Arkansas at Monticello. Occurrence dataset https://doi.org/10.15468/w6f6aa accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

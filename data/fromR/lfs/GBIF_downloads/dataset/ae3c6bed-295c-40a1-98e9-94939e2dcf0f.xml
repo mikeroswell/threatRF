@@ -1,227 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="ae3c6bed-295c-40a1-98e9-94939e2dcf0f"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="ae3c6bed-295c-40a1-98e9-94939e2dcf0f"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/ty22qw</alternateIdentifier>
-        <alternateIdentifier>ae3c6bed-295c-40a1-98e9-94939e2dcf0f</alternateIdentifier>
-        <alternateIdentifier>http://ipt-nigeria.gbif.fr/resource?r=higher_plants_collections_of_luh_families_a</alternateIdentifier>
-    <title>Higher Plant Collections of the Lagos University Herbarium (LUH): Families A - Z</title>
-    <creator>
-    <individualName>
-<givenName>Temitope</givenName>          <surName>Onuminya</surName>
-    </individualName>
-<organizationName>University of Lagos</organizationName><positionName>Associate Professor</positionName>    <address>
-<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>    </address>
-<phone>+2347030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>      <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
-    </creator>
-    <creator>
-    <individualName>
-<givenName>Oluwatoyin</givenName>          <surName>Ogundipe</surName>
-    </individualName>
-<organizationName>University of Lagos</organizationName><positionName>Professor</positionName>    <address>
-<deliveryPoint>Department of Botany, University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>    </address>
-<phone>+2348023201618</phone><electronicMailAddress>oogundipe@unilag.edu.ng</electronicMailAddress><onlineUrl>http://cebcem.unilag.edu.ng</onlineUrl>      <userId directory="https://scholar.google.com/citations?user=">VWQwLZgAAAAJ&amp;hl=en</userId>
-    </creator>
-    <creator>
-    <individualName>
-<givenName>Aramide</givenName>          <surName>Igbari</surName>
-    </individualName>
-<organizationName>University of Lagos</organizationName><positionName>Lecturer</positionName>    <address>
-<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>    </address>
-<phone>+234 812 087 8811</phone><electronicMailAddress>aoshingboye@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>    </creator>
-    <creator>
-    <individualName>
-<givenName>Kehinde</givenName>          <surName>Kemabonta</surName>
-    </individualName>
-<organizationName>University of Lagos</organizationName><positionName>Professor</positionName>    <address>
-<deliveryPoint>Department of Zoology, University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>    </address>
-<electronicMailAddress>kkemabonta@unilag.edu.ng</electronicMailAddress>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Temitope</givenName>          <surName>Onuminya</surName>
-    </individualName>
-<organizationName>University of Lagos</organizationName><positionName>Associate Professor</positionName>    <address>
-<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>    </address>
-<phone>+2347030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>      <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
-    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Temitope</givenName>          <surName>Onuminya</surName>
-    </individualName>
-<organizationName>Lecturer</organizationName><positionName>Associate Professor</positionName>    <address>
-<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>    </address>
-<phone>+234 7030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>      <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
-    <role>PRINCIPAL_INVESTIGATOR</role>
-    </associatedParty>
-      <pubDate>
-      2022-06-17
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>This is a record of higher plant collections in the Lagos University Herbarium (LUH)</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>The Lagos University Herbarium is located at the Department of Botany within the Akoka Campus of the University of  Lagos.</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-116.719</westBoundingCoordinate>
-                      <eastBoundingCoordinate>54.141</eastBoundingCoordinate>
-                      <northBoundingCoordinate>43.069</northBoundingCoordinate>
-                      <southBoundingCoordinate>-37.719</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-          <temporalCoverage>
-            <rangeOfDates>
-              <beginDate>
-                <calendarDate>      1926-11-28
+    <dataset>
+            <alternateIdentifier>10.15468/ty22qw</alternateIdentifier>
+                <alternateIdentifier>https://ipt-nigeria.gbif.fr/resource?r=higher_plants_collections_of_luh_families_a</alternateIdentifier>
+                <alternateIdentifier>ae3c6bed-295c-40a1-98e9-94939e2dcf0f</alternateIdentifier>
+                <alternateIdentifier>http://ipt-nigeria.gbif.fr/resource?r=higher_plants_collections_of_luh_families_a</alternateIdentifier>
+        <title>Higher Plant Collections of the Lagos University Herbarium (LUH): Families A - Z</title>
+            <creator>
+            <individualName>
+<givenName>Temitope</givenName>                    <surName>Onuminya</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Associate Professor</positionName>            <address>
+<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<phone>+2347030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>            <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
+            </creator>
+            <creator>
+            <individualName>
+<givenName>Oluwatoyin</givenName>                    <surName>Ogundipe</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Professor</positionName>            <address>
+<deliveryPoint>Department of Botany, University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<phone>+2348023201618</phone><electronicMailAddress>oogundipe@unilag.edu.ng</electronicMailAddress><onlineUrl>http://cebcem.unilag.edu.ng</onlineUrl>            <userId directory="https://scholar.google.com/citations?user=">VWQwLZgAAAAJ&amp;hl=en</userId>
+            </creator>
+            <creator>
+            <individualName>
+<givenName>Aramide</givenName>                    <surName>Igbari</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Lecturer</positionName>            <address>
+<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<phone>+234 812 087 8811</phone><electronicMailAddress>aoshingboye@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>            </creator>
+            <creator>
+            <individualName>
+<givenName>Kehinde</givenName>                    <surName>Kemabonta</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Professor</positionName>            <address>
+<deliveryPoint>Department of Zoology, University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<electronicMailAddress>kkemabonta@unilag.edu.ng</electronicMailAddress>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Temitope</givenName>                    <surName>Onuminya</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Associate Professor</positionName>            <address>
+<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<phone>+2347030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>            <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
+            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Temitope</givenName>                    <surName>Onuminya</surName>
+            </individualName>
+<organizationName>Lecturer</organizationName><positionName>Associate Professor</positionName>            <address>
+<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<phone>+234 7030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>            <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
+            <role>PRINCIPAL_INVESTIGATOR</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Oluwatoyin</givenName>                    <surName>Ogundipe</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Professor</positionName>            <address>
+<deliveryPoint>DEPARTMENT OF BOTANY</deliveryPoint><city>AKOKA</city><administrativeArea>LAGOS</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<phone>+2348023201618</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress>            <userId directory="https://scholar.google.com/citations?user=">VWQwLZgAAAAJ&amp;hl=en</userId>
+            <role>EDITOR</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Victor</givenName>                    <surName>Oroleke</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Technical Assistant</positionName>            <address>
+<deliveryPoint>DEPARTMENT OF BOTANY, Faculty of Science</deliveryPoint><city>AKOKA</city><administrativeArea>LAGOS</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<electronicMailAddress>orolekevictor@gmail.com</electronicMailAddress>            <role>PROCESSOR</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>George</givenName>                    <surName>Nodza</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Lecturer</positionName>            <address>
+<deliveryPoint>DEPARTMENT OF BOTANY</deliveryPoint><city>AKOKA</city><administrativeArea>LAGOS</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<electronicMailAddress>gnodza@unilag.edu.ng</electronicMailAddress>            <role>CURATOR</role>
+            </associatedParty>
+            <pubDate>
+                2022-12-27
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>This is a record of higher plant collections in the Lagos University Herbarium (LUH)</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>The Lagos University Herbarium is located at the Department of Botany within the Akoka Campus of the University of  Lagos.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-116.719</westBoundingCoordinate>
+                                <eastBoundingCoordinate>54.141</eastBoundingCoordinate>
+                                <northBoundingCoordinate>43.069</northBoundingCoordinate>
+                                <southBoundingCoordinate>-37.719</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                    <temporalCoverage>
+                            <rangeOfDates>
+                                <beginDate>
+                                    <calendarDate>                1926-11-28
 </calendarDate>
-              </beginDate>
-              <endDate>
-                <calendarDate>      2021-10-16
+                                </beginDate>
+                                <endDate>
+                                    <calendarDate>                2022-05-27
 </calendarDate>
-              </endDate>
-            </rangeOfDates>
-          </temporalCoverage>
-              <taxonomicCoverage>
-                    <generalTaxonomicCoverage>The collection covers record of Higher Plants in the families A - Z.</generalTaxonomicCoverage>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Acanthaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Amaranthaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Sapindaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Lamiaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Fabaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Ericaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Bombacaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Apocynaaceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Class</taxonRankName>
-                        <taxonRankValue>Phaeophyceae</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Class</taxonRankName>
-                        <taxonRankValue>Pinopsida</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Class</taxonRankName>
-                        <taxonRankValue>Liliopsida</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Class</taxonRankName>
-                        <taxonRankValue>Polypodiopsida</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Class</taxonRankName>
-                        <taxonRankValue>Magnoliopsida</taxonRankValue>
-                    </taxonomicClassification>
-              </taxonomicCoverage>
-      </coverage>
-      <maintenance>
-          <description>
-              <para>Taxonomic errors as well as geographic errors observed were corrected.</para>
-          </description>
-          <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Temitope</givenName>          <surName>Onuminya</surName>
-    </individualName>
-<organizationName>University of Lagos</organizationName><positionName>Associate Professor</positionName>    <address>
-<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>    </address>
-<phone>+2347030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>      <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
-      </contact>
-      <methods>
-            <methodStep>
+                                </endDate>
+                            </rangeOfDates>
+                    </temporalCoverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>The collection covers record of Higher Plants in the phylum Tracheophyta.</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Acanthaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Amaranthaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Sapindaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Lamiaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Fabaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Ericaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Bombacaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Apocynaaceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Phaeophyceae</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Pinopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Liliopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Polypodiopsida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Magnoliopsida</taxonRankValue>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
                 <description>
-                    <para></para>
+                    <para>Taxonomic errors as well as geographic errors observed were corrected.</para>
                 </description>
-            </methodStep>
-      </methods>
+                <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Temitope</givenName>                    <surName>Onuminya</surName>
+            </individualName>
+<organizationName>University of Lagos</organizationName><positionName>Associate Professor</positionName>            <address>
+<deliveryPoint>Department of Botany University of Lagos</deliveryPoint><city>Akoka</city><administrativeArea>Lagos</administrativeArea><postalCode>23401</postalCode><country>NIGERIA</country>            </address>
+<phone>+2347030241452</phone><electronicMailAddress>tadeyemi@unilag.edu.ng</electronicMailAddress><onlineUrl>http://www.unilag.edu.ng/botany</onlineUrl>            <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
+            </contact>
+            <methods>
+                    <methodStep>
+                        <description>
+                            <para></para>
+                        </description>
+                    </methodStep>
+            </methods>
 
-      <project id="BID-AF2020-009-INS">
-          <title>Expanding the visibility of the Lagos Herbarium through Digitization and Mobilization of Plant Specimen Data - BID-AF2020-009-INS</title>
-          <personnel>
-    <individualName>
-<givenName>Temitope</givenName>          <surName>Onuminya</surName>
-    </individualName>
-      <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
-    <role>PRINCIPAL_INVESTIGATOR</role>
-          </personnel>
-          <personnel>
-    <individualName>
-<givenName>Oluwatoyin</givenName>          <surName>Ogundipe</surName>
-    </individualName>
-      <userId directory="https://scholar.google.com/citations?user=">VWQwLZgAAAAJ&amp;hl=en</userId>
-    <role>CURATOR</role>
-          </personnel>
-          <abstract>
-              <para>Mobilization of Vascular plants in the LUH</para>
-          </abstract>
-          <funding>
-              <para>GBIF-BID Grant</para>
-          </funding>
-            <studyAreaDescription>
-                <descriptor name="generic" citableClassificationSystem="false">
-                    <descriptorValue>The study is carried out in Lagos, Nigeria</descriptorValue>
-                </descriptor>
-            </studyAreaDescription>
-            <designDescription>
-                <description>
-                    <para>Data was mobilized from preserved voucher specimens in the LUH.</para>
-                </description>
-            </designDescription>
-      </project>
-</dataset>
+            <project id="BID-AF2020-009-INS">
+                <title>Expanding the visibility of the Lagos Herbarium through Digitization and Mobilization of Plant Specimen Data</title>
+                    <personnel>
+            <individualName>
+<givenName>Temitope</givenName>                    <surName>Onuminya</surName>
+            </individualName>
+            <userId directory="https://scholar.google.com/citations?user=">RXZrUZIAAAAJ&amp;hl=en</userId>
+            <role>PRINCIPAL_INVESTIGATOR</role>
+                    </personnel>
+                    <personnel>
+            <individualName>
+<givenName>Oluwatoyin</givenName>                    <surName>Ogundipe</surName>
+            </individualName>
+            <userId directory="https://scholar.google.com/citations?user=">VWQwLZgAAAAJ&amp;hl=en</userId>
+            <role>EDITOR</role>
+                    </personnel>
+                    <personnel>
+            <individualName>
+<givenName>Victor</givenName>                    <surName>Oroleke</surName>
+            </individualName>
+            <role>PROCESSOR</role>
+                    </personnel>
+                    <personnel>
+            <individualName>
+<givenName>George</givenName>                    <surName>Nodza</surName>
+            </individualName>
+            <role>CURATOR</role>
+                    </personnel>
+                <abstract>
+                    <para>Mobilization of Vascular plants in the Lagos University Herbarium</para>
+                </abstract>
+                <funding>
+                    <para>GBIF-BID Grant</para>
+                </funding>
+                    <studyAreaDescription>
+                        <descriptor name="generic" citableClassificationSystem="false">
+                            <descriptorValue>The study is carried out in Lagos, Nigeria</descriptorValue>
+                        </descriptor>
+                    </studyAreaDescription>
+                    <designDescription>
+                        <description>
+                            <para>Data was mobilized from preserved voucher specimens in the LUH.</para>
+                        </description>
+                    </designDescription>
+            </project>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:54Z</dateStamp>
-      <citation>Onuminya T, Ogundipe O, Igbari A, Kemabonta K (2022). Higher Plant Collections of the Lagos University Herbarium (LUH): Families A - Z. Version 1.3. University of Lagos. Occurrence dataset https://doi.org/10.15468/ty22qw accessed via GBIF.org on 2022-10-18.</citation>
-              <collection>
-                <parentCollectionIdentifier></parentCollectionIdentifier>
-                <collectionIdentifier></collectionIdentifier>
-                <collectionName>Vascular plants of LUH</collectionName>
-              </collection>
-                <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:36Z</dateStamp>
+                <citation>Onuminya T, Ogundipe O, Igbari A, Kemabonta K (2022). Higher Plant Collections of the Lagos University Herbarium (LUH): Families A - Z. Version 1.5. University of Lagos. Occurrence dataset https://doi.org/10.15468/ty22qw accessed via GBIF.org on 2023-01-16.</citation>
+                        <collection>
+                            <parentCollectionIdentifier></parentCollectionIdentifier>
+                            <collectionIdentifier></collectionIdentifier>
+                            <collectionName>Vascular plants of LUH</collectionName>
+                        </collection>
+                        <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

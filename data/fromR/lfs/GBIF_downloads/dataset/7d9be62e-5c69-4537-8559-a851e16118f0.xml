@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="7d9be62e-5c69-4537-8559-a851e16118f0"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="7d9be62e-5c69-4537-8559-a851e16118f0"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/ivsxey</alternateIdentifier>
-        <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=196</alternateIdentifier>
-        <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=196</alternateIdentifier>
-    <title>Appalachian State University, I. W. Carpenter, Jr. Herbarium</title>
-    <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Andrew</givenName>          <surName>Jenkins</surName>
-    </individualName>
-<positionName>Curator</positionName><electronicMailAddress>jenkinsap@appstate.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-    <associatedParty>
-    <individualName>
-<givenName>Zack E.</givenName>          <surName>Murrell</surName>
-    </individualName>
-<positionName>Department Chair</positionName><electronicMailAddress>murrellze@appstate.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-09-02
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The I.W. Carpenter, Jr. Herbarium contains 30,220 as of 6/7/18. The three main functions of the ASU Herbarium are for teaching, maintenance of vouchers, and development of a research herbarium with a focus on the flora of the Southern Appalachians.</para>
-    </abstract>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>Appalachian State University, I. W. Carpenter, Jr. Herbarium</organizationName><phone>828-262-2674</phone><electronicMailAddress>jenkinsap@appstate.edu</electronicMailAddress><onlineUrl>http://herbarium.appstate.edu/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/ivsxey</alternateIdentifier>
+                <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=196</alternateIdentifier>
+                <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=196</alternateIdentifier>
+        <title>Appalachian State University, I. W. Carpenter, Jr. Herbarium</title>
+            <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Andrew</givenName>                    <surName>Jenkins</surName>
+            </individualName>
+<positionName>Curator</positionName><electronicMailAddress>jenkinsap@appstate.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Zack E.</givenName>                    <surName>Murrell</surName>
+            </individualName>
+<positionName>Department Chair</positionName><electronicMailAddress>murrellze@appstate.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-03
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The I.W. Carpenter, Jr. Herbarium contains 30,220 as of 6/7/18. The three main functions of the ASU Herbarium are for teaching, maintenance of vouchers, and development of a research herbarium with a focus on the flora of the Southern Appalachians.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Appalachian State University, I. W. Carpenter, Jr. Herbarium</organizationName><phone>828-262-2674</phone><electronicMailAddress>jenkinsap@appstate.edu</electronicMailAddress><onlineUrl>http://herbarium.appstate.edu/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:53Z</dateStamp>
-      <citation>Appalachian State University (2022). Appalachian State University, I. W. Carpenter, Jr. Herbarium. Occurrence dataset https://doi.org/10.15468/ivsxey accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:33Z</dateStamp>
+                <citation>Appalachian State University (2023). Appalachian State University, I. W. Carpenter, Jr. Herbarium. Occurrence dataset https://doi.org/10.15468/ivsxey accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

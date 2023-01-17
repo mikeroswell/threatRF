@@ -1,131 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="fda694ce-fb23-4c47-b765-4cd7d8b4d43d"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="fda694ce-fb23-4c47-b765-4cd7d8b4d43d"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/yvek7u</alternateIdentifier>
-        <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=usgs_submergedaquaticplants-rybicki</alternateIdentifier>
-        <alternateIdentifier>fda694ce-fb23-4c47-b765-4cd7d8b4d43d</alternateIdentifier>
-        <alternateIdentifier>http://bison.ornl.gov/ipt/resource.do?r=usgs_submergedaquaticplants-rybicki</alternateIdentifier>
-    <title>USGS NRP - Submerged Aquatic Plants - 1966-2009</title>
-    <creator>
-    <individualName>
-<givenName>Annie</givenName>          <surName>Simpson</surName>
-    </individualName>
-<organizationName>U.S. Geological Survey, Core Science Analytics &amp; Synthesis</organizationName><positionName>Biologist &amp; Information Scientist</positionName>    <address>
-<deliveryPoint>12201 Sunrise Valley Drive, Mailstop 302</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>    </address>
-<phone>+1 703-648-4281</phone><electronicMailAddress>asimpson@usgs.gov</electronicMailAddress><onlineUrl>http://www.usgs.gov</onlineUrl>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Nancy</givenName>          <surName>Rybicki</surName>
-    </individualName>
-<organizationName>U.S. Geological Survey, National Research Program</organizationName><positionName>Research Scientist</positionName>    <address>
-<deliveryPoint>12201 Sunrise Valley Drive, Mailstop 430</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>    </address>
-<phone>703-648-5728</phone><electronicMailAddress>nrybicki@usgs.gov</electronicMailAddress>    </metadataProvider>
-      <pubDate>
-      2016-09-27
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>Molecular methods reveal new information on the range and recent history of four related and similar appearing species: Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii (family Hydrocharitaceae).  We also distinguish monoecious from dioecious hydrilla for each of the hydrilla samples.  We examined implications of the confirmed distribution relative to previous records and demonstrated the regional and national need for reverification of these species collected recently or as much as a half century ago. USGS National Research Program (NRP).</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <distribution scope="document">
-          <online>
-              <url function="information">http://water.usgs.gov/nrp/proj.bib/sav/wethome.htm</url>
-          </online>
-      </distribution>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>Continental United States, freshwater habitats.</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-125.31</westBoundingCoordinate>
-                      <eastBoundingCoordinate>-65.94</eastBoundingCoordinate>
-                      <northBoundingCoordinate>49.02</northBoundingCoordinate>
-                      <southBoundingCoordinate>24.72</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-          <temporalCoverage>
-            <rangeOfDates>
-              <beginDate>
-                <calendarDate>      1966
+    <dataset>
+            <alternateIdentifier>10.15468/yvek7u</alternateIdentifier>
+                <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=usgs_submergedaquaticplants-rybicki</alternateIdentifier>
+                <alternateIdentifier>fda694ce-fb23-4c47-b765-4cd7d8b4d43d</alternateIdentifier>
+                <alternateIdentifier>http://bison.ornl.gov/ipt/resource.do?r=usgs_submergedaquaticplants-rybicki</alternateIdentifier>
+        <title>USGS NRP - Submerged Aquatic Plants - 1966-2009</title>
+            <creator>
+            <individualName>
+<givenName>Annie</givenName>                    <surName>Simpson</surName>
+            </individualName>
+<organizationName>U.S. Geological Survey, Core Science Analytics &amp; Synthesis</organizationName><positionName>Biologist &amp; Information Scientist</positionName>            <address>
+<deliveryPoint>12201 Sunrise Valley Drive, Mailstop 302</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+1 703-648-4281</phone><electronicMailAddress>asimpson@usgs.gov</electronicMailAddress><onlineUrl>http://www.usgs.gov</onlineUrl>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Nancy</givenName>                    <surName>Rybicki</surName>
+            </individualName>
+<organizationName>U.S. Geological Survey, National Research Program</organizationName><positionName>Research Scientist</positionName>            <address>
+<deliveryPoint>12201 Sunrise Valley Drive, Mailstop 430</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>            </address>
+<phone>703-648-5728</phone><electronicMailAddress>nrybicki@usgs.gov</electronicMailAddress>            </metadataProvider>
+            <pubDate>
+                2016-09-27
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Molecular methods reveal new information on the range and recent history of four related and similar appearing species: Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii (family Hydrocharitaceae).  We also distinguish monoecious from dioecious hydrilla for each of the hydrilla samples.  We examined implications of the confirmed distribution relative to previous records and demonstrated the regional and national need for reverification of these species collected recently or as much as a half century ago. USGS National Research Program (NRP).</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://water.usgs.gov/nrp/proj.bib/sav/wethome.htm</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>Continental United States, freshwater habitats.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-125.31</westBoundingCoordinate>
+                                <eastBoundingCoordinate>-65.94</eastBoundingCoordinate>
+                                <northBoundingCoordinate>49.02</northBoundingCoordinate>
+                                <southBoundingCoordinate>24.72</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                    <temporalCoverage>
+                            <rangeOfDates>
+                                <beginDate>
+                                    <calendarDate>                1966
 </calendarDate>
-              </beginDate>
-              <endDate>
-                <calendarDate>      2009
+                                </beginDate>
+                                <endDate>
+                                    <calendarDate>                2009
 </calendarDate>
-              </endDate>
-            </rangeOfDates>
-          </temporalCoverage>
-              <taxonomicCoverage>
-                    <generalTaxonomicCoverage>Four related and similar appearing species, Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii (family Hydrocharitaceae).</generalTaxonomicCoverage>
-                    <taxonomicClassification>
-                          <taxonRankName>Species</taxonRankName>
-                        <taxonRankValue>Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii</taxonRankValue>
-                    </taxonomicClassification>
-                    <taxonomicClassification>
-                          <taxonRankName>Family</taxonRankName>
-                        <taxonRankValue>Hydrocharitaceae</taxonRankValue>
-                    </taxonomicClassification>
-              </taxonomicCoverage>
-      </coverage>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Nancy</givenName>          <surName>Rybicki</surName>
-    </individualName>
-<organizationName>U.S. Geological Survey, National Research Program</organizationName><positionName>Research Scientist</positionName>    <address>
-<deliveryPoint>12201 Sunrise Valley Drive, Mailstop 430</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>    </address>
-<phone>703-648-5728</phone><electronicMailAddress>nrybicki@usgs.gov</electronicMailAddress>      </contact>
-
-      <project >
-          <title>Application of molecular techniques for identification of Hydrilla, Egeria, and Elodea (Hydrocharitacea)</title>
-          <personnel>
-    <individualName>
-<givenName>Nancy</givenName>          <surName>Rybicki</surName>
-    </individualName>
-    <role>PRINCIPAL_INVESTIGATOR</role>
-          </personnel>
-          <abstract>
-              <para></para>
-          </abstract>
-          <funding>
-              <para></para>
-          </funding>
-            <studyAreaDescription>
-                <descriptor name="generic" citableClassificationSystem="false">
-                    <descriptorValue>Fresh and archived samples were acquired throughout the USA: about % 30 of the samples were from the Chesapeake Bay watershed. Herbarium samples were acquired with permission from the United States National Herbarium (US), George Mason University, Fairfax, Virginia (GMUF), North Carolina State University (NCSC), University of Florida (FLAS), University of Alabama (UNA), Missouri Botanical Garden (MO), Patuxent Research Refuge Herbarium, and Gabrielson Laboratory, Laurel, MD (PRR).</descriptorValue>
-                </descriptor>
-            </studyAreaDescription>
-            <designDescription>
+                                </endDate>
+                            </rangeOfDates>
+                    </temporalCoverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>Four related and similar appearing species, Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii (family Hydrocharitaceae).</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Species</taxonRankName>
+                                    <taxonRankValue>Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Family</taxonRankName>
+                                    <taxonRankValue>Hydrocharitaceae</taxonRankValue>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
                 <description>
-                    <para>Premise of study: We apply molecular methods to reveal new information on the range and recent history of four related and morphologically similar species, Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii (family Hydrocharitaceae).  We also distinguish monoecious from dioecious hydrilla for each of the hydrilla samples.</para>
+                    <para></para>
                 </description>
-            </designDescription>
-      </project>
-</dataset>
+                <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Nancy</givenName>                    <surName>Rybicki</surName>
+            </individualName>
+<organizationName>U.S. Geological Survey, National Research Program</organizationName><positionName>Research Scientist</positionName>            <address>
+<deliveryPoint>12201 Sunrise Valley Drive, Mailstop 430</deliveryPoint><city>Reston</city><administrativeArea>Virginia</administrativeArea><postalCode>20192</postalCode><country>UNITED_STATES</country>            </address>
+<phone>703-648-5728</phone><electronicMailAddress>nrybicki@usgs.gov</electronicMailAddress>            </contact>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:57Z</dateStamp>
-      <citation>Simpson A, Rybicki N (2016). USGS NRP - Submerged Aquatic Plants - 1966-2009. Version 5.8. United States Geological Survey. Occurrence dataset https://doi.org/10.15468/yvek7u accessed via GBIF.org on 2022-10-18.</citation>
-              <resourceLogoUrl>https://bison.usgs.gov/ipt/logo.do?r=usgs_submergedaquaticplants-rybicki</resourceLogoUrl>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+            <project >
+                <title>Application of molecular techniques for identification of Hydrilla, Egeria, and Elodea (Hydrocharitacea)</title>
+                    <personnel>
+            <individualName>
+<givenName>Nancy</givenName>                    <surName>Rybicki</surName>
+            </individualName>
+            <role>PRINCIPAL_INVESTIGATOR</role>
+                    </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+                    <studyAreaDescription>
+                        <descriptor name="generic" citableClassificationSystem="false">
+                            <descriptorValue>Fresh and archived samples were acquired throughout the USA: about % 30 of the samples were from the Chesapeake Bay watershed. Herbarium samples were acquired with permission from the United States National Herbarium (US), George Mason University, Fairfax, Virginia (GMUF), North Carolina State University (NCSC), University of Florida (FLAS), University of Alabama (UNA), Missouri Botanical Garden (MO), Patuxent Research Refuge Herbarium, and Gabrielson Laboratory, Laurel, MD (PRR).</descriptorValue>
+                        </descriptor>
+                    </studyAreaDescription>
+                    <designDescription>
+                        <description>
+                            <para>Premise of study: We apply molecular methods to reveal new information on the range and recent history of four related and morphologically similar species, Hydrilla verticillata, Egeria densa, Elodea canadensis, and Elodea nuttallii (family Hydrocharitaceae).  We also distinguish monoecious from dioecious hydrilla for each of the hydrilla samples.</para>
+                        </description>
+                    </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:40Z</dateStamp>
+                <citation>Simpson A, Rybicki N (2016). USGS NRP - Submerged Aquatic Plants - 1966-2009. Version 5.8. United States Geological Survey. Occurrence dataset https://doi.org/10.15468/yvek7u accessed via GBIF.org on 2023-01-16.</citation>
+                    <resourceLogoUrl>https://bison.usgs.gov/ipt/logo.do?r=usgs_submergedaquaticplants-rybicki</resourceLogoUrl>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

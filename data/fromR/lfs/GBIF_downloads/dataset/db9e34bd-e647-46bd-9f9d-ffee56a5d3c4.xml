@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="db9e34bd-e647-46bd-9f9d-ffee56a5d3c4"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="db9e34bd-e647-46bd-9f9d-ffee56a5d3c4"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/fy8dsi</alternateIdentifier>
-        <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=193</alternateIdentifier>
-        <alternateIdentifier>http://www.sernecportal.org/portal/collections/misc/collprofiles.php?collid=193</alternateIdentifier>
-        <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=193</alternateIdentifier>
-    <title>Eastern Kentucky University, Ronald L. Jones Herbarium</title>
-    <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Sally</givenName>          <surName>Chambers</surName>
-    </individualName>
-<positionName>Curator</positionName><electronicMailAddress>sally.chambers@eku.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-09-02
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>Several years ago, the Eastern Kentucky University Herbarium (EKY) merged with the Berea College Ralph L. Thompson Herbarium (BEREA) to form a unified collection at Eastern Kentucky University. Both collections are maintained separately in the same physical facilities. As of late 2021, the combined accessioned herbarium collection exceeded 110,000 specimens, and was actively growing. Almost all of the holdings are of vascular plants. This herbarium is by far the largest, most diverse and most active in Kentucky. Significant collections from many people and sources are included in EKY; most of the collections in BEREA are of Ralph Thompson. Significant strengths include Kentucky plants, woody taxa, the Southern Appalachians and Kentucky’s Red River Gorge, though there are significant holdings from a much wider area.</para>
-    </abstract>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>Eastern Kentucky University, Ronald L. Jones Herbarium</organizationName><electronicMailAddress>sally.chambers@eku.edu</electronicMailAddress><onlineUrl>https://herbarium.eku.edu/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/fy8dsi</alternateIdentifier>
+                <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=193</alternateIdentifier>
+                <alternateIdentifier>http://www.sernecportal.org/portal/collections/misc/collprofiles.php?collid=193</alternateIdentifier>
+                <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=193</alternateIdentifier>
+        <title>Eastern Kentucky University, Ronald L. Jones Herbarium</title>
+            <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Sally</givenName>                    <surName>Chambers</surName>
+            </individualName>
+<positionName>Curator</positionName><electronicMailAddress>sally.chambers@eku.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-03
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Several years ago, the Eastern Kentucky University Herbarium (EKY) merged with the Berea College Ralph L. Thompson Herbarium (BEREA) to form a unified collection at Eastern Kentucky University. Both collections are maintained separately in the same physical facilities. As of late 2021, the combined accessioned herbarium collection exceeded 110,000 specimens, and was actively growing. Almost all of the holdings are of vascular plants. This herbarium is by far the largest, most diverse and most active in Kentucky. Significant collections from many people and sources are included in EKY; most of the collections in BEREA are of Ralph Thompson. Significant strengths include Kentucky plants, woody taxa, the Southern Appalachians and Kentucky’s Red River Gorge, though there are significant holdings from a much wider area.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Eastern Kentucky University, Ronald L. Jones Herbarium</organizationName><electronicMailAddress>sally.chambers@eku.edu</electronicMailAddress><onlineUrl>https://herbarium.eku.edu/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:53Z</dateStamp>
-      <citation>Eastern Kentucky University, Ronald L. Jones Herbarium (EKY) (2022). Eastern Kentucky University, Ronald L. Jones Herbarium. Occurrence dataset https://doi.org/10.15468/fy8dsi accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:38Z</dateStamp>
+                <citation>Eastern Kentucky University, Ronald L. Jones Herbarium (EKY) (2023). Eastern Kentucky University, Ronald L. Jones Herbarium. Occurrence dataset https://doi.org/10.15468/fy8dsi accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

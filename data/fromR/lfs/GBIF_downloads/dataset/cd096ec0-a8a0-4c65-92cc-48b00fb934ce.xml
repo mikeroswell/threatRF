@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="cd096ec0-a8a0-4c65-92cc-48b00fb934ce"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="cd096ec0-a8a0-4c65-92cc-48b00fb934ce"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/g85t8z</alternateIdentifier>
-        <alternateIdentifier>cd096ec0-a8a0-4c65-92cc-48b00fb934ce</alternateIdentifier>
-        <alternateIdentifier>http://ipt.tacc.utexas.edu/resource?r=prc</alternateIdentifier>
-    <title>Plant Resources Center</title>
-    <creator>
-    <individualName>
-<givenName>George</givenName>          <surName>Yatskievych</surName>
-    </individualName>
-<organizationName>Plant Resources Center</organizationName><positionName>Curator</positionName>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>George</givenName>          <surName>Yatskievych</surName>
-    </individualName>
-<organizationName>Plant Resources Center</organizationName><positionName>Curator</positionName>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Tomislav</givenName>          <surName>Urban</surName>
-    </individualName>
-<electronicMailAddress>turban@tacc.utexas.edu</electronicMailAddress>    <role>USER</role>
-    </associatedParty>
-      <pubDate>
-      2022-10-13
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The Plant Resources Center of the University of Texas at Austin houses the University of Texas (TEX) and Lundell (LL) herbaria, which combined comprise over a million specimens. The database presented here includes over 210,000 Texas specimens from both herbaria, presented using the Symbiota interface and software. Future development will soon expand the on-line data to the Mexican and type specimens in TEX-LL, and interfaces will then be provided to allow other herbaria in Texas and Mexico (and elsewhere) to database their collections and serve their specimen data and images through the Lundell Portal.</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>George</givenName>          <surName>Yatskievych</surName>
-    </individualName>
-<organizationName>Plant Resources Center</organizationName><positionName>Curator</positionName>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/g85t8z</alternateIdentifier>
+                <alternateIdentifier>cd096ec0-a8a0-4c65-92cc-48b00fb934ce</alternateIdentifier>
+                <alternateIdentifier>http://ipt.tacc.utexas.edu/resource?r=prc</alternateIdentifier>
+        <title>Plant Resources Center</title>
+            <creator>
+            <individualName>
+<givenName>George</givenName>                    <surName>Yatskievych</surName>
+            </individualName>
+<organizationName>Plant Resources Center</organizationName><positionName>Curator</positionName>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>George</givenName>                    <surName>Yatskievych</surName>
+            </individualName>
+<organizationName>Plant Resources Center</organizationName><positionName>Curator</positionName>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Tomislav</givenName>                    <surName>Urban</surName>
+            </individualName>
+<electronicMailAddress>turban@tacc.utexas.edu</electronicMailAddress>            <role>USER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-12
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Plant Resources Center of the University of Texas at Austin houses the University of Texas (TEX) and Lundell (LL) herbaria, which combined comprise over a million specimens. The database presented here includes over 210,000 Texas specimens from both herbaria, presented using the Symbiota interface and software. Future development will soon expand the on-line data to the Mexican and type specimens in TEX-LL, and interfaces will then be provided to allow other herbaria in Texas and Mexico (and elsewhere) to database their collections and serve their specimen data and images through the Lundell Portal.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>George</givenName>                    <surName>Yatskievych</surName>
+            </individualName>
+<organizationName>Plant Resources Center</organizationName><positionName>Curator</positionName>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:56Z</dateStamp>
-      <citation>Yatskievych G (2022). Plant Resources Center. Version 1.92. University of Texas at Austin, Biodiversity Collections. Occurrence dataset https://doi.org/10.15468/g85t8z accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:37Z</dateStamp>
+                <citation>Yatskievych G (2023). Plant Resources Center. Version 1.105. University of Texas at Austin, Biodiversity Collections. Occurrence dataset https://doi.org/10.15468/g85t8z accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

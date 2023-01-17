@@ -1,118 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="af1b4db0-c8ce-4a95-b700-8a6a02bed9d6"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="af1b4db0-c8ce-4a95-b700-8a6a02bed9d6"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/mdnmzb</alternateIdentifier>
-        <alternateIdentifier>https://ipt.plantatlas.usf.edu/resource?r=usf_herb</alternateIdentifier>
-        <alternateIdentifier>af1b4db0-c8ce-4a95-b700-8a6a02bed9d6</alternateIdentifier>
-        <alternateIdentifier>http://ipt.plantatlas.usf.edu/resource?r=usf_herb</alternateIdentifier>
-        <alternateIdentifier>8c7fd0ea-4fef-49c5-b9bf-e7ebe1d08222</alternateIdentifier>
-    <title>University of South Florida Herbarium (USF)</title>
-    <creator>
-    <individualName>
-<givenName>Alan R.</givenName>          <surName>Franck</surName>
-    </individualName>
-<organizationName>University of South Florida</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>4202 E. Fowler Ave, ISA 2015</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620-5150</postalCode><country>UNITED_STATES</country>    </address>
-<phone>+01-813-974-7602</phone><electronicMailAddress>afranck@mail.usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Alan R.</givenName>          <surName>Franck</surName>
-    </individualName>
-<organizationName>University of South Florida</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>4202 E. Fowler Ave, ISA 2015</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620-5150</postalCode><country>UNITED_STATES</country>    </address>
-<phone>+01-813-974-7602</phone><electronicMailAddress>afranck@mail.usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>    </metadataProvider>
-    <metadataProvider>
-    <individualName>
-<givenName>Keith</givenName>          <surName>Bornhorst</surName>
-    </individualName>
-<organizationName>USF Water Institute</organizationName><positionName>IT</positionName>    <address>
-<deliveryPoint>4202 E. Fowler Ave., CHE 304</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620</postalCode><country>UNITED_STATES</country>    </address>
-<phone>+01-813-974-7406</phone><electronicMailAddress>bornhorst@usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Bruce F.</givenName>          <surName>Hansen</surName>
-    </individualName>
-<organizationName>University of South Florida</organizationName><positionName>Associated Research Staff</positionName>    <address>
-<city>Tampa</city><administrativeArea>Florida</administrativeArea><country>UNITED_STATES</country>    </address>
-<phone>+01-813-974-6238</phone><electronicMailAddress>hansen@usf.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-10-13
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The USF Herbarium was established as a research and teaching collection in 1958 by George R. Cooley, two years after the founding of the University of South Florida. The USF Herbarium is the second largest collection in Florida, the seventh largest in the southeastern United States, and ranks in the upper third of the world&amp;#39;s herbaria in size. The herbarium contains approximately 280,000 specimens, consisting of about 260,000 specimens of vascular plants, 14,000 algae, 2,800 bryophytes, 1,300 lichens, and 300 macrofungi. The collection contains approximately 400 type specimens. The herbarium is richest in specimens from Florida (~40%), with additional holdings from North America north of Mexico (~35%), Latin America and the West Indies (~15%), and the Eastern Hemisphere (~10%). Specific groups well represented in the herbarium include Acanthaceae, Apocynaceae, Begoniaceae, Bromeliaceae, Fabaceae, Orchidaceae, and pteridophytes (ferns).</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <distribution scope="document">
-          <online>
-              <url function="information">http://biology.usf.edu/cmmb/research/herbarium/</url>
-          </online>
-      </distribution>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Alan R.</givenName>          <surName>Franck</surName>
-    </individualName>
-<organizationName>University of South Florida</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>4202 E. Fowler Ave, ISA 2015</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620-5150</postalCode><country>UNITED_STATES</country>    </address>
-<phone>+01-813-974-7602</phone><electronicMailAddress>afranck@mail.usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/mdnmzb</alternateIdentifier>
+                <alternateIdentifier>https://ipt.plantatlas.usf.edu/resource?r=usf_herb</alternateIdentifier>
+                <alternateIdentifier>af1b4db0-c8ce-4a95-b700-8a6a02bed9d6</alternateIdentifier>
+                <alternateIdentifier>http://ipt.plantatlas.usf.edu/resource?r=usf_herb</alternateIdentifier>
+                <alternateIdentifier>8c7fd0ea-4fef-49c5-b9bf-e7ebe1d08222</alternateIdentifier>
+        <title>University of South Florida Herbarium (USF)</title>
+            <creator>
+            <individualName>
+<givenName>Alan R.</givenName>                    <surName>Franck</surName>
+            </individualName>
+<organizationName>University of South Florida</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>4202 E. Fowler Ave, ISA 2015</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620-5150</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+01-813-974-7602</phone><electronicMailAddress>afranck@mail.usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Alan R.</givenName>                    <surName>Franck</surName>
+            </individualName>
+<organizationName>University of South Florida</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>4202 E. Fowler Ave, ISA 2015</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620-5150</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+01-813-974-7602</phone><electronicMailAddress>afranck@mail.usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>            </metadataProvider>
+            <metadataProvider>
+            <individualName>
+<givenName>Keith</givenName>                    <surName>Bornhorst</surName>
+            </individualName>
+<organizationName>USF Water Institute</organizationName><positionName>IT</positionName>            <address>
+<deliveryPoint>4202 E. Fowler Ave., CHE 304</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+01-813-974-7406</phone><electronicMailAddress>bornhorst@usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Bruce F.</givenName>                    <surName>Hansen</surName>
+            </individualName>
+<organizationName>University of South Florida</organizationName><positionName>Associated Research Staff</positionName>            <address>
+<city>Tampa</city><administrativeArea>Florida</administrativeArea><country>UNITED_STATES</country>            </address>
+<phone>+01-813-974-6238</phone><electronicMailAddress>hansen@usf.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-12
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The USF Herbarium was established as a research and teaching collection in 1958 by George R. Cooley, two years after the founding of the University of South Florida. The USF Herbarium is the second largest collection in Florida, the seventh largest in the southeastern United States, and ranks in the upper third of the world&amp;#39;s herbaria in size. The herbarium contains approximately 280,000 specimens, consisting of about 260,000 specimens of vascular plants, 14,000 algae, 2,800 bryophytes, 1,300 lichens, and 300 macrofungi. The collection contains approximately 400 type specimens. The herbarium is richest in specimens from Florida (~40%), with additional holdings from North America north of Mexico (~35%), Latin America and the West Indies (~15%), and the Eastern Hemisphere (~10%). Specific groups well represented in the herbarium include Acanthaceae, Apocynaceae, Begoniaceae, Bromeliaceae, Fabaceae, Orchidaceae, and pteridophytes (ferns).</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://biology.usf.edu/cmmb/research/herbarium/</url>
+                </online>
+            </distribution>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Alan R.</givenName>                    <surName>Franck</surName>
+            </individualName>
+<organizationName>University of South Florida</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>4202 E. Fowler Ave, ISA 2015</deliveryPoint><city>Tampa</city><administrativeArea>Florida</administrativeArea><postalCode>33620-5150</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+01-813-974-7602</phone><electronicMailAddress>afranck@mail.usf.edu</electronicMailAddress><onlineUrl>http://florida.plantatlas.usf.edu</onlineUrl>            </contact>
 
-      <project >
-          <title>Atlas of Florida Plants</title>
-          <personnel>
-    <individualName>
-<givenName>Alan</givenName>          <surName>Franck</surName>
-    </individualName>
-    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
-          </personnel>
-          <abstract>
-              <para></para>
-          </abstract>
-          <funding>
-              <para></para>
-          </funding>
-            <studyAreaDescription>
-                <descriptor name="generic" citableClassificationSystem="false">
-                    <descriptorValue>Florida has over 4,700 species of native or naturalized plants in Florida, including over 4,300 species of vascular plants and over 400 species of bryophytes (plants known only from cultivation are not included). The Atlas of Florida Plants is a joint effort by the Institute for Systematic Botany, the University of South Florida, and the USF Water Institute to provide a comprehensive searchable database of plants in the state of Florida. This website also provides access to the USF Herbarium, which houses over 280,000 specimens from around the world (about 50% of these are databased and available online).</descriptorValue>
-                </descriptor>
-            </studyAreaDescription>
-      </project>
-</dataset>
+            <project >
+                <title>Atlas of Florida Plants</title>
+                    <personnel>
+            <individualName>
+<givenName>Alan</givenName>                    <surName>Franck</surName>
+            </individualName>
+            <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                    </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+                    <studyAreaDescription>
+                        <descriptor name="generic" citableClassificationSystem="false">
+                            <descriptorValue>Florida has over 4,700 species of native or naturalized plants in Florida, including over 4,300 species of vascular plants and over 400 species of bryophytes (plants known only from cultivation are not included). The Atlas of Florida Plants is a joint effort by the Institute for Systematic Botany, the University of South Florida, and the USF Water Institute to provide a comprehensive searchable database of plants in the state of Florida. This website also provides access to the USF Herbarium, which houses over 280,000 specimens from around the world (about 50% of these are databased and available online).</descriptorValue>
+                        </descriptor>
+                    </studyAreaDescription>
+            </project>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
-      <citation identifier="https://doi.org/10.15468/mdnmzb">Franck A R, Bornhorst K (2022). University of South Florida Herbarium (USF). Version 7.362. USF Water Institute. Occurrence dataset https://doi.org/10.15468/mdnmzb accessed via GBIF.org on 2022-10-18.</citation>
-              <resourceLogoUrl>https://cdn.plantatlas.org/img/logos/usf-v-black.jpg</resourceLogoUrl>
-              <collection>
-                <parentCollectionIdentifier>Not applicable</parentCollectionIdentifier>
-                <collectionIdentifier>urn:lsid:biocol.org:col:15638</collectionIdentifier>
-                <collectionName>University of South Florida Herbarium</collectionName>
-              </collection>
-                <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:36Z</dateStamp>
+                <citation identifier="https://doi.org/10.15468/mdnmzb">Franck A R, Bornhorst K (2023). University of South Florida Herbarium (USF). Version 7.375. USF Water Institute. Occurrence dataset https://doi.org/10.15468/mdnmzb accessed via GBIF.org on 2023-01-16.</citation>
+                    <resourceLogoUrl>https://cdn.plantatlas.org/img/logos/usf-v-black.jpg</resourceLogoUrl>
+                        <collection>
+                            <parentCollectionIdentifier>Not applicable</parentCollectionIdentifier>
+                            <collectionIdentifier>urn:lsid:biocol.org:col:15638</collectionIdentifier>
+                            <collectionName>University of South Florida Herbarium</collectionName>
+                        </collection>
+                        <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

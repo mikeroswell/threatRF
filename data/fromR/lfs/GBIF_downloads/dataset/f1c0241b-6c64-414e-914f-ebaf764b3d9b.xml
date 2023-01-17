@@ -1,158 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="f1c0241b-6c64-414e-914f-ebaf764b3d9b"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="f1c0241b-6c64-414e-914f-ebaf764b3d9b"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/qdatdf</alternateIdentifier>
-        <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=mvsc-millersville-university</alternateIdentifier>
-    <title>MVSC; The James C. Parks Herbarium at Millersville University</title>
-    <creator>
-    <individualName>
-<givenName>Christopher</givenName>          <surName>Hardy</surName>
-    </individualName>
-<organizationName>Millersville University of Pennsylvania</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>PO Box 1002</deliveryPoint><city>Millersville</city><administrativeArea>PA</administrativeArea><postalCode>17551</postalCode><country>UNITED_STATES</country>    </address>
-<phone>717-871-4317</phone><electronicMailAddress>Christopher.hardy@millersville.edu</electronicMailAddress>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Christopher</givenName>          <surName>Hardy</surName>
-    </individualName>
-<organizationName>Millersville University of Pennsylvania</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>PO Box 1002</deliveryPoint><city>Millersville</city><administrativeArea>PA</administrativeArea><postalCode>17551</postalCode><country>UNITED_STATES</country>    </address>
-<phone>717-871-4317</phone><electronicMailAddress>Christopher.hardy@millersville.edu</electronicMailAddress>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Kevin</givenName>          <surName>Faccenda</surName>
-    </individualName>
-<electronicMailAddress>faccenda@hawaii.edu</electronicMailAddress>    <role>CUSTODIAN_STEWARD</role>
-    </associatedParty>
-      <pubDate>
-      2021-08-04
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The James C. Parks Herbarium at Millersville University (MVSC) holds about 20000 specimens primarily from Lancaster County Pennsylvania. Here is presented, in digitized form, the full herbarium holdings as of 2020, entirely geo-referenced and photographed. The herbarium collection spans from the mid 1800s to the present day and primarily contains vascular plants. The collection includes many rare fern hybrids and forms collected by James C. Parks and Mary Emma Groff. The herbarium also holds the Mary Emma Groff and Mary E. Grebinger collection, notable for their contributions to Lancaster County Botany and the excellent quality of the specimens.</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <distribution scope="document">
-          <online>
-              <url function="information">http://herbarium.millersville.edu</url>
-          </online>
-      </distribution>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>Specimens mainly from the Continental United States. The majority of the specimens come from within Pennsylvania, but we have representation from most states as well as some from Alaska and other countries such as Aruba and Germany.</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-160.7</westBoundingCoordinate>
-                      <eastBoundingCoordinate>122.41</eastBoundingCoordinate>
-                      <northBoundingCoordinate>66.33</northBoundingCoordinate>
-                      <southBoundingCoordinate>9.15</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-          <temporalCoverage>
-            <rangeOfDates>
-              <beginDate>
-                <calendarDate>      1833
+    <dataset>
+            <alternateIdentifier>10.15468/qdatdf</alternateIdentifier>
+                <alternateIdentifier>f1c0241b-6c64-414e-914f-ebaf764b3d9b</alternateIdentifier>
+                <alternateIdentifier>https://bison.usgs.gov/ipt/resource?r=mvsc-millersville-university</alternateIdentifier>
+        <title>MVSC; The James C. Parks Herbarium at Millersville University</title>
+            <creator>
+            <individualName>
+<givenName>Christopher</givenName>                    <surName>Hardy</surName>
+            </individualName>
+<organizationName>Millersville University of Pennsylvania</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>PO Box 1002</deliveryPoint><city>Millersville</city><administrativeArea>PA</administrativeArea><postalCode>17551</postalCode><country>UNITED_STATES</country>            </address>
+<phone>717-871-4317</phone><electronicMailAddress>Christopher.hardy@millersville.edu</electronicMailAddress>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Christopher</givenName>                    <surName>Hardy</surName>
+            </individualName>
+<organizationName>Millersville University of Pennsylvania</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>PO Box 1002</deliveryPoint><city>Millersville</city><administrativeArea>PA</administrativeArea><postalCode>17551</postalCode><country>UNITED_STATES</country>            </address>
+<phone>717-871-4317</phone><electronicMailAddress>Christopher.hardy@millersville.edu</electronicMailAddress>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Kevin</givenName>                    <surName>Faccenda</surName>
+            </individualName>
+<electronicMailAddress>faccenda@hawaii.edu</electronicMailAddress>            <role>CUSTODIAN_STEWARD</role>
+            </associatedParty>
+            <pubDate>
+                2022-12-29
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The James C. Parks Herbarium at Millersville University (MVSC) holds about 20000 specimens primarily from Lancaster County Pennsylvania. Here is presented, in digitized form, the full herbarium holdings as of 2020, entirely geo-referenced and photographed. The herbarium collection spans from the mid 1800s to the present day and primarily contains vascular plants. The collection includes many rare fern hybrids and forms collected by James C. Parks and Mary Emma Groff. The herbarium also holds the Mary Emma Groff and Mary E. Grebinger collection, notable for their contributions to Lancaster County Botany and the excellent quality of the specimens.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://herbarium.millersville.edu</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>Specimens mainly from the Continental United States. The majority of the specimens come from within Pennsylvania, but we have representation from most states as well as some from Alaska and other countries such as Aruba and Germany.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-160.7</westBoundingCoordinate>
+                                <eastBoundingCoordinate>122.41</eastBoundingCoordinate>
+                                <northBoundingCoordinate>66.33</northBoundingCoordinate>
+                                <southBoundingCoordinate>9.15</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                    <temporalCoverage>
+                            <rangeOfDates>
+                                <beginDate>
+                                    <calendarDate>                1833
 </calendarDate>
-              </beginDate>
-              <endDate>
-                <calendarDate>      2020-06-18
+                                </beginDate>
+                                <endDate>
+                                    <calendarDate>                2020-06-18
 </calendarDate>
-              </endDate>
-            </rangeOfDates>
-          </temporalCoverage>
-      </coverage>
-      <purpose>
-          <para>Digitized herbarium data for any natural history purposes</para>
-      </purpose>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Christopher</givenName>          <surName>Hardy</surName>
-    </individualName>
-<organizationName>Millersville University of Pennsylvania</organizationName><positionName>Curator</positionName>    <address>
-<deliveryPoint>PO Box 1002</deliveryPoint><city>Millersville</city><administrativeArea>PA</administrativeArea><postalCode>17551</postalCode><country>UNITED_STATES</country>    </address>
-<phone>717-871-4317</phone><electronicMailAddress>Christopher.hardy@millersville.edu</electronicMailAddress>      </contact>
-      <methods>
-            <methodStep>
+                                </endDate>
+                            </rangeOfDates>
+                    </temporalCoverage>
+            </coverage>
+            <purpose>
+                <para>Digitized herbarium data for any natural history purposes</para>
+            </purpose>
+            <maintenance>
                 <description>
-                    <para>Data were digitized from herbarium labels. Georeferencing was mainly manual by searching google maps and other gazetteers as well as via an automatic geolocation service for some specimens.</para>
+                    <para></para>
                 </description>
-            </methodStep>
-            <sampling>
-                <studyExtent>
-                    <description>
-                        <para>Herbarium data; from various sources and without any consistent collection protocol</para>
-                    </description>
-                </studyExtent>
-                <samplingDescription>
-                    <para>Herbarium data; from various sources and without any consistent collection protocol</para>
-                </samplingDescription>
-            </sampling>
-            <qualityControl>
-                <description>
-                    <para>Most specimens from the North East region of the United states were reviewed by Kevin Faccenda for taxonomic accuracy.</para>
-                </description>
-            </qualityControl>
-      </methods>
+                <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Christopher</givenName>                    <surName>Hardy</surName>
+            </individualName>
+<organizationName>Millersville University of Pennsylvania</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>PO Box 1002</deliveryPoint><city>Millersville</city><administrativeArea>PA</administrativeArea><postalCode>17551</postalCode><country>UNITED_STATES</country>            </address>
+<phone>717-871-4317</phone><electronicMailAddress>Christopher.hardy@millersville.edu</electronicMailAddress>            </contact>
+            <methods>
+                    <methodStep>
+                        <description>
+                            <para>Data were digitized from herbarium labels. Georeferencing was mainly manual by searching google maps and other gazetteers as well as via an automatic geolocation service for some specimens.</para>
+                        </description>
+                    </methodStep>
+                    <sampling>
+                        <studyExtent>
+                            <description>
+                                <para>Herbarium data; from various sources and without any consistent collection protocol</para>
+                            </description>
+                        </studyExtent>
+                        <samplingDescription>
+                            <para>Herbarium data; from various sources and without any consistent collection protocol</para>
+                        </samplingDescription>
+                    </sampling>
+                    <qualityControl>
+                        <description>
+                            <para>Most specimens from the North East region of the United states were reviewed by Kevin Faccenda for taxonomic accuracy.</para>
+                        </description>
+                    </qualityControl>
+            </methods>
 
-      <project >
-          <title>Digitization of the MVSC Herbarium</title>
-          <personnel>
-    <individualName>
-<givenName>Kevin</givenName>          <surName>Faccenda</surName>
-    </individualName>
-    <role>PROCESSOR</role>
-          </personnel>
-          <abstract>
-              <para></para>
-          </abstract>
-          <funding>
-              <para>Funded by Millersville University Biology Department</para>
-          </funding>
-            <studyAreaDescription>
-                <descriptor name="generic" citableClassificationSystem="false">
-                    <descriptorValue>Herbarium data</descriptorValue>
-                </descriptor>
-            </studyAreaDescription>
-            <designDescription>
-                <description>
-                    <para>Herbarium data; from various sources and without any consistent collection protocol</para>
-                </description>
-            </designDescription>
-      </project>
-</dataset>
+            <project >
+                <title>Digitization of the MVSC Herbarium</title>
+                    <personnel>
+            <individualName>
+<givenName>Kevin</givenName>                    <surName>Faccenda</surName>
+            </individualName>
+            <role>PROCESSOR</role>
+                    </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para>Funded by Millersville University Biology Department</para>
+                </funding>
+                    <studyAreaDescription>
+                        <descriptor name="generic" citableClassificationSystem="false">
+                            <descriptorValue>Herbarium data</descriptorValue>
+                        </descriptor>
+                    </studyAreaDescription>
+                    <designDescription>
+                        <description>
+                            <para>Herbarium data; from various sources and without any consistent collection protocol</para>
+                        </description>
+                    </designDescription>
+            </project>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
-      <citation>Hardy C (2021). MVSC; The James C. Parks Herbarium at Millersville University. Millersville University James C. Parks Herbarium. Occurrence dataset https://doi.org/10.15468/qdatdf accessed via GBIF.org on 2022-10-18.</citation>
-              <collection>
-                <parentCollectionIdentifier></parentCollectionIdentifier>
-                <collectionIdentifier></collectionIdentifier>
-                <collectionName>MVSC; The James C. Parks Herbarium at Millersville University</collectionName>
-              </collection>
-                <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
+                <citation>Hardy C (2022). MVSC; The James C. Parks Herbarium at Millersville University. Millersville University James C. Parks Herbarium. Occurrence dataset https://doi.org/10.15468/qdatdf accessed via GBIF.org on 2023-01-16.</citation>
+                        <collection>
+                            <parentCollectionIdentifier></parentCollectionIdentifier>
+                            <collectionIdentifier></collectionIdentifier>
+                            <collectionName>MVSC; The James C. Parks Herbarium at Millersville University</collectionName>
+                        </collection>
+                        <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

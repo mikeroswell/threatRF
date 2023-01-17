@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="abba37fc-a9c3-4de2-bba2-7f929abc937d"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/78jqq4</alternateIdentifier>
+                <alternateIdentifier>https://portal.torcherbaria.org/portal/collections/misc/collprofiles.php?collid=463</alternateIdentifier>
+        <title>Baylor University Herbarium</title>
+            <creator>
+<organizationName>TORCH Portal</organizationName><electronicMailAddress>jbest@brit.org</electronicMailAddress><onlineUrl>https://portal.torcherbaria.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>TORCH Portal</organizationName><electronicMailAddress>jbest@brit.org</electronicMailAddress><onlineUrl>https://portal.torcherbaria.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+                    <surName>Joseph White</surName>
+            </individualName>
+<electronicMailAddress>Joseph_D_White@baylor.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-03
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Baylor University Herbarium was officially founded in 1967 as part of the Department of Biology at Baylor University (BAYLU). Currently located on the 2nd floor, A-wing, of the Baylor Sciences Building, the herbarium was organized by Dr. Floyd F. Davidson in 1967, then chair of the department, with the first curator Ms. Fannie Mae Hurst-Windham. Much of the herbarium is dedicated to Texas flora, though with specimens included from Oklahoma, Louisiana, Central/South America, and China. The herbarium also houses over 200&amp;#43; specimens from Lindheimer, specifically those specimens near New Braunfels and Comanche Spring. Dr. Walter Holmes, Professor Emeritus of Biology at Baylor University, is the most recent curator of the herbarium who has specialized in the genus Mikania (Asteraceae) with the herbarium containing several types specimens.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Baylor University Herbarium</organizationName><electronicMailAddress>Joseph_D_White@baylor.edu</electronicMailAddress>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:36Z</dateStamp>
+                <citation>Baylor University, Mayborn Museum Complex (2023). Baylor University Herbarium. Occurrence dataset https://doi.org/10.15468/78jqq4 accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

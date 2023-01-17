@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="f3f03cbf-1a01-4739-ae15-c1355b8c2dbf"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="f3f03cbf-1a01-4739-ae15-c1355b8c2dbf"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/d51v1f</alternateIdentifier>
-        <alternateIdentifier>https://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=328</alternateIdentifier>
-        <alternateIdentifier>http://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=328</alternateIdentifier>
-    <title>Carnegie Museum of Natural History Herbarium</title>
-    <creator>
-<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-          <surName>Bonnie L. Isaac</surName>
-    </individualName>
-<electronicMailAddress>IsaacB@CarnegieMNH.org</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-10-04
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The Carnegie Museum herbarium (CM) has over 540,000 worldwide vascular plant specimens as well as the best representation in any herbarium of specimens from western Pennsylvania and the Upper Ohio Basin. CM holds the private herbarium of Hannibal and Tyrecca Davis containing 20,000 specimens with a concentration on Rubus (Rosaceae).</para>
-    </abstract>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>Carnegie Museum of Natural History Herbarium</organizationName><electronicMailAddress>IsaacB@CarnegieMNH.org</electronicMailAddress><onlineUrl>https://carnegiemnh.org/research/botany-5/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/d51v1f</alternateIdentifier>
+                <alternateIdentifier>https://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=328</alternateIdentifier>
+                <alternateIdentifier>http://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=328</alternateIdentifier>
+        <title>Carnegie Museum of Natural History Herbarium</title>
+            <creator>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+                    <surName>Bonnie L. Isaac</surName>
+            </individualName>
+<electronicMailAddress>IsaacB@CarnegieMNH.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-01-05
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Carnegie Museum herbarium (CM) has over 540,000 worldwide vascular plant specimens as well as the best representation in any herbarium of specimens from western Pennsylvania and the Upper Ohio Basin. CM holds the private herbarium of Hannibal and Tyrecca Davis containing 20,000 specimens with a concentration on Rubus (Rosaceae).</para>
+            </abstract>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Carnegie Museum of Natural History Herbarium</organizationName><electronicMailAddress>IsaacB@CarnegieMNH.org</electronicMailAddress><onlineUrl>https://carnegiemnh.org/research/botany-5/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
-      <citation>Carnegie Museums (2022). Carnegie Museum of Natural History Herbarium. Occurrence dataset https://doi.org/10.15468/d51v1f accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
+                <citation>Carnegie Museums (2023). Carnegie Museum of Natural History Herbarium. Occurrence dataset https://doi.org/10.15468/d51v1f accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

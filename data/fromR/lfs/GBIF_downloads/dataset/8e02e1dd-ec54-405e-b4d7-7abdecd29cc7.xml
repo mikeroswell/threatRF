@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="8e02e1dd-ec54-405e-b4d7-7abdecd29cc7"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="8e02e1dd-ec54-405e-b4d7-7abdecd29cc7"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/ahwyqb</alternateIdentifier>
-        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=79</alternateIdentifier>
-        <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=79</alternateIdentifier>
-    <title>University of Minnesota Insect Collection</title>
-    <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-<organizationName>University of Minnesota Insect Collection</organizationName><positionName>Collection Manager</positionName><electronicMailAddress>thom1514@umn.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-10-06
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The University of Minnesota Insect Collection’s mission is to explore, describe, and preserve representative specimens of Earth’s remarkable diversity of insects and to make these specimens available to the global community for research and education. Contributions to the collection began in 1879 with specimens of insects and spiders from the North Shore of Lake Superior. During the last 140 years, the collection’s holdings have grown from a regional collection of 3,000 specimens to a major national and international resource of more than 4.06 million specimens. The collection is one of the largest university-affiliated insect collections in North America. Enhancing the collection’s status are 5 resident systematists, computerized inventory management and specimen databases, and the large and historically important affiliated University of Minnesota Natural Resources Library. Current and past National Science Foundation grants have made significant progress in digitizing the collection’s specimen holdings. Research projects associated with the collection have broad taxonomic and geographic scope. Faculty and graduate student research focuses on both aquatic and terrestrial insect groups and includes taxonomic, phylogenetic, and applied questions. The collection is the mainstay of graduate training is systematic entomology at the University of Minnesota.</para>
-    </abstract>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>University of Minnesota Insect Collection</organizationName><electronicMailAddress>thom1514@umn.edu</electronicMailAddress><onlineUrl>http://insectcollection.umn.edu/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/ahwyqb</alternateIdentifier>
+                <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=79</alternateIdentifier>
+                <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=79</alternateIdentifier>
+        <title>University of Minnesota Insect Collection</title>
+            <creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+<organizationName>University of Minnesota Insect Collection</organizationName><positionName>Collection Manager</positionName><electronicMailAddress>thom1514@umn.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2022-10-06
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The University of Minnesota Insect Collection’s mission is to explore, describe, and preserve representative specimens of Earth’s remarkable diversity of insects and to make these specimens available to the global community for research and education. Contributions to the collection began in 1879 with specimens of insects and spiders from the North Shore of Lake Superior. During the last 140 years, the collection’s holdings have grown from a regional collection of 3,000 specimens to a major national and international resource of more than 4.06 million specimens. The collection is one of the largest university-affiliated insect collections in North America. Enhancing the collection’s status are 5 resident systematists, computerized inventory management and specimen databases, and the large and historically important affiliated University of Minnesota Natural Resources Library. Current and past National Science Foundation grants have made significant progress in digitizing the collection’s specimen holdings. Research projects associated with the collection have broad taxonomic and geographic scope. Faculty and graduate student research focuses on both aquatic and terrestrial insect groups and includes taxonomic, phylogenetic, and applied questions. The collection is the mainstay of graduate training is systematic entomology at the University of Minnesota.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>University of Minnesota Insect Collection</organizationName><electronicMailAddress>thom1514@umn.edu</electronicMailAddress><onlineUrl>http://insectcollection.umn.edu/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:56Z</dateStamp>
-      <citation>University of Minnesota Insect Collection (2022). University of Minnesota Insect Collection. Occurrence dataset https://doi.org/10.15468/ahwyqb accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
+                <citation>University of Minnesota Insect Collection (2022). University of Minnesota Insect Collection. Occurrence dataset https://doi.org/10.15468/ahwyqb accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="0d8d90f4-973a-46a1-9ea1-55b0c7b222ea"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="0d8d90f4-973a-46a1-9ea1-55b0c7b222ea"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/dpyqml</alternateIdentifier>
-        <alternateIdentifier>https://biokic2.rc.asu.edu:443/portal/collections/misc/collprofiles.php?collid=220</alternateIdentifier>
-        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=220</alternateIdentifier>
-    <title>San Diego Natural History Museum Entomology Department</title>
-    <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-<organizationName>San Diego Natural History Museum Entomology Department</organizationName><positionName>Collection Manager</positionName>    <address>
-<deliveryPoint>P.O. Box 121390, ,</deliveryPoint><city>San Diego</city><administrativeArea>CA</administrativeArea><postalCode>92112-1390</postalCode><country>UNITED_STATES</country>    </address>
-<electronicMailAddress>mwall@sdnhm.org</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-10-06
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>Collection is heavily focused on the SW USA and NW Mexico, particularly the peninsula of Baja California. Notably strong collections of Lepidoptera and Neuroptera. The median date of specimen acquisition is 1957 with collections ranging from 1905 to present day. Current and near future collection priorities will focus on underrepresented areas in Baja California, particular inland and coastal dunes.</para>
-    </abstract>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>San Diego Natural History Museum Entomology Department</organizationName><electronicMailAddress>mwall@sdnhm.org</electronicMailAddress><onlineUrl>https://www.sdnhm.org/science/entomology/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/dpyqml</alternateIdentifier>
+                <alternateIdentifier>https://biokic2.rc.asu.edu:443/portal/collections/misc/collprofiles.php?collid=220</alternateIdentifier>
+                <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=220</alternateIdentifier>
+        <title>San Diego Natural History Museum Entomology Department</title>
+            <creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+<organizationName>San Diego Natural History Museum Entomology Department</organizationName><positionName>Collection Manager</positionName>            <address>
+<deliveryPoint>P.O. Box 121390, ,</deliveryPoint><city>San Diego</city><administrativeArea>CA</administrativeArea><postalCode>92112-1390</postalCode><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>mwall@sdnhm.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2022-10-06
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Collection is heavily focused on the SW USA and NW Mexico, particularly the peninsula of Baja California. Notably strong collections of Lepidoptera and Neuroptera. The median date of specimen acquisition is 1957 with collections ranging from 1905 to present day. Current and near future collection priorities will focus on underrepresented areas in Baja California, particular inland and coastal dunes.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>San Diego Natural History Museum Entomology Department</organizationName><electronicMailAddress>mwall@sdnhm.org</electronicMailAddress><onlineUrl>https://www.sdnhm.org/science/entomology/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:44:04Z</dateStamp>
-      <citation>San Diego Natural History Museum (2022). San Diego Natural History Museum Entomology Department. Occurrence dataset https://doi.org/10.15468/dpyqml accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:23Z</dateStamp>
+                <citation>San Diego Natural History Museum (2022). San Diego Natural History Museum Entomology Department. Occurrence dataset https://doi.org/10.15468/dpyqml accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

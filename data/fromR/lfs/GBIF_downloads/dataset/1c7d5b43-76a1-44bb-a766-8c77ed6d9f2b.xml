@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="1c7d5b43-76a1-44bb-a766-8c77ed6d9f2b"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="1c7d5b43-76a1-44bb-a766-8c77ed6d9f2b"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/v5seko</alternateIdentifier>
-        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=67</alternateIdentifier>
-        <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=67</alternateIdentifier>
-    <title>Western Washington University Insect Collection</title>
-    <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </creator>
-    <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>    </metadataProvider>
-    <associatedParty>
-<organizationName>Western Washington University Insect Collection</organizationName><positionName>Collection Manager</positionName>    <address>
-<deliveryPoint>Biology Department, Western Washington University, 516 High St.</deliveryPoint><city>Bellingham</city><administrativeArea>WA</administrativeArea><postalCode>98225</postalCode><country>UNITED_STATES</country>    </address>
-<electronicMailAddress>Merrill.Peterson@wwu.edu</electronicMailAddress>    <role>CONTENT_PROVIDER</role>
-    </associatedParty>
-      <pubDate>
-      2022-10-06
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>The Western Washington University Insect Collection houses approximately 50,000 insect specimens. Our geographic area of focus is the northwestern portion of the contiguous United States. Most of our specimens are from the northwestern portion of Washington State, an area that is poorly represented in other collections in the region. The collection is the largest publicly-held insect collection within a 100 mile radius centered on Seattle.  </para>
-    </abstract>
-      <intellectualRights>
-        <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
-      </intellectualRights>
-      <contact>
-<organizationName>Western Washington University Insect Collection</organizationName><electronicMailAddress>Merrill.Peterson@wwu.edu</electronicMailAddress><onlineUrl>http://pnwmoths.biol.wwu.edu/</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/v5seko</alternateIdentifier>
+                <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=67</alternateIdentifier>
+                <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=67</alternateIdentifier>
+        <title>Western Washington University Insect Collection</title>
+            <creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+<organizationName>Western Washington University Insect Collection</organizationName><positionName>Collection Manager</positionName>            <address>
+<deliveryPoint>Biology Department, Western Washington University, 516 High St.</deliveryPoint><city>Bellingham</city><administrativeArea>WA</administrativeArea><postalCode>98225</postalCode><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>Merrill.Peterson@wwu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2022-10-06
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Western Washington University Insect Collection houses approximately 50,000 insect specimens. Our geographic area of focus is the northwestern portion of the contiguous United States. Most of our specimens are from the northwestern portion of Washington State, an area that is poorly represented in other collections in the region. The collection is the largest publicly-held insect collection within a 100 mile radius centered on Seattle.  </para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Western Washington University Insect Collection</organizationName><electronicMailAddress>Merrill.Peterson@wwu.edu</electronicMailAddress><onlineUrl>http://pnwmoths.biol.wwu.edu/</onlineUrl>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:54Z</dateStamp>
-      <citation>Western Washington University Insect Collection (WWUC) (2022). Western Washington University Insect Collection. Occurrence dataset https://doi.org/10.15468/v5seko accessed via GBIF.org on 2022-10-18.</citation>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:23Z</dateStamp>
+                <citation>Western Washington University Insect Collection (WWUC) (2022). Western Washington University Insect Collection. Occurrence dataset https://doi.org/10.15468/v5seko accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>

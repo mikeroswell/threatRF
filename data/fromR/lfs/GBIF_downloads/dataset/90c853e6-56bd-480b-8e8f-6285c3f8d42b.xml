@@ -1,100 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
-        packageId="90c853e6-56bd-480b-8e8f-6285c3f8d42b"  system="http://gbif.org" scope="system"
-  xml:lang="en">
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="90c853e6-56bd-480b-8e8f-6285c3f8d42b"  system="http://gbif.org" scope="system"
+xml:lang="en">
 
-<dataset>
-      <alternateIdentifier>10.15468/nxnqzf</alternateIdentifier>
-        <alternateIdentifier>https://fmipt.fieldmuseum.org/ipt/resource?r=fmnh_seedplants</alternateIdentifier>
-        <alternateIdentifier>http://fmipt.fieldmuseum.org:8080/ipt/resource?r=fmnh_seedplants</alternateIdentifier>
-        <alternateIdentifier>http://fmipt.fieldmuseum.org:8080/ipt/resource.do?r=fmnh_seedplants</alternateIdentifier>
-        <alternateIdentifier>90c853e6-56bd-480b-8e8f-6285c3f8d42b</alternateIdentifier>
-        <alternateIdentifier>14346</alternateIdentifier>
-    <title>Field Museum of Natural History (Botany)  Seed Plant Collection</title>
-    <creator>
-    <individualName>
-<givenName>Sharon</givenName>          <surName>Grant</surName>
-    </individualName>
-<organizationName>Field Museum of Natural History</organizationName><positionName>Technology Liaison to Science</positionName>    <address>
-<deliveryPoint>1400 S Lake Shore Drive</deliveryPoint><city>Chicago</city><administrativeArea>IL</administrativeArea><postalCode>60605</postalCode><country>UNITED_STATES</country>    </address>
-<phone>3126657203</phone><electronicMailAddress>sgrant@fieldmuseum.org</electronicMailAddress><onlineUrl>http://fieldmuseum.org/users/sharon-grant</onlineUrl>    </creator>
-    <metadataProvider>
-    <individualName>
-<givenName>Christine</givenName>          <surName>Niezgoda</surName>
-    </individualName>
-<organizationName>Field Museum of Natural History</organizationName><positionName>Collections Manager</positionName>    <address>
-<deliveryPoint>1400 S Lake Shore Drive</deliveryPoint><city>Chicago</city><administrativeArea>IL</administrativeArea><postalCode>60605</postalCode><country>UNITED_STATES</country>    </address>
-<phone>3126657203</phone><electronicMailAddress>cniezgoda@fieldmuseum.org</electronicMailAddress><onlineUrl>http://fieldmuseum.org/users/christine-niezgoda</onlineUrl>    </metadataProvider>
-    <associatedParty>
-    <individualName>
-<givenName>Richard</givenName>          <surName>Ree</surName>
-    </individualName>
-<organizationName>Field Museum of Natural History</organizationName><positionName>Associate Curator of Botany</positionName>    <address>
-<deliveryPoint>1400 S Lake Shore Drive</deliveryPoint><city>Chicago</city><administrativeArea>IL</administrativeArea><postalCode>60605</postalCode><country>UNITED_STATES</country>    </address>
-<electronicMailAddress>rree@fieldmuseum.org</electronicMailAddress><onlineUrl>http://fieldmuseum.org/users/richard-ree</onlineUrl>    <role>PRINCIPAL_INVESTIGATOR</role>
-    </associatedParty>
-      <pubDate>
-      2020-05-11
-      </pubDate>
-    <language>ENGLISH</language>
-    <abstract>
-        <para>Strong representation of neotropical taxa is credited to the many floristic projects and collection-oriented research programs, an integral part of the department since its inception. Especially rich are holdings in the neotropical families Rubiaceae, Asteraceae, Palmae, Fabaceae, Piperaceae and Solanaceae, primarily due to the work of present or former staff botanists. The Central American material is overall one of the world&amp;#39;s finest single collections with special strengths in Guatemala, Honduras and Costa Rica. The South American collections are important with special strengths in Venezuela, Colombia, Ecuador and Peru. A good representation in North American taxa is found, especially for Missouri and Illinois, and unmarked types are commonly discovered in these holdings.</para>
-    </abstract>
-        <keywordSet>
-              <keyword>Occurrence</keyword>
-              <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
-        </keywordSet>
-        <keywordSet>
-              <keyword>Specimen</keyword>
-              <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
-        </keywordSet>
-      <additionalInfo>
-          <para>https://www.fieldmuseum.org/field-museum-natural-history-conditions-and-suggested-norms-use-collections-data-and-images</para>
-      </additionalInfo>
-      <intellectualRights>
-        <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
-      </intellectualRights>
-      <distribution scope="document">
-          <online>
-              <url function="information">http://fieldmuseum.org/explore/department/botany/seedplants/collections</url>
-          </online>
-      </distribution>
-      <coverage>
-            <geographicCoverage>
-                  <geographicDescription>Global</geographicDescription>
-                  <boundingCoordinates>
-                      <westBoundingCoordinate>-180</westBoundingCoordinate>
-                      <eastBoundingCoordinate>180</eastBoundingCoordinate>
-                      <northBoundingCoordinate>90</northBoundingCoordinate>
-                      <southBoundingCoordinate>-90</southBoundingCoordinate>
-                  </boundingCoordinates>
-            </geographicCoverage>
-      </coverage>
-      <maintenance>
-          <description>
-              <para></para>
-          </description>
-          <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
-      </maintenance>
-      <contact>
-    <individualName>
-<givenName>Sharon</givenName>          <surName>Grant</surName>
-    </individualName>
-<organizationName>Field Museum of Natural History</organizationName><positionName>Technology Liaison to Science</positionName>    <address>
-<deliveryPoint>1400 S Lake Shore Drive</deliveryPoint><city>Chicago</city><administrativeArea>IL</administrativeArea><postalCode>60605</postalCode><country>UNITED_STATES</country>    </address>
-<phone>3126657203</phone><electronicMailAddress>sgrant@fieldmuseum.org</electronicMailAddress><onlineUrl>http://fieldmuseum.org/users/sharon-grant</onlineUrl>      </contact>
+    <dataset>
+            <alternateIdentifier>10.15468/nxnqzf</alternateIdentifier>
+                <alternateIdentifier>https://fmipt.fieldmuseum.org/ipt/resource?r=fmnh_seedplants</alternateIdentifier>
+                <alternateIdentifier>http://fmipt.fieldmuseum.org:8080/ipt/resource?r=fmnh_seedplants</alternateIdentifier>
+                <alternateIdentifier>http://fmipt.fieldmuseum.org:8080/ipt/resource.do?r=fmnh_seedplants</alternateIdentifier>
+                <alternateIdentifier>90c853e6-56bd-480b-8e8f-6285c3f8d42b</alternateIdentifier>
+                <alternateIdentifier>14346</alternateIdentifier>
+        <title>Field Museum of Natural History (Botany) Seed Plant Collection</title>
+            <creator>
+            <individualName>
+<givenName>Sharon</givenName>                    <surName>Grant</surName>
+            </individualName>
+<organizationName>Field Museum of Natural History</organizationName><positionName>Information Systems Director</positionName>            <address>
+<city>Chicago</city><administrativeArea>IL</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>sgrant@fieldmuseum.org</electronicMailAddress>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Matt</givenName>                    <surName>von Konrat</surName>
+            </individualName>
+<organizationName>Field Museum of Natural History</organizationName><positionName>Head of Botany Collections</positionName>            <address>
+<city>Chicago</city><administrativeArea>IL</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>mvonkonrat@fieldmuseum.org</electronicMailAddress>            </metadataProvider>
+            <pubDate>
+                2022-12-21
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Strong representation of neotropical taxa is credited to the many floristic projects and collection-oriented research programs, an integral part of the department since its inception. Especially rich are holdings in the neotropical families Rubiaceae, Asteraceae, Palmae, Fabaceae, Piperaceae and Solanaceae, primarily due to the work of present or former staff botanists. The Central American material is overall one of the world&amp;#39;s finest single collections with special strengths in Guatemala, Honduras and Costa Rica. The South American collections are important with special strengths in Venezuela, Colombia, Ecuador and Peru. A good representation in North American taxa is found, especially for Missouri and Illinois, and unmarked types are commonly discovered in these holdings.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <additionalInfo>
+                <para>https://www.fieldmuseum.org/field-museum-natural-history-conditions-and-suggested-norms-use-collections-data-and-images</para>
+            </additionalInfo>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Sharon</givenName>                    <surName>Grant</surName>
+            </individualName>
+<organizationName>Field Museum of Natural History</organizationName><positionName>Information Systems Director</positionName>            <address>
+<city>Chicago</city><administrativeArea>IL</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>sgrant@fieldmuseum.org</electronicMailAddress>            </contact>
 
-</dataset>
+    </dataset>
 
-<additionalMetadata>
-    <metadata>
-      <gbif>
-        <dateStamp>2022-10-18T16:43:55Z</dateStamp>
-      <citation>Grant S, Niezgoda C (2020). Field Museum of Natural History (Botany)  Seed Plant Collection. Version 11.12. Field Museum. Occurrence dataset https://doi.org/10.15468/nxnqzf accessed via GBIF.org on 2022-10-18.</citation>
-              <resourceLogoUrl>https://fmipt.fieldmuseum.org/ipt/logo.do?r=fmnh_seedplants</resourceLogoUrl>
-      </gbif>
-    </metadata>
-</additionalMetadata>
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
+                <citation>Grant S, von Konrat M (2022). Field Museum of Natural History (Botany) Seed Plant Collection. Version 11.14. Field Museum. Occurrence dataset https://doi.org/10.15468/nxnqzf accessed via GBIF.org on 2023-01-16.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
 
 </eml:eml>
