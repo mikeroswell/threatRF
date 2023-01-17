@@ -54,3 +54,26 @@ data/fromR/lfs/leps_direct_from_gbif.csv filter=lfs diff=lfs merge=lfs -text
 /occurrence.txt filter=lfs diff=lfs merge=lfs -text
 /verbatim.txt filter=lfs diff=lfs merge=lfs -text
 >>>>>>> c0ebffdb90cf6389f7a25e7a14485692e31c3331
+data/fromR/lfs/100_100_fits_20230113.rda filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/0182506-220831081235567.zip filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/100_100_fits_20221021_espindolab.rda filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/100_100_fits_20230105.rda filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/occ_with_status_long.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/excluded_records.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/native_records.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/final_fits_20221219.RDA filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/0101566-220831081235567.zip filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/100_100_fits_20221215.rda filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/final_fits_20221108.RDA filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/final_fits_20221202.RDA filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/final_fits_20230116.RDA filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/100_100_fits_20221202.rda filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/tofit.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/final_fits_20230112.RDA filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/100_100_fits_20221018_espindolab.rda filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/final_fits_20221031_espindolab.RDA filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/tofit_summary.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/tofit_summary_complete.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/all_model_data.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/predictions.csv filter=lfs diff=lfs merge=lfs -text
+data/fromR/lfs/0249307-220831081235567.zip filter=lfs diff=lfs merge=lfs -text
