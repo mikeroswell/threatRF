@@ -35,16 +35,16 @@ load(file="data/fromR/lfs/to_predict.RDA")
 
 almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
                                  lon = sf::st_coordinates(.)[,2]) %>% 
-  group_by(genus, species, kingdomKey) %>%
+  group_by(genus, species, kingdomKey, simple_status) %>%
   mutate(maxlat = max(lat, na.rm =T)
          , minlat = min(lat, na.rm = T)
          , maxlon = max(lon, na.rm = T)
          , minlon = min(lon, na.rm = T)
-         , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
-                                          , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")
+         # , simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
+                                          # , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")
+         # )
          )
-         )
-  )
+  
 
 almost %>% 
   ungroup() %>% 
@@ -83,8 +83,8 @@ tofit_summary_complete <- tofit_summary %>% drop_na()
 
 # for the testing and training dataset, drop the ones with unknown status
 classed <- tofit_summary_complete %>% 
-  filter(simple_status_mu != 1) %>% 
-  mutate(simple_status_mu = if_else(simple_status_mu ==3, "secure", "threatened"))# 1 corresponds to "NONE"
+  filter(simple_status_mu != "unranked") %>% 
+  mutate(simple_status_mu = if_else(simple_status_mu =="threat", "secure", "threatened"))# 1 corresponds to "NONE"
 
 
 

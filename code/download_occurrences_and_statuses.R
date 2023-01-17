@@ -32,24 +32,26 @@ null_to_NA <- function(x){
 # likely takes several minutes.
 # does not need to be redone each time code is run
 
-# MD_vasc_and_lep_doi <- occ_download(
-#   user = gbif_user
-#   , pwd = gbif_pwd
-#   , email = gbif_email
-#   , pred_in("taxonKey", c(7707728, 797))
-#   , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
-#   , pred_in("stateProvince", "Maryland")
-#   , pred("hasCoordinate", TRUE)
-#   , pred("sendNotification", TRUE)
-#   , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
-#   )
+MD_vasc_and_lep_doi <- occ_download(
+  user = gbif_user
+  , pwd = gbif_pwd
+  , email = gbif_email
+  , pred_in("taxonKey", c(7707728, 797))
+  , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
+  , pred_in("stateProvince", "Maryland")
+  , pred("hasCoordinate", TRUE)
+  # , pred("sendNotification", TRUE)
+  , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
+  )
 
 # # this reveals status of all gbif download requests
-# occ_download_list()
+# occ_download_list( user = gbif_user
+#                    , pwd = gbif_pwd
+#                   )
 
 
 
-# # this actually downloads the data (~142 MB)
+# # this actually downloads the data (~143 MB)
 # occ_download_get(MD_vasc_and_lep_doi, path = "data/fromR/lfs", overwrite = TRUE)
 
 # # another function to read into R's brain
@@ -62,7 +64,7 @@ null_to_NA <- function(x){
 # MD_vasc_lep <- bind.gbif(GBIF_plant_lep)
 # after a bit of exploration I feel good about not going with this process.
 # instead unzip and just grab the occurrence data themselves for now
-# unzip("data/fromR/lfs/0101566-220831081235567.zip", exdir = "data/fromR/lfs/GBIF_downloads")
+# unzip("data/fromR/lfs/0249307-220831081235567.zip", exdir = "data/fromR/lfs/GBIF_downloads")
 MD_plant_lep_occ <- data.table::fread("data/fromR/lfs/GBIF_downloads/occurrence.txt")
 # # note this returns a warning about parsing th efile (is it weird it gets demonic after line 666?)
 head(MD_plant_lep_occ)
@@ -331,7 +333,7 @@ all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 natives <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
   filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
-  filter((!exotic...273| is.na(exotic...273)), (!exotic...275|is.na(exotic...275))) %>%
+  filter((!exotic...275| is.na(exotic...275)), (!exotic...277|is.na(exotic...277))) %>%
   select(gbifID
          , genus
          , species
@@ -343,18 +345,24 @@ natives <- all_with_stat %>%
          , order
          , roundedSRank
          , simple_status) %>% 
-  ungroup() %>%
-  group_by(genus, species, roundedSRank, decimalLongitude, decimalLatitude) %>% 
-  slice_head(n = 1) %>% 
+  ungroup() %>% 
   group_by(genus, species) %>% 
   mutate(simple_status = if_else("threat" %in% simple_status, "threat"
-        , if_else("secure" %in% simple_status, "secure", "unranked")))
+        , if_else("secure" %in% simple_status, "secure", "unranked"))) %>% 
+  group_by(genus, species, simple_status, decimalLongitude, decimalLatitude) %>% 
+  slice_head(n = 1) 
 
 natives %>%
   ungroup() %>% 
   mutate(gs = paste(genus, species)) %>%
   group_by(kingdomKey, simple_status) %>% 
   summarize(occ = n(), spp = n_distinct(gs)) 
+
+natives %>%
+  sf::st_drop_geometry() %>% 
+  group_by(genus, species, simple_status) %>% 
+  summarize(locs = n_distinct(decimalLatitude), sranks = n_distinct(roundedSRank), tot = n()) %>% 
+  filter(species == "pauciflora")
 
 # # look at plants since I have a feel for them
 # natives %>%
@@ -366,7 +374,7 @@ natives %>%
 
 excludeds <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
-  filter((exclude & !has_nonNative_ssp) | exotic...273 |exotic...275) %>%
+  filter((exclude & !has_nonNative_ssp) | exotic...275 |exotic...277) %>%
   select(gbifID
          , genus
          , species
@@ -379,10 +387,11 @@ excludeds <- all_with_stat %>%
          , roundedSRank
          , simple_status) %>% 
   ungroup() %>% 
-  group_by(genus, species, roundedSRank, decimalLongitude, decimalLatitude) %>% 
-  slice_head(n = 1) %>% 
   mutate(simple_status = if_else("threat" %in% simple_status, "threat"
-                                 , if_else("secure" %in% simple_status, "secure", "unranked")))
+                                 , if_else("secure" %in% simple_status
+                                           , "secure", "unranked"))) %>% 
+  group_by(genus, species, simple_status, decimalLongitude, decimalLatitude) %>% 
+  slice_head(n = 1) 
   
 
 
