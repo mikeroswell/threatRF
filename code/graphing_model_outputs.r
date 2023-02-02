@@ -334,35 +334,35 @@ threshlist
 ot
 
 # make predictions on the new data
-predict_unclassified <- map_dfr(c(1, 2), function(tax){
-  kk <- c(1,6)[tax]
-  raw <- tofit_summary_complete %>%
-    filter(kingdomKey == kk & simple_status_mu == "unranked" ) %>%
-    drop_na()
-  dat <- dropper(raw)
-  og <- fix.mod(final_fits[[tax]]
-                , dat
-                , "simple_status_mu")
-  preds <- predict(object = fix.mod(final_fits[[tax]]
-                                    , dat
-                                    , "simple_status_mu")
-                   , newdata = dat
-                   , type="prob")
-
-  bind_cols(raw %>% select(genus, species)
-            , preds
-            , taxon = c( "lepidoptera", "plantae" )[tax])
-})
-
-predict_preclassified<-map_dfr(1:2, function(tax){
-  threshlist[[tax]]$train.preds
-})
-write.csv(predict_unclassified, "data/fromR/predict_unclassified.csv"
-          , row.names = FALSE)
-
-write.csv(predict_preclassified, "data/fromR/predict_preclassified.csv"
-          , row.names = FALSE)
-
+# predict_unclassified <- map_dfr(c(1, 2), function(tax){
+#   kk <- c(1,6)[tax]
+#   raw <- tofit_summary_complete %>%
+#     filter(kingdomKey == kk & simple_status_mu == "unranked" ) %>%
+#     drop_na()
+#   dat <- dropper(raw)
+#   og <- fix.mod(final_fits[[tax]]
+#                 , dat
+#                 , "simple_status_mu")
+#   preds <- predict(object = fix.mod(final_fits[[tax]]
+#                                     , dat
+#                                     , "simple_status_mu")
+#                    , newdata = dat
+#                    , type="prob")
+# 
+#   bind_cols(raw %>% select(genus, species)
+#             , preds
+#             , taxon = c( "lepidoptera", "plantae" )[tax])
+# })
+# 
+# predict_preclassified<-map_dfr(1:2, function(tax){
+#   threshlist[[tax]]$train.preds
+# })
+# write.csv(predict_unclassified, "data/fromR/predict_unclassified.csv"
+#           , row.names = FALSE)
+# 
+# write.csv(predict_preclassified, "data/fromR/predict_preclassified.csv"
+#           , row.names = FALSE)
+# 
 
 predict_preclassified <- read.csv("data/fromR/predict_preclassified.csv")
 predict_unclassified <- read.csv("data/fromR/predict_unclassified.csv")
@@ -727,11 +727,11 @@ w_preds %>%
 pdf("figures/for_fun_are_higher_S_ranks_getting_more_votes.pdf")
 w_preds %>% 
   sf::st_drop_geometry() %>% 
-  group_by(genus, species, roundedSRank, threatened, taxon) %>% 
+  group_by(genus, species, roundedSRank, secure, taxon) %>% 
   filter(!is.na(taxon)) %>% 
   summarize(n()) %>% 
   filter(roundedSRank %in% c("S1", "S2", "S3", "S4", "S5")) %>% 
-  ggplot(aes(as.numeric(as.factor(roundedSRank)), threatened))+
+  ggplot(aes(as.numeric(as.factor(roundedSRank)), secure))+
   geom_boxplot(aes(group = roundedSRank))+
   ggbeeswarm::geom_beeswarm()+
   theme_classic()+
@@ -741,12 +741,12 @@ dev.off()
 
 # look at the threatened species
 View(predict_unclassified %>% 
-       arrange(desc(threatened)) %>% 
+       arrange(desc(secure)) %>% 
        filter(taxon == "lepidoptera")
 )
 
 View(predict_unclassified %>% 
-       arrange(desc(threatened)) %>% 
+       arrange(desc(secure)) %>% 
        filter(taxon == "plantae")
 )
 
