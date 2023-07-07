@@ -30,13 +30,13 @@ str(knapp_raw)
 knapp_next <- knapp_raw %>% 
   mutate(sl = str_length(V1)
          , V1=str_replace(.data$V1, "( d)([a-z]{1,2}) ", "fid\\2 ")
-         , V1=str_replace(.data$V1, "avesce", "flavesce")
-         , V1=str_replace(.data$V1, " avu", " flavu")
+         , V1=str_replace(.data$V1, " avesce", "flavesce")
+         , V1=str_replace(.data$V1, " avu", "flavu")
          , V1=str_replace(.data$V1, " exuo", " flexuo")
-         , V1=str_replace(.data$V1, "avico", "flavico")
-         , V1=str_replace(.data$V1, "uvia", "fluvia")
-         , V1=str_replace(.data$V1, "licinus ", "filicinus ")
-         , V1=str_replace(.data$V1, "liculm", "filiculm")
+         , V1=str_replace(.data$V1, " avico", "flavico")
+         , V1=str_replace(.data$V1, " uvia", "fluvia")
+         , V1=str_replace(.data$V1, " licinus ", "filicinus ")
+         , V1=str_replace(.data$V1, " liculm", "filiculm")
          , V1=str_replace(.data$V1, "ru dulum", "rufidulum")
          , V1=str_replace(.data$V1, "ra nesq", "rafinesq")
          , V1=str_replace(.data$V1, " lifor", " filifor")
@@ -65,6 +65,7 @@ knapp_next <- knapp_raw %>%
          , V1=str_replace(.data$V1, " uitans", " fluitans")
          , V1=str_replace(.data$V1, "( a)([a-z]ellaris)", " fla\\2")
          , V1=str_replace(.data$V1, " exip", " flexip")
+         , V1=str_replace(.data$V1, " cinale", "ficinale")
          , V1=str_replace(.data$V1, "Carex ssa", "Carex fissa"))%>% 
   filter(sl > 2)
 
@@ -119,6 +120,7 @@ n_distinct(towards_useful$gs)
 
 towards_useful %>% filter(str_length(species)<4)
 
+
 # looks like those that exist are mostly character rendering problems.. now fixed 
 
 towards_useful %>% filter(grepl("fluvia", obs_full))
@@ -126,9 +128,9 @@ towards_useful %>% filter(grepl("fluvia", obs_full))
 towards_useful[grepl("flave", towards_useful$species),]
 towards_useful[grepl("flex", towards_useful$species),]
 
-towards_useful %>% filter(grepl("fluvia", obs_full))
+towards_useful %>% filter(grepl("fluvia", obs_full)) %>% select(genus, species)
 towards_useful %>% filter(grepl("fidu", obs_full)) %>% select(species)
-towards_useful %>% filter(grepl("Viburnum", obs_full))
+towards_useful %>% filter(grepl("Viburnum", obs_full)) %>% select(gs)
 
 # check out the duplicated spp
 # View(towards_useful %>% group_by(gs) %>% mutate(dups = n()) %>% filter(dups >1))
@@ -166,16 +168,16 @@ towards_useful %>% group_by(exclude) %>% summarize(n_distinct(gs))
 
 # towards_useful %>% filter(!exclude) %>% pull(gs) %>% unique()
 # View(towards_useful)
-write.csv(towards_useful, "data/fromR/knapp_to_check.csv", row.names = FALSE)
-
+# write.csv(towards_useful, "data/fromR/knapp_to_check.csv", row.names = FALSE)
+# read.csv(towards_useful)
 
 # check names against GBIF, I guess
-# namecheck2 <- towards_useful %>% 
-#   mutate(gs = paste(genus, species)) %>% 
-#   pull(gs) %>% 
+# namecheck2 <- towards_useful %>%
+#   mutate(gs = paste(genus, species)) %>%
+#   pull(gs) %>%
 #   sapply(function(x){
 #     rgbif::name_backbone(name = x, verbose = TRUE)
-#   }) %>% 
+#   }) %>%
 #   map_dfr(bind_rows, .id = "gs")
 
 

@@ -314,26 +314,41 @@ plant_joined <- occ_stat_plants %>%
                         , "orderKey", "familyKey", "genusKey", "speciesKey"
                         , "class", "gs")), by = c("withspace" = "accepted_gs"))  
 
+# check species not in flora
+# plant_joined %>% 
+#   filter(is.na(verbiage) #&! grepl("fl", gs) &! grepl("fi", gs)
+#          ) %>% 
+#   group_by(gs) %>% 
+#   summarize(recs = n()) %>% 
+#   filter(recs >2) %>% 
+#   arrange(desc(recs)) %>% View()
+#  
 all_with_stat<- bind_rows(lep_joined, plant_joined)
-
-
-# summary data
-# plant_stats %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
-#                                                          , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))) %>%
-#   group_by(simple_status) %>% summarize(n())
-
-
-# don't delete info, but here is where we can simplify status (also an e.g.)
-data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
+# 
+# 
+# # summary data
+# # plant_stats %>% mutate(simple_status = factor(if_else(roundedSRank %in% c("S4","S5"), "secure"
+# #                                                          , if_else(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threatened", "NONE")))) %>%
+# #   group_by(simple_status) %>% summarize(n())
+# 
+# 
+# # don't delete info, but here is where we can simplify status (also an e.g.)
+# data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
 
 all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 # all_with_stat %>% filter(grepl("^[^[:alnum:]]", species))
 # all_with_stat %>% filter(grepl("[^[:alnum:][:punct:]]", species)) %>% select (genus, species, gs)
 
 natives <- all_with_stat %>%
+  filter((kingdomKey == 6 & ( verb_length > 0
+                              )
+          )|kingdomKey ==1) %>% 
   group_by(genus, species, speciesKey) %>%
   filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
+  filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>% 
   filter((!exotic...275| is.na(exotic...275)), (!exotic...277|is.na(exotic...277))) %>%
+  # deal with spp not in Knapp
+ 
   select(gbifID
          , genus
          , species
@@ -351,6 +366,8 @@ natives <- all_with_stat %>%
         , if_else("secure" %in% simple_status, "secure", "unranked"))) %>% 
   group_by(genus, species, simple_status, decimalLongitude, decimalLatitude) %>% 
   slice_head(n = 1) 
+
+
 
 natives %>%
   ungroup() %>% 
@@ -373,8 +390,10 @@ natives %>%
 
 
 excludeds <- all_with_stat %>%
-  group_by(genus, species, speciesKey) %>%
-  filter((exclude & !has_nonNative_ssp) | exotic...275 |exotic...277) %>%
+  group_by(genus, species, speciesKey)  %>% 
+  filter((exclude & !has_nonNative_ssp) | exotic...275 |exotic...277 |
+           !(kingdomKey == 6 & ( verb_length  >0            )
+           ) | (grepl("campestre", species) & grepl("Acer", genus))) %>%
   select(gbifID
          , genus
          , species
