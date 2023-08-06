@@ -315,12 +315,12 @@ plant_joined <- occ_stat_plants %>%
                         , "class", "gs")), by = c("withspace" = "accepted_gs"))  
 
 # check species not in flora
-# plant_joined %>% 
+# plant_joined %>%
 #   filter(is.na(verbiage) #&! grepl("fl", gs) &! grepl("fi", gs)
-#          ) %>% 
-#   group_by(gs) %>% 
-#   summarize(recs = n()) %>% 
-#   filter(recs >2) %>% 
+#          ) %>%
+#   group_by(gs) %>%
+#   summarize(recs = n()) %>%
+#   filter(recs >2) %>%
 #   arrange(desc(recs)) %>% View()
 #  
 all_with_stat<- bind_rows(lep_joined, plant_joined)
@@ -339,7 +339,25 @@ all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 # all_with_stat %>% filter(grepl("^[^[:alnum:]]", species))
 # all_with_stat %>% filter(grepl("[^[:alnum:][:punct:]]", species)) %>% select (genus, species, gs)
 
+# natives_filtering <- all_with_stat %>%
+#   # deal with spp not in Knapp
+#   
+#   filter((kingdomKey == 6 & ( verb_length > 0
+#   )
+#   )|kingdomKey ==1) %>% 
+#   group_by(genus, species, speciesKey) %>%
+#   filter(all(!exclude) |has_nonNative_ssp | is.na(exclude)) %>%
+#   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>% 
+#   filter((!exotic...275| is.na(exotic...275)), (!exotic...277|is.na(exotic...277))) 
+# 
+# natives_filtering %>% 
+#   filter(grepl("japonic", species
+#   )) %>% 
+#   select(genus, species, verbiage, exclude, has_nonNative_ssp) 
+
 natives <- all_with_stat %>%
+   # deal with spp not in Knapp
+
   filter((kingdomKey == 6 & ( verb_length > 0
                               )
           )|kingdomKey ==1) %>% 
@@ -347,8 +365,7 @@ natives <- all_with_stat %>%
   filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>% 
   filter((!exotic...275| is.na(exotic...275)), (!exotic...277|is.na(exotic...277))) %>%
-  # deal with spp not in Knapp
- 
+
   select(gbifID
          , genus
          , species
@@ -375,6 +392,7 @@ natives %>%
   group_by(kingdomKey, simple_status) %>% 
   summarize(occ = n(), spp = n_distinct(gs)) 
 
+
 natives %>%
   sf::st_drop_geometry() %>% 
   group_by(genus, species, simple_status) %>% 
@@ -387,6 +405,8 @@ natives %>%
 #   group_by(genus, species) %>%
 #   summarize(n()) %>%
 #   filter(genus == "Acer")
+
+# natives %>% filter(grepl("japonic", species))
 
 
 excludeds <- all_with_stat %>%
