@@ -88,9 +88,9 @@ sfed_all <- st_as_sf(localities
 
 sfed_MD <- sfed_all %>% mutate(in_MD = lengths(st_within(sfed_all, MD_boundary)))
 
-sfed <- sfed_MD %>% filter(in_MD ==1) %>% select(-in_MD)
+sfed <- sfed_MD %>% filter(in_MD ==1) %>% dplyr::select(-in_MD)
 
-sfed_outside <- sfed_MD %>% filter(in_MD ==0) %>% select (-in_MD)
+sfed_outside <- sfed_MD %>% filter(in_MD ==0) %>% dplyr::select (-in_MD)
   
 
 # see what I can see with this NLCD data so far

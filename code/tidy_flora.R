@@ -7,7 +7,7 @@ source("code/robust_gbif_namesearch.R")
 knapp_raw <- read.table("data/Knapp_word_to_Accessible_search_and_replace_emDash_special.txt", header = FALSE, sep = "\t")
 
 
-knapp_raw
+knapp_raw <- knapp_raw %>% slice(1:11151)
 str(knapp_raw)
 
 

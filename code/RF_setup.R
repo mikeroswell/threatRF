@@ -54,7 +54,7 @@ almost %>%
 
 tofit <-almost %>% 
   sf::st_drop_geometry() %>% 
-  select(-contains("exotic"))
+  dplyr::select(-contains("exotic"))
 
 
 
@@ -71,7 +71,7 @@ no_sing <- tofit %>%
   group_by(genus, species) %>% 
   mutate(nrec = n_distinct(lat)) %>% 
   filter(nrec > 1) %>% 
-  select(-c("nrec", "fcf")) # remove fcf because it creates NA
+  dplyr::select(-c("nrec", "fcf")) # remove fcf because it creates NA
 
 tofit_summary <- no_sing %>% 
   group_by(genus, species, kingdomKey) %>%
