@@ -21,6 +21,30 @@ large) for this project
 - *notes* is a place where I am recording code snippets and notes to myself, 
 there is not analysis here
 
+# Workflow within `code/`: 
+
+## Utilities
+### data cleanup
+1. *tidy_flora.R* regex matching to turn .pdf into a flat file
+1. *robust_gbif_namesearch.R* wraps an `rgbif` function to try to get nice 
+matches for taxon names without returning synonyms if a valid match exists.
+### model fitting etc. 
+1. *fix_mod.R* klugey way to handle novel factor levels when using various 
+`predict` functions.
+1. *RF_tuner.R* specifies how to tune an fit the random forests
+1. *RF_setup.R* creates folds for model fitting, cleans up model formulae
+
+## Data download and analysis scripts (may call 1 or more utilities above)
+1. *download_gis.R* documents the sources of many of the GIS layers used 
+downstream. Created a long time ago and unstable. Do not run
+1. *download_occurrences_and_statuses.R* documents the queries in GBIF and 
+natureserve. Largely stable but not rerun; the dataset liable to change if 
+rerun. 
+1. *crunch_GIS.R* Should be rel. stable, all GIS work done in R
+1. *fit_RF.R* Fits random forests
+1. *graphing_model_outputs.R* generates figures and tabular results
+
+
 # large files and git lfs
 This is the first time I used `git lfs` to handle large files in the repo. 
 The files tracked by lfs are most likely handled dysfunctionally you clone this 
