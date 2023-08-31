@@ -1,11 +1,16 @@
 # code to download gis data
+# This code was constructed and run primarily in 2021 and is very unstable. It
+# gives clues to the data sources used in downstream analyses but should not be
+# run.
+
+
 library(tidyverse)
 library(sp)
 library(rgdal)
 # raster has conflicts with dplyr.
 # library(raster) #working with raster data (has fancy things to load parts of file, process, move on)
 # library(climatedata) #should be useful for downloading chelsa data programatically. Requires an update tho. Right now using chelsa v1 but should prob. use v2.
-source("code/get_chelsa_revised.R") #hand-edited version of main function that works fine
+#  source("code/get_chelsa_revised.R") #hand-edited version of main function that works fine
 # 
 # # unique IDs for the layers I want
 # LULC1973<-"e98677701fb547a695b2f650bb19f35e"
@@ -15,7 +20,7 @@ source("code/get_chelsa_revised.R") #hand-edited version of main function that w
 parcels <- "dc2d4fec9e814cb98b418babffec16a4"
 slope <- "9268765c1c6e468c880e98482673de63" # no dice with this one
 
-layers<- c( "parcels", "elevation")n# "LULC2010", "LULC2002", "LULC2010",
+layers<- c( "parcels", "elevation")# "LULC2010", "LULC2002", "LULC2010",
 
 getlayer <- function(x,y){
   download.file(paste0("http://data.imap.maryland.gov/datasets/", get(x), "_", y, ".zip")
