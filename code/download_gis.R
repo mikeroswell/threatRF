@@ -1,7 +1,7 @@
 # code to download gis data
 # This code was constructed and run primarily in 2021 and is very unstable. It
 # gives clues to the data sources used in downstream analyses but should not be
-# run.
+# run. MER 20230831
 
 
 library(tidyverse)
