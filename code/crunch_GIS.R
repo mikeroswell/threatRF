@@ -257,7 +257,7 @@ save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
 took # under 4 on new MBP. 
 
-# # cleanup recommended
+# # cleanup recommended; Tmp Files can get big.
 # rm(list = ls())
 # removeTmpFiles()
 # gc()
