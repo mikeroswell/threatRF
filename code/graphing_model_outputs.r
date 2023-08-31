@@ -381,7 +381,7 @@ w_preds <- almost %>%
 
 prec <- w_preds %>% 
   sf::st_drop_geometry() %>% 
-  # filter(simple_status != "unranked" ) %>% 
+  filter(!is.na(threatened)) %>% 
   dplyr::select(taxon, genus, species, maryland_status = roundedSRank, simple_status,  secure, threatened, roundedSRank) %>% 
   left_join(ot) %>% 
   mutate(class_pred = if_else(threatened < cut, "threatened", "secure")) %>%
@@ -390,8 +390,7 @@ prec <- w_preds %>%
  dplyr::select(taxon, genus, species, maryland_status, simple_status, probability_threatened = threatened, probability_secure = secure, predicted_status = class_pred) %>% 
   arrange(desc(taxon), desc(probability_threatened))
 
-w_preds %>% filter(genus == "Rhexia") %>% group_by(genus, species, roundedSRank, simple_status) %>% summarize(n())
-prec
+
 
 w_preds %>% 
   sf::st_drop_geometry() %>% 
@@ -464,18 +463,10 @@ w_preds %>%
             , frac = nthreat/n()
             , n = n())
 
-prediction_table <- w_preds %>% 
-  sf::st_drop_geometry() %>% 
-  filter(simple_status == "unranked") %>% 
-  filter(!is.na(threatened)) %>% 
-  group_by(taxon, genus, species, simple_status) %>% 
-  summarize(threat_prob = 1-mean(threatened), sprob = mean(threatened)) %>% 
-  arrange(desc(taxon), desc(threat_prob)) %>% 
-  dplyr::select(taxon_group = taxon, genus, species, probability_threatened = threat_prob, probability_secure = sprob)
 
 
 
-write.csv(prediction_table, "data/supplementary_data_predictions_on_unassessed.csv", row.names = FALSE)
+write.csv(prec, "data/supplementary_data_predictions.csv", row.names = FALSE)
 
 
 # plot predictions at the observation level
@@ -605,11 +596,11 @@ threatened_plants <- ggplot()+
        , fill = "species")
 
 pdf(file = "figures/n_spp_cell_verbose.pdf")
-threatened_leps + threatened_plants + plot_layout(ncol = 1)
+threatened_plants +  threatened_leps + plot_layout(ncol = 1)
 dev.off()
 
 pdf(file = "figures/n_spp_cell.pdf")
-threatened_leps +labs(title = "lepidopterans") + threatened_plants +labs(title = "plants") + plot_layout(ncol = 1)
+threatened_plants +labs(title = "a    plants")+ threatened_leps +labs(title = "b    lepidopterans")  + plot_layout(ncol = 1)
 dev.off()
 
 
@@ -617,7 +608,7 @@ dev.off()
 
 species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
   pred_by_spp_thresh %>%
-    filter(taxon == tax, simple_status =="unranked", is.threatened == 0) %>%
+    dplyr::filter(taxon == tax, simple_status =="unranked", is.threatened == 0) %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -629,9 +620,9 @@ species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax
 })
 
 
-species_per_cell <- map(c("lepidopterans", "plants"), function(tax){
+species_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
   pred_by_spp_thresh %>%
-    filter(taxon == tax, simple_status =="unranked") %>%
+    dplyr::filter(taxon == tax, simple_status =="unranked") %>%
     raster::rasterize(
       y = base_rast
       , fun = function(x, ...){
@@ -650,9 +641,9 @@ p_spp_threatened <-map(1:2, function(tax){
 
 
 
-n_over_thresh<-function(x, ...){sum(na.omit(x>threat_thres))}
+n_over_thresh <- function(x, ...){sum(na.omit(x>threat_thres))}
 
-mean_sd_pred <- map(c("lepidopterans", "plants"), function(tax){
+mean_sd_pred <- map(c("lepidoptera", "plantae"), function(tax){
   w_preds %>%
     filter(taxon == tax, simple_status =="unranked") %>% 
     raster::rasterize(
@@ -666,7 +657,7 @@ mean_sd_pred <- map(c("lepidopterans", "plants"), function(tax){
 
 pro<-function(x){sum(x)/length(x)}
 
-count_occ_threatened <- map(c("lepidopterans", "plants"), function(tax){
+count_occ_threatened <- map(c("lepidoptera", "plant"), function(tax){
   w_preds %>%
     filter(taxon == tax, simple_status =="unranked") %>% 
     mutate(overThresh = as.numeric(secure > ot$cut[2-as.numeric(tax == "lepidopterans")])) %>% 
@@ -682,7 +673,7 @@ count_occ_threatened <- map(c("lepidopterans", "plants"), function(tax){
 
 # count_occ_threatened[[1]]
 
-pdf("figures/threat_prob_predictions.pdf")
+
 
 prob_plots <- map(1:2, function(tax){
   map(1:2, function(x){
@@ -703,6 +694,8 @@ prob_plots <- map(1:2, function(tax){
   })
 })
 
+pdf("figures/threat_prob_predictions.pdf")
+prob_plots
 dev.off()
 
 pdf("figures/occurrence_predictions.pdf")
@@ -735,13 +728,13 @@ map(1:2, function(tax){
               , aes(x = x, y = y, fill = .data[["layer"]]
               )
     )+
-    scale_fill_viridis_c() +
+    scale_fill_viridis_c(direction =  -1) +
     coord_equal() +
     theme_void() +
     labs(title = c("lepidopterans", "plants")[tax]
          , fill = c(
            
-           "proportion observations \n predicted to be threatened at \noptimal threshold per cell")
+           "proportion species \npredicted to be threatened at \noptimal threshold per cell")
     )
 })
 dev.off()
@@ -826,4 +819,15 @@ bottom_ten <- predict_unclassified %>%
 write.csv(w_preds, "data/fromR/lfs/predictions.csv", row.names = FALSE)
 write.csv(top_ten, "data/fromR/top_ten_threatened.csv", row.names = FALSE)
 write.csv(bottom_ten, "data/fromR/bottom_ten_threatened.csv", row.names = FALSE)
+
+
+w_preds %>% sf::st_drop_geometry() %>% 
+  filter(!is.na(threatened)) %>%
+  group_by(taxon, simple_status) %>% 
+  summarize(records = n(), spp = n_distinct(genus, species))
+
+w_preds %>% sf::st_drop_geometry() %>% 
+  filter(!is.na(threatened)) %>%
+  group_by(taxon) %>% 
+  summarize(records = n(), spp = n_distinct(genus, species))
 
