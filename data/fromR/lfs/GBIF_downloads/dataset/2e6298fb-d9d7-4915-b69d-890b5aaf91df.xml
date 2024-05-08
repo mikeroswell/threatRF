@@ -9,14 +9,16 @@ xml:lang="en">
                 <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=148</alternateIdentifier>
         <title>The Lepidopterists&apos; Society Season Summary</title>
             <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
-<organizationName>The Lepidopterists&apos; Society Season Summary</organizationName><positionName>Collection Manager</positionName><electronicMailAddress>info@lepsoc.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+<organizationName>The Lepidopterists&apos; Society Season Summary</organizationName><positionName>Collection Manager</positionName>            <address>
+<deliveryPoint>55 Music Concourse Dr</deliveryPoint><city>San Francisco</city><administrativeArea>California</administrativeArea><postalCode>94118</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(415) 379-8000</phone><electronicMailAddress>info@lepsoc.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2019-12-10
+                2024-02-15
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -26,15 +28,15 @@ xml:lang="en">
                     <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
             </intellectualRights>
             <contact>
-<organizationName>The Lepidopterists&apos; Society Season Summary</organizationName><electronicMailAddress>info@lepsoc.org</electronicMailAddress>            </contact>
+<organizationName>The Lepidopterists&apos; Society Season Summary</organizationName><phone>(415) 379-8000</phone><electronicMailAddress>info@lepsoc.org</electronicMailAddress><onlineUrl>http://www.calacademy.org/scientists/entomology</onlineUrl>            </contact>
 
     </dataset>
 
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:30Z</dateStamp>
-                <citation>The Lepidopterists&apos; Society Season Summary (2019). The Lepidopterists&apos; Society Season Summary. Occurrence dataset https://doi.org/10.15468/jo1wfa accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:31Z</dateStamp>
+                <citation>The Lepidopterists&apos; Society Season Summary (2024). The Lepidopterists&apos; Society Season Summary. Occurrence dataset https://doi.org/10.15468/jo1wfa accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

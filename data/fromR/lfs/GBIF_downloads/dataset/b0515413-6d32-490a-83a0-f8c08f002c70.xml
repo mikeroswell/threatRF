@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="b0515413-6d32-490a-83a0-f8c08f002c70"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/phc373</alternateIdentifier>
+                <alternateIdentifier>https://cch2.org/portal/collections/misc/collprofiles.php?collid=50</alternateIdentifier>
+        <title>CDA - California Department of Food and Agriculture</title>
+            <creator>
+<organizationName>CCH2 Portal</organizationName><electronicMailAddress>jyost@calpoly.edu</electronicMailAddress><onlineUrl>https://cch2.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>CCH2 Portal</organizationName><electronicMailAddress>jyost@calpoly.edu</electronicMailAddress><onlineUrl>https://cch2.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+                    <surName>Genevieve Walden</surName>
+            </individualName>
+<electronicMailAddress>genevieve.walden@cdfa.ca.gov</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2024-04-15
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Founded in the 1920s, the Botany Lab and Herbarium of the California Department of Food and Agriculture (Plant Pest Diagnostics Center) serves as the plant diagnostic and identification service for California, and is the repository for the state collection of noxious weed and agricultural plant specimens. Size of collection: ca. 55,000 plant specimens. Notable collections include those of CDFA and County Agricultural Commissioner staff, M. K. Bellue, T. C. Fuller, G. Douglas Barbe, G. F. Hrusa, and G. L. Stout. The Gilbert L. Stout Plant Disease Herbarium (CDA-BPS) has ca. 10,000 unaccessioned specimens, integration into CDA is in progress.
+CITES US 241; APHIS PPQ Containment facility #889; Foreign Importation PPQ 588 P526P-20-04200 [exp 10302023]; Interstate movement PPQ 526 P526P-20-02933 [exp 07012023]; CA State Diagnostic Plant Pest Permit 2828 [exp 08312023]; CDFW CESA (2081(a)-19-011-RP) AMENDMENT 1.
+The CDFA PPDC Seed Herbarium has ca. 50,000 accessions in the Seed and Fruit Collection (CDA SFC), and is curated and databased separately from CDA (curator Deborah J. Meyer, retired Volunteer). Notable collections in CDA-SFC include those of CDFA and County Agricultural Commissioner staff, M. K. Bellue, B. Crampton, P. B. Kennedy, D. Baxter, B. M. Browning, D. Decker-Walters, and C. Dremann.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>CDA - California Department of Food and Agriculture</organizationName><phone>[1] 916 738 6688</phone><electronicMailAddress>genevieve.walden@cdfa.ca.gov</electronicMailAddress><onlineUrl>http://cdfa.ca.gov/plant/ppd/herbarium.html</onlineUrl>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:38Z</dateStamp>
+                <citation>California Department of Food and Agriculture (CDA) (2024). CDA - California Department of Food and Agriculture. Occurrence dataset https://doi.org/10.15468/phc373 accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

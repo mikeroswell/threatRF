@@ -9,7 +9,7 @@ xml:lang="en">
                 <alternateIdentifier>http://ipt.mobot.org:8080/ipt/resource?r=tropicosspecimens</alternateIdentifier>
                 <alternateIdentifier>7bd65a7a-f762-11e1-a439-00145eb45e9a</alternateIdentifier>
                 <alternateIdentifier>12084</alternateIdentifier>
-        <title>Tropicos Specimen Data</title>
+        <title>Tropicos MO Specimen Data</title>
             <creator>
             <individualName>
 <givenName>Jordan</givenName>                    <surName>Teisher</surName>
@@ -27,7 +27,7 @@ xml:lang="en">
 <electronicMailAddress>heather.stimmel@mobot.org</electronicMailAddress>            <role>USER</role>
             </associatedParty>
             <pubDate>
-                2022-11-09
+                2024-03-18
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -61,8 +61,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:32Z</dateStamp>
-                <citation>Teisher J, Stimmel H (2022). Tropicos Specimen Data. Missouri Botanical Garden. Occurrence dataset https://doi.org/10.15468/hja69f accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:30Z</dateStamp>
+                <citation>Teisher J, Stimmel H (2024). Tropicos MO Specimen Data. Missouri Botanical Garden. Occurrence dataset https://doi.org/10.15468/hja69f accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

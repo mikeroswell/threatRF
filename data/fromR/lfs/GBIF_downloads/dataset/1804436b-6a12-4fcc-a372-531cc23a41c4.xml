@@ -32,7 +32,7 @@ xml:lang="en">
 <electronicMailAddress>herbarium@sebs.rutgers.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-03-06
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -49,8 +49,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:23Z</dateStamp>
-                <citation>Rutger&apos;s University - Chrysler Herbarium (2023). Rutgers University, Chrysler Herbarium. Occurrence dataset https://doi.org/10.15468/1n787c accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:30Z</dateStamp>
+                <citation>Rutgers University - Chrysler Herbarium (2024). Rutgers University, Chrysler Herbarium. Occurrence dataset https://doi.org/10.15468/1n787c accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

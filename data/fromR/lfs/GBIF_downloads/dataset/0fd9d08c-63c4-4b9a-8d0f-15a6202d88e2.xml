@@ -10,9 +10,9 @@ xml:lang="en">
                 <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=155</alternateIdentifier>
         <title>Clemson University Herbarium</title>
             <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
                     <surName>Dixie Z. Damrel</surName>
@@ -26,7 +26,7 @@ xml:lang="en">
 <positionName>curator</positionName><electronicMailAddress>cendara@clemson.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2023-12-05
             </pubDate>
         <language>ENGLISH</language>
             <intellectualRights>
@@ -40,8 +40,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:23Z</dateStamp>
-                <citation>Clemson University Herbarium (2023). Clemson University Herbarium. Occurrence dataset https://doi.org/10.15468/srjd22 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:30Z</dateStamp>
+                <citation>Clemson University Herbarium (2023). Clemson University Herbarium. Occurrence dataset https://doi.org/10.15468/srjd22 accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

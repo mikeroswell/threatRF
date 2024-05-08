@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="325390a8-fb62-4e67-ba56-aad2f0c5002a"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/q8pk32</alternateIdentifier>
+                <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=554</alternateIdentifier>
+        <title>West Virginia Natural Heritage Program Herbarium</title>
+            <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Brian</givenName>                    <surName>Streets</surName>
+            </individualName>
+<positionName>Associate Ecologist &amp; Data Manager</positionName><electronicMailAddress>Brian.P.Streets@wv.gov</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>John</givenName>                    <surName>Burkhart</surName>
+            </individualName>
+<positionName>Botanist</positionName><electronicMailAddress>john.q.burkhart@wv.gov</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2024-05-02
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The West Virginia Natural Heritage Program Herbarium was founded in 1988 as a reference collection to supplement the work of WV Natural Heritage researchers. Through donations and exchanges, the collections span from the 1890s to present day and consist mainly of vascular plants but includes lichens and bryophytes, all primarily from West Virginia.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>West Virginia Natural Heritage Program Herbarium</organizationName><phone>304-637-0245</phone><electronicMailAddress>Brian.P.Streets@wv.gov</electronicMailAddress>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:31Z</dateStamp>
+                <citation>West Virginia Division of Natural Resources Herbarium (WVHP) (2024). West Virginia Natural Heritage Program Herbarium. Occurrence dataset https://doi.org/10.15468/q8pk32 accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

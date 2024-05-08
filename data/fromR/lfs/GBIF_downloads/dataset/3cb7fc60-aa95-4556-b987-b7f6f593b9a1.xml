@@ -12,20 +12,20 @@ xml:lang="en">
         <title>US herbarium - Smithsonian Institute - Amostras Brasileiras Repatriadas - Herbário Virtual REFLORA</title>
             <creator>
             <individualName>
-<givenName>Rafaela</givenName>                    <surName>Forzza</surName>
+<givenName>Sue</givenName>                    <surName>Lutz</surName>
             </individualName>
-<organizationName>Rio de Janeiro Botanical Garden</organizationName><positionName>Reflora coordinator</positionName>            <address>
-<deliveryPoint>Rua Pacheco Leão 915</deliveryPoint><city>Rio de Janeiro</city><administrativeArea>RJ</administrativeArea><postalCode>22460-030</postalCode><country>BRAZIL</country>            </address>
-<phone>+552132042082</phone><electronicMailAddress>reflora@jbrj.gov.br</electronicMailAddress>            </creator>
+<organizationName>Smithsonian Institution</organizationName><positionName>Curator</positionName>            <address>
+<city>Washington</city><administrativeArea>DC</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>lutzs@si.edu</electronicMailAddress><onlineUrl>https://www.si.edu</onlineUrl>            </creator>
             <metadataProvider>
             <individualName>
-<givenName>Rafaela</givenName>                    <surName>Forzza</surName>
+<givenName>Brazilian Flora Group</givenName>                    <surName>Reflora</surName>
             </individualName>
-<organizationName>Rio de Janeiro Botanical Garden</organizationName><positionName>Reflora coordinator</positionName>            <address>
+<organizationName>Instituto de Pesquisas Jardim Botânico do Rio de Janeiro</organizationName><positionName>Reflora coordinator</positionName>            <address>
 <deliveryPoint>Rua Pacheco Leão 915</deliveryPoint><city>Rio de Janeiro</city><administrativeArea>RJ</administrativeArea><postalCode>22460-030</postalCode><country>BRAZIL</country>            </address>
 <phone>+552132042082</phone><electronicMailAddress>reflora@jbrj.gov.br</electronicMailAddress>            </metadataProvider>
             <pubDate>
-                2022-12-22
+                2024-01-01
             </pubDate>
         <language>PORTUGUESE</language>
             <abstract>
@@ -54,19 +54,19 @@ xml:lang="en">
             </maintenance>
             <contact>
             <individualName>
-<givenName>Rafaela</givenName>                    <surName>Forzza</surName>
+<givenName>Sue</givenName>                    <surName>Lutz</surName>
             </individualName>
-<organizationName>Rio de Janeiro Botanical Garden</organizationName><positionName>Reflora coordinator</positionName>            <address>
-<deliveryPoint>Rua Pacheco Leão 915</deliveryPoint><city>Rio de Janeiro</city><administrativeArea>RJ</administrativeArea><postalCode>22460-030</postalCode><country>BRAZIL</country>            </address>
-<phone>+552132042082</phone><electronicMailAddress>reflora@jbrj.gov.br</electronicMailAddress>            </contact>
+<organizationName>Smithsonian Institution</organizationName><positionName>Curator</positionName>            <address>
+<city>Washington</city><administrativeArea>DC</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>lutzs@si.edu</electronicMailAddress><onlineUrl>https://www.si.edu</onlineUrl>            </contact>
 
     </dataset>
 
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:31Z</dateStamp>
-                <citation>Forzza R (2022). US herbarium - Smithsonian Institute - Amostras Brasileiras Repatriadas - Herbário Virtual REFLORA. Version 1.208. Instituto de Pesquisas Jardim Botanico do Rio de Janeiro. Occurrence dataset https://doi.org/10.15468/9dbxh8 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:31Z</dateStamp>
+                <citation>Lutz S, Reflora B F G (2024). US herbarium - Smithsonian Institute - Amostras Brasileiras Repatriadas - Herbário Virtual REFLORA. Version 1.221. Instituto de Pesquisas Jardim Botanico do Rio de Janeiro. Occurrence dataset https://doi.org/10.15468/9dbxh8 accessed via GBIF.org on 2024-05-08.</citation>
                     <resourceLogoUrl>http://ipt.jbrj.gov.br/reflora/logo.do?r=us_reflora</resourceLogoUrl>
             </gbif>
         </metadata>

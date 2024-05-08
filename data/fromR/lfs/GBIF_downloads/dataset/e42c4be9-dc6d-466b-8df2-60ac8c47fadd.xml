@@ -15,12 +15,18 @@ xml:lang="en">
 <organizationName>North American Network of Small Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://nansh.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
-                    <surName>David S. Barrington</surName>
+<givenName>Weston L.</givenName>                    <surName>Testo</surName>
+            </individualName>
+<positionName>Curator</positionName><electronicMailAddress>wtesto@uvm.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>David S.</givenName>                    <surName>Barrington</surName>
             </individualName>
 <electronicMailAddress>dbarring@uvm.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-05-01
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -30,15 +36,15 @@ xml:lang="en">
                     <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
             </intellectualRights>
             <contact>
-<organizationName>University of Vermont, Pringle Herbarium</organizationName><electronicMailAddress>dbarring@uvm.edu</electronicMailAddress><onlineUrl>http://www.uvm.edu/~plantbio/pringle/</onlineUrl>            </contact>
+<organizationName>University of Vermont, Pringle Herbarium</organizationName><phone>802 656 3221</phone><electronicMailAddress>wtesto@uvm.edu</electronicMailAddress><onlineUrl>http://www.uvm.edu/~plantbio/pringle/</onlineUrl>            </contact>
 
     </dataset>
 
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
-                <citation>The University of Vermont Pringle Herbarium (2023). University of Vermont, Pringle Herbarium. Occurrence dataset https://doi.org/10.15468/zsgiog accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:39Z</dateStamp>
+                <citation>The University of Vermont Pringle Herbarium (2024). University of Vermont, Pringle Herbarium. Occurrence dataset https://doi.org/10.15468/zsgiog accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

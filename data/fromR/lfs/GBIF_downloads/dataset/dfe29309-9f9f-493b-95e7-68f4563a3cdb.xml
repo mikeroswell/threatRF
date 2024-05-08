@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="dfe29309-9f9f-493b-95e7-68f4563a3cdb"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/nu8kw5</alternateIdentifier>
+                <alternateIdentifier>dfe29309-9f9f-493b-95e7-68f4563a3cdb</alternateIdentifier>
+                <alternateIdentifier>https://ipt.pnwherbaria.org/resource?r=srp</alternateIdentifier>
+        <title>Snake River Plain Herbarium (Boise State University, Idaho, USA)</title>
+            <creator>
+            <individualName>
+<givenName>James</givenName>                    <surName>Smith</surName>
+            </individualName>
+<organizationName>Snake River Plain Herbarium</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>Boise State University</deliveryPoint><city>Boise</city><administrativeArea>Idaho</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>jfsmith@boisestate.edu</electronicMailAddress>            </creator>
+            <associatedParty>
+            <individualName>
+<givenName>David</givenName>                    <surName>Giblin</surName>
+            </individualName>
+<electronicMailAddress>dgiblin@uw.edu</electronicMailAddress>            <role>USER</role>
+            </associatedParty>
+            <pubDate>
+                2024-05-01
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Snake River Plain Herbarium (Boise State University, Idaho, USA).</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>monthly</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>James</givenName>                    <surName>Smith</surName>
+            </individualName>
+<organizationName>Snake River Plain Herbarium</organizationName><positionName>Curator</positionName>            <address>
+<deliveryPoint>Boiset State University</deliveryPoint><city>Boise</city><administrativeArea>Idaho</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>jfsmith@boisestate.edu</electronicMailAddress>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:39Z</dateStamp>
+                <citation>Smith J (2024). Snake River Plain Herbarium (Boise State University, Idaho, USA). Version 1.14. Consortium of Pacific Northwest Herbaria. Occurrence dataset https://doi.org/10.15468/nu8kw5 accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

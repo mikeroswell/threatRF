@@ -26,7 +26,7 @@ xml:lang="en">
 <positionName>Curator</positionName><electronicMailAddress>Andrew.Sanders@ucr.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-05-01
             </pubDate>
         <language>ENGLISH</language>
             <intellectualRights>
@@ -40,8 +40,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
-                <citation>University of California Riverside (2023). UCR - University of California, Riverside Herbarium - Vascular Plants. Occurrence dataset https://doi.org/10.15468/ai1kou accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:39Z</dateStamp>
+                <citation>University of California Riverside (2024). UCR - University of California, Riverside Herbarium - Vascular Plants. Occurrence dataset https://doi.org/10.15468/ai1kou accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

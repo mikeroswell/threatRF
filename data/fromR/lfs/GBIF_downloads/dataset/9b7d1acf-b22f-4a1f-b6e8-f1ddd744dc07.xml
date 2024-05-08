@@ -21,7 +21,7 @@ xml:lang="en">
 <electronicMailAddress>laerne@sdnhm.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-08
+                2024-05-01
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -38,8 +38,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
-                <citation>San Diego Natural History Museum (2023). SD - SD Herbarium, San Diego Natural History Museum. Occurrence dataset https://doi.org/10.15468/lneqwn accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:37Z</dateStamp>
+                <citation>San Diego Natural History Museum (2024). SD - SD Herbarium, San Diego Natural History Museum. Occurrence dataset https://doi.org/10.15468/lneqwn accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

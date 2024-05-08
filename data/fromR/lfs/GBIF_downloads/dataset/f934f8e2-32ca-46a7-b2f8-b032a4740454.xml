@@ -27,7 +27,7 @@ xml:lang="en">
 <deliveryPoint>55 Music Concourse Dr.</deliveryPoint><city>San Francisco</city><administrativeArea>CA</administrativeArea><postalCode>94118</postalCode><country>UNITED_STATES</country>            </address>
 <phone>+1 (415) 379-5280</phone><electronicMailAddress>jfong@calacademy.org</electronicMailAddress>            </metadataProvider>
             <pubDate>
-                2023-01-09
+                2024-05-06
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -90,8 +90,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:40Z</dateStamp>
-                <citation>Magnaghi E, Fong J (2023). CAS Botany (BOT). Version 157.481. California Academy of Sciences. Occurrence dataset https://doi.org/10.15468/7gudyo accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:40Z</dateStamp>
+                <citation>Magnaghi E, Fong J (2024). CAS Botany (BOT). Version 157.549. California Academy of Sciences. Occurrence dataset https://doi.org/10.15468/7gudyo accessed via GBIF.org on 2024-05-08.</citation>
                     <resourceLogoUrl>https://monarch.calacademy.org/images/collicons/CAS-BOT-2.png</resourceLogoUrl>
             </gbif>
         </metadata>

@@ -27,13 +27,13 @@ xml:lang="en">
             </associatedParty>
             <associatedParty>
             <individualName>
-<givenName>Laura</givenName>                    <surName>Rocha Prado</surName>
+<givenName>Chandra</givenName>                    <surName>Earl</surName>
             </individualName>
-<positionName>Bioinformatician</positionName><electronicMailAddress>lauraprado@asu.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0003-1237-2824</userId>
-            <role>CONTENT_PROVIDER</role>
+<electronicMailAddress>chandra.earl@asu.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-9850-882X</userId>
+            <role>TECHNICAL_POINT_OF_CONTACT</role>
             </associatedParty>
             <pubDate>
-                2023-01-11
+                2024-04-04
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -50,8 +50,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
-                <citation>National Ecological Observatory Network (2023). NEON Biorepository Terrestrial Plant Collection (Canopy Foliage). Occurrence dataset https://doi.org/10.15468/km9xvj accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:40Z</dateStamp>
+                <citation>National Ecological Observatory Network (2024). NEON Biorepository Terrestrial Plant Collection (Canopy Foliage). Occurrence dataset https://doi.org/10.15468/km9xvj accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

@@ -11,14 +11,14 @@ xml:lang="en">
                 <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=126</alternateIdentifier>
         <title>Frost Entomological Museum</title>
             <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
 <organizationName>Frost Entomological Museum</organizationName><positionName>Collection Manager</positionName><electronicMailAddress>adeans@psu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2022-10-06
+                2024-03-21
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -35,8 +35,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:31Z</dateStamp>
-                <citation>Frost Entomological Museum (2022). Frost Entomological Museum. Occurrence dataset https://doi.org/10.15468/epw1ws accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:32Z</dateStamp>
+                <citation>Frost Entomological Museum (2024). Frost Entomological Museum. Occurrence dataset https://doi.org/10.15468/epw1ws accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

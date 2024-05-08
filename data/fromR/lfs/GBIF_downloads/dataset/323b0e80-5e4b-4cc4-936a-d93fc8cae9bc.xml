@@ -10,16 +10,16 @@ xml:lang="en">
                 <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=4</alternateIdentifier>
         <title>C.P. Gillette Museum of Arthropod Diversity</title>
             <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
 <organizationName>C.P. Gillette Museum of Arthropod Diversity</organizationName><positionName>Collection Manager</positionName>            <address>
-<deliveryPoint>1177 Campus Delivery</deliveryPoint><city>Fort Collins</city><administrativeArea>Colorado</administrativeArea><postalCode>80523-1177</postalCode><country>UNITED_STATES</country>            </address>
+<deliveryPoint>1177H Campus Delivery</deliveryPoint><city>Fort Collins</city><administrativeArea>Colorado</administrativeArea><postalCode>80523-1177</postalCode><country>UNITED_STATES</country>            </address>
 <electronicMailAddress>Chuck.Harp@colostate.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2022-10-06
+                2024-04-03
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -36,8 +36,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:30Z</dateStamp>
-                <citation>Colorado State University, C.P. Gillette Museum of Arthropod Diversity (2022). C.P. Gillette Museum of Arthropod Diversity. Occurrence dataset https://doi.org/10.15468/k0aett accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:31Z</dateStamp>
+                <citation>Colorado State University, C.P. Gillette Museum of Arthropod Diversity (2024). C.P. Gillette Museum of Arthropod Diversity. Occurrence dataset https://doi.org/10.15468/k0aett accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

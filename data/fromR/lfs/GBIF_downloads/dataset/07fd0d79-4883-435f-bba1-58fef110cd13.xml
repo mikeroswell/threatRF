@@ -14,33 +14,41 @@ xml:lang="en">
         <title>University of British Columbia Herbarium (UBC) - Vascular Plant Collection</title>
             <creator>
             <individualName>
-<givenName>Linda</givenName>                    <surName>Jennings</surName>
+<givenName>Linda</givenName>                    <surName>PJ Lipsen</surName>
             </individualName>
-<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>            <address>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Collections Curator, Vascular Plants &amp; Algae</positionName>            <address>
+<deliveryPoint>2212 Main Mall</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>linda.jennings@ubc.ca</electronicMailAddress><onlineUrl>https://beatymuseum.ubc.ca/research-2/collections/herbarium/herbarium-vascular-plants/</onlineUrl>            </creator>
+            <creator>
+            <individualName>
+<givenName>Linda</givenName>                    <surName>PJ Lipsen</surName>
+            </individualName>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Collections Curator, Vascular Plants &amp; Algae</positionName>            <address>
 <deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
-<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>            </creator>
+<electronicMailAddress>linda.jennings@ubc.ca</electronicMailAddress><onlineUrl>https://beatymuseum.ubc.ca/research-2/collections/herbarium/</onlineUrl>            </creator>
             <metadataProvider>
             <individualName>
-<givenName>Linda</givenName>                    <surName>Jennings</surName>
+<givenName>Mark</givenName>                    <surName>Pitblado</surName>
             </individualName>
-<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>            <address>
-<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
-<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>            </metadataProvider>
+<organizationName>Beaty Biodiversity Museum</organizationName><positionName>Collections Curator, Biodiversity Informatics</positionName>            <address>
+<deliveryPoint>2212 Main Mall</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>mark.pitblado@ubc.ca</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0002-8786-5167</userId>
+            </metadataProvider>
+            <metadataProvider>
+            <individualName>
+<givenName>Mark</givenName>                    <surName>Pitblado</surName>
+            </individualName>
+<organizationName>Beaty Biodiversity Museum</organizationName><positionName>Collections Curator, Biodiversity Informatics</positionName>            <address>
+<deliveryPoint>2212 Main Mall</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>mark.pitblado@ubc.ca</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0002-8786-5167</userId>
+            </metadataProvider>
             <associatedParty>
             <individualName>
 <givenName>Jeannette</givenName>                    <surName>Whitton</surName>
             </individualName>
-<organizationName>University of British Columbia Herbarium</organizationName><positionName>Director &amp; Curator, Vascular Plants</positionName>            <address>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Herbarium Director</positionName>            <address>
 <deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
 <electronicMailAddress>jeannette.whitton@botany.ubc.ca</electronicMailAddress><onlineUrl>http://www.botany.ubc.ca/people/jwhitton.html</onlineUrl>            <role>PRINCIPAL_INVESTIGATOR</role>
-            </associatedParty>
-            <associatedParty>
-            <individualName>
-<givenName>Linda</givenName>                    <surName>Jennings</surName>
-            </individualName>
-<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>            <address>
-<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
-<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>            <role>CUSTODIAN_STEWARD</role>
             </associatedParty>
             <associatedParty>
             <individualName>
@@ -48,23 +56,18 @@ xml:lang="en">
             </individualName>
 <organizationName>University of British Columbia Herbarium</organizationName><positionName>Curator, Monocots and Basal Angiosperms</positionName>            <address>
 <deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
-<electronicMailAddress>sean.graham@ubc.ca</electronicMailAddress><onlineUrl>http://www.botany.ubc.ca/people/sgraham.html</onlineUrl>            <role>PRINCIPAL_INVESTIGATOR</role>
+<electronicMailAddress>sean.graham@ubc.ca</electronicMailAddress><onlineUrl>http://www.botany.ubc.ca/people/sgraham.html</onlineUrl>            <role>CURATOR</role>
             </associatedParty>
             <associatedParty>
             <individualName>
 <givenName>Quentin</givenName>                    <surName>Cronk</surName>
             </individualName>
 <organizationName>University of British Columbia Herbarium</organizationName><positionName>Curator, Eudicots</positionName>            <address>
-<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
-<electronicMailAddress>quentin.cronk@ubc.ca</electronicMailAddress><onlineUrl>http://cronklab.wikidot.com/</onlineUrl>            <role>PRINCIPAL_INVESTIGATOR</role>
-            </associatedParty>
-            <associatedParty>
-<organizationName>University of British Columbia</organizationName>            <address>
-<deliveryPoint>2329 West Mall</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
-            <role>PUBLISHER</role>
+<deliveryPoint>2212 Main Mall</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>quentin.cronk@ubc.ca</electronicMailAddress><onlineUrl>http://cronklab.wikidot.com/</onlineUrl>            <role>CURATOR</role>
             </associatedParty>
             <pubDate>
-                2022-08-24
+                2024-04-30
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -93,12 +96,16 @@ The UBC Herbarium has one of the world&amp;#39;s largest collections of British 
                         <keyword>Specimen</keyword>
                         <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
                 </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
             <intellectualRights>
                     <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
             </intellectualRights>
             <distribution scope="document">
                 <online>
-                    <url function="information">http://www.biodiversity.ubc.ca/museum/herbarium/</url>
+                    <url function="information">https://collections.beatymuseum.ubc.ca/dataset/07fd0d79-4883-435f-bba1-58fef110cd13</url>
                 </online>
             </distribution>
             <coverage>
@@ -127,11 +134,11 @@ The UBC Herbarium has one of the world&amp;#39;s largest collections of British 
             </maintenance>
             <contact>
             <individualName>
-<givenName>Linda</givenName>                    <surName>Jennings</surName>
+<givenName>Linda</givenName>                    <surName>PJ Lipsen</surName>
             </individualName>
-<organizationName>University of British Columbia Herbarium</organizationName><positionName>Assistant Curator, Vascular Plants &amp; Algae</positionName>            <address>
-<deliveryPoint>3529-6270 University Boulevard</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
-<phone>(604) 822-9740</phone><electronicMailAddress>linda.jennings@beatymuseum.ubc.ca</electronicMailAddress><onlineUrl>http://www.biodiversity.ubc.ca/museum/herbarium/</onlineUrl>            </contact>
+<organizationName>University of British Columbia Herbarium</organizationName><positionName>Collections Curator, Vascular Plants &amp; Algae</positionName>            <address>
+<deliveryPoint>2212 Main Mall</deliveryPoint><city>Vancouver</city><administrativeArea>British Columbia</administrativeArea><postalCode>V6T 1Z4</postalCode><country>CANADA</country>            </address>
+<electronicMailAddress>linda.jennings@ubc.ca</electronicMailAddress><onlineUrl>https://beatymuseum.ubc.ca/research-2/collections/herbarium/herbarium-vascular-plants/</onlineUrl>            </contact>
             <methods>
                     <methodStep>
                         <description>
@@ -145,56 +152,14 @@ The UBC Herbarium has one of the world&amp;#39;s largest collections of British 
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:22Z</dateStamp>
-                <citation identifier="doi:10.5886/rtt57cc9">Jennings L (2022). University of British Columbia Herbarium (UBC) - Vascular Plant Collection. Version 16.9. University of British Columbia. Occurrence dataset https://doi.org/10.5886/rtt57cc9 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:29Z</dateStamp>
+                <citation identifier="doi:10.5886/rtt57cc9">PJ Lipsen L, Pitblado M (2024). University of British Columbia Herbarium (UBC) - Vascular Plant Collection. Version 16.18. University of British Columbia. Occurrence dataset https://doi.org/10.5886/rtt57cc9 accessed via GBIF.org on 2024-05-08.</citation>
                     <bibliography>
                 <citation identifier="http://www.ingentaconnect.com/content/iapt/tax/2006/00000055/00000003/art00017">Smith, A.R., Pryer, K.M., Schuettpelz, E., Korall, P., Schneider, H., Wolf, P.G. 2006. A classification for extant ferns. Taxon 55(3): 705-731.</citation>
                 <citation identifier="http://www.nrcresearchpress.com/doi/abs/10.1139/B08-062">Rai, H.S., Reeves, P.A., Peakall, R., Olmstead, R.G., Graham, S.W. 2008. Inference of higher-order conifer relationships from a multi-locus plastid data set. Botany 86(7): 658-669.</citation>
                 <citation identifier="http://onlinelibrary.wiley.com/doi/10.1111/j.1095-8339.2009.00996.x/abstract">The Angiosperm Phylogeny Group. 2009. An update of the Angiosperm Phylogeny Group classification for the orders and families of flowering plants: APG III. Botanical Journal of the Linnaen Society 161(2): 105-121.</citation>
                 <citation identifier="http://onlinelibrary.wiley.com/doi/10.1111/j.1095-8339.2009.01000.x/abstract">Haston, E., Richardson, J.E., Stevens, P.F., Chase, M.W., Harris, D.J. 2009. The Linear Angiosperm Phylogeny Group (LAPG) III: a linear sequence of the families in APG III. Botanical Journal of the Linnaen Society 161(2): 128-131.</citation>
                     </bibliography>
-                    <physical>
-                        <objectName>UBC Herbarium Databases</objectName>
-                        <characterEncoding>UTF-8</characterEncoding>
-                        <dataFormat>
-                            <externallyDefinedFormat>
-                                <formatName>HTML</formatName>
-                            </externallyDefinedFormat>
-                        </dataFormat>
-                        <distribution>
-                            <online>
-                                <url function="download">http://www.biodiversity.ubc.ca/museum/herbarium/database.html</url>
-                            </online>
-                        </distribution>
-                    </physical>
-                    <physical>
-                        <objectName>Canadensys explorer</objectName>
-                        <characterEncoding>UTF-8</characterEncoding>
-                        <dataFormat>
-                            <externallyDefinedFormat>
-                                <formatName>HTML</formatName>
-                            </externallyDefinedFormat>
-                        </dataFormat>
-                        <distribution>
-                            <online>
-                                <url function="download">http://data.canadensys.net/explorer/en/resources/ubc-vascular-specimens</url>
-                            </online>
-                        </distribution>
-                    </physical>
-                    <physical>
-                        <objectName>GBIF data portal</objectName>
-                        <characterEncoding>UTF-8</characterEncoding>
-                        <dataFormat>
-                            <externallyDefinedFormat>
-                                <formatName>HTML</formatName>
-                            </externallyDefinedFormat>
-                        </dataFormat>
-                        <distribution>
-                            <online>
-                                <url function="download">http://www.gbif.org/dataset/07fd0d79-4883-435f-bba1-58fef110cd13</url>
-                            </online>
-                        </distribution>
-                    </physical>
                     <resourceLogoUrl>http://data.canadensys.net/ipt/logo.do?r=ubc-vascular-specimens</resourceLogoUrl>
                         <collection>
                             <parentCollectionIdentifier>UBC</parentCollectionIdentifier>

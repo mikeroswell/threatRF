@@ -8,7 +8,7 @@ xml:lang="en">
             <alternateIdentifier>10.15468/t43wjj</alternateIdentifier>
                 <alternateIdentifier>https://intermountainbiota.org/portal/collections/misc/collprofiles.php?collid=16</alternateIdentifier>
                 <alternateIdentifier>http://intermountainbiota.org/portal/collections/misc/collprofiles.php?collid=16</alternateIdentifier>
-        <title>Intermountain Herbarium (Vascular plants &amp; algae)</title>
+        <title>Intermountain Herbarium (Vasc. &amp; Algae)</title>
             <creator>
 <organizationName>Consortium of Intermountain Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://intermountainbiota.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
@@ -20,25 +20,25 @@ xml:lang="en">
 <electronicMailAddress>kristian.valles@usu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2023-12-04
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
-                    <para>Records in this database are of the vascular plants and algae (of which there are very few) in the Intermountain Herbarium. Records for fungi, lichens and bryophytes are now being posted to the taxon-specific networks. The geographic focus of the Intermountain Herbarium is the Intermountain Region of western North America but its holdings come from many different countries. It even has one or more specimens from each of the seven continents. The collection is particularly rich in the Scrophulariaceae (traditional sense) and grasses, including voucher specimens of plants used by the late D.R. Dewey in his cytogenetic studies of the Triticeae.</para>
+                    <para>Records in this database are of the vascular plants and algae (of which there are very few) in the Intermountain Herbarium. Records for fungi, lichens and bryophytes are now being posted to the taxon-specific networks. The geographic focus of the Intermountain Herbarium is the Intermountain Region of western North America but its holdings come from many different countries. It even has one or more specimens from each of the seven continents. The collection is particularly rich in the Scrophulariaceae (traditional sense), Eriogonum, and grasses, including voucher specimens of plants used by the late D.R. Dewey in his cytogenetic studies of the Triticeae.</para>
             </abstract>
             <intellectualRights>
                     <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
             </intellectualRights>
             <contact>
-<organizationName>Intermountain Herbarium (Vascular plants &amp; algae)</organizationName><phone>435-797-4034</phone><electronicMailAddress>kristian.valles@usu.edu</electronicMailAddress><onlineUrl>http://herbarium.usu.edu/default.htm</onlineUrl>            </contact>
+<organizationName>Intermountain Herbarium (Vasc. &amp; Algae)</organizationName><phone>435-797-4034</phone><electronicMailAddress>kristian.valles@usu.edu</electronicMailAddress><onlineUrl>http://herbarium.usu.edu/default.htm</onlineUrl>            </contact>
 
     </dataset>
 
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:32Z</dateStamp>
-                <citation>Utah State University (2023). Intermountain Herbarium (Vascular plants &amp; algae). Occurrence dataset https://doi.org/10.15468/t43wjj accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:32Z</dateStamp>
+                <citation>Utah State University (2023). Intermountain Herbarium (Vasc. &amp; Algae). Occurrence dataset https://doi.org/10.15468/t43wjj accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

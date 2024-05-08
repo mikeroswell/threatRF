@@ -6,6 +6,7 @@ xml:lang="en">
 
     <dataset>
             <alternateIdentifier>10.15468/v5wjn7</alternateIdentifier>
+                <alternateIdentifier>https://ipt.floridamuseum.ufl.edu/ipt/resource?r=herbarium</alternateIdentifier>
                 <alternateIdentifier>b89d52a2-861d-4388-adad-c0da3d55fc78</alternateIdentifier>
                 <alternateIdentifier>http://ipt.flmnh.ufl.edu:8080/ipt/resource?r=herbarium</alternateIdentifier>
         <title>University of Florida Herbarium (FLAS)</title>
@@ -32,11 +33,11 @@ xml:lang="en">
 <phone>352-273-1984</phone><electronicMailAddress>francka@flmnh.ufl.edu</electronicMailAddress><onlineUrl>http://www.flmnh.ufl..edu/herbarium/</onlineUrl>            <role>USER</role>
             </associatedParty>
             <pubDate>
-                2023-01-16
+                2024-05-06
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
-                    <para>The University of Florida Herbarium (FLAS) in the Florida Museum of Natural History was established in 1891 by Peter H. Rolfs.  Current holdings comprise approximately 460,000 botanical specimens including many historical specimens dating from the 1800&amp;#39;s and early 1900&amp;#39;s.  The vascular plant collection (ca. 267,000 specimens) has an excellent representation of the flora of Florida and the southeastern United States, large holdings from the West Indies (esp. Haiti) and other Neotropical areas.  The bryophyte and lichen collections (ca. 120,000 specimens) are worldwide in scope with an excellent representation of species from Florida and tropical areas such as Costa Rica, Venezuela and Brazil. The wood collection (16,000 samples) is worldwide in scope with a excellent representation of tropical woods.  The algal collection includes ca. 2,000 specimens, mainly from Florida.  The Fungal Herbarium contains ca. 55,000 specimens.  The herbarium&amp;#39;s collection catalog includes ca. 70,000 specimens, mainly vascular plants, including ca. 1,000 type specimens.  Digital images are available for approximately 40,000 specimens.  Support for the UF herbarium&amp;#39;s computerization effort is provided by the Florida Museum of Natural History, UF / Institute of Food and Agricultural Sciences, United States Department of Agriculture (Hatch Project FLAS-HRB-04170), UF Libraries Digital Library Center, Florida Center for Library Automation, the Florida Museum Associates and the Andrew W. Mellon Foundation.</para>
+                    <para>The University of Florida Herbarium (FLAS) in the Florida Museum of Natural History contains approximately 500,000 specimens of vascular plants, bryophytes, lichens, fungi, and wood, with the earliest specimens dating to the early to mid-1800s. The FLAS acronym is the standard international abbreviation for the Herbarium, derived from its early association with the Florida Agricultural Experiment Station. The herbarium was established in 1891 by Peter H. Rolfs of Florida Agricultural College in Lake City, and later moved to the University of Florida in Gainesville in 1906. The vascular plant collection (ca. 320,000 specimens) has an excellent representation of the USA (esp. Florida and the southeastern USA), the West Indies (esp. Hispaniola), and other Neotropical areas. The bryophyte collection (ca. 70,000 specimens) and lichen collection (ca. 16,000 specimens) are worldwide in scope (esp. Florida and Neotropical areas such as Costa Rica, Venezuela, and Brazil). The wood collection (ca. 16,000 specimens) is worldwide in scope (esp. tropical woods). The algal collection includes ca. 3,500 specimens, mainly from Florida. The Fungal Herbarium contains ca. 55,000 specimens (primarily non-lichenized fungi and slime molds). This digital dataset serves the vascular plant collection, of which ca. 2/3 are digitized, including ca. 500 type specimens (holo-, lecto-, iso-, neo-, or epi-types). The herbarium&amp;#39;s digitization effort has been supported by several institutions, including the Florida Museum of Natural History, Institute of Food and Agricultural Sciences, National Science Foundation, United States Department of Agriculture (Hatch Project FLAS-HRB-04170), UF Libraries Digital Library Center, Florida Center for Library Automation, Florida Museum Associates, and the Andrew W. Mellon Foundation.</para>
             </abstract>
                 <keywordSet>
                         <keyword>Occurrence</keyword>
@@ -83,8 +84,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:37Z</dateStamp>
-                <citation>Franck A R (2023). University of Florida Herbarium (FLAS). Version 11.1934. Florida Museum of Natural History. Occurrence dataset https://doi.org/10.15468/v5wjn7 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:38Z</dateStamp>
+                <citation>Franck A R (2024). University of Florida Herbarium (FLAS). Version 11.2101. Florida Museum of Natural History. Occurrence dataset https://doi.org/10.15468/v5wjn7 accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

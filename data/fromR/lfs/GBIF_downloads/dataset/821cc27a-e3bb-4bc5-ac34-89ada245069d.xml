@@ -97,7 +97,7 @@ xml:lang="en">
 <phone>202-633-1247</phone><electronicMailAddress>rochoni@si.edu</electronicMailAddress><onlineUrl>http://collections.mnh.si.edu/search/mammals/</onlineUrl>            <role>POINT_OF_CONTACT</role>
             </associatedParty>
             <pubDate>
-                2023-01-02
+                2024-05-02
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -191,8 +191,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:34Z</dateStamp>
-                <citation>Orrell T, Informatics Office (2023). NMNH Extant Specimen Records (USNM, US). Version 1.65. National Museum of Natural History, Smithsonian Institution. Occurrence dataset https://doi.org/10.15468/hnhrg3 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:32Z</dateStamp>
+                <citation>Orrell T, Informatics Office (2024). NMNH Extant Specimen Records (USNM, US). Version 1.81. National Museum of Natural History, Smithsonian Institution. Occurrence dataset https://doi.org/10.15468/hnhrg3 accessed via GBIF.org on 2024-05-08.</citation>
                     <resourceLogoUrl>http://collections.nmnh.si.edu/ipt/logo.do?r=nmnh_extant_dwc-a</resourceLogoUrl>
                         <collection>
                             <parentCollectionIdentifier>http://grbio.org/cool/142r-0w94</parentCollectionIdentifier>

@@ -6,18 +6,22 @@ xml:lang="en">
 
     <dataset>
             <alternateIdentifier>10.15468/m2htqa</alternateIdentifier>
+                <alternateIdentifier>https://ecdysis.org/collections/misc/collprofiles.php?collid=98</alternateIdentifier>
                 <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=75</alternateIdentifier>
                 <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=75</alternateIdentifier>
         <title>Virginia Polytechnic Institute and State University Insect Collection</title>
             <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+<organizationName>Ecdysis Portal</organizationName><onlineUrl>https://ecdysis.org/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>Ecdysis Portal</organizationName><onlineUrl>https://ecdysis.org/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
-<organizationName>Virginia Polytechnic Institute and State University Insect Collection</organizationName><positionName>Collection Manager</positionName><electronicMailAddress>pmarek@vt.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            <individualName>
+<givenName>Paul</givenName>                    <surName>Marek</surName>
+            </individualName>
+<positionName>Curator</positionName><electronicMailAddress>pmarek@vt.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2022-10-06
+                2024-05-01
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -34,8 +38,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:22Z</dateStamp>
-                <citation>Virginia Tech Insect Collection (2022). Virginia Polytechnic Institute and State University Insect Collection. Occurrence dataset https://doi.org/10.15468/m2htqa accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:29Z</dateStamp>
+                <citation>Virginia Tech Insect Collection (2024). Virginia Polytechnic Institute and State University Insect Collection. Occurrence dataset https://doi.org/10.15468/m2htqa accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

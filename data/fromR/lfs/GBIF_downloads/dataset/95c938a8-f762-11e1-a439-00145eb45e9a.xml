@@ -36,7 +36,7 @@ xml:lang="en">
 <phone>+1 (785) 864-3453</phone><electronicMailAddress>ccfree@ku.edu</electronicMailAddress><onlineUrl>https://biodiversity.ku.edu/botany</onlineUrl>            <role>CURATOR</role>
             </associatedParty>
             <pubDate>
-                2022-12-05
+                2024-05-07
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -107,8 +107,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
-                <citation>Bentley A, Morse C (2022). R. L. McGregor Herbarium Vascular Plants Collection. University of Kansas Biodiversity Institute. Occurrence dataset https://doi.org/10.15468/htptzr accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:36Z</dateStamp>
+                <citation>Bentley A, Morse C (2024). R. L. McGregor Herbarium Vascular Plants Collection. University of Kansas Biodiversity Institute. Occurrence dataset https://doi.org/10.15468/htptzr accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

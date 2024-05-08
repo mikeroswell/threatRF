@@ -10,9 +10,9 @@ xml:lang="en">
                 <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=206</alternateIdentifier>
         <title>University of North Carolina at Chapel Hill Herbarium: Vascular Plants</title>
             <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
 <givenName>Carol Ann</givenName>                    <surName>McCormick</surName>
@@ -25,8 +25,14 @@ xml:lang="en">
             </individualName>
 <positionName>Herbarium Director</positionName><electronicMailAddress>weakley@unc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Shanna</givenName>                    <surName>Oberreiter</surName>
+            </individualName>
+<positionName>Herbarium Assistant Curatrix</positionName><electronicMailAddress>oberreit@email.unc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
             <pubDate>
-                2023-01-13
+                2024-05-02
             </pubDate>
         <language>ENGLISH</language>
             <intellectualRights>
@@ -40,8 +46,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:30Z</dateStamp>
-                <citation>University of North Carolina at Chapel Hill Herbarium (NCU) (2023). University of North Carolina at Chapel Hill Herbarium: Vascular Plants. Occurrence dataset https://doi.org/10.15468/63vxjd accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:30Z</dateStamp>
+                <citation>University of North Carolina at Chapel Hill Herbarium (NCU) (2024). University of North Carolina at Chapel Hill Herbarium: Vascular Plants. Occurrence dataset https://doi.org/10.15468/63vxjd accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

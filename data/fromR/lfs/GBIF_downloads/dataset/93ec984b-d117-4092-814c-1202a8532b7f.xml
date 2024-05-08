@@ -9,9 +9,9 @@ xml:lang="en">
                 <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=220</alternateIdentifier>
         <title>University of Mississippi, Thomas M. Pullen Herbarium</title>
             <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
                     <surName>Lucile McCook, Curator</surName>
@@ -19,7 +19,7 @@ xml:lang="en">
 <electronicMailAddress>bymccook@olemiss.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-04
+                2023-12-05
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -36,8 +36,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
-                <citation>University of Mississippi (2023). University of Mississippi, Thomas M. Pullen Herbarium. Occurrence dataset https://doi.org/10.15468/txxhcj accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:36Z</dateStamp>
+                <citation>University of Mississippi (2023). University of Mississippi, Thomas M. Pullen Herbarium. Occurrence dataset https://doi.org/10.15468/txxhcj accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

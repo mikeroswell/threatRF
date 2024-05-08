@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="0039bbb4-f753-40fd-8629-a4ed74fc5c6b"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/vc7ahv</alternateIdentifier>
+                <alternateIdentifier>https://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=334</alternateIdentifier>
+        <title>Delaware State University, Claude E. Phillips Herbarium</title>
+            <creator>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+                    <surName>Cynthia Hong-Wa</surName>
+            </individualName>
+<electronicMailAddress>chwa@desu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2024-05-01
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Claude E. Phillips Herbarium (DOV) at Delaware State University is the only public herbarium on the Delmarva Peninsula and houses over 150,000 specimens of vascular plants, ca. 35,000 specimens of bryophytes and 3,600 lichens. DOV’s collections span more than 200 years of botanical exploration in Delmarva and the neighboring states and include representative flora from other parts of the U.S. and the world.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Delaware State University, Claude E. Phillips Herbarium</organizationName><electronicMailAddress>chwa@desu.edu</electronicMailAddress><onlineUrl>https://herbarium.desu.edu/</onlineUrl>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:29Z</dateStamp>
+                <citation>Delaware State University, Claude E. Phillips Herbarium (2024). Delaware State University, Claude E. Phillips Herbarium. Occurrence dataset https://doi.org/10.15468/vc7ahv accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

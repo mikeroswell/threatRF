@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="808d54a7-9884-4b1c-8112-39522fe004d4"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/vzkvuf</alternateIdentifier>
+                <alternateIdentifier>https://midwestherbaria.org/portal/collections/misc/collprofiles.php?collid=238</alternateIdentifier>
+        <title>Miami University Turrell Herbarium - Vascular Plants</title>
+            <creator>
+<organizationName>Consortium of Midwest Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midwestherbaria.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>Consortium of Midwest Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midwestherbaria.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Gretchen</givenName>                    <surName>Meier</surName>
+            </individualName>
+<positionName>Curator</positionName><electronicMailAddress>meierga@miamioh.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2024-04-29
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Miami University is the home of Ohio&amp;#39;s largest herbarium, the Willard Sherman Turrell Herbarium. The herbarium&amp;#39;s holdings of approximately 620,000 specimens are worldwide in both geographical and taxonomic coverage. The collection consists of 330,000 vascular plant specimens, as well as 140,000 bryophytes, 100,000 fungi, 35,000 lichens, 10,000 algae, and 5,000 fossil plants. There are several thousand type specimens contained in the collection, as well as many sets of cryptogamic exsiccatae. Active exchange programs are ongoing with many herbaria worldwide to ensure the continued breadth and depth of the collection. The W.S. Turrell Herbarium Fund is an endowment which benefits the herbarium, and is restricted to support of the research activities of the staff and students in systematic botany.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Miami University Turrell Herbarium - Vascular Plants</organizationName><electronicMailAddress>meierga@miamioh.edu</electronicMailAddress><onlineUrl>http://herbarium.muohio.edu/herbariummu</onlineUrl>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:23Z</dateStamp>
+                <citation>W.S. Turrell Herbarium (MU) (2024). Miami University Turrell Herbarium - Vascular Plants. Occurrence dataset https://doi.org/10.15468/vzkvuf accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

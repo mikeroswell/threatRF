@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="2ab496e3-18cb-4cc0-9dca-9402d29b4e5b"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/a2esxa</alternateIdentifier>
+                <alternateIdentifier>http://herbarium.bio.fsu.edu:8080/ipt/resource?r=fsuherb</alternateIdentifier>
+        <title>Robert K. Godfrey Herbarium  at Florida State University</title>
+            <creator>
+            <individualName>
+<givenName>Austin</givenName>                    <surName>Mast</surName>
+            </individualName>
+<organizationName>Florida State University</organizationName><positionName>Director, Robert K. Godfrey Herbarium</positionName>            </creator>
+            <pubDate>
+                2023-04-27
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Florida State University&amp;#39;s Robert K. Godfrey Herbarium is a museum-quality collection of over 220,000 plant and microalgae specimens. These document the distribution and natural variation of the 2,400 species of flowering plants, ferns, conifers, and cycads found in northern Florida-one of North America&amp;#39;s biodiversity hotspots-and the microalgae of Florida’s Gulf and Atlantic coasts. Each plant specimen is carefully identified, pressed, dried, and mounted to archival standards, with accompanying data on where and when it was collected. The specimens are a valued resource to local, state, national, and international biologists studying plant and microalgae systematics, ecology, evolution, biogeography, conservation biology, anatomy, and morphology. New specimens are added to the collection each week. As of May 2014, the collection includes all specimens from Stetson University&amp;#39;s Herbarium (DLF). In August 2003, Austin Mast became the new director of the herbarium.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>monthly</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Austin</givenName>                    <surName>Mast</surName>
+            </individualName>
+<organizationName>Florida State University</organizationName><positionName>Director, Robert K. Godfrey Herbarium</positionName>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:30Z</dateStamp>
+                <citation>Mast A (2023). Robert K. Godfrey Herbarium  at Florida State University. Florida State University Robert K. Godfrey Herbarium. Occurrence dataset https://doi.org/10.15468/a2esxa accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

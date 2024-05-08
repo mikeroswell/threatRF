@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="785da3a1-3b86-4ac2-8f68-0903cb1cd085"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/sgmyyp</alternateIdentifier>
+                <alternateIdentifier>https://sernecportal.org/portal/collections/misc/collprofiles.php?collid=192</alternateIdentifier>
+        <title>Duke University Vascular Plant Collection</title>
+            <creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Michael D.</givenName>                    <surName>Windham</surName>
+            </individualName>
+<electronicMailAddress>mdw26@duke.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Connie</givenName>                    <surName>Robertson</surName>
+            </individualName>
+<electronicMailAddress>cjrobert@duke.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2024-04-29
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Duke Herbarium houses more than 425,000 specimens of vascular plants, including 821 types. The collection is especially rich in accessions from the Southeastern United States, in particular for the Carolinas, and Mesoamerica. The vascular plant herbarium contains an important collection of over 22,000 sheets from La Selva in Costa Rica.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Duke University Vascular Plant Collection</organizationName><electronicMailAddress>mdw26@duke.edu</electronicMailAddress>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:33Z</dateStamp>
+                <citation>Duke University Herbarium (2024). Duke University Vascular Plant Collection. Occurrence dataset https://doi.org/10.15468/sgmyyp accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

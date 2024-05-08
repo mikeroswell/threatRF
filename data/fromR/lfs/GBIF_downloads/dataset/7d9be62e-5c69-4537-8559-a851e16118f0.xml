@@ -10,9 +10,9 @@ xml:lang="en">
                 <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=196</alternateIdentifier>
         <title>Appalachian State University, I. W. Carpenter, Jr. Herbarium</title>
             <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
 <givenName>Andrew</givenName>                    <surName>Jenkins</surName>
@@ -26,7 +26,7 @@ xml:lang="en">
 <positionName>Department Chair</positionName><electronicMailAddress>murrellze@appstate.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-05-02
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -43,8 +43,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:33Z</dateStamp>
-                <citation>Appalachian State University (2023). Appalachian State University, I. W. Carpenter, Jr. Herbarium. Occurrence dataset https://doi.org/10.15468/ivsxey accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:33Z</dateStamp>
+                <citation>Appalachian State University (2024). Appalachian State University, I. W. Carpenter, Jr. Herbarium. Occurrence dataset https://doi.org/10.15468/ivsxey accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

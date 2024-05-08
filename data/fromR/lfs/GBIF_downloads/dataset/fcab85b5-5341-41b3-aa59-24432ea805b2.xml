@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="fcab85b5-5341-41b3-aa59-24432ea805b2"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/czbcsx</alternateIdentifier>
+                <alternateIdentifier>https://midatlanticherbaria.org/portal/collections/misc/collprofiles.php?collid=320</alternateIdentifier>
+        <title>Morris Arboretum of University of Pennsylvania</title>
+            <creator>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>Mid-Atlantic Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midatlanticherbaria.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+                    <surName>C. Skema</surName>
+            </individualName>
+<electronicMailAddress>MOAR@morrisarboretum.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-12-05
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The herbarium of the Morris Arboretum of University of Pennsylvania contains mostly vascular plants of Pennsylvania, and also vouchers for the living collection at the arboretum, and some temperate, woody plants of Europe and Asia.</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Morris Arboretum of University of Pennsylvania</organizationName><electronicMailAddress>MOAR@morrisarboretum.org</electronicMailAddress><onlineUrl>http://paflora.org</onlineUrl>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:40Z</dateStamp>
+                <citation>Morris Arboretum of the University of Pennsylvania (2023). Morris Arboretum of University of Pennsylvania. Occurrence dataset https://doi.org/10.15468/czbcsx accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

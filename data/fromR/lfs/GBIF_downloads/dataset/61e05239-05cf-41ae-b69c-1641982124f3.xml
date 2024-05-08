@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="61e05239-05cf-41ae-b69c-1641982124f3"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/7v5zvb</alternateIdentifier>
+                <alternateIdentifier>61e05239-05cf-41ae-b69c-1641982124f3</alternateIdentifier>
+                <alternateIdentifier>https://ipt.pnwherbaria.org/resource?r=wsu</alternateIdentifier>
+        <title>Washington State University Herbarium</title>
+            <creator>
+            <individualName>
+<givenName>Eric</givenName>                    <surName>Roalson</surName>
+            </individualName>
+<organizationName>Washington State University Herbarium</organizationName><positionName>Curator</positionName>            <address>
+<city>Pullman</city><administrativeArea>Washington</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>eric_roalson@wsu.edu</electronicMailAddress>            </creator>
+            <associatedParty>
+            <individualName>
+<givenName>David</givenName>                    <surName>Giblin</surName>
+            </individualName>
+<electronicMailAddress>dgiblin@uw.edu</electronicMailAddress>            <role>USER</role>
+            </associatedParty>
+            <pubDate>
+                2024-05-01
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>Washington State University Herbarium vascular plants.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <coverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>Vascular plants.</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Kingdom</taxonRankName>
+                                    <taxonRankValue>Plantae</taxonRankValue>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>monthly</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Walter</givenName>                    <surName>Fertig</surName>
+            </individualName>
+<organizationName>Washington State University Herbarium</organizationName><positionName>Collections Manager</positionName>            <address>
+<city>Pullman</city><administrativeArea>Washington</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>walter.fertig@wsu.edu</electronicMailAddress>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:32Z</dateStamp>
+                <citation>Roalson E (2024). Washington State University Herbarium. Version 1.14. Consortium of Pacific Northwest Herbaria. Occurrence dataset https://doi.org/10.15468/7v5zvb accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

@@ -27,13 +27,6 @@ xml:lang="en">
             </associatedParty>
             <associatedParty>
             <individualName>
-<givenName>Laura</givenName>                    <surName>Rocha Prado</surName>
-            </individualName>
-<positionName>Bioinformatician</positionName><electronicMailAddress>lauraprado@asu.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0003-1237-2824</userId>
-            <role>CONTENT_PROVIDER</role>
-            </associatedParty>
-            <associatedParty>
-            <individualName>
 <givenName>Christopher</givenName>                    <surName>Livingston</surName>
             </individualName>
 <positionName>Specimen Imaging (2021-2022)</positionName><electronicMailAddress>calivin3@asu.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-8676-0817</userId>
@@ -46,8 +39,21 @@ xml:lang="en">
 <positionName>Voucher Mounting (2021-2022)</positionName><electronicMailAddress>amfoss1@asu.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-9632-9721</userId>
             <role>CONTENT_PROVIDER</role>
             </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Ava</givenName>                    <surName>Claus</surName>
+            </individualName>
+<positionName>Voucher Mounting &amp; Imaging (2023-2024)</positionName><electronicMailAddress>alclaus@asu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Chandra</givenName>                    <surName>Earl</surName>
+            </individualName>
+<electronicMailAddress>chandra.earl@asu.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-9850-882X</userId>
+            <role>TECHNICAL_POINT_OF_CONTACT</role>
+            </associatedParty>
             <pubDate>
-                2023-01-11
+                2024-04-04
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -64,8 +70,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:31Z</dateStamp>
-                <citation>National Ecological Observatory Network (2023). NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers). Occurrence dataset https://doi.org/10.15468/bmmg36 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:32Z</dateStamp>
+                <citation>National Ecological Observatory Network (2024). NEON Biorepository Terrestrial Plant Collection (Herbarium Vouchers). Occurrence dataset https://doi.org/10.15468/bmmg36 accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

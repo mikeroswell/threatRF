@@ -11,9 +11,9 @@ xml:lang="en">
                 <alternateIdentifier>http://sernecportal.org/portal/collections/misc/collprofiles.php?collid=147</alternateIdentifier>
         <title>University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection</title>
             <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
 <givenName>Herrick</givenName>                    <surName>Brown</surName>
@@ -24,16 +24,16 @@ xml:lang="en">
             <individualName>
 <givenName>Csilla</givenName>                    <surName>Czako</surName>
             </individualName>
-<positionName>GIS Guru</positionName><electronicMailAddress>czakoc@dnr.sc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+<positionName>GIS Specialist/SCDNR NHT Botany and Plant Conservation Liason</positionName><electronicMailAddress>czakoc@dnr.sc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <associatedParty>
             <individualName>
-<givenName>Amy</givenName>                    <surName>Harmon</surName>
+<givenName>Avery</givenName>                    <surName>Browning</surName>
             </individualName>
-<positionName>Herbarium Collection Manager</positionName><electronicMailAddress>harmona3@mailbox.sc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+<positionName>Assistant Collections Manager (Resident Phycologist)</positionName><electronicMailAddress>averyob@mailbox.sc.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-04
+                2023-12-05
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -50,8 +50,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:36Z</dateStamp>
-                <citation>University of South Carolina (2023). University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection. Occurrence dataset https://doi.org/10.15468/fmj4at accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:37Z</dateStamp>
+                <citation>University of South Carolina (2023). University of South Carolina, A. C. Moore Herbarium Vascular Plant Collection. Occurrence dataset https://doi.org/10.15468/fmj4at accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

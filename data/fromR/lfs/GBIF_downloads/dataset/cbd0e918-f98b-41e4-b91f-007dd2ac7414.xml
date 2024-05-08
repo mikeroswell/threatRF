@@ -10,9 +10,9 @@ xml:lang="en">
                 <alternateIdentifier>https://www.sernecportal.org/portal/collections/misc/collprofiles.php?collid=228</alternateIdentifier>
         <title>George Mason University, Ted R. Bradley Herbarium</title>
             <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
 <givenName>Andrea</givenName>                    <surName>Weeks</surName>
@@ -20,7 +20,7 @@ xml:lang="en">
 <positionName>Director &amp; Curator</positionName><electronicMailAddress>aweeks3@gmu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-05-02
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -37,8 +37,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:37Z</dateStamp>
-                <citation>George Mason University Herbarium (GMUF) (2023). George Mason University, Ted R. Bradley Herbarium. Occurrence dataset https://doi.org/10.15468/t8ar55 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:38Z</dateStamp>
+                <citation>George Mason University Herbarium (GMUF) (2024). George Mason University, Ted R. Bradley Herbarium. Occurrence dataset https://doi.org/10.15468/t8ar55 accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

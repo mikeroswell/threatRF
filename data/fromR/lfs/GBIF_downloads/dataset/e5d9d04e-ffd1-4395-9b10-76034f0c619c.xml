@@ -16,34 +16,34 @@ xml:lang="en">
             <individualName>
                     <surName>General Contact</surName>
             </individualName>
-<electronicMailAddress>deaver.herbarium [at] nau [period] edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+<electronicMailAddress>deaver.herbarium@nau.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <associatedParty>
             <individualName>
 <givenName>Tina</givenName>                    <surName>Ayers</surName>
             </individualName>
-<positionName>Deaver Herbarium Curator</positionName><electronicMailAddress>tina.ayers [at] nau [period] edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+<positionName>Deaver Herbarium Curator</positionName><electronicMailAddress>tina.ayers@nau.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-03-05
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
-                    <para>Number of Specimens: 120,000 Specialty: Colorado Plateau, especially northern Arizona; northeastern Mojave Desert; northern Arizona National Parks and Monuments; vascular plants of the San Francisco Peaks and Coconino National Forest. Important Collections: M. Baker; R. E. Collom; C. F. Deaver; D. Demaree; R. K. Gierisch; L. N. Goodding; G. Goodwin; H. D. Hammond; R. H. Hevly; M. E. Jones; T. H. Kearney; Max Licher; E. L. Little, Jr.; V. O. Mayes; A. M. Phillips; G. R. Rink; C. G. Schaack; J. J. Thornber; A. F. Whiting. Incorporated Herbaria: FSLF (1000 specimens) in 1989. Notes: Name for Arizona State College changed to Northern Arizona University in 1966. ASC fungi transferred to MICH in 1998. ASC is temporarily housing NAVA. Date Founded: 1930.</para>
+                    <para>Number of Specimens: 125,000 Specialty: Colorado Plateau, especially northern Arizona; northeastern Mojave Desert; northern Arizona National Parks and Monuments; vascular plants of the San Francisco Peaks and Coconino National Forest. Important Collections: M. Baker; R. E. Collom; C. F. Deaver; D. Demaree; R. K. Gierisch; L. N. Goodding; G. Goodwin; H. D. Hammond; R. H. Hevly; M. E. Jones; T. H. Kearney; Max Licher; E. L. Little, Jr.; V. O. Mayes; A. M. Phillips; G. R. Rink; C. G. Schaack; J. J. Thornber; A. F. Whiting. Incorporated Herbaria: FSLF (1000 specimens) in 1989. Notes: Arizona State College changed to Northern Arizona University in 1966. ASC fungi transferred to MICH in 1998. ASC is temporarily housing NAVA. Date Founded: 1930.</para>
             </abstract>
             <intellectualRights>
                     <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
             </intellectualRights>
             <contact>
-<organizationName>Deaver Herbarium (Northern Arizona University)</organizationName><phone>928/523-7242</phone><electronicMailAddress>deaver.herbarium [at] nau [period] edu</electronicMailAddress><onlineUrl>https://nau.edu/biological-sciences/deaver-herbarium/</onlineUrl>            </contact>
+<organizationName>Deaver Herbarium (Northern Arizona University)</organizationName><phone>928/523-7242</phone><electronicMailAddress>deaver.herbarium@nau.edu</electronicMailAddress><onlineUrl>https://nau.edu/biological-sciences/deaver-herbarium/</onlineUrl>            </contact>
 
     </dataset>
 
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
-                <citation>Northern Arizona University (2023). Deaver Herbarium (Northern Arizona University). Occurrence dataset https://doi.org/10.15468/b7tfpa accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:40Z</dateStamp>
+                <citation>Northern Arizona University (2024). Deaver Herbarium (Northern Arizona University). Occurrence dataset https://doi.org/10.15468/b7tfpa accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

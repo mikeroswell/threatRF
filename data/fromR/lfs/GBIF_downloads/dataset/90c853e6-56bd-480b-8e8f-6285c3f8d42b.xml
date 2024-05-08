@@ -27,7 +27,7 @@ xml:lang="en">
 <city>Chicago</city><administrativeArea>IL</administrativeArea><country>UNITED_STATES</country>            </address>
 <electronicMailAddress>mvonkonrat@fieldmuseum.org</electronicMailAddress>            </metadataProvider>
             <pubDate>
-                2022-12-21
+                2023-09-22
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -66,8 +66,9 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
-                <citation>Grant S, von Konrat M (2022). Field Museum of Natural History (Botany) Seed Plant Collection. Version 11.14. Field Museum. Occurrence dataset https://doi.org/10.15468/nxnqzf accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:36Z</dateStamp>
+                <citation>Grant S, von Konrat M (2023). Field Museum of Natural History (Botany) Seed Plant Collection. Version 11.16. Field Museum. Occurrence dataset https://doi.org/10.15468/nxnqzf accessed via GBIF.org on 2024-05-08.</citation>
+                    <resourceLogoUrl>https://fmipt.fieldmuseum.org/ipt/logo.do?r=fmnh_seedplants</resourceLogoUrl>
             </gbif>
         </metadata>
     </additionalMetadata>

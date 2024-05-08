@@ -29,11 +29,11 @@ xml:lang="en">
 <electronicMailAddress>kwatson@nybg.org</electronicMailAddress>            </metadataProvider>
             <metadataProvider>
             <individualName>
-<givenName>Leanna</givenName>                    <surName>McMillin</surName>
+<givenName>Leanna</givenName>                    <surName>Feder</surName>
             </individualName>
 <organizationName>The New York Botanical Garden</organizationName><positionName>Herbarium Digital Asset Manager</positionName>            <address>
 <deliveryPoint>2900 Southern Blvd.</deliveryPoint><city>Bronx</city><administrativeArea>NY</administrativeArea><postalCode>10458-5126</postalCode><country>UNITED_STATES</country>            </address>
-<electronicMailAddress>lmcmillin@nybg.org</electronicMailAddress>            </metadataProvider>
+<electronicMailAddress>lfeder@nybg.org</electronicMailAddress>            </metadataProvider>
             <metadataProvider>
             <individualName>
 <givenName>Elizabeth</givenName>                    <surName>Gjieli</surName>
@@ -55,7 +55,7 @@ xml:lang="en">
 <electronicMailAddress>kwatson@nybg.org</electronicMailAddress>            <role>USER</role>
             </associatedParty>
             <pubDate>
-                2022-12-16
+                2024-05-03
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -68,6 +68,10 @@ xml:lang="en">
                 <keywordSet>
                         <keyword>Specimen</keyword>
                         <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
                 </keywordSet>
             <intellectualRights>
                     <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
@@ -107,9 +111,9 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:38Z</dateStamp>
-                <citation>Ramirez J, Watson K, McMillin L, Gjieli E, Sessa E (2022). The New York Botanical Garden Herbarium (NY). Version 1.56. The New York Botanical Garden. Occurrence dataset https://doi.org/10.15468/6e8nje accessed via GBIF.org on 2023-01-16.</citation>
-                    <resourceLogoUrl>https://www.nybg.org/content/themes/nybg/build/images/logo.png</resourceLogoUrl>
+                <dateStamp>2024-05-08T13:46:38Z</dateStamp>
+                <citation>Ramirez J, Watson K, Feder L, Gjieli E, Sessa E (2024). The New York Botanical Garden Herbarium (NY). Version 1.67. The New York Botanical Garden. Occurrence dataset https://doi.org/10.15468/6e8nje accessed via GBIF.org on 2024-05-08.</citation>
+                    <resourceLogoUrl>https://sweetgum.nybg.org/science/wp-content/themes/nybgscience/images/logo23.svg</resourceLogoUrl>
             </gbif>
         </metadata>
     </additionalMetadata>

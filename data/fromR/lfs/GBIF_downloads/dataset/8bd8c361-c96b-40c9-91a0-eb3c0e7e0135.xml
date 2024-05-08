@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="8bd8c361-c96b-40c9-91a0-eb3c0e7e0135"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/tf54rf</alternateIdentifier>
+                <alternateIdentifier>https://midwestherbaria.org/portal/collections/misc/collprofiles.php?collid=133</alternateIdentifier>
+        <title>Eastern Illinois University, Stover-Ebinger Herbarium</title>
+            <creator>
+<organizationName>Consortium of Midwest Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midwestherbaria.org/portal/index.php</onlineUrl>            </creator>
+            <metadataProvider>
+<organizationName>Consortium of Midwest Herbaria</organizationName><electronicMailAddress>seinetAdmin@asu.edu</electronicMailAddress><onlineUrl>https://midwestherbaria.org/portal/index.php</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+                    <surName>Gordon C. Tucker, Professor &amp; Curator</surName>
+            </individualName>
+<electronicMailAddress>gctucker@eiu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <pubDate>
+                2023-12-05
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The Stover-Ebinger Herbarium has about 88,000 specimens. It contains a very good representation of the flora of the midwestern United States; about half the specimens were collected in Illinois. Students and faculty conducting ecological studies and floristic inventories use the herbarium to help identify the plants they see and collect. Students in Plant Taxonomy, Dendrology, and Wetland Plants classes use it to become familiar with species and for identification of specimens. In our courses on Wetland Plants, Woody Plants, Economic Botany, Medicinal Plants, and Plant Evolution, herbarium specimens are used to to make morphological comparisons among relevant plant taxa. The herbarium was started in 1899. Originally named the Stover Herbarium for Dr. Ernest L. Stover, professor of botany from 1923-1960, the Botany Dept. faculty voted in Dec., 1995 to &amp;#34;expand&amp;#34; the name to honor John E. Ebinger on the occasion of his retirement. Dr. Ebinger collected about one-third of the specimens in the herbarium and served as curator from 1963-1995. For information about vascular plants, contact Dr. Gordon C. Tucker (gctucker&amp;#64;eiu.edu). Our specimens of fungi (including lichens) and bryophytes were transferred to the Illinois Natural History Survey (ILLS), beginning in 2015; for further information about these collections, please contact Dr. Andrew Miller (amiller7&amp;#64;illinois.edu).</para>
+            </abstract>
+            <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+            </intellectualRights>
+            <contact>
+<organizationName>Eastern Illinois University, Stover-Ebinger Herbarium</organizationName><electronicMailAddress>gctucker@eiu.edu</electronicMailAddress><onlineUrl>http://ux1.eiu.edu/~gctucker/eiu-herbarium.htm</onlineUrl>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:36Z</dateStamp>
+                <citation>Eastern Illinois University, Stover-Ebinger Herbarium (EIU) (2023). Eastern Illinois University, Stover-Ebinger Herbarium. Occurrence dataset https://doi.org/10.15468/tf54rf accessed via GBIF.org on 2024-05-08.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

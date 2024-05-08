@@ -6,22 +6,33 @@ xml:lang="en">
 
     <dataset>
             <alternateIdentifier>10.15468/mtagq6</alternateIdentifier>
+                <alternateIdentifier>https://ecdysis.org/collections/misc/collprofiles.php?collid=128</alternateIdentifier>
                 <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=76</alternateIdentifier>
                 <alternateIdentifier>http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=76</alternateIdentifier>
         <title>The Albert J. Cook Arthropod Research Collection</title>
             <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+<organizationName>Ecdysis Portal</organizationName><onlineUrl>https://ecdysis.org/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>Ecdysis Portal</organizationName><onlineUrl>https://ecdysis.org/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
-<organizationName>The Albert J. Cook Arthropod Research Collection</organizationName><positionName>Collection Manager</positionName><electronicMailAddress>cognato@msu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            <individualName>
+<givenName>Anthony</givenName>                    <surName>Cognato</surName>
+            </individualName>
+<electronicMailAddress>cognato@msu.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Sarah</givenName>                    <surName>Smith</surName>
+            </individualName>
+<positionName>curator</positionName><electronicMailAddress>smith462@msu.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0002-5173-3736</userId>
+            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2022-10-06
+                2024-05-01
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
-                    <para>In 1867, Professor Albert J. Cook started the ARC and it currently houses ~ 1.5 million specimens mounted on pins, slides or stored in alcohol representing ~35,000 species. A significant portion of the collection represents the insect diversity Michigan and the Great Lakes Region. Other significant collections represent the world-wide arthropod fauna for select taxa, e.g., Lepidoptera and Scolytinae. Researchers in systematics, agriculture, natural resources, urban insect management, to extension personnel and to the general public use these specimens. Please direct inquiries to Anthony Cognato, Director or Gary Parsons, Manager (parsonsg&amp;#64;cns.msu.edu).</para>
+                    <para>In 1867, Professor Albert J. Cook started the ARC and it currently houses ~ 1.5 million specimens mounted on pins, slides or stored in alcohol representing ~35,000 species. A significant portion of the collection represents the insect diversity Michigan and the Great Lakes Region. Other significant collections represent the world-wide arthropod fauna for select taxa, e.g., Lepidoptera and Scolytinae. Researchers in systematics, agriculture, natural resources, urban insect management, to extension personnel and to the general public use these specimens. Please direct inquiries to Anthony Cognato, Director or Sarah Smith, curator (smith462&amp;#64;msu.edu).</para>
             </abstract>
             <intellectualRights>
                     <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
@@ -34,8 +45,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:32Z</dateStamp>
-                <citation>A.J. Cook Arthropod Research Collection (2022). The Albert J. Cook Arthropod Research Collection. Occurrence dataset https://doi.org/10.15468/mtagq6 accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:32Z</dateStamp>
+                <citation>A.J. Cook Arthropod Research Collection (2024). The Albert J. Cook Arthropod Research Collection. Occurrence dataset https://doi.org/10.15468/mtagq6 accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

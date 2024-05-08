@@ -20,7 +20,7 @@ xml:lang="en">
 <electronicMailAddress>IsaacB@CarnegieMNH.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-05
+                2024-03-04
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -37,8 +37,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
-                <citation>Carnegie Museums (2023). Carnegie Museum of Natural History Herbarium. Occurrence dataset https://doi.org/10.15468/d51v1f accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:40Z</dateStamp>
+                <citation>Carnegie Museums (2024). Carnegie Museum of Natural History Herbarium. Occurrence dataset https://doi.org/10.15468/d51v1f accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

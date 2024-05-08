@@ -68,7 +68,7 @@ xml:lang="en">
             <role>CURATOR</role>
             </associatedParty>
             <pubDate>
-                2022-12-27
+                2024-04-27
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -159,8 +159,8 @@ Arthropoda, Hexapoda, Coleoptera, Lepidoptera, Carabidae, Noctuidae</generalTaxo
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
-                <citation identifier="http://doi.org/10.18165/9enbmt">University of Alberta Museums, La France D, Becker-Burns A (2022). University of Alberta E. H. Strickland Entomological Museum (UASM). University of Alberta Museums. Occurrence dataset https://doi.org/10.18165/9enbmt accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:36Z</dateStamp>
+                <citation identifier="http://doi.org/10.18165/9enbmt">University of Alberta Museums, La France D, Becker-Burns A (2024). University of Alberta E. H. Strickland Entomological Museum (UASM). University of Alberta Museums. Occurrence dataset https://doi.org/10.18165/9enbmt accessed via GBIF.org on 2024-05-08.</citation>
                         <collection>
                             <parentCollectionIdentifier>UAM</parentCollectionIdentifier>
                             <collectionIdentifier>UASM</collectionIdentifier>

@@ -17,7 +17,7 @@ xml:lang="en">
             </individualName>
 <organizationName>Insectarium de Montréal - Espace pour la vie</organizationName><positionName>Director</positionName>            <address>
 <administrativeArea>Quebec</administrativeArea><country>CANADA</country>            </address>
-<electronicMailAddress>maxim.larrivee@ville.montreal.qc.ca</electronicMailAddress>            <userId directory="http://orcid.org/">0000-0002-2925-3736</userId>
+<electronicMailAddress>maxim.larrivee@ville.montreal.qc.ca</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0002-2925-3736</userId>
             </creator>
             <creator>
             <individualName>
@@ -25,7 +25,7 @@ xml:lang="en">
             </individualName>
 <organizationName>Vermont Center for Ecostudies</organizationName><positionName>conservation biologist</positionName>            <address>
 <deliveryPoint>PO Box 420</deliveryPoint><city>Norwich</city><administrativeArea>Vermont</administrativeArea><postalCode>05091</postalCode><country>UNITED_STATES</country>            </address>
-<phone>802-649-1431</phone><electronicMailAddress>kmcfarland@vtecostudies.org</electronicMailAddress>            <userId directory="http://orcid.org/">0000-0001-7809-5503</userId>
+<phone>802-649-1431</phone><electronicMailAddress>kmcfarland@vtecostudies.org</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-7809-5503</userId>
             </creator>
             <creator>
             <individualName>
@@ -40,7 +40,7 @@ xml:lang="en">
             </individualName>
 <organizationName>University of Arizona</organizationName><positionName>Assistant Professor</positionName>            <address>
 <city>Tuscon</city><administrativeArea>Arizona</administrativeArea><postalCode>85719</postalCode><country>UNITED_STATES</country>            </address>
-<electronicMailAddress>klprudic@email.arizona.edu</electronicMailAddress>            <userId directory="http://orcid.org/">0000-0001-8242-7769</userId>
+<electronicMailAddress>klprudic@email.arizona.edu</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-8242-7769</userId>
             </creator>
             <creator>
             <individualName>
@@ -51,14 +51,17 @@ xml:lang="en">
             <individualName>
 <givenName>Michael</givenName>                    <surName>Bunsen</surName>
             </individualName>
-<organizationName>eButterfly.org</organizationName><positionName>software engineer</positionName><electronicMailAddress>notbot@gmail.com</electronicMailAddress>            </creator>
+<organizationName>eButterfly.org</organizationName><positionName>software and machine learning engineer</positionName>            <address>
+<administrativeArea>Oregon</administrativeArea><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>michael.bunsen@mila.quebec</electronicMailAddress><onlineUrl>https://mbunsen.com</onlineUrl>            <userId directory="https://orcid.org/">0000-0002-1458-1382</userId>
+            </creator>
             <creator>
             <individualName>
 <givenName>Jeremy</givenName>                    <surName>Kerr</surName>
             </individualName>
 <organizationName>University of Ottawa</organizationName><positionName>University Research Chair in Macroecology &amp; Conservation</positionName>            <address>
 <city>Ottawa</city><administrativeArea>Ontario</administrativeArea><country>CANADA</country>            </address>
-<electronicMailAddress>jkerr@uOttawa.ca</electronicMailAddress><onlineUrl>https://macroecology.ca/</onlineUrl>            <userId directory="http://orcid.org/">0000-0002-3972-7560</userId>
+<electronicMailAddress>jkerr@uOttawa.ca</electronicMailAddress><onlineUrl>https://macroecology.ca/</onlineUrl>            <userId directory="https://orcid.org/">0000-0002-3972-7560</userId>
             </creator>
             <metadataProvider>
             <individualName>
@@ -66,14 +69,14 @@ xml:lang="en">
             </individualName>
 <organizationName>Vermont Center for Ecostudies</organizationName><positionName>conservation biologist</positionName>            <address>
 <deliveryPoint>PO Box 420</deliveryPoint><city>Norwich</city><administrativeArea>Vermont</administrativeArea><postalCode>05055</postalCode><country>UNITED_STATES</country>            </address>
-<electronicMailAddress>kmcfarland@vtecostudies.org</electronicMailAddress>            <userId directory="http://orcid.org/">0000-0001-7809-5503</userId>
+<electronicMailAddress>kmcfarland@vtecostudies.org</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-7809-5503</userId>
             </metadataProvider>
             <pubDate>
-                2023-01-16
+                2024-05-08
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
-                    <para>eButterfly was created in 2011 based upon two simple ideas. First, many people are passionate about observing butterflies and, second, every butterfly observation has potential research value for fundamental and conservation research. Even observations of common species from well-sampled areas have value for monitoring population change, phenology, and for other spatiotemporal studies. Using informal science education, eButterfly steers participants into standardized data collection and provides extensive resources to improve observers’ capacities for butterfly detection and identification. eButterfly users document the presence or presumed absence of species as well as abundance through checklist data collection. To report butterfly observations, a web interface engages participants to submit observations through three interactive steps designed to collect location, effort, and the species and numbers detected. eButterfly encourages participants to submit photos of their observations as vouchers for species verification. eButterfly - an international, data driven project dedicated to butterfly biodiversity, conservation, and education - is a joint initiative of the  Insectarium de Montréal - Espace pour la vie, Vermont Center for Ecostudies, University of Arizona, and University of Ottawa.</para>
+                    <para>eButterfly was created in 2011 based upon two simple ideas. First, many people are passionate about observing butterflies and, second, every butterfly observation has potential research value for fundamental and conservation research. Even observations of common species from well-sampled areas have value for monitoring population change, phenology, and for other spatiotemporal studies. Using informal science education, eButterfly steers participants into standardized data collection and provides extensive resources to improve observers’ capacities for butterfly detection and identification. eButterfly users document the presence or presumed absence of species as well as abundance through checklist data collection. To report butterfly observations, a web interface engages participants to submit observations through three interactive steps designed to collect location, effort, and the species and numbers detected. eButterfly encourages participants to submit photos of their observations as vouchers for species verification. eButterfly - an international, data driven project dedicated to butterfly biodiversity, conservation, and education - is a joint initiative of the  Insectarium de Montréal - Espace pour la vie, Vermont Center for Ecostudies, Mila - Quebec Artificial Intelligence Institute, and University of Ottawa.</para>
                     <para>Through time, each participant, each observation, each checklist, and each verification builds the database. eButterfly then shares this treasure trove of butterfly data with a global community of community scientists, educators, lepidopterists, conservationists, and land managers. In time, this information will become the foundation for a better understanding of butterfly distribution and population trends.</para>
             </abstract>
                 <keywordSet>
@@ -94,16 +97,28 @@ xml:lang="en">
             </distribution>
             <coverage>
                     <geographicCoverage>
-                            <geographicDescription>Panama and Caribbean islands north through United States and Canada in the northwestern Hemisphere, including Hawaii and Bermuda.</geographicDescription>
+                            <geographicDescription>Worldwide</geographicDescription>
                             <boundingCoordinates>
-                                <westBoundingCoordinate>-169.453</westBoundingCoordinate>
-                                <eastBoundingCoordinate>-42.188</eastBoundingCoordinate>
-                                <northBoundingCoordinate>83.677</northBoundingCoordinate>
-                                <southBoundingCoordinate>5.966</southBoundingCoordinate>
+                                <westBoundingCoordinate>-180</westBoundingCoordinate>
+                                <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                                <northBoundingCoordinate>90</northBoundingCoordinate>
+                                <southBoundingCoordinate>-90</southBoundingCoordinate>
                             </boundingCoordinates>
                     </geographicCoverage>
+                    <temporalCoverage>
+                            <rangeOfDates>
+                                <beginDate>
+                                    <calendarDate>                2021-04-30
+</calendarDate>
+                                </beginDate>
+                                <endDate>
+                                    <calendarDate>                2021-04-30
+</calendarDate>
+                                </endDate>
+                            </rangeOfDates>
+                    </temporalCoverage>
                         <taxonomicCoverage>
-                                <generalTaxonomicCoverage>taxonomic authority: Warren, A. D., K. J. Davis, N. V. Grishin, J. P. Pelham, E. M. Stangeland. 2012. Interactive Listing of American Butterflies. http://www.butterfliesofamerica.com/</generalTaxonomicCoverage>
+                                <generalTaxonomicCoverage>Butterflies of the world</generalTaxonomicCoverage>
                                 <taxonomicClassification>
                                         <taxonRankName>Superfamily</taxonRankName>
                                     <taxonRankValue>Papilionoidea</taxonRankValue>
@@ -123,7 +138,7 @@ xml:lang="en">
             </individualName>
 <organizationName>Insectarium de Montréal - Espace pour la vie</organizationName><positionName>Director</positionName>            <address>
 <administrativeArea>Quebec</administrativeArea><country>CANADA</country>            </address>
-<electronicMailAddress>maxim.larrivee@ville.montreal.qc.ca</electronicMailAddress>            <userId directory="http://orcid.org/">0000-0002-2925-3736</userId>
+<electronicMailAddress>maxim.larrivee@ville.montreal.qc.ca</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0002-2925-3736</userId>
             </contact>
             <contact>
             <individualName>
@@ -131,7 +146,7 @@ xml:lang="en">
             </individualName>
 <organizationName>Vermont Center for Ecostudies</organizationName><positionName>conservation biologist</positionName>            <address>
 <deliveryPoint>PO Box 420</deliveryPoint><city>Norwich</city><administrativeArea>Vermont</administrativeArea><postalCode>05055</postalCode><country>UNITED_STATES</country>            </address>
-<phone>802-649-1431</phone><electronicMailAddress>kmcfarland@vtecostudies.org</electronicMailAddress>            <userId directory="http://orcid.org/">0000-0001-7809-5503</userId>
+<phone>802-649-1431</phone><electronicMailAddress>kmcfarland@vtecostudies.org</electronicMailAddress>            <userId directory="https://orcid.org/">0000-0001-7809-5503</userId>
             </contact>
             <methods>
                     <methodStep>
@@ -161,8 +176,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:38Z</dateStamp>
-                <citation>Larrivée M, McFarland K, Zhang X, Prudic K, Solis R, Bunsen M, Kerr J (2023). eButterfly Surveys. Version 1.322. Vermont Center for Ecostudies. Sampling event dataset https://doi.org/10.15468/ykxm8x accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:38Z</dateStamp>
+                <citation>Larrivée M, McFarland K, Zhang X, Prudic K, Solis R, Bunsen M, Kerr J (2024). eButterfly Surveys. Version 1.755. Vermont Center for Ecostudies. Sampling event dataset https://doi.org/10.15468/ykxm8x accessed via GBIF.org on 2024-05-08.</citation>
                     <bibliography>
                 <citation identifier="https://doi.org/10.3390/insects8020053">Prudic, K.L.; McFarland, K.P.; Oliver, J.C.; Hutchinson, R.A.; Long, E.C.; Kerr, J.T.; Larrivée, M. (2017) eButterfly: Leveraging Massive Online Citizen Science for Butterfly Conservation. Insects 8 (2), 53.</citation>
                 <citation identifier="http://www.e-butterfly.org">Larrivee M, Prudic KL, McFarland KP, Zhang, X. and J Kerr 2020. eButterfly: a citizen-based butterfly database in the biological sciences. http://www.e-butterfly.org</citation>

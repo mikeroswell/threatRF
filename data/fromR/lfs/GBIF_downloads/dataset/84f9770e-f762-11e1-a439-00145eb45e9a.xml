@@ -10,9 +10,9 @@ xml:lang="en">
                 <alternateIdentifier>775</alternateIdentifier>
         <title>University of Alabama Herbarium</title>
             <creator>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SERNEC</organizationName><electronicMailAddress>herrick.brown@gmail.com</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SERNEC</organizationName><electronicMailAddress>hbrown@mailbox.sc.edu</electronicMailAddress><onlineUrl>https://sernecportal.org/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
             <individualName>
                     <surName>Steve Ginzbarg</surName>
@@ -20,7 +20,7 @@ xml:lang="en">
 <electronicMailAddress>sginzbar@ua.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-04
+                2024-05-02
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -28,7 +28,7 @@ xml:lang="en">
 The herbarium is in the process of digitizing its specimen data. The data can be searched on the Global Biodiversity Information Facility (GBIF). We participated in the Checklist of Vascular Plants of Alabama project. We reviewed the identifications in the collection to determine which species have been documented to occur in the state and in each county. Our Alabama collections can now be searched in the Alabama Plant Atlas.</para>
             </abstract>
             <intellectualRights>
-                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
             </intellectualRights>
             <contact>
 <organizationName>University of Alabama Herbarium</organizationName><electronicMailAddress>sginzbar@ua.edu</electronicMailAddress><onlineUrl>http://herbarium.as.ua.edu</onlineUrl>            </contact>
@@ -38,8 +38,8 @@ The herbarium is in the process of digitizing its specimen data. The data can be
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:34Z</dateStamp>
-                <citation>University of Alabama Biodiversity and Systematics (2023). University of Alabama Herbarium. Occurrence dataset https://doi.org/10.15468/qy6hkl accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:36Z</dateStamp>
+                <citation>University of Alabama Biodiversity and Systematics (2024). University of Alabama Herbarium. Occurrence dataset https://doi.org/10.15468/qy6hkl accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

@@ -25,14 +25,14 @@ xml:lang="en">
 <positionName>Collection Manager</positionName><electronicMailAddress>ans_ph_herbarium@drexel.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-05-01
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
                     <para>The herbarium of the Academy of Natural Sciences (PH) is the oldest institutional herbarium in the United States. It is a national resource for material from 1750-1850. The diatom herbarium (ANSP) is managed separately.</para>
             </abstract>
             <intellectualRights>
-                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
             </intellectualRights>
             <contact>
 <organizationName>Academy of Natural Sciences of Drexel University</organizationName><electronicMailAddress>tl534@drexel.edu</electronicMailAddress><onlineUrl>http://www.ansp.org/research/systematics-evolution/collections/botany/</onlineUrl>            </contact>
@@ -42,8 +42,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:40Z</dateStamp>
-                <citation>Academy of Natural Sciences (2023). Academy of Natural Sciences of Drexel University. Occurrence dataset https://doi.org/10.15468/s55f2k accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:40Z</dateStamp>
+                <citation>Academy of Natural Sciences (2024). Academy of Natural Sciences of Drexel University. Occurrence dataset https://doi.org/10.15468/s55f2k accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

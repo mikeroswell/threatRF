@@ -25,14 +25,14 @@ xml:lang="en">
 <positionName>Collections Manager</positionName><electronicMailAddress>abordelon@brit.org</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2023-01-03
+                2024-05-02
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
-                    <para>The core of BRIT’s herbarium is the Lloyd H. Shinners Collection in Systematic Botany, begun at Southern Methodist University in Dallas, Texas, in 1944. The Botanical Research Institute of Texas was formed in 1987 to house the transfer of this collection, which moved to Fort Worth in 1991.  Areas of geographic concentration encompass Texas, the southeastern United States, Mexico, Central America, South America, and Southeast Asia. The BRIT herbarium holdings are worldwide in scope, and represent most of the earth’s plant families. </para>
+                    <para>The core of BRIT’s herbarium is the Lloyd H. Shinners Collection in Systematic Botany, begun at Southern Methodist University in Dallas, Texas, in 1944. The Botanical Research Institute of Texas was formed in 1987 to house the transfer of this collection, which moved to Fort Worth in 1991.  Areas of geographic concentration encompass Texas, the southeastern United States, Mexico, Central America, South America, and Southeast Asia. The BRIT herbarium holdings are worldwide in scope, and represent most of the earth’s plant families.</para>
             </abstract>
             <intellectualRights>
-                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
             </intellectualRights>
             <contact>
 <organizationName>Botanical Research Institute of Texas, Philecology Herbarium</organizationName><phone>817-332-4441</phone><electronicMailAddress>trehman@brit.org</electronicMailAddress><onlineUrl>https://fwbg.org/research/herbarium/about-the-brit-herbarium/</onlineUrl>            </contact>
@@ -42,8 +42,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:39Z</dateStamp>
-                <citation>Botanical Research Institute of Texas (2023). Botanical Research Institute of Texas, Philecology Herbarium. Occurrence dataset https://doi.org/10.15468/7nd66f accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:39Z</dateStamp>
+                <citation>Botanical Research Institute of Texas (2024). Botanical Research Institute of Texas, Philecology Herbarium. Occurrence dataset https://doi.org/10.15468/7nd66f accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

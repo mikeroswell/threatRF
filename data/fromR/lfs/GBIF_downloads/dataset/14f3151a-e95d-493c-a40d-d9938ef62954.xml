@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="14f3151a-e95d-493c-a40d-d9938ef62954"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/3ibpmo</alternateIdentifier>
+                <alternateIdentifier>http://ipt.calacademy.org:8080/resource?r=ent</alternateIdentifier>
+                <alternateIdentifier>http://ipt.calacademy.org:8080/ipt/resource?r=ent</alternateIdentifier>
+                <alternateIdentifier>http://ipt.calacademy.org:8080/ipt/resource.do?r=ent</alternateIdentifier>
+                <alternateIdentifier>14f3151a-e95d-493c-a40d-d9938ef62954</alternateIdentifier>
+                <alternateIdentifier>14364</alternateIdentifier>
+        <title>CAS Entomology (ENT)</title>
+            <creator>
+            <individualName>
+<givenName>Chris</givenName>                    <surName>Grinter</surName>
+            </individualName>
+<organizationName>California Academy of Sciences</organizationName><positionName>Collections Manager, Entomology</positionName>            <address>
+<deliveryPoint>55 Music Concourse Drive</deliveryPoint><city>San Francisco</city><administrativeArea>CA</administrativeArea><postalCode>94118</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+1 (415) 379-5320</phone><electronicMailAddress>cgrinter@calacademy.org</electronicMailAddress><onlineUrl>https://www.calacademy.org/staff/ibss/entomology/christopher-c-grinter</onlineUrl>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Jon</givenName>                    <surName>Fong</surName>
+            </individualName>
+<organizationName>California Academy of Sciences</organizationName><positionName>Programmer</positionName>            <address>
+<deliveryPoint>55 Music Concourse Drive</deliveryPoint><city>San Francisco</city><administrativeArea>CA</administrativeArea><postalCode>94118</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+1 (415) 379-5280</phone><electronicMailAddress>jfong@calacademy.org</electronicMailAddress>            </metadataProvider>
+            <pubDate>
+                2024-05-06
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The electronic catalog of the entomology collection at the California Academy of Sciences, San Francisco.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://www.calacademy.org/scientists/entomology-collection</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>The collection contains specimens from around the world.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-180</westBoundingCoordinate>
+                                <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                                <northBoundingCoordinate>70</northBoundingCoordinate>
+                                <southBoundingCoordinate>-70</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                    <temporalCoverage>
+                            <rangeOfDates>
+                                <beginDate>
+                                    <calendarDate>                1862
+</calendarDate>
+                                </beginDate>
+                                <endDate>
+                                    <calendarDate>                1862
+</calendarDate>
+                                </endDate>
+                            </rangeOfDates>
+                    </temporalCoverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>Arthropod animals commonly known as insects, spiders, centipedes, and millipedes (phylum Arthropoda; classes Arachnida, Insecta, Chilopoda).</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Insecta</taxonRankValue>
+                                        <commonName>insects</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Arachnida</taxonRankValue>
+                                        <commonName>spiders</commonName>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Chilopoda</taxonRankValue>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>weekly</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Chris</givenName>                    <surName>Grinter</surName>
+            </individualName>
+<organizationName>California Academy of Sciences</organizationName><positionName>Collections Manager, Entomology</positionName>            <address>
+<deliveryPoint>55 Music Concourse Drive</deliveryPoint><city>San Francisco</city><administrativeArea>CA</administrativeArea><postalCode>94118</postalCode><country>UNITED_STATES</country>            </address>
+<phone>+1 (415) 379-5320</phone><electronicMailAddress>cgrinter@calacademy.org</electronicMailAddress><onlineUrl>https://www.calacademy.org/staff/ibss/entomology/christopher-c-grinter</onlineUrl>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:30Z</dateStamp>
+                <citation>Grinter C, Fong J (2024). CAS Entomology (ENT). Version 6.277. California Academy of Sciences. Occurrence dataset https://doi.org/10.15468/3ibpmo accessed via GBIF.org on 2024-05-08.</citation>
+                    <resourceLogoUrl>https://monarch.calacademy.org/images/collicons/CAS-ENT-2.png</resourceLogoUrl>
+                        <collection>
+                            <parentCollectionIdentifier>CAS</parentCollectionIdentifier>
+                            <collectionIdentifier>CASENT, CASLOT</collectionIdentifier>
+                            <collectionName>Entomology</collectionName>
+                        </collection>
+                        <specimenPreservationMethod>PINNED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

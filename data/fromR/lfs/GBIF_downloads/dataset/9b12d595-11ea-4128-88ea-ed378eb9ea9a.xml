@@ -11,16 +11,16 @@ xml:lang="en">
                 <alternateIdentifier>http://symbiota4.acis.ufl.edu/scan/portal/collections/misc/collprofiles.php?collid=108</alternateIdentifier>
         <title>Mississippi Entomological Museum</title>
             <creator>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </creator>
             <metadataProvider>
-<organizationName>SCAN</organizationName><electronicMailAddress>Neil.Cobb@nau.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
+<organizationName>SCAN</organizationName><electronicMailAddress>scan_noreply@asu.edu</electronicMailAddress><onlineUrl>https://scan-bugs.org:443/portal/index.php</onlineUrl>            </metadataProvider>
             <associatedParty>
 <organizationName>Mississippi Entomological Museum</organizationName><positionName>Collection Manager</positionName>            <address>
 <deliveryPoint>(100 Old Highway 12)</deliveryPoint><city>Mississippi State</city><administrativeArea>MS</administrativeArea><postalCode>39762</postalCode>            </address>
 <electronicMailAddress>Jgh4@entomology.msstate.edu</electronicMailAddress>            <role>CONTENT_PROVIDER</role>
             </associatedParty>
             <pubDate>
-                2022-10-06
+                2023-05-17
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -37,8 +37,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:35Z</dateStamp>
-                <citation>Mississippi Entomological Museum (2022). Mississippi Entomological Museum. Occurrence dataset https://doi.org/10.15468/iuhxpw accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:37Z</dateStamp>
+                <citation>Mississippi Entomological Museum (2023). Mississippi Entomological Museum. Occurrence dataset https://doi.org/10.15468/iuhxpw accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>

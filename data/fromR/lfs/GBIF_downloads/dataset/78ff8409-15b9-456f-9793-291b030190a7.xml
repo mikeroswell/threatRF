@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+packageId="78ff8409-15b9-456f-9793-291b030190a7"  system="http://gbif.org" scope="system"
+xml:lang="en">
+
+    <dataset>
+            <alternateIdentifier>10.15468/ou1lf2</alternateIdentifier>
+                <alternateIdentifier>https://ipt.vertnet.org/resource?r=msb_para</alternateIdentifier>
+                <alternateIdentifier>http://ipt.vertnet.org:8080/ipt/resource?r=msb_para</alternateIdentifier>
+                <alternateIdentifier>http://ipt.vertnet.org:8080/ipt/resource.do?r=msb_para</alternateIdentifier>
+                <alternateIdentifier>78ff8409-15b9-456f-9793-291b030190a7</alternateIdentifier>
+                <alternateIdentifier>14902</alternateIdentifier>
+        <title>MSB Parasite Collection (Arctos)</title>
+            <creator>
+            <individualName>
+<givenName>Sara</givenName>                    <surName>Brant</surName>
+            </individualName>
+<organizationName>Museum of Southwestern Biology</organizationName><positionName>Senior Collection Manager, Parasites</positionName>            <address>
+<deliveryPoint>University of New Mexico</deliveryPoint><city>Albuquerque</city><administrativeArea>NM</administrativeArea><postalCode>87131-0001</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(505) 277-8171</phone><electronicMailAddress>sbrant@unm.edu</electronicMailAddress><onlineUrl>http://msb.unm.edu/divisions/parasites/index.html</onlineUrl>            </creator>
+            <metadataProvider>
+            <individualName>
+<givenName>Sara</givenName>                    <surName>Brant</surName>
+            </individualName>
+<organizationName>Museum of Southwestern Biology</organizationName><positionName>Senior Collection Manager, Parasites</positionName>            <address>
+<deliveryPoint>University of New Mexico</deliveryPoint><city>Albuquerque</city><administrativeArea>NM</administrativeArea><postalCode>87131-0001</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(505) 277-8171</phone><electronicMailAddress>sbrant@unm.edu</electronicMailAddress><onlineUrl>http://msb.unm.edu/divisions/parasites/index.html</onlineUrl>            </metadataProvider>
+            <associatedParty>
+            <individualName>
+<givenName>Laura</givenName>                    <surName>Russell</surName>
+            </individualName>
+<organizationName>VertNet</organizationName><positionName>VertNet Programmer</positionName><electronicMailAddress>larussell@vertnet.org</electronicMailAddress>            <role>PROGRAMMER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>David</givenName>                    <surName>Bloom</surName>
+            </individualName>
+<positionName>VertNet Coordinator</positionName><electronicMailAddress>dbloom@vertnet.org</electronicMailAddress>            <role>PROGRAMMER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>John</givenName>                    <surName>Wieczorek</surName>
+            </individualName>
+<organizationName>Museum of Vertebrate Zoology at UC Berkeley</organizationName><positionName>Information Architect</positionName><electronicMailAddress>tuco@berkeley.edu</electronicMailAddress>            <role>PROGRAMMER</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Dusty</givenName>                    <surName>McDonald</surName>
+            </individualName>
+<organizationName>University of Alaska Museum</organizationName><positionName>Arctos Database Programmer</positionName><electronicMailAddress>dlmcdonald@alaska.edu</electronicMailAddress><onlineUrl>http://arctos.database.museum</onlineUrl>            <role>POINT_OF_CONTACT</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Eric</givenName>                    <surName>Loker</surName>
+            </individualName>
+<organizationName>Museum of Southwestern Biology</organizationName><positionName>Curator of Parasites</positionName>            <address>
+<deliveryPoint>University of New Mexico</deliveryPoint><city>Albuquerque</city><administrativeArea>NM</administrativeArea><postalCode>87131-0001</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(505) 277-2124</phone><electronicMailAddress>esloker@unm.edu</electronicMailAddress><onlineUrl>http://biology.unm.edu/biology/esloker/</onlineUrl>            <role>POINT_OF_CONTACT</role>
+            </associatedParty>
+            <associatedParty>
+            <individualName>
+<givenName>Mariel</givenName>                    <surName>Campbell</surName>
+            </individualName>
+<organizationName>Museum of Southwestern Biology</organizationName><positionName>Collection Manager, Division of Genetic Resources and Assistant to Division of Parasites</positionName>            <address>
+<deliveryPoint>University of New Mexico</deliveryPoint><city>Albuquerque</city><administrativeArea>NM</administrativeArea><postalCode>87131-0001</postalCode><country>UNITED_STATES</country>            </address>
+<electronicMailAddress>campbell@carachupa.org</electronicMailAddress>            <role>POINT_OF_CONTACT</role>
+            </associatedParty>
+            <pubDate>
+                2024-04-18
+            </pubDate>
+        <language>ENGLISH</language>
+            <abstract>
+                    <para>The MSB Division of Parasitology is a collection of primarily metazoan endoparasites, especially helminths, including the personal collection of Robert L. Rausch and Virginia R. Rausch. The Rausch material, plus specimens from the Beringian Coevolution Project, make this an important aggregation of western arctic and subarctic parasites. It vouchers an active program in global schistosome diversity, as well as Long-Term Ecological Research at the Sevilleta National Wildife Refuge.</para>
+            </abstract>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Specimen</keyword>
+                        <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+                </keywordSet>
+                <keywordSet>
+                        <keyword>Occurrence</keyword>
+                        <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                </keywordSet>
+            <intellectualRights>
+                    <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+            </intellectualRights>
+            <distribution scope="document">
+                <online>
+                    <url function="information">http://msb.unm.edu/divisions/parasites/index.html</url>
+                </online>
+            </distribution>
+            <coverage>
+                    <geographicCoverage>
+                            <geographicDescription>The MSB parasite collection is global, but with strongest representation from Arctic and Boreal regions and from the Southwestern United States (specifically New Mexico).</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>-180</westBoundingCoordinate>
+                                <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                                <northBoundingCoordinate>90</northBoundingCoordinate>
+                                <southBoundingCoordinate>-90</southBoundingCoordinate>
+                            </boundingCoordinates>
+                    </geographicCoverage>
+                        <taxonomicCoverage>
+                                <generalTaxonomicCoverage>Parasites of birds and mammals primarily, including a multi-continent collection of horsehair worms and avian Schistosomes.</generalTaxonomicCoverage>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Cestoda</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Secernentea</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Coccidia</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Trematoda</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Arachnida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Adenophorea</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Insecta</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Archiacanthocephala</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Chromadorea</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Gordioida</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Maxillopoda</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Palaeacanthocephala</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Sporozoa</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Kinetoplastea</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Neoophora</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Malacostraca</taxonRankValue>
+                                </taxonomicClassification>
+                                <taxonomicClassification>
+                                        <taxonRankName>Class</taxonRankName>
+                                    <taxonRankValue>Magnoliopsida</taxonRankValue>
+                                </taxonomicClassification>
+                        </taxonomicCoverage>
+            </coverage>
+            <maintenance>
+                <description>
+                    <para></para>
+                </description>
+                <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+            </maintenance>
+            <contact>
+            <individualName>
+<givenName>Sara</givenName>                    <surName>Brant</surName>
+            </individualName>
+<organizationName>Museum of Southwestern Biology</organizationName><positionName>Senior Collection Manager, Parasites</positionName>            <address>
+<deliveryPoint>University of New Mexico</deliveryPoint><city>Albuquerque</city><administrativeArea>NM</administrativeArea><postalCode>87131-0001</postalCode><country>UNITED_STATES</country>            </address>
+<phone>(505) 277-8171</phone><electronicMailAddress>sbrant@unm.edu</electronicMailAddress><onlineUrl>http://msb.unm.edu/divisions/parasites/index.html</onlineUrl>            </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2024-05-08T13:46:33Z</dateStamp>
+                <citation>Brant S (2024). MSB Parasite Collection (Arctos). Version 32.85. Museum of Southwestern Biology. Occurrence dataset https://doi.org/10.15468/ou1lf2 accessed via GBIF.org on 2024-05-08.</citation>
+                    <livingTimePeriod>1945 to present</livingTimePeriod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+
+</eml:eml>

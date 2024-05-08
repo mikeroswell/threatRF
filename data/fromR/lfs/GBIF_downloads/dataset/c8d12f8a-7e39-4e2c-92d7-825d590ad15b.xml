@@ -28,7 +28,7 @@ xml:lang="en">
 <electronicMailAddress>lsa-it-ipt-admins@umich.edu</electronicMailAddress><onlineUrl>http://www.lsa.umich.edu/lsait/</onlineUrl>            <role>POINT_OF_CONTACT</role>
             </associatedParty>
             <pubDate>
-                2022-10-27
+                2024-05-01
             </pubDate>
         <language>ENGLISH</language>
             <abstract>
@@ -91,8 +91,8 @@ xml:lang="en">
     <additionalMetadata>
         <metadata>
             <gbif>
-                <dateStamp>2023-01-16T19:40:37Z</dateStamp>
-                <citation>UM Herbarium Data Group, IPT Admin L (2022). University of Michigan Herbarium. Version 1.42. University of Michigan Herbarium. Occurrence dataset https://doi.org/10.15468/nl8bvi accessed via GBIF.org on 2023-01-16.</citation>
+                <dateStamp>2024-05-08T13:46:36Z</dateStamp>
+                <citation>UM Herbarium Data Group, IPT Admin L (2024). University of Michigan Herbarium. Version 1.55. University of Michigan Herbarium. Occurrence dataset https://doi.org/10.15468/nl8bvi accessed via GBIF.org on 2024-05-08.</citation>
             </gbif>
         </metadata>
     </additionalMetadata>
