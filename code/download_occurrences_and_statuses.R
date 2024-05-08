@@ -12,7 +12,7 @@ library(patchwork) # cute pkg for assembling plots
 
 # # when downloading data from gbif with `occ_search`
 # need to combine different record types into DF
-# bind.gbif<-function(gbif){bind_rows(gbif[[2]][[3]], gbif[[3]][[3]])}
+bind.gbif<-function(gbif){bind_rows(gbif[[2]][[3]], gbif[[3]][[3]])}
 
 #deal with complex species name rules with a function to grab just the binomials
 uscore_binomial<-function(x){gsub("+ + *", "+_+",x)}
@@ -41,15 +41,18 @@ MD_vasc_and_lep_doi <- occ_download(
   , pred_in("stateProvince", "Maryland")
   , pred("hasCoordinate", TRUE)
   # , pred("sendNotification", TRUE)
-  , pred_and(pred_gte("year", 1989), pred_lte("year", 2021))
+  , pred_and(pred_gte("year", 2001), pred_lte("year", 2023))
   )
 
-# # this reveals status of all gbif download requests
+# # this reveals status of all gbif download requests, includes DOIs
 # occ_download_list( user = gbif_user
 #                    , pwd = gbif_pwd
 #                   )
 
 
+# When changed to 2001-2023, got about double the records as previous search, 
+# iNaturalist is probably the reason. I don't think this is necessarily a problem
+# or even a topic to discuss?
 
 # # this actually downloads the data (~143 MB)
 # occ_download_get(MD_vasc_and_lep_doi, path = "data/fromR/lfs", overwrite = TRUE)
@@ -58,40 +61,31 @@ MD_vasc_and_lep_doi <- occ_download(
 # GBIF_plant_lep <- occ_download_import(path ="data/fromR/lfs"
 #                                       , key = MD_vasc_and_lep_doi)
 
-# # check out the file
-# GBIF_plant_lep
-# names(GBIF_plant_lep)
-# MD_vasc_lep <- bind.gbif(GBIF_plant_lep)
-# after a bit of exploration I feel good about not going with this process.
-# instead unzip and just grab the occurrence data themselves for now
-# unzip("data/fromR/lfs/0249307-220831081235567.zip", exdir = "data/fromR/lfs/GBIF_downloads")
+
+# unzip and grab the occurrence data themselves for now
+# unzip("data/fromR/lfs/0003222-240506114902167.zip", exdir = "data/fromR/lfs/GBIF_downloads")
 MD_plant_lep_occ <- data.table::fread("data/fromR/lfs/GBIF_downloads/occurrence.txt")
-# # note this returns a warning about parsing th efile (is it weird it gets demonic after line 666?)
+# # note this returns a warning about parsing the file 
 head(MD_plant_lep_occ)
 MD_occ <- MD_plant_lep_occ %>% filter(taxonRank == "SPECIES")
 head(MD_occ)
 
 
 # 
-# #histogram of species frequency by year
-# # md_vasc_obs %>%
-# #   group_by(acceptedTaxonKey, year) %>%
-# #   summarize(obs =n()) %>%
-# #   ggplot(aes(obs))+
-# #   geom_histogram()+
-# #   facet_wrap(~year)+
-# #   theme_classic()+
-# #   labs(y="species", x="occurrences")+
-# #   scale_y_log10()
+#histogram of species frequency by year
+MD_occ %>%
+  group_by(acceptedTaxonKey, year) %>%
+  summarize(obs =n()) %>%
+  ggplot(aes(obs))+
+  geom_histogram()+
+  facet_wrap(~year)+
+  theme_classic()+
+  labs(y="species", x="occurrences")+
+  scale_y_log10()
+
+# inaturalist effect so clear starting 2019, it's bonkers
 
 
-# get plant names from state
-
-# plants_gs<-md_vasc_obs %>%
-#   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
-#            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
-#   mutate(gs = paste(genus, species, sep = "_")
-#          , withspace = paste(genus, species, sep = " ")) #convenient to keep track of binomials in several forms?
 
 occ_gs <- MD_occ %>%
   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
@@ -100,9 +94,7 @@ occ_gs <- MD_occ %>%
          , withspace = paste(genus, species, sep = " ")) %>%  #convenient to keep track of binomials in several forms?
   filter(!grepl("^[^[:alnum:]]", species)) # remove hybrids (can't deal with them responsibly)
 
-unique(occ_gs$gs)
-
-unique(occ_gs$species)
+unique(occ_gs$gs) #4864 spp!
 
 
 
@@ -113,30 +105,39 @@ write.csv(occ_gs, "data/fromR/lfs/occ_from_gbif.csv", row.names = F)
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
 
 
-#get a list of all binomials in the GBIF dataset
-plants_of_MD<-unique(occ_gs %>%  filter(kingdomKey == 6) %>% pull(withspace)) #3253  with new data. 
+#get a list of all plant binomials in the GBIF dataset
+plants_of_MD <- unique(occ_gs %>%  filter(kingdomKey == 6) %>% pull(withspace)) 
+# 2915; maybe there was a taxonomy update  with new data, otherwise we lost
+# hundreds of names in the 90s as it was 3253 before.
 
 ###################################################
 
 #next, download status classifications from natureserve
-plant_stats <- ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plantae", level = "kingdom")
+# merge status and occcurence one kingdom at a time. 
+
+# set max page to 41 by trial and error
+plant_stats <- map_dfr(0:41, function(pp){
+  ns_search_spp(species_taxonomy = list(scientificTaxonomy = "Plantae", level = "kingdom")
                              , location = list(nation ="US", subnation ="MD") #this filters to only include species that have a MD status, but retains status for all localities
-                             , page = 0
-                             , per_page = 5e3)[[1]] %>%
+                             , page = pp
+                             , per_page = 100)[[1]] %>%
   unnest(cols = nations) %>%
   unnest (cols = "subnations", names_repair ="unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
+})
 
-#merge status and occcurence one kingdom at a time. 
-lep_stats <-ns_search_spp(species_taxonomy = list(
+
+lep_stats <-map_dfr(0:3, function(pp){
+  ns_search_spp(species_taxonomy = list(
   scientificTaxonomy = "Lepidoptera", level = "order",
   kingdom = "Animalia")
   , location = list(nation ="US", subnation ="MD") #this filters to only include species that have a MD status, but retains status for all localities
-  , page = 0
-  , per_page = 5e3)[[1]] %>%
+  , page = pp
+  , per_page = 100)[[1]] %>%
   unnest(cols=nations) %>%
   unnest (cols = "subnations", names_repair ="unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
+})
 
 # drafted to deal with bad species names
 ps1 <- plant_stats %>% 
@@ -214,9 +215,7 @@ better_leps <- alt_gs(ls1 %>%
 
 # notes: Looks like almost all are 1:1 synonymies (good!)
 # exceptions:
-# - Polites/Wallengrenia egeremet looks like a valid species, but GBIF is
-# lumping with W. otho (filed an issue on GBIF GH
-# https://github.com/gbif/portal-feedback/issues/4340 )
+
 # - Peridea bordeloni is a new species not yet recognized by ITIS/ GBIF. The
 # parent species (P. ferruginea) is not ranked in MD, so won't affect results
 # here.
