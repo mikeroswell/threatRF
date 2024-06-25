@@ -261,7 +261,7 @@ namecheck %>%
 namecheck %>% filter(matchType == "FUZZY")
 
 namecheck %>% filter(is.na(status)) %>% pull(gs)
-# Heteranthera pauciflora is a good name not yet in backbone, it looks like
+# Heteranthera pauciflora is a good name not yet in backbone, it looks like (now solved!)
 namecheck %>% filter(status == "SYNONYM") %>% pull(gs)
 
 knapp_backboned<-towards_useful %>% left_join(namecheck, by = "gs") %>% 

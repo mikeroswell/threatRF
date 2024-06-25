@@ -342,7 +342,8 @@ lep_joined <- occ_gs %>%
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
-                                        , "unranked"))) 
+                                        , ifelse(roundedSRank %in% "SNA", "remove_not_native"
+                                        , "unranked"))) )
 
 
 occ_gs %>% 
@@ -398,19 +399,19 @@ all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 
 # natives_filtering <- all_with_stat %>%
 #   # deal with spp not in Knapp
-#   
+# 
 #   filter((kingdomKey == 6 & ( verb_length > 0
 #   )
-#   )|kingdomKey ==1) %>% 
+#   )|kingdomKey ==1) %>%
 #   group_by(genus, species, speciesKey) %>%
 #   filter(all(!exclude) |has_nonNative_ssp | is.na(exclude)) %>%
-#   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>% 
-#   filter((!exotic...275| is.na(exotic...275)), (!exotic...277|is.na(exotic...277))) 
+#   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>%
+#   filter((!exotic...239| is.na(exotic...239)), (!exotic...241|is.na(exotic...241)))
 # 
-# natives_filtering %>% 
-#   filter(grepl("japonic", species
-#   )) %>% 
-#   select(genus, species, verbiage, exclude, has_nonNative_ssp) 
+natives_filtering %>%
+  filter(grepl("japonic", species
+  )) %>%
+  select(genus, species, verbiage, exclude, has_nonNative_ssp)
 
 natives <- all_with_stat %>%
    # deal with spp not in Knapp
@@ -421,7 +422,8 @@ natives <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
   filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>% 
-  filter((!exotic...275| is.na(exotic...275)), (!exotic...277|is.na(exotic...277))) %>%
+  filter((!exotic...239| is.na(exotic...239)), (!exotic...241|is.na(exotic...241))) %>%
+  filter(roundedSRank!= "SNA") %>% 
 
   select(gbifID
          , genus
@@ -468,9 +470,10 @@ natives %>%
 
 excludeds <- all_with_stat %>%
   group_by(genus, species, speciesKey)  %>% 
-  filter((exclude & !has_nonNative_ssp) | exotic...275 |exotic...277 |
+  filter((exclude & !has_nonNative_ssp) | exotic...239 |exotic...241 |
            !(kingdomKey == 6 & ( verb_length  >0            )
-           ) | (grepl("campestre", species) & grepl("Acer", genus))) %>%
+           ) | (grepl("campestre", species) & grepl("Acer", genus)) |
+           roundedSRank == "SNA") %>%
   select(gbifID
          , genus
          , species
