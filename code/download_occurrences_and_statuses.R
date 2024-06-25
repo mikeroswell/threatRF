@@ -2,11 +2,14 @@
 
 # this script depends on code/tidy_flora.R
 # source("code/tidy_flora.R)
-# use own copy of natureserve (will not necessarily work for others)
-install.packages("/System/Volumes/Data/Rstudio_Git/natserv_1.0.0.92.tar.gz", repos = NULL)
+# use own copy of natserv package until PR is accepted or other patch solve issue
+devtools::install_github("mikeroswell/natserv-1", force = TRUE)
 library(natserv) #this is how we get natureserve status
 library(rgbif) #how we get gbif observations
-library(tidyverse)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+library(tidyr)
 library(patchwork) # cute pkg for assembling plots
 
 
@@ -32,17 +35,17 @@ null_to_NA <- function(x){
 # likely takes several minutes.
 # does not need to be redone each time code is run
 
-MD_vasc_and_lep_doi <- occ_download(
-  user = gbif_user
-  , pwd = gbif_pwd
-  , email = gbif_email
-  , pred_in("taxonKey", c(7707728, 797))
-  , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
-  , pred_in("stateProvince", "Maryland")
-  , pred("hasCoordinate", TRUE)
-  # , pred("sendNotification", TRUE)
-  , pred_and(pred_gte("year", 2001), pred_lte("year", 2023))
-  )
+# MD_vasc_and_lep_doi <- occ_download(
+#   user = gbif_user
+#   , pwd = gbif_pwd
+#   , email = gbif_email
+#   , pred_in("taxonKey", c(7707728, 797))
+#   , pred_in("basisOfRecord", c("OBSERVATION", "HUMAN_OBSERVATION", "PRESERVED_SPECIMEN"))
+#   , pred_in("stateProvince", "Maryland")
+#   , pred("hasCoordinate", TRUE)
+#   # , pred("sendNotification", TRUE)
+#   , pred_and(pred_gte("year", 2001), pred_lte("year", 2023))
+#   )
 
 # # this reveals status of all gbif download requests, includes DOIs
 # occ_download_list( user = gbif_user
@@ -62,45 +65,45 @@ MD_vasc_and_lep_doi <- occ_download(
 #                                       , key = MD_vasc_and_lep_doi)
 
 
-# unzip and grab the occurrence data themselves for now
-# unzip("data/fromR/lfs/0003222-240506114902167.zip", exdir = "data/fromR/lfs/GBIF_downloads")
-MD_plant_lep_occ <- data.table::fread("data/fromR/lfs/GBIF_downloads/occurrence.txt")
-# # note this returns a warning about parsing the file 
-head(MD_plant_lep_occ)
-MD_occ <- MD_plant_lep_occ %>% filter(taxonRank == "SPECIES")
-head(MD_occ)
-
-
+# # unzip and grab the occurrence data themselves for now
+# # unzip("data/fromR/lfs/0003222-240506114902167.zip", exdir = "data/fromR/lfs/GBIF_downloads")
+# MD_plant_lep_occ <- data.table::fread("data/fromR/lfs/GBIF_downloads/occurrence.txt")
+# # # note this returns a warning about parsing the file 
+# head(MD_plant_lep_occ)
+# MD_occ <- MD_plant_lep_occ %>% filter(taxonRank == "SPECIES")
+# head(MD_occ)
 # 
-#histogram of species frequency by year
-MD_occ %>%
-  group_by(acceptedTaxonKey, year) %>%
-  summarize(obs =n()) %>%
-  ggplot(aes(obs))+
-  geom_histogram()+
-  facet_wrap(~year)+
-  theme_classic()+
-  labs(y="species", x="occurrences")+
-  scale_y_log10()
-
-# inaturalist effect so clear starting 2019, it's bonkers
-
-
-
-occ_gs <- MD_occ %>%
-  separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
-           , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
-  mutate(gs = paste(genus, species, sep = "_")
-         , withspace = paste(genus, species, sep = " ")) %>%  #convenient to keep track of binomials in several forms?
-  filter(!grepl("^[^[:alnum:]]", species)) # remove hybrids (can't deal with them responsibly)
-
-unique(occ_gs$gs) #4864 spp!
-
-
-
-
-# write gbif data to file (make these steps modular since they take a long time)
-write.csv(occ_gs, "data/fromR/lfs/occ_from_gbif.csv", row.names = F)
+# 
+# # 
+# #histogram of species frequency by year
+# MD_occ %>%
+#   group_by(acceptedTaxonKey, year) %>%
+#   summarize(obs =n()) %>%
+#   ggplot(aes(obs))+
+#   geom_histogram()+
+#   facet_wrap(~year)+
+#   theme_classic()+
+#   labs(y="species", x="occurrences")+
+#   scale_y_log10()
+# 
+# # inaturalist effect so clear starting 2019, it's bonkers
+# 
+# 
+# 
+# occ_gs <- MD_occ %>%
+#   separate(acceptedScientificName, sep =" " # this is the accepted name (i.e. most taxonomic issues resolved)
+#            , into =c("genus", "species")) %>% # separate just drops stuff after the first two!
+#   mutate(gs = paste(genus, species, sep = "_")
+#          , withspace = paste(genus, species, sep = " ")) %>%  #convenient to keep track of binomials in several forms?
+#   filter(!grepl("^[^[:alnum:]]", species)) # remove hybrids (can't deal with them responsibly)
+# 
+# unique(occ_gs$gs) #4864 spp!
+# 
+# 
+# 
+# 
+# # write gbif data to file (make these steps modular since they take a long time)
+# write.csv(occ_gs, "data/fromR/lfs/occ_from_gbif.csv", row.names = F)
 
 occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
 
@@ -122,20 +125,22 @@ plant_stats <- map_dfr(0:41, function(pp){
                              , page = pp
                              , per_page = 100)[[1]] %>%
   unnest(cols = nations) %>%
-  unnest (cols = "subnations", names_repair ="unique") %>%
+  unnest (cols = "subnations", names_repair = "unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 })
 
-
+# Note, this only works with my version of natserv, currently
 lep_stats <-map_dfr(0:3, function(pp){
-  ns_search_spp(species_taxonomy = list(
-  scientificTaxonomy = "Lepidoptera", level = "order",
-  kingdom = "Animalia")
-  , location = list(nation ="US", subnation ="MD") #this filters to only include species that have a MD status, but retains status for all localities
+  myres <- ns_search_spp(species_taxonomy = list(
+    level = "order"
+    , scientificTaxonomy = "Lepidoptera"
+    , kingdom = "Animalia" # at one point this was necessary but maybe not with current natserve
+  )
+  , location = list(nation = "US", subnation = "MD") #this filters to only include species that have a MD status, but retains status for all localities
   , page = pp
   , per_page = 100)[[1]] %>%
-  unnest(cols=nations) %>%
-  unnest (cols = "subnations", names_repair ="unique") %>%
+  unnest(cols = nations) %>%
+  unnest (cols = "subnations", names_repair = "unique") %>%
   filter(subnationCode == "MD") #here is the step where I drop other localities, but this could be dropped at some point.
 })
 
@@ -173,7 +178,9 @@ nslnames <- ls1 %>%
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
-problem_names_lep <- nslnames %>% filter(is.na(matchType) | matchType == "HIGHERRANK" | status == "SYNONYM") %>% pull(gs)
+problem_names_lep <- nslnames %>% 
+  filter(is.na(matchType) | matchType == "HIGHERRANK" | status == "SYNONYM") %>%
+  pull(gs)
 
 dat <- ls1 %>% 
   filter(withspace %in% problem_names_lep) %>% 
@@ -198,6 +205,8 @@ alt_gs <- function(dat){
                                                           , "\\2"))
                                    , itis.name)
             
+          
+            
             # goal is to line up with gbif backbone 
             gbif.name <- rgbif::name_backbone(better.name)
             
@@ -220,6 +229,8 @@ better_leps <- alt_gs(ls1 %>%
 # parent species (P. ferruginea) is not ranked in MD, so won't affect results
 # here.
 
+better_leps <- better_leps %>% filter(!is.na(gbif.gs))
+
 
 nspnames <- ps1 %>% 
   mutate(gs = paste(genus, species)) %>% 
@@ -230,7 +241,11 @@ nspnames <- ps1 %>%
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
-problem_names_plant <- nspnames %>% filter(matchType != "EXACT" | status == "SYNONYM") %>% pull(gs)
+nspnames %>% filter(genus == "Trautvetteria")
+
+problem_names_plant <- nspnames %>% 
+  filter(matchType != "EXACT" | status == "SYNONYM") %>% 
+  pull(gs)
 
 problem_names_plant
 
@@ -244,7 +259,38 @@ better_plants <- alt_gs(ps1 %>%
                         as.data.frame()) %>% 
   select(gbif.gs = species, ns.gs = natserv.name)
 
-better_plants
+
+
+
+
+# Some mismatches, enumerate those that aren't SNR
+
+# Hexalectris spicata = Bletia spicata (this one looks like it's matching correctly rn, need to do first)
+# Listera cordata = Neottia cordata
+# Piptatherum racemosum = Patis racemosa
+# Saccharum brevibarbe = Erianthus 
+# Saccharum contortum = Erianthus
+# Oldenlandia uniflora = Edrastema
+# Oligoneuron rigidum  = Solidago
+# Onosmodium molle  = Lithospermum parviflorum
+# Polygonum amphibium = Persicaria amphibia
+# Polygonum lapathifolium = Persicaria lapathifolia
+# Rhamnus alnifolia = Endotropis alnifolia
+# Trautvetteria caroliniensis = T carolinensis
+
+
+plant_stats %>% filter(scientificName %in% 
+                         (better_plants %>% 
+                            group_by(ns.gs)
+                          %>% filter(all(is.na(gbif.gs))) 
+                          %>% pull(ns.gs)) 
+) %>% 
+  filter(roundedSRank != "SNR") %>% 
+  select(scientificName, roundedSRank) %>% 
+  filter(roundedSRank != "SNA")
+# there are 16 spp (do I need to filter those? Probably!)
+# looks like a little more than half are non-native
+
 
 ps2 <- ps1 %>% 
   left_join(better_plants, by = c("withspace" = "ns.gs" )) %>%
@@ -255,6 +301,9 @@ ps2 <- ps1 %>%
          , species = gsub("(.*)( )(.*)", "\\3", withspace)) %>% 
   filter(!grepl("ssp.", scientificName))
 
+ps2 %>% filter(grepl("brevibarbe", withspace)) # still here with its NS name
+ps2 %>% filter(grepl("arundinaceus", withspace))
+
 ls2 <- ls1 %>% 
   left_join(better_leps, by = c("withspace" = "ns.gs" )) %>% 
   group_by(withspace) %>% 
@@ -263,11 +312,7 @@ ls2 <- ls1 %>%
          , genus = gsub("(.*)( )(.*)", "\\1", withspace)
          , species = gsub("(.*)( )(.*)", "\\3", withspace)) %>% 
   filter(!grepl("ssp.", scientificName))
-# notes
-# I think these are basically all 1:1
-# the Solanum might not be exactly, but it s not native. Ditto Tripleurospermum. 
-# both those spp. are listed as not native by Knapp and Naczi, so should be 
-# filtered.
+
 ##############################
 ##### write and read NS data 
 
@@ -299,13 +344,22 @@ lep_joined <- occ_gs %>%
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
                                         , "unranked"))) 
 
+
+occ_gs %>% 
+  filter( genus == 'Trautvetteria') %>% 
+  select(gs, genus, species, withspace)
+
+ps2 %>% 
+  filter( genus == 'Trautvetteria') %>% 
+  select(gs, genus, species, withspace)
   
 occ_stat_plants <- occ_gs %>% 
   filter(kingdomKey == 6) %>% 
   left_join(ps2, by = c("gs", "genus", "species", "withspace")) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
                                , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
-                                        , "unranked")))
+                                        , ifelse(roundedSRank %in% "SNA", "remove_not_native"
+                                        , "unranked"))))
 plant_joined <- occ_stat_plants %>% 
   left_join(knapp_backboned  %>% 
               select(-c("scientificName", "kingdom", "phylum", "order"
@@ -314,13 +368,17 @@ plant_joined <- occ_stat_plants %>%
                         , "class", "gs")), by = c("withspace" = "accepted_gs"))  
 
 # check species not in flora
-# plant_joined %>%
-#   filter(is.na(verbiage) #&! grepl("fl", gs) &! grepl("fi", gs)
-#          ) %>%
-#   group_by(gs) %>%
-#   summarize(recs = n()) %>%
-#   filter(recs >2) %>%
-#   arrange(desc(recs)) %>% View()
+plant_joined %>%
+  filter(is.na(verbiage) #&! grepl("fl", gs) &! grepl("fi", gs)
+         ) %>%
+  group_by(gs) %>%
+  summarize(recs = n()) %>%
+  filter(recs >2) %>%
+  arrange(desc(recs)) %>% View()
+
+# it seems like there are a bunch of things going on, one of which is spellings (like why is accepted )
+
+# Trautvetteria carolinensis = T caroliniensis looks like a yikes.
 #  
 all_with_stat<- bind_rows(lep_joined, plant_joined)
 # 

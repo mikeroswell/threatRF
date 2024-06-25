@@ -1,5 +1,8 @@
 # code to tidy untidy flora data
-library(tidyverse)
+library(dplyr)
+library(purrr)
+library(tidyr)
+library(stringr)
 source("code/robust_gbif_namesearch.R")
 
 # to create this file, saved .pdf of only the useful pages to "accessible text" 
@@ -123,14 +126,16 @@ towards_useful %>% filter(str_length(species)<4)
 
 # looks like those that exist are mostly character rendering problems.. now fixed 
 
-towards_useful %>% filter(grepl("fluvia", obs_full))
-# check the fi and fl spp
-towards_useful[grepl("flave", towards_useful$species),]
-towards_useful[grepl("flex", towards_useful$species),]
+# # Checks for character rendering issues past 
 
-towards_useful %>% filter(grepl("fluvia", obs_full)) %>% select(genus, species)
-towards_useful %>% filter(grepl("fidu", obs_full)) %>% select(species)
-towards_useful %>% filter(grepl("Viburnum", obs_full)) %>% select(gs)
+# towards_useful %>% filter(grepl("fluvia", obs_full))
+# # check the fi and fl spp
+# towards_useful[grepl("flave", towards_useful$species),]
+# towards_useful[grepl("flex", towards_useful$species),]
+# 
+# towards_useful %>% filter(grepl("fluvia", obs_full)) %>% select(genus, species)
+# towards_useful %>% filter(grepl("fidu", obs_full)) %>% select(species)
+# towards_useful %>% filter(grepl("Viburnum", obs_full)) %>% select(gs)
 
 # check out the duplicated spp
 # View(towards_useful %>% group_by(gs) %>% mutate(dups = n()) %>% filter(dups >1))
@@ -142,7 +147,7 @@ towards_useful %>% filter(grepl("^[[:space:]]*[[:lower:]]{2,}", verbiage))
 # make sure I got the invasives
 towards_useful %>% filter(genus == "Cynodon")
 
-n_distinct(towards_useful$gs)
+n_distinct(towards_useful$gs) #3524
 
 
 
@@ -155,6 +160,7 @@ n_distinct(towards_useful$gs)
 
 # Look at counts of native and excludes
 towards_useful %>% group_by(exclude) %>% summarize(n_distinct(gs))
+# 2313 good, 1375 bad
 
 # scan first thousand names of each group
 # towards_useful %>% filter(exclude) %>% pull(gs) %>% unique()
