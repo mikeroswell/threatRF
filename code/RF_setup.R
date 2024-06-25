@@ -1,6 +1,8 @@
 # code to fit RF models to occurrence data with covariates
 
-library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(purrr)
 library(doParallel)
 library(caret)
 library(tictoc)
@@ -25,9 +27,11 @@ load(file="data/fromR/lfs/to_predict.RDA")
 # unique(indi$roundedSRank)
 
 # just some summary data:
-# indi %>%
+# indi %>% sf::st_drop_geometry() %>%
 #   mutate(gs = paste(genus, species)) %>%
-#   group_by(kingdomKey) %>%
+#   group_by(kingdomKey
+#            # , simple_status
+#            ) %>%
 #   summarize(occ = n(), spp = n_distinct(gs))
 
 
@@ -46,37 +50,53 @@ almost <- indi %>% dplyr::mutate(lat = sf::st_coordinates(.)[,1],
          )
   
 
-almost %>% 
-  ungroup() %>% 
-  mutate(gs = paste(genus, species)) %>%
-  group_by(kingdomKey, simple_status) %>%
-  summarize(occ = n(), spp = n_distinct(gs))
+# almost %>% 
+#   ungroup() %>% 
+#   mutate(gs = paste(genus, species)) %>%
+#   group_by(kingdomKey, simple_status) %>%
+#   summarize(occ = n(), spp = n_distinct(gs))
 
 tofit <-almost %>% 
+  ungroup() %>% 
   sf::st_drop_geometry() %>% 
   dplyr::select(-contains("exotic"))
 
+tofit %>% group_by(kingdomKey, simple_status) %>% 
+  summarize(occs = n(), spp = n_distinct(genus, species))
 
 
 
-# see what columns have issues of NA
+sing <- tofit %>% 
+  group_by(kingdomKey, genus, species, simple_status) %>% 
+  mutate(nrec = n_distinct(lat, lon)) %>% 
+  filter(nrec == 1)
 
-# sapply(tofit_summary, function(x){sum(is.na(x))}) 
-# looks good now... well, 155 not giving slope, maxlat, etc. 
-# guessing those are singletons (very droppable)
-
-
+# reporting dropped singlecton spp
+sing %>% group_by(kingdomKey, simple_status) %>% 
+  summarize(occs = n(), spp = n_distinct(genus, species))
 
 no_sing <- tofit %>% 
   group_by(genus, species) %>% 
-  mutate(nrec = n_distinct(lat)) %>% 
-  filter(nrec > 1) %>% 
-  dplyr::select(-c("nrec", "fcf")) # remove fcf because it creates NA
+  mutate(nrec = n_distinct(lat, lon)) %>% 
+  filter(nrec > 1) # %>%
+  # dplyr::select(-c("nrec", "fcf")) # remove fcf because it creates NA
 
+# reporting used counts
+no_sing %>% 
+  group_by(simple_status, kingdomKey) %>%
+  summarize(occs = n(), spp = n_distinct(genus, species))
+  
 tofit_summary <- no_sing %>% 
   group_by(genus, species, kingdomKey) %>%
   summarize_all(.funs = c("mu", "sig")) %>% 
   mutate(Random_Pred = runif(1))
+
+# see what columns have issues of NA
+
+# sapply(tofit_summary, function(x){sum(is.na(x))}) 
+# looks ok. There are a few bioclim variables with issues though
+# guessing those are singletons (very droppable)
+
 
 # drop na preemptively
 tofit_summary_complete <- tofit_summary %>% drop_na()
@@ -111,7 +131,7 @@ make_status_mod <- function(dat = classed){
                         | grepl("lon_sig", names(dat))
                         | grepl("UID", names(dat))
                         | grepl("X2001_2019_change_index", names(dat))
-                        | grepl("Red.1_mu", names(dat))
+                        | grepl("Red.1_mu", names(dat)) # I think this one is gone
                       )
                       
                       # these variables will cause problems if they have
