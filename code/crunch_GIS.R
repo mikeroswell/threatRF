@@ -255,7 +255,7 @@ indi <- st_join(chel_sf, obs)
 
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
-took # under 4 on new MBP. 
+took # under 4 on new MBP. Wow. now an hour. Not sure waht the difference is. 
 
 # # cleanup recommended; Tmp Files can get big.
 # rm(list = ls())
