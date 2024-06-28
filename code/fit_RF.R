@@ -15,7 +15,9 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
   outer_folds <- folder(classy, "simple_status_mu")
   save(outer_folds, file = paste0("data/fromR/", tax, "_outerFolds.RDA"))
   # fit models
-  fold_fits <- furrr::future_map(1:length(outer_folds), function(fold){ # 
+  fold_fits <- furrr::future_map(1:length(outer_folds)
+                                 , .options = furrr_options(seed = TRUE)
+                                 , function(fold){ # 
     tic()
 
     rf <- fit_rf(formu = my_mod
@@ -46,7 +48,7 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20230116.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20240625.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
