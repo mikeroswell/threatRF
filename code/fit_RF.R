@@ -24,7 +24,7 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
                 , data = classy[outer_folds[[fold]], ]
                 , sampling = NULL
                 , tuneMethod = "repeatedcv"
-                , repeats = 10
+                , repeats = 1 # note shold be 10, reduced for testing
     )
 
 
@@ -48,7 +48,7 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20240625.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20240628_mini.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)

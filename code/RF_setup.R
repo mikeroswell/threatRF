@@ -85,9 +85,22 @@ no_sing <- tofit %>%
 no_sing %>% 
   group_by(simple_status, kingdomKey) %>%
   summarize(occs = n(), spp = n_distinct(genus, species))
+
+# see if I can figure out anything about the problematic variables and fix somehow
+# check_fgd_mu <- no_sing %>% 
+#   group_by(genus, species, kingdomKey) %>%
+#   mutate_all(.funs = c("mu", "sig")) %>% 
+#   mutate(Random_Pred = runif(1))
   
+# 
+# check_fgd_mu %>% 
+#   filter(is.na(fgd_mu)) %>%
+#   group_by(genus, species, kingdomKey) %>%  mutate(n = n()) %>% 
+#   select(lat, lon, genus, species, fgd, fgd_mu, fgd_sig, n)
+
 tofit_summary <- no_sing %>% 
   group_by(genus, species, kingdomKey) %>%
+  select(-c(fgd, lgd)) %>% # seems like this has a few hundred missing values, just drop
   summarize_all(.funs = c("mu", "sig")) %>% 
   mutate(Random_Pred = runif(1))
 
@@ -98,14 +111,20 @@ tofit_summary <- no_sing %>%
 # guessing those are singletons (very droppable)
 
 
-# drop na preemptively
-tofit_summary_complete <- tofit_summary %>% drop_na()
+
+# drop na preemptively, but first drop two variables that appear problematic
+tofit_summary_complete <- tofit_summary %>%
+  drop_na()
 
 # for the testing and training dataset, drop the ones with unknown status
 classed <- tofit_summary_complete %>% 
   filter(simple_status_mu != "unranked") %>% 
   mutate(simple_status_mu = if_else(simple_status_mu =="threat", "secure", "threatened"))# 1 corresponds to "NONE"
 
+# check counts again, it was bad before
+classed %>% 
+  group_by(simple_status_mu, kingdomKey) %>%
+  summarize(occs = n(), spp = n_distinct(genus, species))
 
 
 classed.plant <- classed %>% filter(kingdomKey ==6) 
@@ -115,7 +134,10 @@ set.seed(888)
 
 # functions for fitting
 
-folder <- function(dat, resp, k = 10, times = 10){
+folder <- function(dat, resp
+                   # , k = 10, times = 10
+                   , k = 5, times = 5
+                     ){
   createMultiFolds(dat[,resp][[1]], k = k, times = times)
 }
 
