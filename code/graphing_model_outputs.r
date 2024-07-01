@@ -9,7 +9,7 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20230105.rda")
+load("data/fromR/lfs/100_100_fits_20240628_mini.rda")
 
 load("data/fromR/outerFolds.RDA")
 
@@ -68,63 +68,63 @@ reclassed.plant <- classed %>% filter(kingdomKey == 6)
 reclassed.lep <- classed %>% filter(kingdomKey == 1)
 # get performance
 
-# assess_method <- function(fits = NULL
-#                           , subdat = NULL
-#                           , fulldat = NULL
-#                           , folds = NULL
-#                           , resp = "simple_status_mu"
-#                           , pos = "threatened"
-#                           , neg = "secure"){
-#   map_dfr(1:length(fits), function(x){
-#     out.dat = subdat[-folds[[x]], ]
-#     mod = fits[[x]]
-#     remod = fix.mod(mod = mod, test.dat = out.dat, resp = resp)
-# 
-#     pre = predict(remod
-#                   , out.dat
-#                   , type = "prob")
-#     predictions = tryCatch(ROCR::prediction(pre[,2], subdat[-folds[[x]], resp])
-#                            , error = function(e){NA})
-#     preval = predict(remod, out.dat)
-#     in_auc = remod$results %>%
-#       filter(mtry == remod$finalModel$mtry) %>%
-#       pull(ROC)
-#     out_auc = tryCatch(performance(predictions, measure = "auc")@y.values[[1]]
-#                        , error = function(e){NA})
-#     data.frame(
-#       accuracy = sum(preval == subdat[-folds[[x]],] %>% pull(resp))/length(preval)
-#       , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
-#       , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
-#       , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
-#       , n_threat =  sum(subdat[-folds[[x]], resp]== pos)
-#       , n_sec =  sum(subdat[-folds[[x]], resp]== neg)
-#       , in_auc
-#       , out_auc  # = as.numeric(my_auc$auc)
-#       , mod = x
-#       , mtry = fits[[x]]$finalModel$mtry
-#     )
-#   })
-# }
-# 
-# 
+assess_method <- function(fits = NULL
+                          , subdat = NULL
+                          , fulldat = NULL
+                          , folds = NULL
+                          , resp = "simple_status_mu"
+                          , pos = "threatened"
+                          , neg = "secure"){
+  map_dfr(1:length(fits), function(x){
+    out.dat = subdat[-folds[[x]], ]
+    mod = fits[[x]]
+    remod = fix.mod(mod = mod, test.dat = out.dat, resp = resp)
+
+    pre = predict(remod
+                  , out.dat
+                  , type = "prob")
+    predictions = tryCatch(ROCR::prediction(pre[,2], subdat[-folds[[x]], resp])
+                           , error = function(e){NA})
+    preval = predict(remod, out.dat)
+    in_auc = remod$results %>%
+      filter(mtry == remod$finalModel$mtry) %>%
+      pull(ROC)
+    out_auc = tryCatch(performance(predictions, measure = "auc")@y.values[[1]]
+                       , error = function(e){NA})
+    data.frame(
+      accuracy = sum(preval == subdat[-folds[[x]],] %>% pull(resp))/length(preval)
+      , oob_accuracy = 1- mean(remod$finalModel$err.rate[, 1])
+      , threat_acc = 1- mean(remod$finalModel$err.rate[, 2])
+      , sec_acc = 1- mean(remod$finalModel$err.rate[, 3])
+      , n_threat =  sum(subdat[-folds[[x]], resp]== pos)
+      , n_sec =  sum(subdat[-folds[[x]], resp]== neg)
+      , in_auc
+      , out_auc  # = as.numeric(my_auc$auc)
+      , mod = x
+      , mtry = fits[[x]]$finalModel$mtry
+    )
+  })
+}
+
+
 naMean <- function(x){mean(x, na.rm = TRUE)}
 naSD <- function(x){sd(x, na.rm = TRUE)}
 sum_success <- function(m_assess){
-  m_assess %>% summarize(across(.fns =list(mean = naMean, sd = naSD)))
+  m_assess %>% summarize(across(everything(), .fns =list(mean = naMean, sd = naSD)))
 }
 # 
-# plant_assess <- assess_method(
-#   fits = trees_leps[[1]][[2]]
-#   , subdat = dropper(reclassed.plant)
-#   , folds = trees_leps[[1]][[3]]
-# 
-# )
-# lep_assess <- assess_method(
-#   fits = trees_leps[[2]][[2]]
-#   , subdat = dropper(reclassed.lep)
-#   , folds = trees_leps[[2]][[3]]
-# 
-# )
+plant_assess <- assess_method(
+  fits = trees_leps[[1]][[2]]
+  , subdat = dropper(reclassed.plant)
+  , folds = trees_leps[[1]][[3]]
+
+)
+lep_assess <- assess_method(
+  fits = trees_leps[[2]][[2]]
+  , subdat = dropper(reclassed.lep)
+  , folds = trees_leps[[2]][[3]]
+
+)
 # 
 # 
 # write.csv(lep_assess, "data/fromR/lep_assess.csv", row.names = FALSE)
@@ -210,28 +210,28 @@ sum_success(plant_assess)
 
 # str(trees_leps[[tax]][[2]][[x]]$finalModel$importance)
 
-# varimp_run<-map_dfr(1:2, function(tax){
-#   map_dfr(1:length(trees_leps[[tax]][[2]]), function(x){
-#     data.frame(data.frame(trees_leps[[tax]][[2]][[x]]$finalModel$importance) %>%
-#                  arrange(desc(MeanDecreaseAccuracy)) %>%
-#                  rownames_to_column() %>%
-#                  mutate(rnk = row_number(), foldrep = x,  taxon = c("lep", "plant")[tax]) %>%
-#                  select(rnk, MeanDecreaseAccuracy, varName = rowname, foldrep, taxon))
-#   })
-# })
-# 
-# vimp_sum<-varimp_run %>%
-#   group_by(varName, taxon) %>%
-#   summarize(meanRank = mean(rnk)
-#             , upprRank = quantile(rnk, 0.975)
-#             , lowrRank = quantile(rnk, 0.025)) %>%
-#   ungroup() %>%
-#   group_by(taxon) %>%
-#   mutate(taxMin = min_rank(meanRank)) %>%
-#   right_join(varimp_run)
+varimp_run<-map_dfr(1:2, function(tax){
+  map_dfr(1:length(trees_leps[[tax]][[2]]), function(x){
+    data.frame(data.frame(trees_leps[[tax]][[2]][[x]]$finalModel$importance) %>%
+                 arrange(desc(MeanDecreaseAccuracy)) %>%
+                 rownames_to_column() %>%
+                 mutate(rnk = row_number(), foldrep = x,  taxon = c("lep", "plant")[tax]) %>%
+                 select(rnk, MeanDecreaseAccuracy, varName = rowname, foldrep, taxon))
+  })
+})
+
+vimp_sum<-varimp_run %>%
+  group_by(varName, taxon) %>%
+  summarize(meanRank = mean(rnk)
+            , upprRank = quantile(rnk, 0.975)
+            , lowrRank = quantile(rnk, 0.025)) %>%
+  ungroup() %>%
+  group_by(taxon) %>%
+  mutate(taxMin = min_rank(meanRank)) %>%
+  right_join(varimp_run)
 
 # write.csv(vimp_sum, "data/fromR/vimp_sum.csv", row.names = FALSE)
-vimp_sum <- read.csv("data/fromR/vimp_sum.csv")
+# vimp_sum <- read.csv("data/fromR/vimp_sum.csv")
 #make variable importance plot
 # next step is to create better 
 pdf("figures/variable_importance_top_abbreviations.pdf")

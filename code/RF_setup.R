@@ -12,10 +12,10 @@ library(tictoc)
 
 `%ni%` <- Negate(`%in%`) #convenience, this should be part of base R!
 # custom summary functions
-mu <- function(x){ifelse(is.numeric(x) & length(unique(x))>length(x)/8
+mu <- function(x){ifelse(is.numeric(x) & length(unique(x))>length(x)/4 # strong test for numeric, b.c layers are getting incorrectly summarized
                          , mean(x, na.rm =T)
                          , raster::modal(x, na.rm =T))}
-sig <- function(x){ifelse(is.numeric(x) & length(unique(x))>length(x)/8
+sig <- function(x){ifelse(is.numeric(x) & length(unique(x))>length(x)/4
                           , sd(x, na.rm =T)
                           , length(unique(x)))}
 # fitting function
@@ -152,6 +152,7 @@ make_status_mod <- function(dat = classed){
                         | grepl("lat_sig", names(dat))
                         | grepl("lon_sig", names(dat))
                         | grepl("UID", names(dat))
+                        | grepl("Layer_1.1_mu", names(dat)) # only one value for leps, and hardly any variety for plants
                         | grepl("X2001_2019_change_index", names(dat))
                         | grepl("Red.1_mu", names(dat)) # I think this one is gone
                       )
