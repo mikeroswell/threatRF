@@ -135,8 +135,8 @@ set.seed(888)
 # functions for fitting
 
 folder <- function(dat, resp
-                   # , k = 10, times = 10
-                   , k = 5, times = 5
+                   , k = 10, times = 10
+                   # , k = 5, times = 5
                      ){
   createMultiFolds(dat[,resp][[1]], k = k, times = times)
 }

@@ -24,7 +24,7 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
                 , data = classy[outer_folds[[fold]], ]
                 , sampling = NULL
                 , tuneMethod = "repeatedcv"
-                , repeats = 1 # note shold be 10, reduced for testing
+                , repeats = 10 # note shold be 10, reduced for testing
     )
 
 
