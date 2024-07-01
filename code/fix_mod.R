@@ -21,7 +21,7 @@
 #' 
 #' is_categorical(dat)
 is_categorical <- function(x) {
-  sapply(x, function(y) {is.factor(y) | is.character(y)})
+  sapply(x, function(y) {is.factor(y) | is.character(y)}, USE.NAMES = FALSE)
 }
 
 
@@ -60,10 +60,12 @@ is_categorical <- function(x) {
 #' 
 fix.mod <- function(mod, test.dat, resp){
   v.names <- is_categorical(test.dat)
-  v.names <- v.names[which(v.names != resp)]
+  # v.names <- v.names[which(v.names != resp)]
+  v.names[which(names(v.names) %in% names(mod$xlevels))] <- FALSE # Not sure this edit was
+  # called for but it seemed like maybe it was the move. 
   mod$xlevels = Map(union
                     , mod$xlevels
-                    ,  lapply(test.dat[v.names], unique)
+                    , lapply(test.dat[v.names], unique)
                     , USE.NAMES = TRUE)
   return(mod)
 }
