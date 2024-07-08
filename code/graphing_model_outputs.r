@@ -9,7 +9,7 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20240628_mini.rda")
+load("data/fromR/lfs/100_100_fits_20240701.rda")
 
 load("data/fromR/outerFolds.RDA")
 
@@ -127,8 +127,8 @@ lep_assess <- assess_method(
 )
 # 
 # 
-# write.csv(lep_assess, "data/fromR/lep_assess.csv", row.names = FALSE)
-# write.csv(plant_assess, "data/fromR/plant_assess.csv", row.names = FALSE)
+write.csv(lep_assess, "data/fromR/lep_assess.csv", row.names = FALSE)
+write.csv(plant_assess, "data/fromR/plant_assess.csv", row.names = FALSE)
 
 lep_assess <- read.csv("data/fromR/lep_assess.csv")
 plant_assess <- read.csv("data/fromR/plant_assess.csv")
