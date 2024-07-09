@@ -307,7 +307,7 @@ load("data/fromR/lfs/final_fits.RDA")
 #   kk <- c(1,6)[tax]
 #   raw <- reclassed %>%
 #     filter(kingdomKey == kk)
-#     
+# 
 #   dat <- dropper(raw)
 #   preds <- predict(object = fix.mod(final_fits[[tax]]
 #                                       , dat
@@ -337,34 +337,32 @@ threshlist
 ot
 
 # make predictions on the new data
-# predict_unclassified <- map_dfr(c(1, 2), function(tax){
-#   kk <- c(1,6)[tax]
-#   raw <- tofit_summary_complete %>%
-#     filter(kingdomKey == kk & simple_status_mu == "unranked" ) %>%
-#     drop_na()
-#   dat <- dropper(raw)
-#   og <- fix.mod(final_fits[[tax]]
-#                 , dat
-#                 , "simple_status_mu")
-#   preds <- predict(object = fix.mod(final_fits[[tax]]
-#                                     , dat
-#                                     , "simple_status_mu")
-#                    , newdata = dat
-#                    , type="prob")
-# 
-#   bind_cols(raw %>% select(genus, species)
-#             , preds
-#             , taxon = c( "lepidopterans", "plants" )[tax])
-# })
-# 
-# predict_preclassified<-map_dfr(1:2, function(tax){
-#   threshlist[[tax]]$train.preds
-# })
-# write.csv(predict_unclassified, "data/fromR/predict_unclassified.csv"
-#           , row.names = FALSE)
-# 
-# write.csv(predict_preclassified, "data/fromR/predict_preclassified.csv"
-#           , row.names = FALSE)
+predict_unclassified <- map_dfr(c(1, 2), function(tax){
+  kk <- c(1,6)[tax]
+  raw <- tofit_summary_complete %>%
+    filter(kingdomKey == kk & simple_status_mu == "unranked" ) %>%
+    drop_na()
+  dat <- dropper(raw)
+  og <- fix.mod(final_fits[[tax]]
+                , dat
+                , "simple_status_mu")
+  preds <- predict(object = og
+                   , newdata = dat
+                   , type="prob")
+
+  bind_cols(raw %>% select(genus, species)
+            , preds
+            , taxon = c( "lepidopterans", "plants" )[tax])
+})
+
+predict_preclassified<-map_dfr(1:2, function(tax){
+  threshlist[[tax]]$train.preds
+})
+write.csv(predict_unclassified, "data/fromR/predict_unclassified.csv"
+          , row.names = FALSE)
+
+write.csv(predict_preclassified, "data/fromR/predict_preclassified.csv"
+          , row.names = FALSE)
 
 
 predict_preclassified <- read.csv("data/fromR/predict_preclassified.csv")
@@ -372,7 +370,7 @@ predict_unclassified <- read.csv("data/fromR/predict_unclassified.csv")
 
 # combine predictions with original data
 w_preds <- almost %>% 
-  mutate(taxon=ifelse(kingdomKey == 6, "plantae", "lepidoptera")) %>% 
+  mutate(taxon=ifelse(kingdomKey == 6, "plants", "lepidopterans")) %>% 
   ungroup() %>% 
   left_join(bind_rows(predict_unclassified, predict_preclassified)
             , by = c("taxon", "genus", "species")) 
@@ -405,7 +403,7 @@ w_preds %>%
   dplyr::summarize(pred_sec = sum(class_pred == "secure")
     , secure_correct = sum(simple_status == "secure" &
                                    class_pred == "secure")/ sum(simple_status == "secure")
-    , pred_thread = sum(class_pred == "threatened")
+    , pred_threat = sum(class_pred == "threatened")
     , threat_correct = sum(simple_status == "threat" &
                              class_pred == "threatened")/ sum(simple_status == "threat") )
 
@@ -482,7 +480,7 @@ labdat <- data.frame(existing = rep(c("known rel. secure", "known threatened", "
 pdf("figures/probability_threatened_subdata.pdf", width = 10, height = 10)
 w_preds %>% 
   mutate(existing = factor(c("known rel. secure", "known threatened", "no prior status")[as.numeric(as.factor(simple_status))])
-         , taxon = factor(taxon, levels = c("plantae", "lepidoptera"), labels = c("plants", "lepidopterans"))) %>% 
+         , taxon = factor(taxon, levels = c("plants", "lepidopterans"), labels = c("plants", "lepidopterans"))) %>% 
   ggplot(aes(color = 1 - threatened)) +
   geom_sf(size = 0.1) +
   geom_text(data = labdat
@@ -535,7 +533,7 @@ pred_by_spp_thresh <- w_preds %>%
 
 plusOne <- function(x){length(unique(x))}
 
-species_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
+species_threatened_per_cell <- map(c("lepidopterans", "plants"), function(tax){
   pred_by_spp_thresh %>%
     filter(taxon == tax, simple_status =="unranked", is.threatened == 1) %>%
     raster::rasterize(
@@ -606,7 +604,7 @@ dev.off()
 
 
 
-species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
+species_not_threatened_per_cell <- map(c("lepidopterans", "plants"), function(tax){
   pred_by_spp_thresh %>%
     dplyr::filter(taxon == tax, simple_status =="unranked", is.threatened == 0) %>%
     raster::rasterize(
@@ -620,7 +618,7 @@ species_not_threatened_per_cell <- map(c("lepidoptera", "plantae"), function(tax
 })
 
 
-species_per_cell <- map(c("lepidoptera", "plantae"), function(tax){
+species_per_cell <- map(c("lepidopterans", "plants"), function(tax){
   pred_by_spp_thresh %>%
     dplyr::filter(taxon == tax, simple_status =="unranked") %>%
     raster::rasterize(
@@ -643,7 +641,7 @@ p_spp_threatened <-map(1:2, function(tax){
 
 n_over_thresh <- function(x, ...){sum(na.omit(x>threat_thres))}
 
-mean_sd_pred <- map(c("lepidoptera", "plantae"), function(tax){
+mean_sd_pred <- map(c("lepidopterans", "plants"), function(tax){
   w_preds %>%
     filter(taxon == tax, simple_status =="unranked") %>% 
     raster::rasterize(
@@ -655,9 +653,9 @@ mean_sd_pred <- map(c("lepidoptera", "plantae"), function(tax){
       , na.rm = FALSE)
 })
 
-pro<-function(x){sum(x)/length(x)}
+pro <- function(x){sum(x)/length(x)}
 
-count_occ_threatened <- map(c("lepidoptera", "plant"), function(tax){
+count_occ_threatened <- map(c("lepidopterans", "plants"), function(tax){
   w_preds %>%
     filter(taxon == tax, simple_status =="unranked") %>% 
     mutate(overThresh = as.numeric(secure > ot$cut[2-as.numeric(tax == "lepidopterans")])) %>% 
@@ -671,7 +669,7 @@ count_occ_threatened <- map(c("lepidoptera", "plant"), function(tax){
       , na.rm = TRUE)
 })
 
-# count_occ_threatened[[1]]
+ # count_occ_threatened[[1]]
 
 
 
@@ -718,6 +716,7 @@ map(1:2, function(tax){
       )
   })
 })
+
 
 dev.off()
 
@@ -816,8 +815,16 @@ bottom_ten <- predict_unclassified %>%
   arrange(taxon, threat_rank) %>% 
   select(taxon, genus, species, threat_rank, perc_votes_threatened = secure)
   
+
+top_ten <- predict_unclassified %>%
+  group_by(taxon) %>% 
+  mutate(threat_rank = min_rank(threatened)) %>% 
+  filter(threat_rank <15) %>% 
+  arrange(taxon, threat_rank) %>% 
+  select(taxon, genus, species, threat_rank, perc_votes_threatened = secure)
 write.csv(w_preds, "data/fromR/lfs/predictions.csv", row.names = FALSE)
 write.csv(top_ten, "data/fromR/top_ten_threatened.csv", row.names = FALSE)
+
 write.csv(bottom_ten, "data/fromR/bottom_ten_threatened.csv", row.names = FALSE)
 
 
