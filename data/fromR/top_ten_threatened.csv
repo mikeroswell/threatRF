@@ -1,31 +1,30 @@
-taxon,genus,species,threat_rank,perc_votes_threatened,Non-native,Status elsewhere?,Northern,Appalachian extension,Refs,notes
-lepidoptera,Olethreutes,bipartitana,1,0.936,,,Y,Y,,
-lepidoptera,Scoparia,cinereomedia,2,0.93,,,Y,Y,,
-lepidoptera,Euphyia,intermediata,3,0.928,,,Y,Y,,
-lepidoptera,Haploa,confusa,4,0.926,,,Y,N,,
-lepidoptera,Catocala,blandula,5,0.916,,"S1 KY, IN; S4 PA",Y,Y,,
-lepidoptera,Panthea,acronyctoides,5,0.916,,"S3 VA; S4 NB, ON",Y,Y,,
-lepidoptera,Argyresthia,calliphanes,7,0.898,,"S1 CT; S2 MA; S4 NH, NB; S5 ON",Y,,,
-lepidoptera,Cingilia,catenaria,7,0.898,,,Y,Y,,
-lepidoptera,Chrysanympha,formosa,9,0.896,,"S1 IN; S3 NC; S4 NY, PA, NB; S5 ON",Y,Y,,
-lepidoptera,Idia,diminuendis,10,0.894,,S2 QE; S3 NH; S4 PA,N,N,,
-lepidoptera,Arequipa,turbatella,11,0.888,,,,,,
-lepidoptera,Acronicta,insita,12,0.886,,,,,,
-lepidoptera,Sthenopis,pretiosus,13,0.884,,,,,,
-lepidoptera,Eulithis,molliculata,14,0.87,,,,,,
-plantae,Pyrola,elliptica,1,0.95,,"S1 VA, NC; S2 DE, S4 WV, NJ",Y,Y,,
-plantae,Poa,autumnalis,2,0.94,,"SX MI, IL, SH NJ, S1 PA, S3 DE, S4 NC, S5 SC, VA, KY",N,N,,
-plantae,Pyrola,americana,2,0.94,,"SX KY, IL, S2 NJ, NC, TN, IN; S4 NJ, VT; S5 VA, WV",Y,Y,,
-plantae,Eragrostis,hypnoides,4,0.938,,"SH ME, NH; S2 NC, DE; S3 NJ, VT, S4 NY, VA, WV, KY",N,N,,
-plantae,Bidens,connata,5,0.936,,"S1 RI; SH WV; S4 VA; QE; S5 NJ, NY, KY",N,N,,
-plantae,Viola,macloskeyi,6,0.932,,"S1 DE; S3 GA, NC; S4 VA, WV; S5 NY, QE, ON",Y,Y,,
-plantae,Dichanthelium,longiligulatum,7,0.928,,"S1 Nj, S3 NC; S4 VA, KY",N,N,,
-plantae,Carex,gynandra,8,0.926,,"S1 OH; S2 De; S4 Nj, NC; S5 VA, WV, NY, ON, KY",Y,Y,,
-plantae,Gentiana,clausa,8,0.926,,"S2 QE, RI; S3 NC, OH; S4VA, WV, NY, NJ",Y,Y,,
-plantae,Selaginella,rupestris,8,0.926,,"S1 OH, NB, NS; S2 IA, NJ; S3 WV, VT, NC, IL, MA; S4 NY; S5 ON, QE, GA",Y,Y,,
-plantae,Viola,rotundifolia,8,0.926,,"S1 RI; S2 DE, S3S4 KY, NJ; S4 NC, WV, S5 NY, VA",Y,Y,,
-plantae,Prunus,pensylvanica,12,0.92,,"S2 GA; S3 IN; S4 NC, WV; S5 VA, PA, NY, ON, QE",Y,Y,,
-plantae,Spiraea,corymbosa,12,0.92,,S1 NC; S2 ,N,Y,,"Taxonomy problem, already listed in MD as Spiraea betulifolia var. corymbosa"
-plantae,Actaea,pachypoda,14,0.918,,"S1 DE; S2 RI, SC; S4 NJ, WV, NC, QE; S5 VA, KY, GA, NY, ON",N,N,,
-plantae,Betula,alleghaniensis,14,0.918,,"S1 IL, SC; S4 WV, QE; S5 KY, VA, NC, PA, NY, ON, ME",Y,Y,,
-plantae,Dichanthelium,boreale,14,0.918,,"S1 NJ, WV, IL; s3 NY, S4 ON, QE",Y,N ,,Likely misidentification
+"taxon","genus","species","threat_rank","perc_votes_threatened"
+"lepidopterans","Caripeta","divisata",1,0.974
+"lepidopterans","Hypena","edictalis",1,0.974
+"lepidopterans","Hyppa","xylinoides",3,0.972
+"lepidopterans","Nola","cilicoides",3,0.972
+"lepidopterans","Idia","diminuendis",5,0.97
+"lepidopterans","Papaipema","pterisii",5,0.97
+"lepidopterans","Argyresthia","calliphanes",7,0.966
+"lepidopterans","Papaipema","insulidens",7,0.966
+"lepidopterans","Astrotischeria","astericola",9,0.964
+"lepidopterans","Haploa","confusa",9,0.964
+"lepidopterans","Hedya","chionosema",11,0.962
+"lepidopterans","Protodeltote","albidula",11,0.962
+"lepidopterans","Sthenopis","pretiosus",11,0.962
+"lepidopterans","Maliattha","concinnimacula",14,0.96
+"lepidopterans","Scoparia","cinereomedia",14,0.96
+"plants","Dichanthelium","boreale",1,0.974
+"plants","Osmunda","regalis",2,0.954
+"plants","Sphenopholis","nitida",3,0.952
+"plants","Euphorbia","commutata",4,0.95
+"plants","Solidago","racemosa",5,0.946
+"plants","Oenothera","perennis",6,0.944
+"plants","Bidens","vulgata",7,0.942
+"plants","Physalis","pubescens",7,0.942
+"plants","Ulmus","minor",9,0.94
+"plants","Solidago","harrisii",10,0.938
+"plants","Poa","autumnalis",11,0.926
+"plants","Robinia","viscosa",11,0.926
+"plants","Triadenum","fraseri",11,0.926
+"plants","Veronica","americana",14,0.924
