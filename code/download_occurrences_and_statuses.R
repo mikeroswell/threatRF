@@ -241,7 +241,9 @@ nspnames <- ps1 %>%
   }) %>% 
   map_dfr(bind_rows, .id = "gs")
 
-nspnames %>% filter(genus == "Trautvetteria")
+# # data quality checks
+# nspnames %>% filter(genus == "Trautvetteria")
+# nspnames %>% filter(genus == "Ulmus")
 
 problem_names_plant <- nspnames %>% 
   filter(matchType != "EXACT" | status == "SYNONYM") %>% 
@@ -301,6 +303,7 @@ ps2 <- ps1 %>%
          , species = gsub("(.*)( )(.*)", "\\3", withspace)) %>% 
   filter(!grepl("ssp.", scientificName))
 
+# data checks again
 ps2 %>% filter(grepl("brevibarbe", withspace)) # still here with its NS name
 ps2 %>% filter(grepl("arundinaceus", withspace))
 
@@ -346,13 +349,13 @@ lep_joined <- occ_gs %>%
                                         , "unranked"))) )
 
 
-occ_gs %>% 
-  filter( genus == 'Trautvetteria') %>% 
-  select(gs, genus, species, withspace)
-
-ps2 %>% 
-  filter( genus == 'Trautvetteria') %>% 
-  select(gs, genus, species, withspace)
+# occ_gs %>% 
+#   filter( genus == 'Trautvetteria') %>% 
+#   select(gs, genus, species, withspace)
+# 
+# ps2 %>% 
+#   filter( genus == 'Trautvetteria') %>% 
+#   select(gs, genus, species, withspace)
   
 occ_stat_plants <- occ_gs %>% 
   filter(kingdomKey == 6) %>% 
@@ -397,17 +400,17 @@ all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 # all_with_stat %>% filter(grepl("^[^[:alnum:]]", species))
 # all_with_stat %>% filter(grepl("[^[:alnum:][:punct:]]", species)) %>% select (genus, species, gs)
 
-# natives_filtering <- all_with_stat %>%
-#   # deal with spp not in Knapp
-# 
-#   filter((kingdomKey == 6 & ( verb_length > 0
-#   )
-#   )|kingdomKey ==1) %>%
-#   group_by(genus, species, speciesKey) %>%
-#   filter(all(!exclude) |has_nonNative_ssp | is.na(exclude)) %>%
-#   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>%
-#   filter((!exotic...239| is.na(exotic...239)), (!exotic...241|is.na(exotic...241)))
-# 
+natives_filtering <- all_with_stat %>%
+  # deal with spp not in Knapp
+
+  filter((kingdomKey == 6 & ( verb_length > 0
+  )
+  )|kingdomKey ==1) %>%
+  group_by(genus, species, speciesKey) %>%
+  filter(all(!exclude) |has_nonNative_ssp | is.na(exclude)) %>%
+  filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>%
+  filter((!exotic...239| is.na(exotic...239)), (!exotic...241|is.na(exotic...241)))
+
 natives_filtering %>%
   filter(grepl("japonic", species
   )) %>%
@@ -452,11 +455,11 @@ natives %>%
   summarize(occ = n(), spp = n_distinct(gs)) 
 
 
-natives %>%
-  sf::st_drop_geometry() %>% 
-  group_by(genus, species, simple_status) %>% 
-  summarize(locs = n_distinct(decimalLatitude), sranks = n_distinct(roundedSRank), tot = n()) %>% 
-  filter(species == "pauciflora")
+# natives %>%
+#   sf::st_drop_geometry() %>% 
+#   group_by(genus, species, simple_status) %>% 
+#   summarize(locs = n_distinct(decimalLatitude), sranks = n_distinct(roundedSRank), tot = n()) %>% 
+#   filter(species == "pauciflora")
 
 # # look at plants since I have a feel for them
 # natives %>%
