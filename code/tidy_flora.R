@@ -10,7 +10,7 @@ source("code/robust_gbif_namesearch.R")
 knapp_raw <- read.table("data/Knapp_word_to_Accessible_search_and_replace_emDash_special.txt", header = FALSE, sep = "\t")
 
 
-knapp_raw <- knapp_raw %>% slice(1:11151)
+knapp_raw <- knapp_raw %>% slice(1:9416)
 str(knapp_raw)
 
 
@@ -160,7 +160,7 @@ n_distinct(towards_useful$gs) #3524
 
 # Look at counts of native and excludes
 towards_useful %>% group_by(exclude) %>% summarize(n_distinct(gs))
-# 2313 good, 1375 bad
+# 2018 good, 1457 bad (OMG, can't believe that I'm only catching this now)
 
 # scan first thousand names of each group
 # towards_useful %>% filter(exclude) %>% pull(gs) %>% unique()
@@ -264,8 +264,15 @@ namecheck %>% filter(is.na(status)) %>% pull(gs)
 # Heteranthera pauciflora is a good name not yet in backbone, it looks like (now solved!)
 namecheck %>% filter(status == "SYNONYM") %>% pull(gs)
 
-knapp_backboned<-towards_useful %>% left_join(namecheck, by = "gs") %>% 
-  rename(genus_knapp = genus.x, species_knapp = species.x, accepted_genus = genus.y, accepted_gs = species.y)
+knapp_backboned <-
+  towards_useful %>% 
+  left_join(namecheck, by = "gs") %>% 
+  rename(genus_knapp = genus.x
+         , species_knapp = species.x
+         , accepted_genus = genus.y
+         , accepted_gs = species.y)
+
+
 write.csv(knapp_backboned, "data/knapp_backboned.csv", row.names = FALSE)
 knapp_backboned <- read.csv("data/knapp_backboned.csv")
 knapp_backboned
