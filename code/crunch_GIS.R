@@ -86,12 +86,19 @@ sfed_all <- st_as_sf(localities
                , crs = "EPSG:4326") %>% 
   st_transform(crs = st_crs(my_pr))
 
-sfed_MD <- sfed_all %>% mutate(in_MD = lengths(st_within(sfed_all, MD_boundary)))
 
-sfed <- sfed_MD %>% filter(in_MD ==1) %>% dplyr::select(-in_MD)
+keepInd <- unlist(st_contains(MD_boundary, sfed_all))
 
-sfed_outside <- sfed_MD %>% filter(in_MD ==0) %>% dplyr::select (-in_MD)
-  
+# this was wildly slow, and the line above fixed it
+# sfed_MD <- sfed_all %>% mutate(in_MD = lengths(st_within(sfed_all, MD_boundary)))
+
+# sfed <- sfed_MD %>% filter(in_MD ==1) %>% dplyr::select(-in_MD)
+
+
+# 
+# sfed_outside <- sfed_MD %>% filter(in_MD ==0) %>% dplyr::select (-in_MD)
+sfed <- sfed_all[keepInd, ]
+sfed_oputside <- sfed_all[-keepInd, ]
 
 # see what I can see with this NLCD data so far
 
@@ -100,9 +107,10 @@ nlcd <- list.files("data/GIS_downloads/NLCD_wmgCNFPzEKD2TBCTk1Kl/"
 nlcd_stack<-raster::stack(nlcd)
 
 # extract
-tic()
+# tic()
 nlcd_points <- raster::extract(nlcd_stack, sfed)
-toc()
+# toc() 
+# <9 sec
 
 colnames(nlcd_points)<-gsub("NLCD_", ""
                             , gsub("_L48_.*", "", colnames(nlcd_points) ))
@@ -118,6 +126,7 @@ colnames(nlcd_points)<-gsub("NLCD_", ""
 # omitting a handful of variables 
 bc <- raster::stack(list.files("data/GIS_downloads/CHELSA"
                                , full.names = TRUE)[c(1:62, 67:70)])
+# just trusting skipping some in the 60s, after 70.
          
 
 #shrink the rasters
@@ -132,10 +141,13 @@ names(chelsa_matrix)<-gsub("_1981.*", "", names(chelsa_matrix))
 apply(chelsa_matrix, 2, function(x){length(unique(x))})
 apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))})
 
-
-drop_vars <- names(which(
-  apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))}) <= 76200) |
-    which(apply(chelsa_matrix, 2, function(x){length(unique(x))})<4))
+# set minimum number of complete cases
+cc <- 41000
+cat("You set the minimum number of complete cases as", cc)
+# this was higher before. Not sure if this is too low now. none dropped.
+drop_vars <- c(names(which(
+  apply(chelsa_matrix, 2, function(x){sum(complete.cases(x))}) <= cc) )
+    , names(which(apply(chelsa_matrix, 2, function(x){length(unique(x))}) < 4)))
 
 write.csv(drop_vars, "data/fromR/CHELSA_variables_dropped.csv", row.names =F)
 
@@ -144,14 +156,14 @@ write.csv(drop_vars, "data/fromR/CHELSA_variables_dropped.csv", row.names =F)
 chelsa_complete <- chelsa_matrix[ 
   , intersect(which(apply(chelsa_matrix, 2, function(x){
     sum(complete.cases(x))
-    }) > 76200),
+    }) > cc),
         which(apply(chelsa_matrix, 2, function(x){length(unique(x))}) > 3))
   ]
 
 
 
 chelsa_points <- bind_cols(
-  localities[which(sfed_MD$in_MD ==1),] # just coordinates?
+  localities[keepInd,] # just coordinates?
   , chelsa_complete # CHELSA extended
   , data.frame(apply(nlcd_points, 2, as.character)) # LULC data
   )
@@ -255,7 +267,7 @@ indi <- st_join(chel_sf, obs)
 
 save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
-took # under 4 on new MBP. Wow. now an hour. Not sure waht the difference is. 
+took # under 2 min on new MBP. 
 
 # # cleanup recommended; Tmp Files can get big.
 # rm(list = ls())
