@@ -9,6 +9,7 @@ cores <- 9
 future::plan(strategy = "multisession", workers = cores)
 
 trees_leps <- map(c( "plant", "lep"), function(tax){
+# trees <- map(c("plant"), function(tax){
  
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
@@ -48,7 +49,7 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20240701.rda")
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20240712.rda")
 
 
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
