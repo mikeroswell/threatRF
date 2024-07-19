@@ -344,7 +344,7 @@ lep_joined <- occ_gs %>%
   left_join(ls2, by = c("gs", "genus", "species")) %>% 
   dplyr::filter((!exotic...15 & !exotic...17) |(is.na(exotic...15) & is.na(exotic...17))) %>% 
   mutate(simple_status =ifelse(roundedSRank %in% c("S1", "S2", "S3", "SH"), "threat"
-                               , ifelse(roundedSRank %in% c("S4", "S5"), "secure"
+                               , ifelse(roundedSRank %in% c("S4", "S5", "S5B"), "secure"
                                         , ifelse(roundedSRank %in% "SNA", "remove_not_native"
                                         , "unranked"))) )
 
@@ -441,6 +441,9 @@ natives <- all_with_stat %>%
          , simple_status) %>% 
   ungroup() %>% 
   group_by(genus, species) %>% 
+  # note here that we use a greedy classification: if any infra-species or 
+  # synonym associated with a valid name is threatened, we use this status for 
+  # the whole species. 
   mutate(simple_status = if_else("threat" %in% simple_status, "threat"
         , if_else("secure" %in% simple_status, "secure", "unranked"))) %>% 
   group_by(genus, species, simple_status, decimalLongitude, decimalLatitude) %>% 
@@ -489,6 +492,9 @@ excludeds <- all_with_stat %>%
          , roundedSRank
          , simple_status) %>% 
   ungroup() %>% 
+  # note here that we use a greedy classification: if any infra-species or 
+  # synonym associated with a valid name is threatened, we use this status for 
+  # the whole species. 
   mutate(simple_status = if_else("threat" %in% simple_status, "threat"
                                  , if_else("secure" %in% simple_status
                                            , "secure", "unranked"))) %>% 
