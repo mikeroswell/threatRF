@@ -269,6 +269,14 @@ save(indi, file="data/fromR/lfs/to_predict.RDA")
 took<-Sys.time()-beg
 took # under 2 min on new MBP. 
 
+# Some data checking. Grrrr
+
+indi %>% sf::st_drop_geometry() %>% 
+  filter(roundedSRank == "S4" , simple_status == "threat") %>% 
+  group_by(genus, species, simple_status, roundedSRank) %>% 
+  summarize(n())
+
+
 # # cleanup recommended; Tmp Files can get big.
 # rm(list = ls())
 # removeTmpFiles()
