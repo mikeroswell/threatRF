@@ -305,28 +305,28 @@ dev.off()
 load("data/fromR/lfs/final_fits.RDA")
 
 # get "optimal" thresholds
-# threshlist <- map(1:2, function(tax){
-#   kk <- c(1,6)[tax]
-#   raw <- reclassed %>%
-#     filter(kingdomKey == kk)
-# 
-#   dat <- dropper(raw)
-#   preds <- predict(object = fix.mod(final_fits[[tax]]
-#                                       , dat
-#                                       , "simple_status_mu")
-#                      , newdata = dat
-#                      , type = "prob")
-#   perf = performance(prediction(preds[2], as.numeric(as.factor(dat$simple_status_mu))), "sens", "spec")
-# 
-#   thresh.df <- data.frame(cut = perf@alpha.values[[1]], sens = perf@x.values[[1]], spec = perf@y.values[[1]])
-#   thresh <- thresh.df[which.max(thresh.df$sens + thresh.df$spec), ]
-#   taxon <- c("lepidopterans", "plants")[tax]
-# 
-#    return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh),
-#                train.preds = data.frame(preds, taxon, genus = raw$genus, species = raw$species)))
-# })
-# 
-# save(threshlist, file = "data/fromR/threshlist.rda")
+threshlist <- map(1:2, function(tax){
+  kk <- c(1,6)[tax]
+  raw <- reclassed %>%
+    filter(kingdomKey == kk)
+
+  dat <- dropper(raw)
+  preds <- predict(object = fix.mod(final_fits[[tax]]
+                                      , dat
+                                      , "simple_status_mu")
+                     , newdata = dat
+                     , type = "prob")
+  perf = performance(prediction(preds[2], as.numeric(as.factor(dat$simple_status_mu))), "sens", "spec")
+
+  thresh.df <- data.frame(cut = perf@alpha.values[[1]], sens = perf@x.values[[1]], spec = perf@y.values[[1]])
+  thresh <- thresh.df[which.max(thresh.df$sens + thresh.df$spec), ]
+  taxon <- c("lepidopterans", "plants")[tax]
+
+   return(list(taxon, all_thresh = data.frame(taxon, thresh.df), best_thresh = data.frame(taxon, thresh),
+               train.preds = data.frame(preds, taxon, genus = raw$genus, species = raw$species)))
+})
+
+save(threshlist, file = "data/fromR/threshlist.rda")
 load("data/fromR/threshlist.rda")
 # 
 # 
