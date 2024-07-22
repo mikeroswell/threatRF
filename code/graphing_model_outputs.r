@@ -9,7 +9,9 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20240701.rda")
+load("data/fromR/lfs/100_100_fits_20240719.rda")
+# I thought I messed this up
+trees_leps[[2]] <- trees_leps[[2]][[1]]
 
 load("data/fromR/outerFolds.RDA")
 
@@ -811,7 +813,7 @@ View(predict_unclassified %>%
 bottom_ten <- predict_unclassified %>%
   group_by(taxon) %>% 
   mutate(threat_rank = min_rank(desc(threatened))) %>% 
-  filter(threat_rank <15) %>% 
+  filter(threat_rank <=20) %>% 
   arrange(taxon, threat_rank) %>% 
   select(taxon, genus, species, threat_rank, perc_votes_threatened = secure)
   
@@ -819,7 +821,7 @@ bottom_ten <- predict_unclassified %>%
 top_ten <- predict_unclassified %>%
   group_by(taxon) %>% 
   mutate(threat_rank = min_rank(threatened)) %>% 
-  filter(threat_rank <15) %>% 
+  filter(threat_rank <=20) %>% 
   arrange(taxon, threat_rank) %>% 
   select(taxon, genus, species, threat_rank, perc_votes_threatened = secure)
 write.csv(w_preds, "data/fromR/lfs/predictions.csv", row.names = FALSE)

@@ -8,9 +8,9 @@ cores <- 9
 # fit models
 future::plan(strategy = "multisession", workers = cores)
 
-trees_leps <- map(c( "plant", "lep"), function(tax){
+# trees_leps <- map(c( "plant", "lep"), function(tax){
 # trees <- map(c("plant"), function(tax){
- 
+leps <- map(c("lep"), function(tax){ 
   main <- get(paste0("classed.", tax ))
   classy <- dropper(main)
   outer_folds <- folder(classy, "simple_status_mu")
@@ -49,9 +49,10 @@ trees_leps <- map(c( "plant", "lep"), function(tax){
 })
 
 
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20240712.rda")
-
-
+# save(trees_leps, file="data/fromR/lfs/100_100_fits_20240712.rda")
+load("data/fromR/lfs/100_100_fits_20240712.rda")
+trees_leps[[2]]<- leps
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20240719.rda")
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
 write.csv(no_sing, "data/fromR/lfs/all_model_data.csv", row.names = FALSE)
 write.csv(tofit, "data/fromR/lfs/tofit.csv", row.names = FALSE)
