@@ -409,7 +409,9 @@ natives_filtering <- all_with_stat %>%
   group_by(genus, species, speciesKey) %>%
   filter(all(!exclude) |has_nonNative_ssp | is.na(exclude)) %>%
   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>%
-  filter((!exotic...239| is.na(exotic...239)), (!exotic...241|is.na(exotic...241)))
+  filter((!exotic...239| is.na(exotic...239))
+         , (!exotic...241|is.na(exotic...241))) %>% 
+  filter(roundedSRank!= "SNA" | is.na(roundedSRank))
 
 natives_filtering %>%
   filter(grepl("japonic", species
@@ -423,10 +425,10 @@ natives <- all_with_stat %>%
                               )
           )|kingdomKey ==1) %>% 
   group_by(genus, species, speciesKey) %>%
-  filter(!exclude | has_nonNative_ssp | is.na(exclude)) %>%
+  filter(all(!exclude) |has_nonNative_ssp | is.na(exclude)) %>%
   filter(!(grepl("campestre", species) & grepl("Acer", genus))) %>% 
   filter((!exotic...239| is.na(exotic...239)), (!exotic...241|is.na(exotic...241))) %>%
-  filter(roundedSRank!= "SNA") %>% 
+  filter(roundedSRank!= "SNA"| is.na(roundedSRank)) %>% 
 
   select(gbifID
          , genus
@@ -459,9 +461,9 @@ natives %>%
 
 
 # natives %>%
-#   sf::st_drop_geometry() %>% 
-#   group_by(genus, species, simple_status) %>% 
-#   summarize(locs = n_distinct(decimalLatitude), sranks = n_distinct(roundedSRank), tot = n()) %>% 
+#   sf::st_drop_geometry() %>%
+#   group_by(genus, species, simple_status) %>%
+#   summarize(locs = n_distinct(decimalLatitude), sranks = n_distinct(roundedSRank), tot = n()) %>%
 #   filter(species == "pauciflora")
 
 # # look at plants since I have a feel for them

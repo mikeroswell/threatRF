@@ -222,7 +222,7 @@ varimp_run<-map_dfr(1:2, function(tax){
   })
 })
 
-vimp_sum<-varimp_run %>%
+vimp_sum <- varimp_run %>%
   group_by(varName, taxon) %>%
   summarize(meanRank = mean(rnk)
             , upprRank = quantile(rnk, 0.975)
