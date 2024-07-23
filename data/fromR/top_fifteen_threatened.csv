@@ -1,0 +1,29 @@
+taxon,genus,species,threat_rank,perc_votes_threatened,statuses in NE N America,northern,appalachian,notes
+lepidopterans,Plusia,contexta,1,0.928,S4 ON,y,m,
+lepidopterans,Amphipoea,americana,2,0.898,"S4 PA, ON, NB, NS",y,y,
+lepidopterans,Catastega,timidella,2,0.898,S4 ON,m,m,
+lepidopterans,Papaipema,pterisii,4,0.896,"SX NJ; SH DE; S3 VA, IN; S4 ON",y,y,"Eats ferns, prefers sandy soils"
+lepidopterans,Cenopis,directana,5,0.894,"S4 PA, ON",n,n,
+lepidopterans,Hyppa,xylinoides,5,0.894,"S4 PA, NB, NS; S5 ON",y,y,
+lepidopterans,Arequipa,turbatella,7,0.892,"S4 PA, ON",y,y,
+lepidopterans,Mythimna,oxygala,8,0.89,"S4 ON, NB, NS",y,n,
+lepidopterans,Papaipema,rigida,9,0.888,"S2 KY; S3 VA, IN; SH DE",y,y,Two recent MD observations on iNat in W. MD; note on natureserve about rapid decline likely driven by deer browsing of their hosts and need to reassess status using more recent data
+lepidopterans,Cingilia,catenaria,10,0.886,S1 CT; S2 MA; S4 NH; S5 ON,y,y,
+lepidopterans,Clepsis,persicana,10,0.886,S4 PA; S5 ON,y,y,very distinctive Appalachian extension. Host generalist
+lepidopterans,Eupithecia,lariciata,10,0.886,"S4 ON, NB",y,y,
+lepidopterans,Papaipema,insulidens,10,0.886,"SH DE; S2 PA, IN; S3 KY, MA",y,y,
+lepidopterans,Sicya,macularia,10,0.886,"S4 PA, NB, ON",y,y,
+plants,Osmunda,regalis,1,0.968,,,,"probably non-native, or in complex with O. spectabilis"
+plants,Euphorbia,commutata,2,0.96,"S1 NC, MI, ON; S2 FL; S3 GA; S4 KY, WV, VA",n,y,
+plants,Physalis,pubescens,3,0.958,"S3 NC; S4 FL, KY, VA, DE",n,n,Knapp and Naczi list var. integrifolia as a waif but var. pubescens as a MD native
+plants,Robinia,viscosa,4,0.95,"S1 NC; S2 TN; SNA SC, PA, NJ, NY, OH, ME, MA, VT, MI, IN, CT",m,y,"not flagged by Knapp and Naczi; native range is mostly in TN and NC, other Southern Appalachians into S VA, but not MD. Widely planted outside that range."
+plants,Oenothera,perennis,5,0.948,"S1 GA; S2 SC, KY; S3 IN, NJ; S4 VA, WV, PE; S5 PA, NY, VT, ON, QE, NB, NS",y,y,
+plants,Bidens,vulgata,6,0.944,"S3 NC, QE, NS; S4 DE, NB; S5 IN, KY, VA, WV, PA, NJ, NY, ON, VT",y,y,
+plants,Sphenopholis,nitida,6,0.944,"S1 ON, VT; S2 MA; S4 NC, KY, WV, DE, NJ; S5 VA, PA, NY",n,m,
+plants,Micranthes,pensylvanica,8,0.936,"S1 TN, NC, DE, RI, ON; S2 WV; S3 VA, NJ, ME; S4 NY; S5 PA, VT",y,y,
+plants,Pyrola,americana,8,0.936,"SX KY; S2 TN, NC, IN, DE; S4 NJ, VT, ON, QE, NB; S5 VA, WV, NY, NS ",y,y,
+plants,Poa,autumnalis,10,0.934,"SX NJ; S1 PA; S2 DE; S4 NC; S5 SC, WV, VA",n,n,
+plants,Arisaema,stewardsonii,11,0.924,"S2 NJ; S3 NC, OH, QE; S4 WV, MA, NB, NS; S5 PA, NY, VT",y,y,Considered a ssp of A triphyllum by some authorities
+plants,Dendrolycopodium,dendroideum,11,0.924,"S1 TN, IN; S2 NC; S3 VA; S4 WV, NJ; S5 PA, NY, VT, QE, ON, NB, NS, PE",y,y,
+plants,Solidago,racemosa,11,0.924,,n,y,Considered a ssp of S siimplex and also possibly already listed in MD
+plants,Solidago,harrisii,14,0.918,,n,y,Considered ssp of S arguta. 

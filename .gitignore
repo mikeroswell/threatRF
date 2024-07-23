@@ -73,6 +73,9 @@ data/fromR/lfs/final_fits_20221018*
 # .pdfs (probably figures, might consider not ignoring)
 *.pdf
 
+# excel files
+*.xlsx
+
 
 
 #rproject file
