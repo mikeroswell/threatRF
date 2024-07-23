@@ -9,9 +9,7 @@ library(patchwork)
 # set bigger font for poster
 theme_set(theme_classic(base_size = 24))
 
-load("data/fromR/lfs/100_100_fits_20240719.rda")
-# I thought I messed this up
-trees_leps[[2]] <- trees_leps[[2]][[1]]
+load("data/fromR/lfs/100_100_fits_20240722.rda")
 
 load("data/fromR/outerFolds.RDA")
 
@@ -283,23 +281,23 @@ dev.off()
 
 # fit final models
 
-# n_cores <- 7
-# final_fits <- map(c("lep", "plant"), function(tax){
-#   main <- get(paste0("reclassed.", tax ))
-#   classy <- dropper(main)
-#   cl <- makePSOCKcluster(n_cores)
-#   registerDoParallel(cl)
-#   # fit models
-#   rf <- fit_rf(formu = my_mod
-#                , data = classy
-#                , sampling = NULL
-#                , tuneMethod = "repeatedcv"
-#                , repeats = 10
-#   )
-#   stopCluster(cl)
-#   return(rf)
-# 
-# })
+n_cores <- 7
+final_fits <- map(c("lep", "plant"), function(tax){
+  main <- get(paste0("reclassed.", tax ))
+  classy <- dropper(main)
+  cl <- makePSOCKcluster(n_cores)
+  registerDoParallel(cl)
+  # fit models
+  rf <- fit_rf(formu = my_mod
+               , data = classy
+               , sampling = NULL
+               , tuneMethod = "repeatedcv"
+               , repeats = 10
+  )
+  stopCluster(cl)
+  return(rf)
+
+})
 # 
 # save(final_fits, file = "data/fromR/lfs/final_fits.RDA")
 load("data/fromR/lfs/final_fits.RDA")
