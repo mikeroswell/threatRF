@@ -51,8 +51,8 @@ leps <- map(c("lep"), function(tax){
 
 # save(trees_leps, file="data/fromR/lfs/100_100_fits_20240712.rda")
 load("data/fromR/lfs/100_100_fits_20240712.rda")
-trees_leps[[2]]<- leps
-save(trees_leps, file="data/fromR/lfs/100_100_fits_20240719.rda")
+trees_leps[[2]]<- leps[[1]]
+save(trees_leps, file="data/fromR/lfs/100_100_fits_20240722.rda")
 write.csv(classed, "data/fromR/training_data.csv", row.names = FALSE)
 write.csv(no_sing, "data/fromR/lfs/all_model_data.csv", row.names = FALSE)
 write.csv(tofit, "data/fromR/lfs/tofit.csv", row.names = FALSE)

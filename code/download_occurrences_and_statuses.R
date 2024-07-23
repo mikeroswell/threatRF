@@ -328,7 +328,10 @@ ps2 <- read.csv("data/fromR/lfs/plant_NS_data.csv")
 ls2 <- read.csv("data/fromR/lfs/lep_NS_data.csv")
 # lep_stats <- read.csv("data/fromR/lfs/lep_NS_data.csv")
 # plant_stats <- read.csv("data/fromR/lfs/plant_NS_data.csv") 
-occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
+# occ_gs <- read.csv("data/fromR/lfs/occ_from_gbif.csv")
+# Quick taxonomy cleanup
+
+occ_gs[which(occ_gs$genus == "Papilio" & occ_gs$species %in% c("appalachiensis", "glaucus", "troilus")), "genus"] <- "Pterourus"
 knapp_backboned <- read.csv("data/knapp_backboned.csv") %>%
   separate(accepted_gs
            , sep =" "
@@ -394,7 +397,7 @@ all_with_stat<- bind_rows(lep_joined, plant_joined)
 # 
 # 
 # # don't delete info, but here is where we can simplify status (also an e.g.)
-# data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
+data.table::fwrite(all_with_stat, "data/fromR/lfs/occ_with_status_long.csv", row.names = FALSE)
 
 all_with_stat <- data.table::fread("data/fromR/lfs/occ_with_status_long.csv")
 # all_with_stat %>% filter(grepl("^[^[:alnum:]]", species))
