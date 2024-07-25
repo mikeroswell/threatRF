@@ -299,7 +299,7 @@ final_fits <- map(c("lep", "plant"), function(tax){
 
 })
 # 
-# save(final_fits, file = "data/fromR/lfs/final_fits.RDA")
+save(final_fits, file = "data/fromR/lfs/final_fits.RDA")
 load("data/fromR/lfs/final_fits.RDA")
 
 # get "optimal" thresholds
@@ -823,9 +823,9 @@ top_ten <- predict_unclassified %>%
   arrange(taxon, threat_rank) %>% 
   select(taxon, genus, species, threat_rank, perc_votes_threatened = secure)
 write.csv(w_preds, "data/fromR/lfs/predictions.csv", row.names = FALSE)
-write.csv(top_ten, "data/fromR/top_ten_threatened.csv", row.names = FALSE)
+write.csv(top_ten, "data/fromR/top_20_threatened.csv", row.names = FALSE)
 
-write.csv(bottom_ten, "data/fromR/bottom_ten_threatened.csv", row.names = FALSE)
+write.csv(bottom_ten, "data/fromR/bottom_20_threatened.csv", row.names = FALSE)
 
 
 w_preds %>% sf::st_drop_geometry() %>% 
