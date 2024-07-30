@@ -597,8 +597,8 @@ pdf(file = "figures/n_spp_cell_verbose.pdf")
 threatened_plants +  threatened_leps + plot_layout(ncol = 1)
 dev.off()
 
-pdf(file = "figures/n_spp_cell.pdf")
-threatened_plants +labs(title = "a    plants")+ threatened_leps +labs(title = "b    lepidopterans")  + plot_layout(ncol = 1)
+pdf(file = "figures/figure_4_species_predicted_threatened.pdf")
+threatened_plants +labs(title = "a    plants", fill = "species predicted\nto be threatened")+ threatened_leps +labs(title = "b    lepidopterans", fill = "species predicted\nto be threatened")  + plot_layout(ncol = 1)
 dev.off()
 
 
