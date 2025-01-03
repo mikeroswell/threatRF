@@ -1,7 +1,7 @@
 # Overview
 This repository contains code and data for Roswell and Espíndola "Global 
 conservation prioritization approach provides credible results at a regional 
-scale", an MS about predicting which unassessed regional taxa are likely to face
+scale", (doi:10.1111/ddi.13969) an MS about predicting which unassessed regional taxa are likely to face
 conservation threats... using occurrence data, covariates, and a random forest 
 classifiers.
 
@@ -47,7 +47,7 @@ rerun.
 
 # large files and git lfs
 This is the first time I used `git lfs` to handle large files in the repo. 
-The files tracked by lfs are most likely handled dysfunctionally you clone this 
+The files tracked by lfs are most likely handled dysfunctionally if you clone this 
 repo and have not installed `git lfs`. For more information on `git lfs`, see
 [here](https://git-lfs.github.com/). 
 
