@@ -139,7 +139,7 @@ plant_auc_hist <- plant_assess %>%
   geom_vline(xintercept = mean(plant_assess$out_auc), color = "red") +
   geom_vline(xintercept = 0.5, color = "black", linetype = 5) +
   labs(x = ""
-       , y = "") +
+       , y = "frequency") +
   # annotate("text", x = 0.2, y = 12, label = "plants", size = 9) +
   scale_x_continuous(limits = c(0, 1.05), breaks = seq(0, 1, 0.25)) + 
   theme(plot.tag.position = "topright")
